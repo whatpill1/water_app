@@ -1,8 +1,10 @@
-package com.example.water_app;
+package com.example.water_app.donation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.water_app.R;
 
 public class DonationItemActivity extends AppCompatActivity {
 
