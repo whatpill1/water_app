@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/first" app:showAsAction="ifRoom" android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground" android:title="홈" />
-    <item android:id="@+id/second" app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_launcher_foreground" android:title="기부" />
-    <item android:id="@+id/third" app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_launcher_foreground" android:title="내 주위" />
-    <item android:id="@+id/fourth" app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_launcher_foreground" android:title="스토어" />
-    <item android:id="@+id/fifth" app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_launcher_foreground" android:title="내 정보" />
+        android:icon="@drawable/home" android:title="홈" />
+    <item android:id="@+id/second" app:showAsAction="ifRoom" android:enabled="true"
+        android:icon="@drawable/heart" android:title="기부" />
+    <item android:id="@+id/third" app:showAsAction="ifRoom" android:enabled="true"
+        android:icon="@drawable/map" android:title="내 주위" />
+    <item android:id="@+id/fourth" app:showAsAction="ifRoom" android:enabled="true"
+        android:icon="@drawable/cart" android:title="스토어" />
+    <item android:id="@+id/fifth" app:showAsAction="ifRoom" android:enabled="true"
+        android:icon="@drawable/user" android:title="내 정보" />
 </menu>
