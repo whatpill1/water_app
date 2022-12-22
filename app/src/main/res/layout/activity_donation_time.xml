@@ -61,20 +61,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        android:text="기부 금액"
+        android:text="날짜 선택"
         android:fontFamily="@font/kim_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insertDonationName" />
 
-    <EditText
-        android:id="@+id/insertDonationNumber"
+    <TextView
+        android:id="@+id/insertDonationItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="70dp"
-        android:ems="10"
-        android:inputType="number"
+        android:layout_marginEnd="105dp"
+        android:text="▼"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:gravity="right"
+        android:background="@drawable/text_donation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -83,11 +87,14 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="원"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/insertDonationNumber"
-        app:layout_constraintStart_toEndOf="@+id/insertDonationNumber"
-        app:layout_constraintTop_toTopOf="@+id/insertDonationNumber" />
+        android:background="@drawable/text_donation"
+        android:text=" 선택 "
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/insertDonationItem"
+        app:layout_constraintStart_toEndOf="@+id/insertDonationItem"
+        app:layout_constraintTop_toTopOf="@+id/insertDonationItem" />
 
     <Button
         android:id="@+id/dnationButton"
@@ -102,7 +109,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insertDonationNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/insertDonationItem" />
 
     <CheckBox
         android:id="@+id/checkBox"
