@@ -34,6 +34,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".StoreActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".DonationActivity"
             android:exported="false">
             <meta-data
@@ -41,7 +48,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Join"
+            android:name=".JoinActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".StoreActivity">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/backpoint" />
+
+    <TextView
+        android:id="@+id/tvStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/kim_bold"
+        android:text="스토어"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+        app:layout_constraintStart_toEndOf="@+id/ivBack"
+        app:layout_constraintTop_toTopOf="@+id/ivBack" />
+
+
+    <ImageView
+        android:id="@+id/ivMenu1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/store_menu1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore" />
+
+    <ImageView
+        android:id="@+id/ivMenu2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/store_menu2"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMenu1"
+        app:layout_constraintStart_toEndOf="@+id/ivMenu1"
+        app:layout_constraintTop_toTopOf="@+id/ivMenu1" />
+
+    <ImageView
+        android:id="@+id/ivMenu3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/store_menu3"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMenu2"
+        app:layout_constraintStart_toEndOf="@+id/ivMenu2"
+        app:layout_constraintTop_toTopOf="@+id/ivMenu2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/ivMenu4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/store_menu4"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMenu3"
+        app:layout_constraintStart_toEndOf="@+id/ivMenu3"
+        app:layout_constraintTop_toTopOf="@+id/ivMenu3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/ivMenu5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/store_menu5"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMenu4"
+        app:layout_constraintStart_toEndOf="@+id/ivMenu4"
+        app:layout_constraintTop_toTopOf="@+id/ivMenu4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/banner1"
+        app:layout_constraintTop_toBottomOf="@+id/ivMenu1"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/ivStore1"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/store1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/tvStore1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="동아연필 36색 크레파스"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivStore1"
+        app:layout_constraintStart_toStartOf="@+id/ivStore1"
+        app:layout_constraintTop_toBottomOf="@+id/ivStore1" />
+
+    <TextView
+        android:id="@+id/tvPrice1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="4,700"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStore1"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore1" />
+
+    <ImageView
+        android:id="@+id/ivStore2"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/store2"
+        app:layout_constraintStart_toEndOf="@+id/ivStore1"
+        app:layout_constraintTop_toTopOf="@+id/ivStore1" />
+
+    <TextView
+        android:id="@+id/tvStore2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="고려은단 멀티비타민 60정"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivStore2"
+        app:layout_constraintStart_toStartOf="@+id/ivStore2"
+        app:layout_constraintTop_toBottomOf="@+id/ivStore2" />
+
+    <TextView
+        android:id="@+id/tvPrice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="21,600"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStore2"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore2" />
+
+    <ImageView
+        android:id="@+id/ivStore3"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/store3"
+        app:layout_constraintStart_toEndOf="@+id/ivStore2"
+        app:layout_constraintTop_toTopOf="@+id/ivStore2" />
+
+    <TextView
+        android:id="@+id/tvStore3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="제주 노지 하우스 감귤 5kg"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivStore3"
+        app:layout_constraintStart_toStartOf="@+id/ivStore3"
+        app:layout_constraintTop_toBottomOf="@+id/ivStore3" />
+
+    <TextView
+        android:id="@+id/tvPrice3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="9,900"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStore3"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore3" />
+
+    <ImageView
+        android:id="@+id/ivStore4"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/store4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice1" />
+
+    <TextView
+        android:id="@+id/tvStore4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="캐모마일 삼각티백 80개입"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivStore4"
+        app:layout_constraintStart_toStartOf="@+id/ivStore4"
+        app:layout_constraintTop_toBottomOf="@+id/ivStore4" />
+
+    <TextView
+        android:id="@+id/tvPrice4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="16,700"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStore4"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore4" />
+
+    <ImageView
+        android:id="@+id/ivStore5"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/store5"
+        app:layout_constraintStart_toEndOf="@+id/ivStore4"
+        app:layout_constraintTop_toTopOf="@+id/ivStore4" />
+
+    <TextView
+        android:id="@+id/tvStore5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="회전목마 촛불끄기 장난감"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivStore5"
+        app:layout_constraintStart_toStartOf="@+id/ivStore5"
+        app:layout_constraintTop_toBottomOf="@+id/ivStore5" />
+
+    <TextView
+        android:id="@+id/tvPrice5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="18,900"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStore5"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore5" />
+
+    <ImageView
+        android:id="@+id/ivStore6"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/store6"
+        app:layout_constraintStart_toEndOf="@+id/ivStore5"
+        app:layout_constraintTop_toTopOf="@+id/ivStore5" />
+
+    <TextView
+        android:id="@+id/tvStore6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="온리유 KF94 마스크 50매"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivStore6"
+        app:layout_constraintStart_toStartOf="@+id/ivStore6"
+        app:layout_constraintTop_toBottomOf="@+id/ivStore6" />
+
+    <TextView
+        android:id="@+id/tvPrice6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="17,500"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvStore6"
+        app:layout_constraintTop_toBottomOf="@+id/tvStore6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
