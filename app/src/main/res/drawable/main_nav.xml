@@ -4,9 +4,9 @@
     <item android:id="@+id/first" app:showAsAction="ifRoom" android:enabled="true"
         android:icon="@drawable/home" android:title="홈" />
     <item android:id="@+id/second" app:showAsAction="ifRoom" android:enabled="true"
-        android:icon="@drawable/heart" android:title="기부" />
+        android:icon="@drawable/heart" android:title="나의 기부" />
     <item android:id="@+id/third" app:showAsAction="ifRoom" android:enabled="true"
-        android:icon="@drawable/map" android:title="내 주위" />
+        android:icon="@drawable/map" android:title="내 주변" />
     <item android:id="@+id/fourth" app:showAsAction="ifRoom" android:enabled="true"
         android:icon="@drawable/cart" android:title="스토어" />
     <item android:id="@+id/fifth" app:showAsAction="ifRoom" android:enabled="true"
