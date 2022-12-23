@@ -24,89 +24,96 @@
                 android:clipChildren="false">
             </androidx.viewpager2.widget.ViewPager2>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="추천 기부 목록"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/childBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/child"
+                    android:layout_margin="10dp"/>
+                <Button
+                    android:id="@+id/oldBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/oldman"
+                    android:layout_margin="10dp"/>
+                <Button
+                    android:id="@+id/disabledBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/disabled"
+                    android:layout_margin="10dp"/>
+                <Button
+                    android:id="@+id/animalBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/animal"
+                    android:layout_margin="10dp"/>
+                <Button
+                    android:id="@+id/etcBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/etc"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="기프티콘 기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="포인트 기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="물품 기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="포인트 기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="재능 기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="쿠폰 기부"
-                android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="어린이"
+                    android:layout_marginStart="20dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="노인"
+                    android:layout_marginStart="48dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="장애인"
+                    android:layout_marginStart="48dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="동물"
+                    android:layout_marginStart="48dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="기타"
+                    android:layout_marginStart="50dp"
+                    android:layout_gravity="center"/>
 
+            </LinearLayout>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="진행중인 기부"
+                android:fontFamily="@font/kim_bold"
+                android:textSize="30dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"/>
 
         </LinearLayout>
     </ScrollView>
