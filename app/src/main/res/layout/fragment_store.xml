@@ -83,6 +83,7 @@
                     android:id="@+id/ivbanner"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
                     android:src="@drawable/banner1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -312,10 +313,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="32dp"
                     android:fontFamily="@font/kim_regular"
                     android:text="16,700"
                     android:textColor="@color/orange"
                     android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tvStore7"
                     app:layout_constraintTop_toBottomOf="@+id/tvStore7" />
 

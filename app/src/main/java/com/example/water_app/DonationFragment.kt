@@ -11,8 +11,6 @@ import android.widget.ImageView
 
 class DonationFragment : Fragment() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
