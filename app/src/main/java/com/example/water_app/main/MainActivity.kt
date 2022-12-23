@@ -1,17 +1,19 @@
 package com.example.water_app.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
-import com.example.water_app.main.MyPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // BottomNavigationView 객체 생성
+
+    // BottomNavigationView 객체 생성
         var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView
 
         bnv_main.run { setOnNavigationItemSelectedListener {
