@@ -49,7 +49,7 @@
         android:background="@drawable/buttoncolor"
         android:text="로그인"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insertPassword" />
 
@@ -91,7 +91,7 @@
         android:fontFamily="@font/kim_regular"
         android:text="로그인"
         android:textColor="@color/black"
-        android:textSize="35dp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@+id/backButton"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="@+id/backButton" />

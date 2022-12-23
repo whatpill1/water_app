@@ -24,7 +24,7 @@
         android:fontFamily="@font/kim_regular"
         android:text="기부하기"
         android:textColor="@color/black"
-        android:textSize="35dp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@+id/backButton"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="@+id/backButton" />
@@ -42,15 +42,14 @@
     <EditText
         android:id="@+id/insertDonationName"
         android:background="@drawable/edittext_login"
-        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="이름"
+        android:hint="  이름"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -69,12 +68,15 @@
     <EditText
         android:id="@+id/insertDonationNumber"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="70dp"
         android:ems="10"
         android:inputType="number"
+        android:hint="0"
+        android:gravity="right"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -84,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="원"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/insertDonationNumber"
         app:layout_constraintStart_toEndOf="@+id/insertDonationNumber"
         app:layout_constraintTop_toTopOf="@+id/insertDonationNumber" />
@@ -99,7 +101,7 @@
         android:background="@drawable/buttoncolor"
         android:text="기부하기"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insertDonationNumber" />
@@ -109,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="49dp"
+        android:minHeight="48dp"
         android:text="동의합니다."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />

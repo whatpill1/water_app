@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="진행중인 기부"
                 android:fontFamily="@font/kim_bold"
-                android:textSize="30dp"/>
+                android:textSize="30sp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

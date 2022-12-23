@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="제목 들어갈 위치"
-                android:textSize="35dp"/>
+                android:textSize="35sp"/>
             <ImageView
                 android:id="@+id/donationImage"
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:id="@+id/donationCn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="17sp"
                 android:hint="글 내용 들어가는 부분 --------------------"/>
 
 
@@ -75,7 +75,7 @@
         android:background="@drawable/buttoncolor"
         android:text="기부하기"
         android:gravity="center"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50%"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/donationAmount"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
         app:layout_constraintTop_toTopOf="@+id/donationAmount" />
@@ -113,7 +113,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:text="10,000,000원"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="parent" />
 
