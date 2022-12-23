@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DonationListActivity">
+    tools:context=".home.DonationListActivity">
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="30dp"

@@ -1,4 +1,4 @@
-package com.example.water_app.donation;
+package com.example.water_app.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.water_app.R;
 
-public class DonationActivity extends AppCompatActivity {
+public class DonationItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donation);
+        setContentView(R.layout.activity_donation_item);
     }
 }

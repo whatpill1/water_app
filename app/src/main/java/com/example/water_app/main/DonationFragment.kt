@@ -1,4 +1,4 @@
-package com.example.water_app
+package com.example.water_app.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,17 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
+import com.example.water_app.R
+import com.example.water_app.communication.CommunicationActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-class MyPageFragment : Fragment() {
+class DonationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -25,12 +23,12 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_my_page, null)
-        val linMyPage = view.findViewById<LinearLayout>(R.id.linMyPage)
+        val view = inflater.inflate(R.layout.fragment_donation, null)
+        val ivDonation = view.findViewById<ImageView>(R.id.ivDonation)
 
-        linMyPage.setOnClickListener{
+        ivDonation.setOnClickListener{
             activity?.let{
-                val intent = Intent(context, MyPageActivity::class.java)
+                val intent = Intent(context, CommunicationActivity::class.java)
                 startActivity(intent)
             }
         }
