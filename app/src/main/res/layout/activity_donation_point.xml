@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <EditText
-        android:id="@+id/insertDonationName"
+        android:id="@+id/edtName"
         android:background="@drawable/edittext_login"
         android:padding="10dp"
         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
         android:text="포인트 선택"
         android:fontFamily="@font/kim_regular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insertDonationName" />
+        app:layout_constraintTop_toBottomOf="@+id/edtName" />
 
     <TextView
         android:id="@+id/insertDonationItem"
