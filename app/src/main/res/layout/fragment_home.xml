@@ -26,52 +26,54 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:weightSum="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
             <Button
                 android:id="@+id/childBtn"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/child" />
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/child"
+                android:gravity="center" />
 
             <Button
                 android:id="@+id/oldBtn"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/oldman" />
 
             <Button
                 android:id="@+id/disabledBtn"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/disabled" />
 
             <Button
                 android:id="@+id/animalBtn"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/animal" />
 
             <Button
                 android:id="@+id/etcBtn"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/etc" />
         </LinearLayout>
 
@@ -79,68 +81,74 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="5dp"
+            android:weightSum="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:fontFamily="@font/kim_regular"
-                android:textColor="@color/black"
-                android:text="어린이" />
+                android:text="어린이"
+                android:textColor="@color/black" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="48dp"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:fontFamily="@font/kim_regular"
-                android:textColor="@color/black"
-                android:text="노인" />
+                android:text="노인"
+                android:textColor="@color/black" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="48dp"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:fontFamily="@font/kim_regular"
-                android:textColor="@color/black"
-                android:text="장애인" />
+                android:text="장애인"
+                android:textColor="@color/black" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="48dp"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:fontFamily="@font/kim_regular"
-                android:textColor="@color/black"
-                android:text="동물" />
+                android:text="동물"
+                android:textColor="@color/black" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="50dp"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:fontFamily="@font/kim_regular"
-                android:textColor="@color/black"
-                android:text="기타" />
+                android:text="기타"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/ivHeart2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/red_heart"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/tvTitle2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvTitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -148,20 +156,22 @@
             android:text="진행중인 기부"
             android:textColor="@color/black"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            app:layout_constraintBottom_toBottomOf="@+id/ivHeart2"
+            app:layout_constraintStart_toEndOf="@+id/ivHeart2"
+            app:layout_constraintTop_toTopOf="@+id/ivHeart2" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_profile"
+            android:id="@+id/rvDonation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
-
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle2"
             tools:listitem="@layout/item_main_recycler" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

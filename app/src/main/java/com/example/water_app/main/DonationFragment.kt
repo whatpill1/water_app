@@ -13,11 +13,6 @@ import com.example.water_app.communication.CommunicationActivity
 
 class DonationFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +27,6 @@ class DonationFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
         return view
     }
 }
