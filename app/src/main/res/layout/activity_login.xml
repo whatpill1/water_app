@@ -7,7 +7,7 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/insertEmail"
+        android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/insertPassword"
+        android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
@@ -38,10 +38,10 @@
         android:textColorHint="@color/darkGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insertEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/btnLogin"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -51,37 +51,37 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insertPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
     <TextView
-        android:id="@+id/joinButton"
+        android:id="@+id/btnJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="50dp"
         android:text="회원가입"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <TextView
-        android:id="@+id/findButton"
+        android:id="@+id/btnFind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:text="아이디/비밀번호 찾기"
-        app:layout_constraintEnd_toStartOf="@+id/joinButton"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintEnd_toStartOf="@+id/btnJoin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <ImageView
-        android:id="@+id/backButton"
+        android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/backpoint" />
+        android:src="@drawable/backpoint" />
 
     <TextView
         android:id="@+id/textView3"
@@ -92,8 +92,8 @@
         android:text="로그인"
         android:textColor="@color/black"
         android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="@+id/backButton"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@+id/backButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
