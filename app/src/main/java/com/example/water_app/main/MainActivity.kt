@@ -1,13 +1,22 @@
 package com.example.water_app.main
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.content.pm.Signature
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,6 +52,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
             selectedItemId = R.id.first
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val packageInfo =
+                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+            for (signature in packageInfo.signingInfo.apkContentsSigners) {
+                try {
+                    val md = MessageDigest.getInstance("SHA")
+                    md.update(signature.toByteArray())
+                    Log.d("getKeyHash", "key hash: ${Base64.encodeToString(md.digest(), Base64.NO_WRAP)}")
+                } catch (e: NoSuchAlgorithmException) {
+                    Log.w("getKeyHash", "Unable to get MessageDigest. signature=$signature", e)
+                }
+            }
         }
     }
 }

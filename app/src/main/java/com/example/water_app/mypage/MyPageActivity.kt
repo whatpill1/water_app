@@ -30,12 +30,6 @@ class MyPageActivity : AppCompatActivity() {
                 Log.d("Response",it.body()?.name.toString())
                 tvId.text = it.body()?.country.toString()
                 tvNickName.text = it.body()?.name.toString()
-//                Log.d("Response",it.body()?.name.toString())
-//                Log.d("Response",it.body()?.country!!)
-
-//                Log.d("Response", it.id.toString())
-//                Log.d("Response", it.name)
-//                Log.d("Response", it.country)
             }
             else{
                 Log.d("Response",it.errorBody().toString())

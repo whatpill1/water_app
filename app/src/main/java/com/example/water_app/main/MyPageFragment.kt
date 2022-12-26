@@ -10,11 +10,6 @@ import android.widget.LinearLayout
 import com.example.water_app.R
 import com.example.water_app.mypage.MyPageActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class MyPageFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
