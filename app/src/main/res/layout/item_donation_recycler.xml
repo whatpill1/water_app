@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="1dp"
     android:layout_margin="10dp"
-    android:background="@color/lightGrey">
+    android:id="@+id/itemView"
+    android:background="@color/lightGrey"
+    tools:ignore="InvalidId">
 
     <ImageView
         android:id="@+id/ivImage"
