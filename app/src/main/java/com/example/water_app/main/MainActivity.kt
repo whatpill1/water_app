@@ -1,19 +1,23 @@
 package com.example.water_app.main
 
-import android.content.pm.PackageInfo
+import android.Manifest
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.Signature
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Base64
 import android.util.Log
-import androidx.annotation.RequiresApi
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityMainBinding
 import com.example.water_app.home.CategoryFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -22,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
     // 뷰바인딩
     private lateinit var binding: ActivityMainBinding
+
+    private val GPS_ENABLE_REQUEST_CODE = 2001
+    private val PERMISSIONS_REQUEST_CODE = 100
+    var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,5 +102,4 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.flContainer, fragment)
         transaction.commit()
     }
-
 }
