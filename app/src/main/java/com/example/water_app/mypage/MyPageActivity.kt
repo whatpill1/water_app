@@ -31,7 +31,7 @@ class MyPageActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getPost()
+        viewModel.getUser()
         viewModel.myResponse.observe(this, Observer {
             if(it.isSuccessful) {
 
