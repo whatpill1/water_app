@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             selectedItemId = R.id.first
         }
 
+        // HashKey
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val packageInfo =
                 packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
