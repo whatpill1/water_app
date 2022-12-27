@@ -1,6 +1,6 @@
 package com.example.water_app.repository
 
-import com.example.water_app.vo.CntrData
+import com.example.water_app.vo.PostData
 import com.example.water_app.vo.UserData
 import retrofit2.Response
 
@@ -10,7 +10,7 @@ class Repository {
         return RetrofitInstance.api.getUser()
     }
 
-    suspend fun getCntr() : Response<CntrData> {
+    suspend fun getCntr() : Response<PostData> {
         return RetrofitInstance.api.getCntr()
     }
 }

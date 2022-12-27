@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityMainBinding
+import com.example.water_app.home.CategoryFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -74,4 +75,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    // 카테고리
+    fun openFragment() {
+        // 프래그먼트 생성
+        var fragment = CategoryFragment()
+
+//            // 액티비티에서 프래그먼트로 전달할 데이터 추가
+//            var bundle = Bundle()
+//            bundle.putString("key_1", "First Fragment")
+//            bundle.putInt("key_2", 20210910)
+//            fragment.arguments = bundle
+
+        // 트랜잭션 생성
+        val transaction = supportFragmentManager.beginTransaction()
+
+        // 트랜잭션을 통한 프래그먼트 삽입
+        transaction.add(R.id.flContainer, fragment)
+        transaction.commit()
+    }
+
 }

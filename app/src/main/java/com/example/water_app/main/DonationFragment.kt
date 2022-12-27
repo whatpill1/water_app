@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
 import com.example.water_app.communication.CommunicationActivity
+import com.example.water_app.databinding.FragmentDonationBinding
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.vo.DonationData
 
@@ -18,12 +19,16 @@ class DonationFragment : Fragment() {
 
     private lateinit var donationRecyclerView: RecyclerView
 
+    // 뷰바인딩
+    private lateinit var binding: FragmentDonationBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_donation, container, false)
+        // 뷰바인딩
+        binding = FragmentDonationBinding.inflate(inflater, container, false)
 
         val donationList = arrayListOf(
             DonationData(R.drawable.my_document, "제목1"),
@@ -32,11 +37,9 @@ class DonationFragment : Fragment() {
             DonationData(R.drawable.my_document, "제목4")
         )
 
-        donationRecyclerView = view.findViewById(R.id.rvDonation)
-
-        donationRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        donationRecyclerView.setHasFixedSize(true)
-        donationRecyclerView.adapter = DonationAdapter(requireContext(), donationList)
+        binding.rvDonation.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvDonation.setHasFixedSize(true)
+        binding.rvDonation.adapter = DonationAdapter(requireContext(), donationList)
 
         // OnClickListener
         val adapter = DonationAdapter(requireContext(), donationList)
@@ -49,8 +52,8 @@ class DonationFragment : Fragment() {
                 }
             }
         })
-        donationRecyclerView.adapter = adapter
+        binding.rvDonation.adapter = adapter
 
-        return view
+        return binding.root
     }
 }
