@@ -10,6 +10,8 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
+import com.example.water_app.databinding.ActivityCommunicationBinding
+import com.example.water_app.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -17,15 +19,18 @@ import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
+    // 뷰바인딩
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 뷰바인딩
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    // BottomNavigationView 객체 생성
-        var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView
-
-        bnv_main.run { setOnNavigationItemSelectedListener {
+        binding.bnvMain.run { setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 // 프래그먼트 이동
                 R.id.first -> {

@@ -49,7 +49,6 @@ class DonationFragment : Fragment() {
                 }
             }
         })
-
         donationRecyclerView.adapter = adapter
 
         return view

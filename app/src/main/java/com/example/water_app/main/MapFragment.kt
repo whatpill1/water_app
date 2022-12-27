@@ -25,6 +25,7 @@ import net.daum.mf.map.api.MapView
 
 class MapFragment : Fragment() {
 
+    // 뷰바인딩
     private lateinit var binding: FragmentMapBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,7 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // 뷰바인딩
         binding = FragmentMapBinding.inflate(inflater, container, false)
 
         // 맵 띄우기
