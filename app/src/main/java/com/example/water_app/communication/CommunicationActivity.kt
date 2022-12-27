@@ -25,16 +25,16 @@ class CommunicationActivity : AppCompatActivity() {
             when(it.itemId) {
                 // 프래그먼트 이동
                 R.id.first -> {
-                    val homeFragment = ComIntroduceFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeFragment).commit()
+                    val fragment1 = ComIntroduceFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment1).commit()
                 }
                 R.id.second -> {
-                    val boardFragment = ComHistoryFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, boardFragment).commit()
+                    val fragment2 = ComHistoryFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment2).commit()
                 }
                 R.id.third -> {
-                    val settingFragment = ComStoryFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()
+                    val fragment3 = ComStoryFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment3).commit()
                 }
             }
             true

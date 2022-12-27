@@ -2,7 +2,7 @@ package com.example.water_app.vo
 
 import com.google.gson.annotations.SerializedName
 
-data class User (
+data class UserData (
     @SerializedName("userId")
     val mbr_sn : Int,
     val mbr_id : String,

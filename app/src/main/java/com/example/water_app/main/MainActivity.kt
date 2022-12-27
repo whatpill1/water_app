@@ -30,28 +30,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bnvMain.run { setOnNavigationItemSelectedListener {
+        binding.navMain.run { setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 // 프래그먼트 이동
                 R.id.first -> {
-                    val homeFragment = HomeFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeFragment).commit()
+                    val fragment1 = HomeFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment1).commit()
                 }
                 R.id.second -> {
-                    val boardFragment = DonationFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, boardFragment).commit()
+                    val fragment2 = DonationFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment2).commit()
                 }
                 R.id.third -> {
-                    val settingFragment = MapFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()
+                    val fragment3 = MapFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment3).commit()
                 }
                 R.id.fourth -> {
-                    val settingFragment = StoreFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()
+                    val fragment4 = StoreFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment4).commit()
                 }
                 R.id.fifth -> {
-                    val settingFragment = MyPageFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()
+                    val fragment5 = MyPageFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment5).commit()
                 }
             }
             true

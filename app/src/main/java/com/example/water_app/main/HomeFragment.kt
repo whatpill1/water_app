@@ -9,19 +9,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
+import com.example.water_app.databinding.FragmentHomeBinding
+import com.example.water_app.databinding.FragmentMapBinding
 import com.example.water_app.home.SubmitActivity
 import com.example.water_app.recyclerview.HomeAdapter
 import com.example.water_app.vo.HomeData
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeRecyclerView: RecyclerView
+    // 뷰바인딩
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container,false)
+
+        // 뷰바인딩
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val homeList = arrayListOf(
             HomeData(R.drawable.my_document, "제목1", "100만원", "10%"),
@@ -30,11 +35,9 @@ class HomeFragment : Fragment() {
             HomeData(R.drawable.my_document, "제목4", "400만원", "40%")
         )
 
-        homeRecyclerView = view.findViewById(R.id.rvDonation)
-
-        homeRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        homeRecyclerView.setHasFixedSize(true)
-        homeRecyclerView.adapter = HomeAdapter(requireContext(), homeList)
+        binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvDonation.setHasFixedSize(true)
+        binding.rvDonation.adapter = HomeAdapter(requireContext(), homeList)
 
         // OnClickListener
         val adapter = HomeAdapter(requireContext(), homeList)
@@ -48,8 +51,8 @@ class HomeFragment : Fragment() {
             }
         })
 
-        homeRecyclerView.adapter = adapter
+        binding.rvDonation.adapter = adapter
 
-        return view
+        return binding.root
     }
 }
