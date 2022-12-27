@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.home.SubmitActivity
 import com.example.water_app.recyclerview.HomeAdapter
+import com.example.water_app.recyclerview.MyViewPagerAdapter
 import com.example.water_app.vo.HomeData
 import com.example.water_app.vo.PostData
 
@@ -22,6 +24,16 @@ class HomeFragment : Fragment() {
 
     // MainActivity 가져오기
     lateinit var mainActivity: MainActivity
+
+    //뷰페이저
+
+    private fun getAespaMembers(): ArrayList<Int> {
+        return arrayListOf<Int>(
+            R.drawable.banner1,
+            R.drawable.store2,
+            R.drawable.store3,
+            R.drawable.store4)
+    }
 
     // context를 mainActivity에 담음
     override fun onAttach(context: Context) {
@@ -37,6 +49,11 @@ class HomeFragment : Fragment() {
 
         // 뷰바인딩
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        //뷰페이저
+        binding.ivBanner.adapter = MyViewPagerAdapter(getAespaMembers()) // 어댑터 생성
+        binding.ivBanner.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
+
 
         // MainActivity 담음
         mainActivity = context as MainActivity

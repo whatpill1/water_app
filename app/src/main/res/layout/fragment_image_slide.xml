@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
-    <TextView
-        android:text="2"
+    <ImageView
+        android:id="@+id/img_slide_image"
         android:layout_width="400dp"
         android:layout_height="200dp"
         android:textSize="50sp"
