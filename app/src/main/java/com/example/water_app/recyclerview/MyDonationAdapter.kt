@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
 import com.example.water_app.vo.DonationData
 
-class DonationAdapter(private val context: Context, private val donationList: ArrayList<DonationData>) : RecyclerView.Adapter<DonationAdapter.ViewHolder>() {
+class MyDonationAdapter(private val context: Context, private val donationList: ArrayList<DonationData>) : RecyclerView.Adapter<MyDonationAdapter.ViewHolder>() {
 
     // 아이템 레이아웃 설정
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyDonationAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_donation_recycler,parent,false)
         return ViewHolder(view)
     }
 
     // 내용 입력
-    override fun onBindViewHolder(holder: DonationAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyDonationAdapter.ViewHolder, position: Int) {
         holder.ivImage.setImageResource(donationList.get(position).img)
         holder.tvTitle.text = donationList.get(position).title
 

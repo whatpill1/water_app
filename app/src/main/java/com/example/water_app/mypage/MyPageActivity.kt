@@ -19,6 +19,7 @@ class MyPageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyPageBinding
 
     private lateinit var viewModel : MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page)

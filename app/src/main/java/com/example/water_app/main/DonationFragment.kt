@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
 import com.example.water_app.communication.CommunicationActivity
 import com.example.water_app.databinding.FragmentDonationBinding
-import com.example.water_app.recyclerview.DonationAdapter
+import com.example.water_app.recyclerview.MyDonationAdapter
 import com.example.water_app.vo.DonationData
 
 
@@ -39,12 +39,12 @@ class DonationFragment : Fragment() {
 
         binding.rvDonation.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvDonation.setHasFixedSize(true)
-        binding.rvDonation.adapter = DonationAdapter(requireContext(), donationList)
+        binding.rvDonation.adapter = MyDonationAdapter(requireContext(), donationList)
 
         // OnClickListener
-        val adapter = DonationAdapter(requireContext(), donationList)
+        val adapter = MyDonationAdapter(requireContext(), donationList)
 
-        adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{
+        adapter.setItemClickListener(object : MyDonationAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 activity?.let{
                     val intent = Intent(context, CommunicationActivity::class.java)

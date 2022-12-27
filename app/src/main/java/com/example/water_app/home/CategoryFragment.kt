@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentCategoryBinding
 import com.example.water_app.recyclerview.CategoryAdapter
-import com.example.water_app.recyclerview.DonationAdapter
-import com.example.water_app.recyclerview.HomeAdapter
 import com.example.water_app.vo.HomeData
-import com.example.water_app.vo.PostData
 
 class CategoryFragment : Fragment() {
 
