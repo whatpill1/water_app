@@ -1,5 +1,6 @@
 package com.example.water_app.main
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -27,6 +28,7 @@ class MyPageFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,6 +94,33 @@ class MyPageFragment : Fragment() {
             val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
             noButton.setOnClickListener {
                 mAlertDialog.dismiss()
+            }
+        }
+
+        binding.linPay.setOnClickListener{
+            // Dialog만들기
+            val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_pay, null)
+            val mBuilder = AlertDialog.Builder(requireContext())
+                .setView(mDialogView)
+                .setTitle("워터 Pay")
+
+            val  mAlertDialog = mBuilder.show()
+
+            val okButton = mDialogView.findViewById<Button>(R.id.btnCall)
+            okButton.setOnClickListener {
+
+                Toast.makeText(requireContext(),"추후 추가 예정", Toast.LENGTH_LONG).show()
+            }
+
+            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
+            noButton.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+
+            val outButton = mDialogView.findViewById<Button>(R.id.btnOut)
+            outButton.setOnClickListener {
+
+                Toast.makeText(requireContext(),"추후 추가 예정", Toast.LENGTH_LONG).show()
             }
         }
 
