@@ -12,7 +12,7 @@ import com.example.water_app.R
 import com.example.water_app.communication.CommunicationActivity
 import com.example.water_app.databinding.FragmentDonationBinding
 import com.example.water_app.recyclerview.MyDonationAdapter
-import com.example.water_app.vo.DonationData
+import com.example.water_app.vo.MyDonationData
 
 
 class DonationFragment : Fragment() {
@@ -31,10 +31,10 @@ class DonationFragment : Fragment() {
         binding = FragmentDonationBinding.inflate(inflater, container, false)
 
         val donationList = arrayListOf(
-            DonationData(R.drawable.my_document, "제목1"),
-            DonationData(R.drawable.my_document, "제목2"),
-            DonationData(R.drawable.my_document, "제목3"),
-            DonationData(R.drawable.my_document, "제목4")
+            MyDonationData(R.drawable.my_document, "제목1"),
+            MyDonationData(R.drawable.my_document, "제목2"),
+            MyDonationData(R.drawable.my_document, "제목3"),
+            MyDonationData(R.drawable.my_document, "제목4")
         )
 
         binding.rvDonation.layoutManager = GridLayoutManager(requireContext(), 2)

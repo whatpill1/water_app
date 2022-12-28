@@ -8,9 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
-import com.example.water_app.vo.DonationData
+import com.example.water_app.vo.MyDonationData
 
-class MyDonationAdapter(private val context: Context, private val donationList: ArrayList<DonationData>) : RecyclerView.Adapter<MyDonationAdapter.ViewHolder>() {
+class MyDonationAdapter(private val context: Context, private val donationList: ArrayList<MyDonationData>) : RecyclerView.Adapter<MyDonationAdapter.ViewHolder>() {
 
     // 아이템 레이아웃 설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyDonationAdapter.ViewHolder {

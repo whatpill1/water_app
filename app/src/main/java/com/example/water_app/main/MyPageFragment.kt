@@ -8,9 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.water_app.R
+import com.example.water_app.databinding.FragmentHomeBinding
+import com.example.water_app.databinding.FragmentMyPageBinding
+import com.example.water_app.mypage.HistoryActivity
 import com.example.water_app.mypage.MyPageActivity
+import com.example.water_app.mypage.PeriodActivity
 
 class MyPageFragment : Fragment() {
+
+    // 뷰바인딩
+    private lateinit var binding: FragmentMyPageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,16 +28,32 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_my_page, null)
-        val linMyPage = view.findViewById<LinearLayout>(R.id.linMyPage)
+        // 뷰바인딩
+        binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
-        linMyPage.setOnClickListener{
+        val view = inflater.inflate(R.layout.fragment_my_page, null)
+
+        binding.linMyPage.setOnClickListener{
             activity?.let{
                 val intent = Intent(context, MyPageActivity::class.java)
                 startActivity(intent)
             }
         }
 
-        return view
+        binding.linHistory.setOnClickListener{
+            activity?.let{
+                val intent = Intent(context, HistoryActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        binding.linPeriod.setOnClickListener{
+            activity?.let{
+                val intent = Intent(context, PeriodActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        return binding.root
     }
 }
