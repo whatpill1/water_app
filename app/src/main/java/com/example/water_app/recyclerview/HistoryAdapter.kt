@@ -13,8 +13,8 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     class ViewHolder(val binding: ItemHistoryRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = ItemHistoryRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(view)
+        val binding = ItemHistoryRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

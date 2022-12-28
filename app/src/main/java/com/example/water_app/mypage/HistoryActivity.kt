@@ -37,15 +37,15 @@ class HistoryActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
-//        viewModel.historyResponse.observe(this, Observer {
-//            if(it.isSuccessful){
+        viewModel.historyResponse.observe(this, Observer {
+            if(it.isSuccessful){
 //                historyAdapter.setData(it.body()!!)
-//
-//            }
-//            else{
-//                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
-//            }
-//        })
+
+            }
+            else{
+                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
+            }
+        })
 
         viewModel.getHistory('Y')
     }

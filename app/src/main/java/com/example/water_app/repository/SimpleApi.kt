@@ -14,9 +14,6 @@ interface SimpleApi {
     @GET("test3.php")
     suspend fun getCntr() : Response<PostData>
 
-    @GET("test.php")
-    suspend fun getHistory() : Response<HistoryData>
-
     @GET("test.php/{use_yn}")
     suspend fun getHistory(@Path("use_yn") use_yn: Char): Response<HistoryData>
 }
