@@ -13,7 +13,6 @@ import retrofit2.Response
 class MainViewModel(private val repository : Repository) : ViewModel() {
 
     val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
-
     fun getUser() {
         viewModelScope.launch {
             val response = repository.getUser()
@@ -22,7 +21,6 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     }
 
     val cntrResponse : MutableLiveData<Response<PostData>> = MutableLiveData()
-
     fun getCntr() {
         viewModelScope.launch {
             val response = repository.getCntr()
@@ -31,10 +29,9 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     }
 
     val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
-
-    fun getHistory() {
+    fun getHistory(useYn: String) {
         viewModelScope.launch {
-            val response = repository.getHistory()
+            val response = repository.getHistory(useYn)
             historyResponse.value = response
         }
     }

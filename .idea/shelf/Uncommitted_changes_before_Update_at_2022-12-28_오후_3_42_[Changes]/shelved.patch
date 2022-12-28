@@ -1,0 +1,225 @@
+Index: app/src/main/java/com/example/water_app/repository/Repository.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.vo.HistoryData\r\nimport com.example.water_app.vo.PostData\r\nimport com.example.water_app.vo.UserData\r\nimport retrofit2.Response\r\n\r\nclass Repository {\r\n\r\n    suspend fun getUser() : Response<UserData> {\r\n        return RetrofitInstance.api.getUser()\r\n    }\r\n\r\n    suspend fun getCntr() : Response<PostData> {\r\n        return RetrofitInstance.api.getCntr()\r\n    }\r\n\r\n    suspend fun getHistory() : Response<HistoryData> {\r\n        return RetrofitInstance.api.getHistory()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/Repository.kt b/app/src/main/java/com/example/water_app/repository/Repository.kt
+--- a/app/src/main/java/com/example/water_app/repository/Repository.kt	(revision 42ee8274eb04dfb03de24ce32b92f194f568ff3b)
++++ b/app/src/main/java/com/example/water_app/repository/Repository.kt	(date 1672209517022)
+@@ -15,7 +15,7 @@
+         return RetrofitInstance.api.getCntr()
+     }
+ 
+-    suspend fun getHistory() : Response<HistoryData> {
+-        return RetrofitInstance.api.getHistory()
++    suspend fun getHistory(useYn: String) : Response<HistoryData> {
++        return RetrofitInstance.api.getHistory(useYn)
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/recyclerview/HistoryAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.recyclerview\r\n\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.ImageView\r\nimport android.widget.TextView\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.example.water_app.R\r\nimport com.example.water_app.vo.HistoryData\r\n\r\nclass HistoryAdapter(val historyList: ArrayList<HistoryData>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryAdapter.ViewHolder {\r\n        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_history_recycler, parent, false)\r\n        return ViewHolder(view)\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {\r\n        holder.image.setImageResource(historyList.get(position).cntr_file_id)\r\n        holder.title.text = historyList.get(position).cntr_ttl\r\n        holder.money.text = historyList.get(position).cntr_obctr\r\n    }\r\n\r\n    override fun getItemCount(): Int {\r\n        return historyList.size\r\n    }\r\n\r\n    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {\r\n        val image = itemView.findViewById<ImageView>(R.id.ivImage)\r\n        val title = itemView.findViewById<TextView>(R.id.tvTitle)\r\n        val money = itemView.findViewById<TextView>(R.id.tvMoney)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/recyclerview/HistoryAdapter.kt b/app/src/main/java/com/example/water_app/recyclerview/HistoryAdapter.kt
+--- a/app/src/main/java/com/example/water_app/recyclerview/HistoryAdapter.kt	(revision 42ee8274eb04dfb03de24ce32b92f194f568ff3b)
++++ b/app/src/main/java/com/example/water_app/recyclerview/HistoryAdapter.kt	(date 1672209725659)
+@@ -1,33 +1,34 @@
+ package com.example.water_app.recyclerview
+ 
+ import android.view.LayoutInflater
+-import android.view.View
+ import android.view.ViewGroup
+-import android.widget.ImageView
+-import android.widget.TextView
+ import androidx.recyclerview.widget.RecyclerView
+-import com.example.water_app.R
++import com.example.water_app.databinding.ItemHistoryRecyclerBinding
+ import com.example.water_app.vo.HistoryData
+ 
+-class HistoryAdapter(val historyList: ArrayList<HistoryData>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryAdapter.ViewHolder {
+-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_history_recycler, parent, false)
++class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
++
++    private var historyList = emptyList<HistoryData>()
++
++    class ViewHolder(val binding: ItemHistoryRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
++
++    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
++        val view = ItemHistoryRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+         return ViewHolder(view)
+     }
+ 
+-    override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
+-        holder.image.setImageResource(historyList.get(position).cntr_file_id)
+-        holder.title.text = historyList.get(position).cntr_ttl
+-        holder.money.text = historyList.get(position).cntr_obctr
++    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
++       holder.binding.tvTitle.text = historyList[position].cntr_ttl
+     }
+ 
+     override fun getItemCount(): Int {
+         return historyList.size
+     }
+ 
+-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+-        val image = itemView.findViewById<ImageView>(R.id.ivImage)
+-        val title = itemView.findViewById<TextView>(R.id.tvTitle)
+-        val money = itemView.findViewById<TextView>(R.id.tvMoney)
++    // 데이터 변경시 리스트 다시 할당
++    fun setData(newList: List<HistoryData>){
++        historyList = newList
++        // 새로고침
++        notifyDataSetChanged()
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/repository/SimpleApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.vo.HistoryData\r\nimport com.example.water_app.vo.PostData\r\nimport com.example.water_app.vo.UserData\r\nimport retrofit2.Response\r\nimport retrofit2.http.GET\r\n\r\ninterface SimpleApi {\r\n    @GET(\"test2.php\")\r\n    suspend fun getUser() : Response<UserData>\r\n\r\n    @GET(\"test3.php\")\r\n    suspend fun getCntr() : Response<PostData>\r\n\r\n    @GET(\"test.php\")\r\n    suspend fun getHistory() : Response<HistoryData>\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/SimpleApi.kt b/app/src/main/java/com/example/water_app/repository/SimpleApi.kt
+--- a/app/src/main/java/com/example/water_app/repository/SimpleApi.kt	(revision 42ee8274eb04dfb03de24ce32b92f194f568ff3b)
++++ b/app/src/main/java/com/example/water_app/repository/SimpleApi.kt	(date 1672209517015)
+@@ -5,14 +5,15 @@
+ import com.example.water_app.vo.UserData
+ import retrofit2.Response
+ import retrofit2.http.GET
++import retrofit2.http.Path
+ 
+ interface SimpleApi {
+     @GET("test2.php")
+-    suspend fun getUser() : Response<UserData>
++    suspend fun getUser(): Response<UserData>
+ 
+     @GET("test3.php")
+-    suspend fun getCntr() : Response<PostData>
++    suspend fun getCntr(): Response<PostData>
+ 
+-    @GET("test.php")
+-    suspend fun getHistory() : Response<HistoryData>
++    @GET("test.php/{use_yn}")
++    suspend fun getHistory(@Path("use_yn") useYn: String): Response<HistoryData>
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/mypage/HistoryActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.mypage\r\n\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityHistoryBinding\r\nimport com.example.water_app.databinding.ActivityMainBinding\r\nimport com.example.water_app.recyclerview.HistoryAdapter\r\nimport com.example.water_app.vo.HistoryData\r\n\r\nclass HistoryActivity : AppCompatActivity() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityHistoryBinding\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_history)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityHistoryBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        val historyList = arrayListOf(\r\n            HistoryData(R.drawable.red_heart, \"기부1\", \"1,000\"),\r\n            HistoryData(R.drawable.red_heart, \"기부2\", \"1,000\"),\r\n            HistoryData(R.drawable.red_heart, \"기부3\", \"1,000\"),\r\n            HistoryData(R.drawable.red_heart, \"기부4\", \"1,000\")\r\n        )\r\n\r\n        binding.rvHistory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)\r\n        binding.rvHistory.setHasFixedSize(true)        // 성능 개선\r\n        binding.rvHistory.adapter = HistoryAdapter(historyList)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/mypage/HistoryActivity.kt b/app/src/main/java/com/example/water_app/mypage/HistoryActivity.kt
+--- a/app/src/main/java/com/example/water_app/mypage/HistoryActivity.kt	(revision 42ee8274eb04dfb03de24ce32b92f194f568ff3b)
++++ b/app/src/main/java/com/example/water_app/mypage/HistoryActivity.kt	(date 1672209517032)
+@@ -2,11 +2,16 @@
+ 
+ import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
++import android.widget.Toast
++import androidx.lifecycle.Observer
++import androidx.lifecycle.ViewModelProvider
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityHistoryBinding
+-import com.example.water_app.databinding.ActivityMainBinding
+ import com.example.water_app.recyclerview.HistoryAdapter
++import com.example.water_app.repository.Repository
++import com.example.water_app.viewmodel.MainViewModel
++import com.example.water_app.viewmodel.MainViewModelFactory
+ import com.example.water_app.vo.HistoryData
+ 
+ class HistoryActivity : AppCompatActivity() {
+@@ -14,6 +19,10 @@
+     // 뷰바인딩
+     private lateinit var binding: ActivityHistoryBinding
+ 
++    private lateinit var viewModel : MainViewModel
++    private val historyAdapter by lazy { HistoryAdapter() }
++//    var historyList = listOf<HistoryData>()
++
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         setContentView(R.layout.activity_history)
+@@ -22,15 +31,23 @@
+         binding = ActivityHistoryBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+ 
+-        val historyList = arrayListOf(
+-            HistoryData(R.drawable.red_heart, "기부1", "1,000"),
+-            HistoryData(R.drawable.red_heart, "기부2", "1,000"),
+-            HistoryData(R.drawable.red_heart, "기부3", "1,000"),
+-            HistoryData(R.drawable.red_heart, "기부4", "1,000")
+-        )
+-
+         binding.rvHistory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
++        binding.rvHistory.adapter = historyAdapter
+         binding.rvHistory.setHasFixedSize(true)        // 성능 개선
+-        binding.rvHistory.adapter = HistoryAdapter(historyList)
++
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
++
++        viewModel.historyResponse.observe(this, Observer {
++            if(it.isSuccessful){
++                historyAdapter.setData(it.body()!!)
++            }
++            else{
++                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
++            }
++        })
++
++        viewModel.getHistory("Y")
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.viewmodel\r\n\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport androidx.lifecycle.viewModelScope\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.vo.HistoryData\r\nimport com.example.water_app.vo.PostData\r\nimport com.example.water_app.vo.UserData\r\nimport kotlinx.coroutines.launch\r\nimport retrofit2.Response\r\n\r\nclass MainViewModel(private val repository : Repository) : ViewModel() {\r\n\r\n    val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()\r\n\r\n    fun getUser() {\r\n        viewModelScope.launch {\r\n            val response = repository.getUser()\r\n            myResponse.value = response\r\n        }\r\n    }\r\n\r\n    val cntrResponse : MutableLiveData<Response<PostData>> = MutableLiveData()\r\n\r\n    fun getCntr() {\r\n        viewModelScope.launch {\r\n            val response = repository.getCntr()\r\n            cntrResponse.value = response\r\n        }\r\n    }\r\n\r\n    val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()\r\n\r\n    fun getHistory() {\r\n        viewModelScope.launch {\r\n            val response = repository.getHistory()\r\n            historyResponse.value = response\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+--- a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(revision 42ee8274eb04dfb03de24ce32b92f194f568ff3b)
++++ b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(date 1672209517026)
+@@ -32,9 +32,9 @@
+ 
+     val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
+ 
+-    fun getHistory() {
++    fun getHistory(useYn: String) {
+         viewModelScope.launch {
+-            val response = repository.getHistory()
++            val response = repository.getHistory(useYn)
+             historyResponse.value = response
+         }
+     }
+Index: app/src/main/java/com/example/water_app/vo/HistoryData.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.vo\r\n\r\ndata class HistoryData (\r\n    val cntr_file_id : Int,\r\n    val cntr_ttl : String,\r\n    val cntr_obctr : String\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/vo/HistoryData.kt b/app/src/main/java/com/example/water_app/vo/HistoryData.kt
+--- a/app/src/main/java/com/example/water_app/vo/HistoryData.kt	(revision 42ee8274eb04dfb03de24ce32b92f194f568ff3b)
++++ b/app/src/main/java/com/example/water_app/vo/HistoryData.kt	(date 1672202120891)
+@@ -1,6 +1,7 @@
+ package com.example.water_app.vo
+ 
+ data class HistoryData (
++    val cntr_sn : Int,
+     val cntr_file_id : Int,
+     val cntr_ttl : String,
+     val cntr_obctr : String

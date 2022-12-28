@@ -2,17 +2,24 @@ package com.example.water_app.mypage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityHistoryBinding
-import com.example.water_app.databinding.ActivityMainBinding
 import com.example.water_app.recyclerview.HistoryAdapter
-import com.example.water_app.vo.HistoryData
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 
 class HistoryActivity : AppCompatActivity() {
 
     // 뷰바인딩
     private lateinit var binding: ActivityHistoryBinding
+
+    private lateinit var viewModel : MainViewModel
+    private val historyAdapter by lazy { HistoryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +29,24 @@ class HistoryActivity : AppCompatActivity() {
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val historyList = arrayListOf(
-            HistoryData(R.drawable.red_heart, "기부1", "1,000"),
-            HistoryData(R.drawable.red_heart, "기부2", "1,000"),
-            HistoryData(R.drawable.red_heart, "기부3", "1,000"),
-            HistoryData(R.drawable.red_heart, "기부4", "1,000")
-        )
-
+        binding.rvHistory.adapter = historyAdapter
         binding.rvHistory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvHistory.setHasFixedSize(true)        // 성능 개선
-        binding.rvHistory.adapter = HistoryAdapter(historyList)
+
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+
+//        viewModel.historyResponse.observe(this, Observer {
+//            if(it.isSuccessful){
+//                historyAdapter.setData(it.body()!!)
+//
+//            }
+//            else{
+//                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
+//            }
+//        })
+
+        viewModel.getHistory("Y")
     }
 }
