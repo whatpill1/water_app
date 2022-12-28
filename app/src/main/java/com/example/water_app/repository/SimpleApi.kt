@@ -1,5 +1,6 @@
 package com.example.water_app.repository
 
+import com.example.water_app.vo.HistoryData
 import com.example.water_app.vo.PostData
 import com.example.water_app.vo.UserData
 import retrofit2.Response
@@ -11,4 +12,7 @@ interface SimpleApi {
 
     @GET("test3.php")
     suspend fun getCntr() : Response<PostData>
+
+    @GET("test.php")
+    suspend fun getHistory() : Response<HistoryData>
 }

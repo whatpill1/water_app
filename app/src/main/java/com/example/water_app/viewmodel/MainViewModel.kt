@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.water_app.repository.Repository
+import com.example.water_app.vo.HistoryData
 import com.example.water_app.vo.PostData
 import com.example.water_app.vo.UserData
 import kotlinx.coroutines.launch
@@ -29,4 +30,12 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
         }
     }
 
+    val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
+
+    fun getHistory() {
+        viewModelScope.launch {
+            val response = repository.getHistory()
+            historyResponse.value = response
+        }
+    }
 }

@@ -48,8 +48,5 @@ class MyPageActivity : AppCompatActivity() {
                 Log.d("Response",it.errorBody().toString())
             }
         })
-
-
-
     }
 }
