@@ -15,7 +15,7 @@ class Repository {
         return RetrofitInstance.api.getCntr()
     }
 
-    suspend fun getHistory(useYn: String) : Response<HistoryData> {
-        return RetrofitInstance.api.getHistory(useYn)
+    suspend fun getHistory(use_yn: Char) : Response<HistoryData> {
+        return RetrofitInstance.api.getHistory(use_yn)
     }
 }

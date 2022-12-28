@@ -47,6 +47,6 @@ class HistoryActivity : AppCompatActivity() {
 //            }
 //        })
 
-        viewModel.getHistory("Y")
+        viewModel.getHistory('Y')
     }
 }

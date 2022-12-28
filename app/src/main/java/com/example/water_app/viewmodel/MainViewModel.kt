@@ -29,9 +29,9 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     }
 
     val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
-    fun getHistory(useYn: String) {
+    fun getHistory(use_yn: Char) {
         viewModelScope.launch {
-            val response = repository.getHistory(useYn)
+            val response = repository.getHistory(use_yn)
             historyResponse.value = response
         }
     }

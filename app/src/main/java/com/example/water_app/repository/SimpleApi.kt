@@ -18,5 +18,5 @@ interface SimpleApi {
     suspend fun getHistory() : Response<HistoryData>
 
     @GET("test.php/{use_yn}")
-    suspend fun getHistory(@Path("use_yn") useYn: String): Response<HistoryData>
+    suspend fun getHistory(@Path("use_yn") use_yn: Char): Response<HistoryData>
 }
