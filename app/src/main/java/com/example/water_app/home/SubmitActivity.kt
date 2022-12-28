@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivitySubmitBinding
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -20,6 +19,7 @@ class SubmitActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySubmitBinding
 
     private lateinit var viewModel : MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_submit)
@@ -48,6 +48,10 @@ class SubmitActivity : AppCompatActivity() {
         binding.btnDonation.setOnClickListener{
             val intent = Intent(this, DonationActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnBack.setOnClickListener{
+            super.onBackPressed()
         }
     }
 }

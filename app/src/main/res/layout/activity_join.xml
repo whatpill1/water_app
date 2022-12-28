@@ -7,7 +7,7 @@
     tools:context=".etc.JoinActivity">
 
     <ImageView
-        android:id="@+id/ivBack"
+        android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="25dp"
@@ -25,9 +25,9 @@
         android:text="회원가입"
         android:textColor="@color/black"
         android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-        app:layout_constraintStart_toEndOf="@+id/ivBack"
-        app:layout_constraintTop_toTopOf="@+id/ivBack" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
     <EditText
         android:id="@+id/edtName"

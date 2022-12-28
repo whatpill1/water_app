@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/backButton"
+                android:id="@+id/btnBack"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="25dp"
@@ -32,9 +32,9 @@
                 android:text="기부하기"
                 android:textColor="@color/black"
                 android:textSize="35sp"
-                app:layout_constraintBottom_toBottomOf="@+id/backButton"
-                app:layout_constraintStart_toEndOf="@+id/backButton"
-                app:layout_constraintTop_toTopOf="@+id/backButton" />
+                app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+                app:layout_constraintStart_toEndOf="@+id/btnBack"
+                app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
             <TextView
                 android:id="@+id/textView2"

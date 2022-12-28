@@ -48,5 +48,11 @@ class MyPageActivity : AppCompatActivity() {
                 Log.d("Response",it.errorBody().toString())
             }
         })
+
+        binding.btnBack.setOnClickListener{
+            super.onBackPressed()
+        }
+
+
     }
 }

@@ -37,5 +37,9 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, JoinActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnBack.setOnClickListener{
+            super.onBackPressed()
+        }
     }
 }
