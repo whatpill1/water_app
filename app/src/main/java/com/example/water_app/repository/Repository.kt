@@ -6,6 +6,7 @@ import com.example.water_app.vo.UserData
 import retrofit2.Response
 
 class Repository {
+    // ViewModel에서 사용할 데이터 통신
 
     suspend fun getUser() : Response<UserData> {
         return RetrofitInstance.api.getUser()

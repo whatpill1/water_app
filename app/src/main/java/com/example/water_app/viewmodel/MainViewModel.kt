@@ -11,24 +11,24 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MainViewModel(private val repository : Repository) : ViewModel() {
+    // 데이터 처리
 
     val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
+    val cntrResponse : MutableLiveData<Response<PostData>> = MutableLiveData()
+    val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
+
     fun getUser() {
         viewModelScope.launch {
             val response = repository.getUser()
             myResponse.value = response
         }
     }
-
-    val cntrResponse : MutableLiveData<Response<PostData>> = MutableLiveData()
     fun getCntr() {
         viewModelScope.launch {
             val response = repository.getCntr()
             cntrResponse.value = response
         }
     }
-
-    val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
     fun getHistory(use_yn: Char) {
         viewModelScope.launch {
             val response = repository.getHistory(use_yn)

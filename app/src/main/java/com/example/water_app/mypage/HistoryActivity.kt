@@ -19,6 +19,7 @@ class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
 
     private lateinit var viewModel : MainViewModel
+
     private val historyAdapter by lazy { HistoryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,24 +30,26 @@ class HistoryActivity : AppCompatActivity() {
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 리사이클러뷰
         binding.rvHistory.adapter = historyAdapter
         binding.rvHistory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvHistory.setHasFixedSize(true)        // 성능 개선
 
+        // 데이터 통신
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
+
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-
+        viewModel.getHistory('Y')
         viewModel.historyResponse.observe(this, Observer {
+            // 통신 성공
             if(it.isSuccessful){
-//                historyAdapter.setData(it.body()!!)
-
+                historyAdapter.setData(it.body()!!)
             }
+            // 통신 실패
             else{
                 Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
             }
         })
-
-        viewModel.getHistory('Y')
     }
 }

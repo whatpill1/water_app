@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.water_app.repository.Repository
 
 class MainViewModelFactory(
+    // ViewModel에서 파라미터로 Repository를 받음
+
     private val repository : Repository
     ) : ViewModelProvider.Factory {
 

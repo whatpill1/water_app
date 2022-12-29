@@ -35,7 +35,6 @@ class MyPageActivity : AppCompatActivity() {
         viewModel.getUser()
         viewModel.myResponse.observe(this, Observer {
             if(it.isSuccessful) {
-
                 binding.tvName.text = it.body()?.mbr_nm.toString()
                 binding.tvId.text = it.body()?.mbr_id.toString()
                 binding.tvNickName.text = it.body()?.mbr_ncnm.toString()

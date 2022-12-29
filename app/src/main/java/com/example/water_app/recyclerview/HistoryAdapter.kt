@@ -18,17 +18,18 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       holder.binding.tvTitle.text = historyList[position].cntr_ttl
+        holder.binding.tvTitle.text = historyList[position].cntr_ttl
+        holder.binding.tvMoney.text = historyList[position].cntr_obctr.toString()
     }
 
     override fun getItemCount(): Int {
         return historyList.size
     }
 
-//    // 데이터 변경시 리스트 다시 할당
-//    fun setData(newList: HistoryData){
-//        historyList = newList
-//        // 새로고침
-//        notifyDataSetChanged()
-//    }
+    // 데이터 변경시 리스트 다시 할당
+    fun setData(newList: HistoryData){
+        historyList = listOf(newList)
+        // 새로고침
+        notifyDataSetChanged()
+    }
 }

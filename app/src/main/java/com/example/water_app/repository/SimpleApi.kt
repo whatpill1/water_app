@@ -9,11 +9,11 @@ import retrofit2.http.Path
 
 interface SimpleApi {
     @GET("test2.php")
-    suspend fun getUser() : Response<UserData>
+    suspend fun getUser(): Response<UserData>
 
     @GET("test3.php")
-    suspend fun getCntr() : Response<PostData>
+    suspend fun getCntr(): Response<PostData>
 
-    @GET("test.php/{use_yn}")
+    @GET("test.php")
     suspend fun getHistory(@Path("use_yn") use_yn: Char): Response<HistoryData>
 }
