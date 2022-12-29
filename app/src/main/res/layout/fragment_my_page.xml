@@ -17,7 +17,7 @@
                     android:id="@+id/linMyPage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -30,14 +30,21 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linPay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -50,14 +57,21 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linHistory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -70,20 +84,27 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linPeriod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="50dp"
                         android:src="@drawable/my_heart"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,14 +113,21 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linMoney"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -112,21 +140,21 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/darkBlue"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linCall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -139,14 +167,21 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linNotice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -159,14 +194,21 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <LinearLayout
                     android:id="@+id/linlogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:layout_margin="15dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -179,7 +221,7 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="15dp"/>
                 </LinearLayout>
             </LinearLayout>
     </ScrollView>
