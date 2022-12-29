@@ -53,8 +53,6 @@ class MyPageFragment : Fragment() {
             }
         }
 
-
-
         binding.linPeriod.setOnClickListener{
             activity?.let{
                 val intent = Intent(context, PeriodActivity::class.java)
@@ -66,14 +64,13 @@ class MyPageFragment : Fragment() {
             val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_call, null)
             val mBuilder = AlertDialog.Builder(requireContext())
                 .setView(mDialogView)
-                .setTitle("고객 센터")
 
             val  mAlertDialog = mBuilder.show()
 
             val okButton = mDialogView.findViewById<Button>(R.id.btnCall)
             okButton.setOnClickListener {
 
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tel:01041785969"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tel:0531111111"))
                 startActivity(intent)
             }
 
@@ -87,7 +84,6 @@ class MyPageFragment : Fragment() {
             val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_money, null)
             val mBuilder = AlertDialog.Builder(requireContext())
                 .setView(mDialogView)
-                .setTitle("연말 정산")
 
             val  mAlertDialog = mBuilder.show()
 
@@ -102,14 +98,13 @@ class MyPageFragment : Fragment() {
             val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_pay, null)
             val mBuilder = AlertDialog.Builder(requireContext())
                 .setView(mDialogView)
-                .setTitle("워터 Pay")
 
             val  mAlertDialog = mBuilder.show()
 
             val okButton = mDialogView.findViewById<Button>(R.id.btnCall)
             okButton.setOnClickListener {
 
-                Toast.makeText(requireContext(),"추후 추가 예정", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"서비스 준비중", Toast.LENGTH_LONG).show()
             }
 
             val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
@@ -120,7 +115,7 @@ class MyPageFragment : Fragment() {
             val outButton = mDialogView.findViewById<Button>(R.id.btnOut)
             outButton.setOnClickListener {
 
-                Toast.makeText(requireContext(),"추후 추가 예정", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"서비스 준비중", Toast.LENGTH_LONG).show()
             }
         }
 
