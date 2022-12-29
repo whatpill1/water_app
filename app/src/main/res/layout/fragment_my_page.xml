@@ -103,8 +103,8 @@
                         android:layout_width="40dp"
                         android:layout_height="50dp"
                         android:src="@drawable/my_heart"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="20dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/kim_regular"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="15dp"/>
+                        android:layout_marginLeft="1dp"/>
                 </LinearLayout>
 
                 <View
