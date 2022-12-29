@@ -18,7 +18,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PayActivity"
+            android:name=".mypage.NoticeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".mypage.PayActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -33,13 +40,6 @@
         </activity>
         <activity
             android:name=".mypage.PeriodActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".CategoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
