@@ -55,16 +55,8 @@ class MapFragment : Fragment() {
     private var pageNumber = 1 // 검색 페이지 번호
     private var keyword = "" // 검색 키워드
 
-    // 위치 권한
-    private val REQUEST_PERMISSION_LOCATION = 10
-    val PERMISSIONS_REQUEST_CODE = 100
-    var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // 위치 권한 확인
-        checkPermissionForLocation(requireContext())
     }
 
     override fun onCreateView(
@@ -75,74 +67,88 @@ class MapFragment : Fragment() {
         // 뷰바인딩
         binding = FragmentMapBinding.inflate(inflater, container, false)
 
-        /* 맵 기본 설정 */
+        // 맵 띄우기
         mapView = MapView(requireActivity())
         val mapViewContainer = binding.mapLayout as ViewGroup
         mapViewContainer.addView(mapView)
 
         // 중심점
-        mapView.setMapCenterPoint(
-            MapPoint.mapPointWithGeoCoord(35.893545384707764, 128.61185594900502), true
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                val lm: LocationManager =
+                    requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        // 줌 레벨
-        mapView.setZoomLevel(1, true);
+                val userNowLocation: Location =
+                    lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!
+                val uLatitude = userNowLocation.latitude
+                val uLongitude = userNowLocation.longitude
+                val uNowPosition = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-        // 해당 위치 마커 표시
-        val MARKER_POINT = MapPoint.mapPointWithGeoCoord(35.893545384707764, 128.61185594900502)
+                mapView.setMapCenterPoint(
+                    MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), true
+                )
 
-        // 마커
-        val marker = MapPOIItem()
-        marker.itemName = "클릭된 장소"
-        marker.tag = 0
-        marker.mapPoint = MARKER_POINT
+                // 줌 레벨
+                mapView.setZoomLevel(1, true);
 
-        // 기본 마커
-        marker.markerType = MapPOIItem.MarkerType.BluePin
+                // 해당 위치 마커 표시
+                val MARKER_POINT = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-        // 기본 마커 클릭했을 때 나타나는 마커
-        marker.selectedMarkerType =
-            MapPOIItem.MarkerType.RedPin
+                // 마커
+                val marker = MapPOIItem()
+                marker.itemName = "클릭된 장소"
+                marker.tag = 0
+                marker.mapPoint = MARKER_POINT
 
-        mapView.addPOIItem(marker)
+                // 기본 마커
+                marker.markerType = MapPOIItem.MarkerType.BluePin
+
+                // 기본 마커 클릭했을 때 나타나는 마커
+                marker.selectedMarkerType =
+                    MapPOIItem.MarkerType.RedPin
+
+                mapView.addPOIItem(marker)
+            }
+        }
 
         /* 현재 위치 */
         binding.btnLocation.setOnClickListener {
-            val permissionCheck = ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-                val lm: LocationManager =
-                    requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    val lm: LocationManager =
+                        requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
                     val userNowLocation: Location =
                         lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!
                     val uLatitude = userNowLocation.latitude
                     val uLongitude = userNowLocation.longitude
                     val uNowPosition = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-                    mapView.setMapCenterPoint(uNowPosition, true)
+                    mapView.setMapCenterPoint(
+                        MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), true
+                    )
 
-                } catch (e: NullPointerException) {
-                    Log.e("LOCATION_ERROR", e.toString())
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        ActivityCompat.finishAffinity(requireActivity())
-                    } else {
-                        ActivityCompat.finishAffinity(requireActivity())
-                    }
+                    // 줌 레벨
+                    mapView.setZoomLevel(1, true);
 
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    System.exit(0)
+                    // 해당 위치 마커 표시
+                    val MARKER_POINT = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
+
+                    // 마커
+                    val marker = MapPOIItem()
+                    marker.itemName = "클릭된 장소"
+                    marker.tag = 0
+                    marker.mapPoint = MARKER_POINT
+
+                    // 기본 마커
+                    marker.markerType = MapPOIItem.MarkerType.BluePin
+
+                    // 기본 마커 클릭했을 때 나타나는 마커
+                    marker.selectedMarkerType =
+                        MapPOIItem.MarkerType.RedPin
+
+                    mapView.addPOIItem(marker)
                 }
-            } else {
-                Toast.makeText(requireContext(), "위치 권한이 없습니다.", Toast.LENGTH_SHORT).show()
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    REQUIRED_PERMISSIONS,
-                    PERMISSIONS_REQUEST_CODE
-                )
             }
         }
 
@@ -168,45 +174,6 @@ class MapFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    /* 위치 권한 */
-    // 권한 확인
-    private fun checkPermissionForLocation(context: Context): Boolean {
-        // Android 6.0 Marshmallow 이상에서는 위치 권한에 추가 런타임 권한이 필요
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                true
-            } else {
-                // 권한이 없으므로 권한 요청 알림 보내기
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    REQUEST_PERMISSION_LOCATION
-                )
-                false
-            }
-        } else {
-            true
-        }
-    }
-
-    // 권한 요청 후 결과 처리
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_PERMISSION_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //
-            } else {
-                Log.d("ttt", "onRequestPermissionsResult() _ 권한 허용 거부")
-                Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
     }
 
     /* 카카오 API */
