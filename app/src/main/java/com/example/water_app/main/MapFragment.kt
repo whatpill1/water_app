@@ -78,27 +78,23 @@ class MapFragment : Fragment() {
                 val lm: LocationManager =
                     requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+                // 현재 위치 받아옴
                 val userNowLocation: Location =
                     lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!
                 val uLatitude = userNowLocation.latitude
                 val uLongitude = userNowLocation.longitude
-                val uNowPosition = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-                mapView.setMapCenterPoint(
-                    MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), true
-                )
+                // 중심점 + 줌 레벨
+                mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), 1, true)
 
-                // 줌 레벨
-                mapView.setZoomLevel(1, true);
+                // 해당 위치 저장
+                val MY_LOCATION = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-                // 해당 위치 마커 표시
-                val MARKER_POINT = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
-
-                // 마커
+                // 마커 표시
                 val marker = MapPOIItem()
-                marker.itemName = "클릭된 장소"
+                marker.itemName = "현재 위치"
                 marker.tag = 0
-                marker.mapPoint = MARKER_POINT
+                marker.mapPoint = MY_LOCATION
 
                 // 기본 마커
                 marker.markerType = MapPOIItem.MarkerType.BluePin
@@ -111,34 +107,30 @@ class MapFragment : Fragment() {
             }
         }
 
-        /* 현재 위치 */
+        // 현재 위치로 돌아가기
         binding.btnLocation.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     val lm: LocationManager =
                         requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+                    // 현재 위치 받아옴
                     val userNowLocation: Location =
                         lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!
                     val uLatitude = userNowLocation.latitude
                     val uLongitude = userNowLocation.longitude
-                    val uNowPosition = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-                    mapView.setMapCenterPoint(
-                        MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), true
-                    )
+                    // 중심점 + 줌 레벨
+                    mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), 1, true)
 
-                    // 줌 레벨
-                    mapView.setZoomLevel(1, true);
+                    // 해당 위치 저장
+                    val MY_LOCATION = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
-                    // 해당 위치 마커 표시
-                    val MARKER_POINT = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
-
-                    // 마커
+                    // 마커 표시
                     val marker = MapPOIItem()
-                    marker.itemName = "클릭된 장소"
+                    marker.itemName = "현재 위치"
                     marker.tag = 0
-                    marker.mapPoint = MARKER_POINT
+                    marker.mapPoint = MY_LOCATION
 
                     // 기본 마커
                     marker.markerType = MapPOIItem.MarkerType.BluePin
@@ -176,7 +168,7 @@ class MapFragment : Fragment() {
         return binding.root
     }
 
-    /* 카카오 API */
+    // 카카오 API
     companion object {
         const val BASE_URL = "https://dapi.kakao.com/"
         const val API_KEY = "KakaoAK 887bc0eaa4f3e8018acf2539644a00db" // REST API 키
