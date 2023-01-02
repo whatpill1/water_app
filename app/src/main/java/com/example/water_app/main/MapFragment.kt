@@ -55,6 +55,12 @@ class MapFragment : Fragment() {
     private var pageNumber = 1 // 검색 페이지 번호
     private var keyword = "" // 검색 키워드
 
+    // 카카오 API
+    companion object {
+        const val BASE_URL = "https://dapi.kakao.com/"
+        const val API_KEY = "KakaoAK 887bc0eaa4f3e8018acf2539644a00db" // REST API 키
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -154,7 +160,7 @@ class MapFragment : Fragment() {
             override fun onClick(v: View, position: Int) {
                 val mapPoint =
                     MapPoint.mapPointWithGeoCoord(listItems[position].y, listItems[position].x)
-                mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true);
+                mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true)
             }
         })
 
@@ -166,12 +172,6 @@ class MapFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    // 카카오 API
-    companion object {
-        const val BASE_URL = "https://dapi.kakao.com/"
-        const val API_KEY = "KakaoAK 887bc0eaa4f3e8018acf2539644a00db" // REST API 키
     }
 
     /* 검색 */
