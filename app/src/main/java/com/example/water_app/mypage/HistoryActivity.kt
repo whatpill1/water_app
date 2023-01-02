@@ -19,7 +19,6 @@ class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
 
     private lateinit var viewModel : MainViewModel
-
     private val historyAdapter by lazy { HistoryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,4 +51,5 @@ class HistoryActivity : AppCompatActivity() {
             }
         })
     }
+
 }

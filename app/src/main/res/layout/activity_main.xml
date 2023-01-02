@@ -18,5 +18,4 @@
         android:layout_height="?attr/actionBarSize" android:id="@+id/navMain" android:background="#FFFFFF"
         app:menu="@drawable/main_nav" app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

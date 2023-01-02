@@ -5,26 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MapFragment"
-    android:id="@+id/mapLayout"
     android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mapLayout"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@drawable/edittext_map"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="36dp"
+            android:background="@null"
+            android:hint="장소ㆍ주소 검색"
+            android:textColorHint="@color/darkGrey"
+            android:fontFamily="@font/kim_regular"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/map_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Button
         android:id="@+id/btnLocation"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|end"
-        android:background="@drawable/map_marker"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginEnd="5dp" />
-
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ㅇㅇ"/>
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="ㄴㄴ"/>
+        android:background="@drawable/map_marker" />
 </FrameLayout>
