@@ -33,7 +33,7 @@ class HistoryActivity : AppCompatActivity() {
         // 리사이클러뷰
         binding.rvHistory.adapter = historyAdapter
         binding.rvHistory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvHistory.setHasFixedSize(true)        // 성능 개선
+        binding.rvHistory.setHasFixedSize(true)  // 성능 개선
 
         // 데이터 통신
         val repository = Repository()
