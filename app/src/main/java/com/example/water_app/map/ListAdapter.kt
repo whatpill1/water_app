@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.databinding.ActivityMainBinding
-import com.example.water_app.databinding.ItemHistoryRecyclerBinding
 import com.example.water_app.databinding.ItemMapRecyclerBinding
 
 class ListAdapter(val itemList: ArrayList<ListLayout>): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -22,12 +20,10 @@ class ListAdapter(val itemList: ArrayList<ListLayout>): RecyclerView.Adapter<Lis
     }
 
     override fun onBindViewHolder(holder: ListAdapter.ViewHolder, position: Int) {
-
         holder.binding.tvName.text = itemList[position].name
         holder.binding.tvRoad.text = itemList[position].road
         holder.binding.tvAddress.text = itemList[position].address
 
-        // 아이템 클릭 이벤트
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }

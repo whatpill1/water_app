@@ -3,8 +3,10 @@ package com.example.water_app.main
 import android.Manifest
 import android.app.TaskStackBuilder.create
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
 import android.location.LocationRequest
 import android.media.audiofx.AcousticEchoCanceler.create
 import android.os.Build
@@ -17,6 +19,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.databinding.FragmentMapBinding
@@ -40,7 +44,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
@@ -54,12 +57,8 @@ class MapFragment : Fragment() {
 
     // 위치 권한
     private val REQUEST_PERMISSION_LOCATION = 10
-
-    // 카카오 API
-    companion object {
-        const val BASE_URL = "https://dapi.kakao.com/"
-        const val API_KEY = "KakaoAK 887bc0eaa4f3e8018acf2539644a00db" // REST API 키
-    }
+    val PERMISSIONS_REQUEST_CODE = 100
+    var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +81,9 @@ class MapFragment : Fragment() {
         mapViewContainer.addView(mapView)
 
         // 중심점
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord( 35.893545384707764, 128.61185594900502), true)
+        mapView.setMapCenterPoint(
+            MapPoint.mapPointWithGeoCoord(35.893545384707764, 128.61185594900502), true
+        )
 
         // 줌 레벨
         mapView.setZoomLevel(1, true);
@@ -105,16 +106,56 @@ class MapFragment : Fragment() {
 
         mapView.addPOIItem(marker)
 
-        /* 현재 위치(해야함) */
+        /* 현재 위치 */
+        binding.btnLocation.setOnClickListener {
+            val permissionCheck = ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                val lm: LocationManager =
+                    requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                try {
+                    val userNowLocation: Location =
+                        lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!
+                    val uLatitude = userNowLocation.latitude
+                    val uLongitude = userNowLocation.longitude
+                    val uNowPosition = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
+
+                    mapView.setMapCenterPoint(uNowPosition, true)
+
+                } catch (e: NullPointerException) {
+                    Log.e("LOCATION_ERROR", e.toString())
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        ActivityCompat.finishAffinity(requireActivity())
+                    } else {
+                        ActivityCompat.finishAffinity(requireActivity())
+                    }
+
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    System.exit(0)
+                }
+            } else {
+                Toast.makeText(requireContext(), "위치 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    REQUIRED_PERMISSIONS,
+                    PERMISSIONS_REQUEST_CODE
+                )
+            }
+        }
 
         /* 검색 기능 */
-        binding.rvList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvList.adapter = listAdapter
 
         // 아이템 클릭 시 해당 위치로 이동
-        listAdapter.setItemClickListener(object: ListAdapter.OnItemClickListener {
+        listAdapter.setItemClickListener(object : ListAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                val mapPoint = MapPoint.mapPointWithGeoCoord(listItems[position].y, listItems[position].x)
+                val mapPoint =
+                    MapPoint.mapPointWithGeoCoord(listItems[position].y, listItems[position].x)
                 mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true);
             }
         })
@@ -125,26 +166,12 @@ class MapFragment : Fragment() {
             pageNumber = 1
             searchKeyword(keyword, pageNumber)
         }
-//
-//        // 이전 페이지 버튼
-//        binding.btnPrevPage.setOnClickListener {
-//            pageNumber--
-//            binding.tvPageNumber.text = pageNumber.toString()
-//            searchKeyword(keyword, pageNumber)
-//        }
-//
-//        // 다음 페이지 버튼
-//        binding.btnNextPage.setOnClickListener {
-//            pageNumber++
-//            binding.tvPageNumber.text = pageNumber.toString()
-//            searchKeyword(keyword, pageNumber)
-//        }
 
         return binding.root
     }
 
     /* 위치 권한 */
-    // 위치 권한 확인
+    // 권한 확인
     private fun checkPermissionForLocation(context: Context): Boolean {
         // Android 6.0 Marshmallow 이상에서는 위치 권한에 추가 런타임 권한이 필요
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -152,7 +179,11 @@ class MapFragment : Fragment() {
                 true
             } else {
                 // 권한이 없으므로 권한 요청 알림 보내기
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_PERMISSION_LOCATION)
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_PERMISSION_LOCATION
+                )
                 false
             }
         } else {
@@ -161,16 +192,27 @@ class MapFragment : Fragment() {
     }
 
     // 권한 요청 후 결과 처리
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //
             } else {
                 Log.d("ttt", "onRequestPermissionsResult() _ 권한 허용 거부")
-                Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
+    }
+
+    /* 카카오 API */
+    companion object {
+        const val BASE_URL = "https://dapi.kakao.com/"
+        const val API_KEY = "KakaoAK 887bc0eaa4f3e8018acf2539644a00db" // REST API 키
     }
 
     /* 검색 */
@@ -184,13 +226,17 @@ class MapFragment : Fragment() {
         val call = api.getSearchKeyword(API_KEY, keyword, page) // 검색 조건 입력
 
         // API 서버에 요청
-        call.enqueue(object: Callback<ResultSearchKeyword> {
-            override fun onResponse(call: Call<ResultSearchKeyword>, response: Response<ResultSearchKeyword>) {
-                // 통신 성공
+        call.enqueue(object : Callback<ResultSearchKeyword> {
+            // 통신 성공
+            override fun onResponse(
+                call: Call<ResultSearchKeyword>,
+                response: Response<ResultSearchKeyword>
+            ) {
                 addItemsAndMarkers(response.body())
             }
+
+            // 통신 실패
             override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {
-                // 통신 실패
                 Log.w("LocalSearch", "통신 실패: ${t.message}")
             }
         })
@@ -204,29 +250,29 @@ class MapFragment : Fragment() {
             mapView.removeAllPOIItems() // 지도의 마커 모두 제거
             for (document in searchResult!!.documents) {
                 // 결과를 리사이클러 뷰에 추가
-                val item = ListLayout(document.place_name,
+                val item = ListLayout(
+                    document.place_name,
                     document.road_address_name,
                     document.address_name,
                     document.x.toDouble(),
-                    document.y.toDouble())
+                    document.y.toDouble()
+                )
                 listItems.add(item)
 
                 // 지도에 마커 추가
                 val point = MapPOIItem()
                 point.apply {
                     itemName = document.place_name
-                    mapPoint = MapPoint.mapPointWithGeoCoord(document.y.toDouble(),
-                        document.x.toDouble())
+                    mapPoint = MapPoint.mapPointWithGeoCoord(
+                        document.y.toDouble(),
+                        document.x.toDouble()
+                    )
                     markerType = MapPOIItem.MarkerType.BluePin
                     selectedMarkerType = MapPOIItem.MarkerType.RedPin
                 }
                 mapView.addPOIItem(point)
             }
             listAdapter.notifyDataSetChanged()
-
-            //            binding.btnNextPage.isEnabled = !searchResult.meta.is_end // 페이지가 더 있을 경우 다음 버튼 활성화
-            //            binding.btnPrevPage.isEnabled = pageNumber != 1 // 1페이지가 아닐 경우 이전 버튼 활성화
-
         } else {
             // 검색 결과 없음
             Toast.makeText(requireContext(), "검색 결과가 없습니다", Toast.LENGTH_SHORT).show()
