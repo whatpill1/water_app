@@ -1,11 +1,10 @@
-package com.example.water_app.etc
+package com.example.water_app.user
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityLoginBinding
-import com.example.water_app.join.JoinActivity
 import com.example.water_app.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {

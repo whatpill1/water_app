@@ -8,12 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityPeriodBinding
-import com.example.water_app.recyclerview.HistoryAdapter
 import com.example.water_app.recyclerview.PeriodAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import com.example.water_app.vo.PeriodData
 
 class PeriodActivity : AppCompatActivity() {
 

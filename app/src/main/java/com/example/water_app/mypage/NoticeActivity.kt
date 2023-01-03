@@ -5,11 +5,8 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityNoticeBinding
-import com.example.water_app.databinding.ActivityPeriodBinding
 import com.example.water_app.recyclerview.NoticeAdapter
-import com.example.water_app.recyclerview.PeriodAdapter
 import com.example.water_app.vo.NoticeData
-import com.example.water_app.vo.PeriodData
 
 class NoticeActivity : AppCompatActivity() {
 

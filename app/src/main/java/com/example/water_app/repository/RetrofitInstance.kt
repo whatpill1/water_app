@@ -1,10 +1,11 @@
 package com.example.water_app.repository
 
-import com.example.water_app.repository.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
+
+    val BASE_URL = "http://10.1.4.121"
 
     private val retrofit by lazy {
         Retrofit.Builder()

@@ -9,17 +9,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.R
 import com.example.water_app.communication.CommunicationActivity
 import com.example.water_app.databinding.FragmentDonationBinding
-import com.example.water_app.recyclerview.HomeAdapter
 import com.example.water_app.recyclerview.MyDonationAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import com.example.water_app.vo.MyDonationData
 
 
 class DonationFragment : Fragment() {

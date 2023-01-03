@@ -13,6 +13,5 @@ data class JoinData(
 )
 
 data class JoinResponse(
-    val code: Int?,
-    val meta: String?,
-    val data: JoinData?)
+    val data: JoinData?
+    )

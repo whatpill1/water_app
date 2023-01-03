@@ -3,11 +3,8 @@ package com.example.water_app.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.databinding.ItemHistoryRecyclerBinding
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
-import com.example.water_app.vo.HistoryData
 import com.example.water_app.vo.NoticeData
-import com.example.water_app.vo.PeriodData
 
 class NoticeAdapter(val noticeList: ArrayList<NoticeData>) : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 

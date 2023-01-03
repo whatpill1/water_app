@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
+import com.example.water_app.user.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
