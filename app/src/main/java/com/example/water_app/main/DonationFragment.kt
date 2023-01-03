@@ -20,8 +20,6 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 
 class DonationFragment : Fragment() {
 
-    private lateinit var donationRecyclerView: RecyclerView
-
     // 뷰바인딩
     private lateinit var binding: FragmentDonationBinding
 

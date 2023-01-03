@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityNoticeBinding
 import com.example.water_app.recyclerview.NoticeAdapter
-import com.example.water_app.vo.NoticeData
+import com.example.water_app.model.NoticeData
 
 class NoticeActivity : AppCompatActivity() {
 

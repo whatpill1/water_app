@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemHistoryRecyclerBinding
-import com.example.water_app.vo.PostData
+import com.example.water_app.model.PostData
 
 class HistoryAdapter(private val context: Context, private var historyList: List<PostData>?) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 

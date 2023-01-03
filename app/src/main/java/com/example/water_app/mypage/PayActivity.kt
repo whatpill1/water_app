@@ -16,6 +16,5 @@ class PayActivity : AppCompatActivity() {
 
         binding = ActivityPayBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
     }
 }

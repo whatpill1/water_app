@@ -51,7 +51,5 @@ class MyPageActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener{
             super.onBackPressed()
         }
-
-
     }
 }

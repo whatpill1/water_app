@@ -1,43 +1,27 @@
 package com.example.water_app.main
 
 import android.Manifest
-import android.app.TaskStackBuilder.create
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.location.LocationRequest
-import android.media.audiofx.AcousticEchoCanceler.create
 import android.os.Build
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.databinding.FragmentMapBinding
 import com.example.water_app.map.KakaoAPI
 import com.example.water_app.map.ListAdapter
-import com.example.water_app.map.ListLayout
+import com.example.water_app.map.LocationData
 import com.example.water_app.map.ResultSearchKeyword
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-import com.google.android.gms.location.LocationRequest.create
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import com.google.android.gms.location.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,7 +34,7 @@ class MapFragment : Fragment() {
     private lateinit var mapView: MapView
 
     // 검색 RecyclerView
-    private val listItems = arrayListOf<ListLayout>() // 리사이클러 뷰 아이템
+    private val listItems = arrayListOf<LocationData>() // 리사이클러 뷰 아이템
     private val listAdapter = ListAdapter(listItems) // 리사이클러 뷰 어댑터
     private var pageNumber = 1 // 검색 페이지 번호
     private var keyword = "" // 검색 키워드
@@ -209,7 +193,7 @@ class MapFragment : Fragment() {
             mapView.removeAllPOIItems() // 지도의 마커 모두 제거
             for (document in searchResult!!.documents) {
                 // 결과를 리사이클러 뷰에 추가
-                val item = ListLayout(
+                val item = LocationData(
                     document.place_name,
                     document.road_address_name,
                     document.address_name,

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
-import com.example.water_app.vo.NoticeData
+import com.example.water_app.model.NoticeData
 
 class NoticeAdapter(val noticeList: ArrayList<NoticeData>) : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 

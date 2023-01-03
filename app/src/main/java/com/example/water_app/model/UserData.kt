@@ -1,9 +1,6 @@
-package com.example.water_app.vo
-
-import com.google.gson.annotations.SerializedName
+package com.example.water_app.model
 
 data class UserData (
-    @SerializedName("userId")
     val mbr_sn : Int,
     val mbr_id : String,
     val mbr_password : String,

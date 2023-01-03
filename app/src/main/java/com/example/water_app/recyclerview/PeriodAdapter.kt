@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemPeriodRecyclerBinding
-import com.example.water_app.vo.PostData
+import com.example.water_app.model.PostData
 
 class PeriodAdapter(val periodList: List<PostData>?) : RecyclerView.Adapter<PeriodAdapter.ViewHolder>() {
 
@@ -26,5 +26,4 @@ class PeriodAdapter(val periodList: List<PostData>?) : RecyclerView.Adapter<Peri
     override fun getItemCount(): Int {
         return periodList!!.size
     }
-
 }

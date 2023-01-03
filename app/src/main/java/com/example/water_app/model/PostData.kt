@@ -1,8 +1,4 @@
-package com.example.water_app.vo
-
-import com.google.gson.annotations.SerializedName
-import java.sql.Date
-import java.time.DateTimeException
+package com.example.water_app.model
 
 class PostData (
     val cntr_sn : Int?,

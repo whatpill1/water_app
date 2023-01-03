@@ -1,6 +1,6 @@
 package com.example.water_app.map
 
-class ListLayout(
+class LocationData(
     val name: String,
     val road: String,
     val address: String,

@@ -1,7 +1,7 @@
 package com.example.water_app.repository
 
-import com.example.water_app.vo.PostData
-import com.example.water_app.vo.UserData
+import com.example.water_app.model.PostData
+import com.example.water_app.model.UserData
 import retrofit2.Response
 
 class Repository {

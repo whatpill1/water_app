@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemMainRecyclerBinding
-import com.example.water_app.vo.PostData
+import com.example.water_app.model.PostData
 
 class HomeAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 

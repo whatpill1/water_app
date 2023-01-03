@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemMapRecyclerBinding
 
-class ListAdapter(val itemList: ArrayList<ListLayout>): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class ListAdapter(val itemList: ArrayList<LocationData>): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMapRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
