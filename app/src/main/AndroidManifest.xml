@@ -115,7 +115,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".etc.JoinActivity"
+            android:name=".join.JoinActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

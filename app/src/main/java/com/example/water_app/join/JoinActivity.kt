@@ -1,4 +1,4 @@
-package com.example.water_app.etc
+package com.example.water_app.join
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
