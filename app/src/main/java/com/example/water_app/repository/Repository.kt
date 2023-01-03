@@ -1,6 +1,7 @@
 package com.example.water_app.repository
 
 import com.example.water_app.vo.HistoryData
+import com.example.water_app.vo.HomeData
 import com.example.water_app.vo.PostData
 import com.example.water_app.vo.UserData
 import retrofit2.Response
@@ -19,5 +20,9 @@ class Repository {
 
     suspend fun getHistory(use_yn: Char) : Response<List<HistoryData>> {
         return RetrofitInstance.api.getHistory(use_yn)
+    }
+
+    suspend fun getHomeList() : Response<List<HomeData>> {
+        return RetrofitInstance.api.getHomeList()
     }
 }

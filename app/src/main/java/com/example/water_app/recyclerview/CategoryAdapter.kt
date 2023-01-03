@@ -26,8 +26,8 @@ class CategoryAdapter(private val context: Context, private val donationList: Ar
     // 내용 입력
     override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
         holder.binding.ivImage.setImageResource(donationList.get(position).img)
-        holder.binding.tvTitle.text = donationList.get(position).title
-        holder.binding.tvMoney.text = donationList.get(position).money
+        holder.binding.tvTitle.text = donationList.get(position).cntr_ttl
+        holder.binding.tvMoney.text = donationList.get(position).cntr_obctr
         holder.binding.tvPercent.text = donationList.get(position).percent
 
         holder.itemView.setOnClickListener {

@@ -9,8 +9,6 @@ import com.example.water_app.vo.HistoryData
 
 class HistoryAdapter(private val context: Context, private var historyList: List<HistoryData>?) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-//    private var historyList = emptyList<HistoryData>()
-
     class ViewHolder(val binding: ItemHistoryRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
