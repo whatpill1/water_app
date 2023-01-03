@@ -21,7 +21,7 @@ class MyDonationAdapter(private val context: Context, private val donationList: 
     // 내용 입력
     override fun onBindViewHolder(holder: MyDonationAdapter.ViewHolder, position: Int) {
 //        holder.binding.ivImage.setImageResource(donationList.get(position).img)
-        holder.binding.tvTitle.text = donationList!!.get(position).cntr_ttl
+        holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)

@@ -18,8 +18,8 @@ class HistoryAdapter(private val context: Context, private var historyList: List
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvTitle.text = historyList!!.get(position).cntr_ttl
-        holder.binding.tvMoney.text = historyList!!.get(position).cntr_obctr.toString()
+        holder.binding.tvTitle.text = historyList?.get(position)?.cntr_ttl
+        holder.binding.tvMoney.text = historyList?.get(position)?.cntr_obctr.toString()
     }
 
     override fun getItemCount(): Int {
