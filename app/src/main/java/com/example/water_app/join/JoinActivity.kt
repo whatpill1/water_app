@@ -30,6 +30,4 @@ class JoinActivity : AppCompatActivity() {
         }
 
     }
-
-
 }
