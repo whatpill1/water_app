@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,14 +37,6 @@ class HomeFragment : Fragment() {
     private val sliderImageHandler: Handler = Handler()
     private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }
 
-    private fun getAespaMembers(): ArrayList<Int> {
-        return arrayListOf<Int>(
-            R.drawable.banner1,
-            R.drawable.store2,
-            R.drawable.store3,
-            R.drawable.store4)
-    }
-
     // context를 mainActivity에 담음
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,9 +53,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         //뷰페이저
-//        binding.ivBanner.adapter = MyViewPagerAdapter(getAespaMembers()) // 어댑터 생성
-//        binding.ivBanner.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
-
         val imageList = arrayListOf<Int>().apply {
             for (i in 0..2) {
                 add(R.drawable.banner1)
@@ -101,8 +89,8 @@ class HomeFragment : Fragment() {
         val viewModelFactory = MainViewModelFactory(repository)
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getHomeList()
-        viewModel.homeResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.getDonationList()
+        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
             // 통신 성공
             if(it.isSuccessful){
                 val homelist = it.body()

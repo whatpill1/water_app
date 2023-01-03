@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemMainRecyclerBinding
-import com.example.water_app.vo.HomeData
+import com.example.water_app.vo.PostData
 
-class HomeAdapter(private val context: Context, private val donationList: List<HomeData>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMainRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,10 +20,10 @@ class HomeAdapter(private val context: Context, private val donationList: List<H
 
     // 내용 입력
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
-        holder.binding.ivImage.setImageResource(donationList!!.get(position).img)
-        holder.binding.tvTitle.text = donationList.get(position).cntr_ttl
-        holder.binding.tvMoney.text = donationList.get(position).cntr_obctr
-        holder.binding.tvPercent.text = donationList.get(position)?.percent
+//        holder.binding.ivImage.setImageResource(donationList!!.get(position).img)
+        holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
+        holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()
+//        holder.binding.tvPercent.text = donationList?.get(position)?.percent
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)

@@ -1,7 +1,6 @@
 package com.example.water_app.mypage
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -34,8 +33,8 @@ class HistoryActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getHistory('Y')
-        viewModel.historyResponse.observe(this, Observer {
+        viewModel.getDonationList()
+        viewModel.getDonationListResponse.observe(this, Observer {
             // 통신 성공
             if(it.isSuccessful){
                 val historylist = it.body()

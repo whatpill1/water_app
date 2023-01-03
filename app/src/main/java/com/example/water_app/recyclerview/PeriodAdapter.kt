@@ -1,18 +1,12 @@
 package com.example.water_app.recyclerview
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.R
-import com.example.water_app.databinding.ItemHistoryRecyclerBinding
 import com.example.water_app.databinding.ItemPeriodRecyclerBinding
-import com.example.water_app.vo.HistoryData
-import com.example.water_app.vo.PeriodData
+import com.example.water_app.vo.PostData
 
-class PeriodAdapter(val periodList: ArrayList<PeriodData>) : RecyclerView.Adapter<PeriodAdapter.ViewHolder>() {
+class PeriodAdapter(val periodList: List<PostData>?) : RecyclerView.Adapter<PeriodAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemPeriodRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 

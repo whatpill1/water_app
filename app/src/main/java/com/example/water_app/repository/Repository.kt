@@ -18,11 +18,8 @@ class Repository {
         return RetrofitInstance.api.getCntr()
     }
 
-    suspend fun getHistory(use_yn: Char) : Response<List<HistoryData>> {
-        return RetrofitInstance.api.getHistory(use_yn)
+    suspend fun getDonationList() : Response<List<PostData>> {
+        return RetrofitInstance.api.getDonationList()
     }
 
-    suspend fun getHomeList() : Response<List<HomeData>> {
-        return RetrofitInstance.api.getHomeList()
-    }
 }

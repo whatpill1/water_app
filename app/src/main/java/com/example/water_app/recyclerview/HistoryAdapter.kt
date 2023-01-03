@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemHistoryRecyclerBinding
 import com.example.water_app.vo.HistoryData
+import com.example.water_app.vo.PostData
 
-class HistoryAdapter(private val context: Context, private var historyList: List<HistoryData>?) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(private val context: Context, private var historyList: List<PostData>?) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemHistoryRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -26,7 +27,7 @@ class HistoryAdapter(private val context: Context, private var historyList: List
     }
 
     // 데이터 변경시 리스트 다시 할당
-    fun setData(newList: HistoryData){
+    fun setData(newList: PostData){
         historyList = listOf(newList)
         // 새로고침
         notifyDataSetChanged()

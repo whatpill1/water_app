@@ -2,20 +2,26 @@ package com.example.water_app.mypage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityHistoryBinding
-import com.example.water_app.databinding.ActivityMainBinding
 import com.example.water_app.databinding.ActivityPeriodBinding
 import com.example.water_app.recyclerview.HistoryAdapter
 import com.example.water_app.recyclerview.PeriodAdapter
-import com.example.water_app.vo.HistoryData
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 import com.example.water_app.vo.PeriodData
 
 class PeriodActivity : AppCompatActivity() {
 
     // 뷰바인딩
     private lateinit var binding: ActivityPeriodBinding
+
+    //뷰모델 불러오기
+    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +31,25 @@ class PeriodActivity : AppCompatActivity() {
         binding = ActivityPeriodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val periodList = arrayListOf(
-            PeriodData(R.drawable.red_heart, "기부1", "1,000", "2022-12-01", "2022-12-28"),
-            PeriodData(R.drawable.red_heart, "기부2", "1,000", "2022-12-01", "2022-12-28"),
-            PeriodData(R.drawable.red_heart, "기부3", "1,000", "2022-12-01", "2022-12-28"),
-            PeriodData(R.drawable.red_heart, "기부4", "1,000", "2022-12-01", "2022-12-28")
-        )
+        //php 데이터 불러오기
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
 
-        binding.rvPeriod.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvPeriod.setHasFixedSize(true)        // 성능 개선
-        binding.rvPeriod.adapter = PeriodAdapter(periodList)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getDonationList()
+        viewModel.getDonationListResponse.observe(this, Observer {
+            // 통신 성공
+            if(it.isSuccessful){
+                val periodList = it.body()
+                //리사이클러뷰
+                binding.rvPeriod.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                binding.rvPeriod.setHasFixedSize(true)        // 성능 개선
+                binding.rvPeriod.adapter = PeriodAdapter(periodList)
+            }
+            // 통신 실패
+            else{
+                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

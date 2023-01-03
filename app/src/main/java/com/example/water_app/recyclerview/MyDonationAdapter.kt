@@ -4,15 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.R
 import com.example.water_app.databinding.ItemDonationRecyclerBinding
-import com.example.water_app.databinding.ItemHistoryRecyclerBinding
-import com.example.water_app.vo.MyDonationData
+import com.example.water_app.vo.PostData
 
-class MyDonationAdapter(private val context: Context, private val donationList: ArrayList<MyDonationData>) : RecyclerView.Adapter<MyDonationAdapter.ViewHolder>() {
+class MyDonationAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<MyDonationAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemDonationRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,8 +20,8 @@ class MyDonationAdapter(private val context: Context, private val donationList: 
 
     // 내용 입력
     override fun onBindViewHolder(holder: MyDonationAdapter.ViewHolder, position: Int) {
-        holder.binding.ivImage.setImageResource(donationList.get(position).img)
-        holder.binding.tvTitle.text = donationList.get(position).title
+//        holder.binding.ivImage.setImageResource(donationList.get(position).img)
+        holder.binding.tvTitle.text = donationList!!.get(position).cntr_ttl
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
@@ -34,7 +30,7 @@ class MyDonationAdapter(private val context: Context, private val donationList: 
 
     // 리스트 내 아이템 개수
     override fun getItemCount(): Int {
-        return donationList.size
+        return donationList!!.size
     }
 
     // OnClickListener
