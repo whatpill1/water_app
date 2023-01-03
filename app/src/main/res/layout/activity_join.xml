@@ -178,6 +178,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtBirth" />
 
     <Button
+        android:id="@+id/btnJoin"
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_marginTop="50dp"
