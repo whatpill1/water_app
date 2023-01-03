@@ -1,5 +1,7 @@
 package com.example.water_app.vo
 
+import com.google.gson.annotations.SerializedName
+
 data class HistoryData (
     val cntr_sn : Int,
     val cntr_file_id : Int,

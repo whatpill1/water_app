@@ -1,0 +1,378 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]/shelved.patch	(revision c6691b098f5cee1496036469af42cd6dccacb1cf)
++++ /dev/null	(revision c6691b098f5cee1496036469af42cd6dccacb1cf)
+@@ -1,354 +0,0 @@
+-Index: app/src/main/java/com/example/water_app/main/MainActivity.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.water_app.main\r\n\r\nimport android.os.Bundle\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView\r\n\r\n\r\n\r\nclass MainActivity : AppCompatActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_main)\r\n\r\n\r\n    // BottomNavigationView 객체 생성\r\n        var bnv_main = findViewById(R.id.bnv_main) as BottomNavigationView\r\n\r\n        bnv_main.run { setOnNavigationItemSelectedListener {\r\n            when(it.itemId) {\r\n                // 프래그먼트 이동\r\n                R.id.first -> {\r\n                    val homeFragment = HomeFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeFragment).commit()\r\n                }\r\n                R.id.second -> {\r\n                    val boardFragment = DonationFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, boardFragment).commit()\r\n                }\r\n                R.id.third -> {\r\n                    val settingFragment = MapFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()\r\n                }\r\n                R.id.fourth -> {\r\n                    val settingFragment = StoreFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()\r\n                }\r\n                R.id.fifth -> {\r\n                    val settingFragment = MyPageFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, settingFragment).commit()\r\n                }\r\n            }\r\n            true\r\n        }\r\n            selectedItemId = R.id.first\r\n        }\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/main/MainActivity.kt b/app/src/main/java/com/example/water_app/main/MainActivity.kt
+---- a/app/src/main/java/com/example/water_app/main/MainActivity.kt	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/java/com/example/water_app/main/MainActivity.kt	(date 1672053155871)
+-@@ -1,13 +1,22 @@
+- package com.example.water_app.main
+- 
+-+import android.content.pm.PackageInfo
+-+import android.content.pm.PackageManager
+-+import android.content.pm.Signature
+-+import android.os.Build
+- import android.os.Bundle
+-+import android.util.Base64
+-+import android.util.Log
+-+import androidx.annotation.RequiresApi
+- import androidx.appcompat.app.AppCompatActivity
+- import com.example.water_app.R
+- import com.google.android.material.bottomnavigation.BottomNavigationView
+--
+-+import java.security.MessageDigest
+-+import java.security.NoSuchAlgorithmException
+- 
+- 
+- class MainActivity : AppCompatActivity() {
+-+
+-     override fun onCreate(savedInstanceState: Bundle?) {
+-         super.onCreate(savedInstanceState)
+-         setContentView(R.layout.activity_main)
+-@@ -44,5 +53,19 @@
+-         }
+-             selectedItemId = R.id.first
+-         }
+-+
+-+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+-+            val packageInfo =
+-+                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+-+            for (signature in packageInfo.signingInfo.apkContentsSigners) {
+-+                try {
+-+                    val md = MessageDigest.getInstance("SHA")
+-+                    md.update(signature.toByteArray())
+-+                    Log.d("getKeyHash", "key hash: ${Base64.encodeToString(md.digest(), Base64.NO_WRAP)}")
+-+                } catch (e: NoSuchAlgorithmException) {
+-+                    Log.w("getKeyHash", "Unable to get MessageDigest. signature=$signature", e)
+-+                }
+-+            }
+-+        }
+-     }
+- }
+-\ No newline at end of file
+-Index: app/src/main/java/com/example/water_app/main/MapFragment.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.water_app.main\r\n\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport com.example.water_app.R\r\n\r\n// TODO: Rename parameter arguments, choose names that match\r\n// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\nprivate const val ARG_PARAM1 = \"param1\"\r\nprivate const val ARG_PARAM2 = \"param2\"\r\n\r\n/**\r\n * A simple [Fragment] subclass.\r\n * Use the [MapFragment.newInstance] factory method to\r\n * create an instance of this fragment.\r\n */\r\nclass MapFragment : Fragment() {\r\n    // TODO: Rename and change types of parameters\r\n    private var param1: String? = null\r\n    private var param2: String? = null\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        arguments?.let {\r\n            param1 = it.getString(ARG_PARAM1)\r\n            param2 = it.getString(ARG_PARAM2)\r\n        }\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        // Inflate the layout for this fragment\r\n        return inflater.inflate(R.layout.fragment_map, container, false)\r\n    }\r\n\r\n    companion object {\r\n        /**\r\n         * Use this factory method to create a new instance of\r\n         * this fragment using the provided parameters.\r\n         *\r\n         * @param param1 Parameter 1.\r\n         * @param param2 Parameter 2.\r\n         * @return A new instance of fragment MapFragment.\r\n         */\r\n        // TODO: Rename and change types and number of parameters\r\n        @JvmStatic\r\n        fun newInstance(param1: String, param2: String) =\r\n            MapFragment().apply {\r\n                arguments = Bundle().apply {\r\n                    putString(ARG_PARAM1, param1)\r\n                    putString(ARG_PARAM2, param2)\r\n                }\r\n            }\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/main/MapFragment.kt b/app/src/main/java/com/example/water_app/main/MapFragment.kt
+---- a/app/src/main/java/com/example/water_app/main/MapFragment.kt	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/java/com/example/water_app/main/MapFragment.kt	(date 1672052417599)
+-@@ -1,60 +1,40 @@
+- package com.example.water_app.main
+- 
+-+import android.R
+-+import android.content.ContentValues.TAG
+- import android.os.Bundle
+--import androidx.fragment.app.Fragment
+-+import android.text.Layout
+- import android.view.LayoutInflater
+- import android.view.View
+- import android.view.ViewGroup
+--import com.example.water_app.R
+-+import androidx.fragment.app.Fragment
+-+import com.example.water_app.databinding.FragmentMapBinding
+-+import com.kakao.util.maps.helper.Utility
+-+import net.daum.mf.map.api.MapPoint
+-+import net.daum.mf.map.api.MapView
+- 
+--// TODO: Rename parameter arguments, choose names that match
+--// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+--private const val ARG_PARAM1 = "param1"
+--private const val ARG_PARAM2 = "param2"
+- 
+--/**
+-- * A simple [Fragment] subclass.
+-- * Use the [MapFragment.newInstance] factory method to
+-- * create an instance of this fragment.
+-- */
+- class MapFragment : Fragment() {
+--    // TODO: Rename and change types of parameters
+--    private var param1: String? = null
+--    private var param2: String? = null
+-+
+-+    private lateinit var binding: FragmentMapBinding
+- 
+-     override fun onCreate(savedInstanceState: Bundle?) {
+-         super.onCreate(savedInstanceState)
+--        arguments?.let {
+--            param1 = it.getString(ARG_PARAM1)
+--            param2 = it.getString(ARG_PARAM2)
+--        }
+-     }
+- 
+-     override fun onCreateView(
+-         inflater: LayoutInflater, container: ViewGroup?,
+-         savedInstanceState: Bundle?
+-     ): View? {
+--        // Inflate the layout for this fragment
+--        return inflater.inflate(R.layout.fragment_map, container, false)
+-+
+-+        binding = FragmentMapBinding.inflate(inflater, container, false)
+-+
+-+        val mapView = MapView(requireActivity())
+-+        val mapViewContainer = binding.mapLayout as ViewGroup
+-+        mapViewContainer.addView(mapView)
+-+
+-+        return binding.root
+-     }
+- 
+--    companion object {
+--        /**
+--         * Use this factory method to create a new instance of
+--         * this fragment using the provided parameters.
+--         *
+--         * @param param1 Parameter 1.
+--         * @param param2 Parameter 2.
+--         * @return A new instance of fragment MapFragment.
+--         */
+--        // TODO: Rename and change types and number of parameters
+--        @JvmStatic
+--        fun newInstance(param1: String, param2: String) =
+--            MapFragment().apply {
+--                arguments = Bundle().apply {
+--                    putString(ARG_PARAM1, param1)
+--                    putString(ARG_PARAM2, param2)
+--                }
+--            }
+--    }
+-+
+- }
+-\ No newline at end of file
+-Index: app/build.gradle
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>plugins {\r\n    id 'com.android.application'\r\n    id 'org.jetbrains.kotlin.android'\r\n    id 'kotlin-kapt'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.water_app'\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.water_app\"\r\n        minSdk 21\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = '1.8'\r\n    }\r\n    buildFeatures {\r\n        viewBinding true\r\n    }\r\n    viewBinding{\r\n        enabled = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.core:core-ktx:1.7.0'\r\n    implementation 'androidx.appcompat:appcompat:1.5.1'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'androidx.annotation:annotation:1.3.0'\r\n    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'\r\n    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'\r\n    implementation 'androidx.room:room-runtime:2.4.3'\r\n    kapt 'androidx.room:room-common:2.4.3'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\r\n\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation(\"androidx.fragment:fragment-ktx:1.3.6\")\r\n\r\n    //Glide\r\n    implementation 'com.github.bumptech.glide:glide:4.11.0'\r\n    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/build.gradle b/app/build.gradle
+---- a/app/build.gradle	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/build.gradle	(date 1672052417605)
+-@@ -8,6 +8,10 @@
+-     namespace 'com.example.water_app'
+-     compileSdk 32
+- 
+-+    buildFeatures {
+-+        viewBinding true
+-+    }
+-+
+-     defaultConfig {
+-         applicationId "com.example.water_app"
+-         minSdk 21
+-@@ -16,6 +20,10 @@
+-         versionName "1.0"
+- 
+-         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+-+
+-+        ndk {
+-+            abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a'
+-+        }
+-     }
+- 
+-     buildTypes {
+-@@ -57,7 +65,11 @@
+-     implementation 'com.google.android.material:material:1.3.0'
+-     implementation("androidx.fragment:fragment-ktx:1.3.6")
+- 
+--    //Glide
+-+    // Glide
+-     implementation 'com.github.bumptech.glide:glide:4.11.0'
+-     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+-+
+-+    // 카카오 맵
+-+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+-+    implementation files('libs/libDaumMapAndroid.jar')
+- }
+-\ No newline at end of file
+-Index: app/src/main/AndroidManifest.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.Water_app\"\r\n        tools:targetApi=\"31\"\r\n        android:usesCleartextTraffic=\"true\">\r\n        <activity\r\n            android:name=\".SplashActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.SubmitActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.DonationListActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".communication.CommunicationActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".mypage.MyPageActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.DonationTimeActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.DonationPointActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.DonationItemActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.DonationActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".JoinActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".main.MainActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n    </application>\r\n    <uses-permission android:name=\"android.permission.INTERNET\"></uses-permission>\r\n</manifest>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+---- a/app/src/main/AndroidManifest.xml	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/AndroidManifest.xml	(date 1672051809995)
+-@@ -2,6 +2,10 @@
+- <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-     xmlns:tools="http://schemas.android.com/tools">
+- 
+-+    <uses-permission android:name="android.permission.INTERNET" />
+-+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+-+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+-+
+-     <application
+-         android:allowBackup="true"
+-         android:dataExtractionRules="@xml/data_extraction_rules"
+-@@ -12,7 +16,8 @@
+-         android:supportsRtl="true"
+-         android:theme="@style/Theme.Water_app"
+-         tools:targetApi="31"
+--        android:usesCleartextTraffic="true">
+-+        android:usesCleartextTraffic="true"
+-+        android:networkSecurityConfig="@xml/network_security_config">
+-         <activity
+-             android:name=".SplashActivity"
+-             android:exported="true">
+-@@ -101,6 +106,7 @@
+-                 android:name="android.app.lib_name"
+-                 android:value="" />
+-         </activity>
+-+
+-+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="bd5be5c79f704a2ca43de0e810f10a03" />
+-     </application>
+--    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+- </manifest>
+-\ No newline at end of file
+-Index: app/src/main/res/layout/fragment_map.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".main.MapFragment\"\r\n    android:background=\"@color/white\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:text=\"@string/hello_blank_fragment\" />\r\n\r\n</FrameLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/fragment_map.xml b/app/src/main/res/layout/fragment_map.xml
+---- a/app/src/main/res/layout/fragment_map.xml	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/res/layout/fragment_map.xml	(date 1672051279418)
+-@@ -6,10 +6,9 @@
+-     tools:context=".main.MapFragment"
+-     android:background="@color/white">
+- 
+--    <!-- TODO: Update blank fragment layout -->
+--    <TextView
+-+    <androidx.constraintlayout.widget.ConstraintLayout
+-+        android:id="@+id/mapLayout"
+-         android:layout_width="match_parent"
+--        android:layout_height="match_parent"
+--        android:text="@string/hello_blank_fragment" />
+--
+-+        android:layout_height="match_parent">
+-+    </androidx.constraintlayout.widget.ConstraintLayout>
+- </FrameLayout>
+-\ No newline at end of file
+-Index: app/src/main/java/com/example/water_app/LoginActivity.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.water_app\r\n\r\nimport android.annotation.SuppressLint\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.widget.Button\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.home.DonationActivity\r\nimport com.example.water_app.main.MainActivity\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_login)\r\n\r\n        val btnLogin = findViewById<Button>(R.id.btnLogin)\r\n\r\n        btnLogin.setOnClickListener{\r\n            val intent = Intent(this, MainActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/LoginActivity.kt b/app/src/main/java/com/example/water_app/LoginActivity.kt
+---- a/app/src/main/java/com/example/water_app/LoginActivity.kt	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/java/com/example/water_app/LoginActivity.kt	(date 1672045324966)
+-@@ -2,11 +2,17 @@
+- 
+- import android.annotation.SuppressLint
+- import android.content.Intent
+-+import android.content.pm.PackageManager
+-+import android.os.Build
+- import android.os.Bundle
+-+import android.util.Base64
+-+import android.util.Log
+- import android.widget.Button
+-+import androidx.annotation.RequiresApi
+- import androidx.appcompat.app.AppCompatActivity
+- import com.example.water_app.home.DonationActivity
+- import com.example.water_app.main.MainActivity
+-+import java.security.MessageDigest
+- 
+- class LoginActivity : AppCompatActivity() {
+- 
+-Index: app/src/main/res/xml/network_security_config.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/xml/network_security_config.xml b/app/src/main/res/xml/network_security_config.xml
+-new file mode 100644
+---- /dev/null	(date 1672053400440)
+-+++ b/app/src/main/res/xml/network_security_config.xml	(date 1672053400440)
+-@@ -0,0 +1,6 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<network-security-config>
+-+    <domain-config cleartextTrafficPermitted="true">
+-+        <domain includeSubdomains="true">maps.daum-img.net</domain>
+-+    </domain-config>
+-+</network-security-config>
+-\ No newline at end of file
+-Index: app/src/main/java/com/example/water_app/main/MyPageFragment.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.water_app.main\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.LinearLayout\r\nimport com.example.water_app.R\r\nimport com.example.water_app.mypage.MyPageActivity\r\n\r\n// TODO: Rename parameter arguments, choose names that match\r\n// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\nprivate const val ARG_PARAM1 = \"param1\"\r\nprivate const val ARG_PARAM2 = \"param2\"\r\n\r\nclass MyPageFragment : Fragment() {\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        val view = inflater.inflate(R.layout.fragment_my_page, null)\r\n        val linMyPage = view.findViewById<LinearLayout>(R.id.linMyPage)\r\n\r\n        linMyPage.setOnClickListener{\r\n            activity?.let{\r\n                val intent = Intent(context, MyPageActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }\r\n\r\n        return view\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/main/MyPageFragment.kt b/app/src/main/java/com/example/water_app/main/MyPageFragment.kt
+---- a/app/src/main/java/com/example/water_app/main/MyPageFragment.kt	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/java/com/example/water_app/main/MyPageFragment.kt	(date 1672049965496)
+-@@ -10,11 +10,6 @@
+- import com.example.water_app.R
+- import com.example.water_app.mypage.MyPageActivity
+- 
+--// TODO: Rename parameter arguments, choose names that match
+--// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+--private const val ARG_PARAM1 = "param1"
+--private const val ARG_PARAM2 = "param2"
+--
+- class MyPageFragment : Fragment() {
+- 
+-     override fun onCreate(savedInstanceState: Bundle?) {
+-Index: app/src/main/java/com/example/water_app/SplashActivity.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.water_app\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.os.Handler\r\nimport android.widget.Button\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.main.MainActivity\r\n\r\nclass SplashActivity : AppCompatActivity() {\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_splash)\r\n\r\n        val handler = Handler()\r\n        handler.postDelayed({\r\n            val intent = Intent(applicationContext, LoginActivity::class.java)\r\n            startActivity(intent)\r\n            finish()\r\n        }, 1500)\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        finish()\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/SplashActivity.kt b/app/src/main/java/com/example/water_app/SplashActivity.kt
+---- a/app/src/main/java/com/example/water_app/SplashActivity.kt	(revision bb5e0a2f2c663ef646606c17124574a0d28fd8dc)
+-+++ b/app/src/main/java/com/example/water_app/SplashActivity.kt	(date 1672045276063)
+-@@ -1,11 +1,17 @@
+- package com.example.water_app
+- 
+- import android.content.Intent
+-+import android.content.pm.PackageManager
+-+import android.os.Build
+- import android.os.Bundle
+- import android.os.Handler
+-+import android.util.Base64
+-+import android.util.Log
+- import android.widget.Button
+-+import androidx.annotation.RequiresApi
+- import androidx.appcompat.app.AppCompatActivity
+- import com.example.water_app.main.MainActivity
+-+import java.security.MessageDigest
+- 
+- class SplashActivity : AppCompatActivity() {
+- 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26__8_17__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26__8_17__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26__8_17__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26__8_17__Changes_.xml	(revision c6691b098f5cee1496036469af42cd6dccacb1cf)
++++ /dev/null	(revision c6691b098f5cee1496036469af42cd6dccacb1cf)
+@@ -1,9 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]" date="1672053542851" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022-12-26 오후 8:17 [Changes]" />
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/libs/libDaumMapAndroid.jar" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-12-26_오후_8_17_[Changes]/libDaumMapAndroid.jar" />
+-  </binary>
+-</changelist>
+\ No newline at end of file

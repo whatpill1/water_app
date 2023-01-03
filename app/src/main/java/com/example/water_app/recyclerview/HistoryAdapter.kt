@@ -1,14 +1,15 @@
 package com.example.water_app.recyclerview
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemHistoryRecyclerBinding
 import com.example.water_app.vo.HistoryData
 
-class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(private val context: Context, private var historyList: List<HistoryData>?) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    private var historyList = emptyList<HistoryData>()
+//    private var historyList = emptyList<HistoryData>()
 
     class ViewHolder(val binding: ItemHistoryRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -18,12 +19,12 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvTitle.text = historyList[position].cntr_ttl
-        holder.binding.tvMoney.text = historyList[position].cntr_obctr.toString()
+        holder.binding.tvTitle.text = historyList!!.get(position).cntr_ttl
+        holder.binding.tvMoney.text = historyList!!.get(position).cntr_obctr.toString()
     }
 
     override fun getItemCount(): Int {
-        return historyList.size
+        return historyList!!.size
     }
 
     // 데이터 변경시 리스트 다시 할당

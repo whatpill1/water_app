@@ -4,6 +4,7 @@ import com.example.water_app.vo.HistoryData
 import com.example.water_app.vo.PostData
 import com.example.water_app.vo.UserData
 import retrofit2.Response
+import retrofit2.http.Query
 
 class Repository {
     // ViewModel에서 사용할 데이터 통신
@@ -16,7 +17,7 @@ class Repository {
         return RetrofitInstance.api.getCntr()
     }
 
-    suspend fun getHistory(use_yn: Char) : Response<HistoryData> {
+    suspend fun getHistory(use_yn: Char) : Response<List<HistoryData>> {
         return RetrofitInstance.api.getHistory(use_yn)
     }
 }

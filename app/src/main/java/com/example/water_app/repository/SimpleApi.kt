@@ -16,5 +16,5 @@ interface SimpleApi {
     suspend fun getCntr(): Response<PostData>
 
     @GET("test.php")
-    suspend fun getHistory(@Query("use_yn") use_yn: Char): Response<HistoryData>
+    suspend fun getHistory(@Query("use_yn") use_yn: Char): Response<List<HistoryData>>
 }

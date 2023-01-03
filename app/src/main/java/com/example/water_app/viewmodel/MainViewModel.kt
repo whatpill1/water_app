@@ -15,7 +15,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
 
     val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
     val cntrResponse : MutableLiveData<Response<PostData>> = MutableLiveData()
-    val historyResponse : MutableLiveData<Response<HistoryData>> = MutableLiveData()
+    val historyResponse : MutableLiveData<Response<List<HistoryData>>> = MutableLiveData()
 
     fun getUser() {
         viewModelScope.launch {
