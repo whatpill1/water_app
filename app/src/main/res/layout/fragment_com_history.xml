@@ -1,14 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Donation.ComHistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/kim_regular"
+                android:text="시작일"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="-"
+                android:textSize="20sp"
+                android:fontFamily="@font/kim_regular"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStart"
+                app:layout_constraintStart_toEndOf="@+id/tvStart"
+                app:layout_constraintTop_toTopOf="@+id/tvStart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="마감일"
+                android:textSize="20sp"
+                android:fontFamily="@font/kim_regular"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStart"
+                app:layout_constraintStart_toEndOf="@+id/tv1"
+                app:layout_constraintTop_toTopOf="@+id/tvStart" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="@+id/tvStart"
+                app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+
+            <TextView
+                android:id="@+id/tvPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/kim_bold"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintStart_toEndOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="0.533" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kim_bold"
+                android:text="%"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPercent"
+                app:layout_constraintStart_toEndOf="@+id/tvPercent"
+                app:layout_constraintTop_toTopOf="@+id/tvPercent" />
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/kim_regular"
+                android:text="모금 금액"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="금액"
+                android:textSize="20sp"
+                android:fontFamily="@font/kim_regular"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/tv4"
+                app:layout_constraintStart_toEndOf="@+id/tv4"
+                app:layout_constraintTop_toTopOf="@+id/tv4" />
+
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="지출 금액"
+                android:textSize="20sp"
+                android:fontFamily="@font/kim_regular"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tv4"
+                app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+            <TextView
+                android:id="@+id/tvExpend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="금액"
+                android:textSize="20sp"
+                android:fontFamily="@font/kim_regular"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/tv5"
+                app:layout_constraintStart_toEndOf="@+id/tv5"
+                app:layout_constraintTop_toTopOf="@+id/tv5" />
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="지출 보고 내역"
+                android:textSize="20sp"
+                android:fontFamily="@font/kim_regular"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tv5"
+                app:layout_constraintTop_toBottomOf="@+id/tv5" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </FrameLayout>
