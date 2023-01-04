@@ -73,14 +73,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".home.DonationActivity"
+            android:name=".Donation.DonationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".communication.CommunicationActivity"
+            android:name=".Donation.CommunicationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

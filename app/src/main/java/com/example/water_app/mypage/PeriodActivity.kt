@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityPeriodBinding
+import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.PeriodAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -16,17 +16,17 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 class PeriodActivity : AppCompatActivity() {
 
     // 뷰바인딩
-    private lateinit var binding: ActivityPeriodBinding
+    private lateinit var binding: ActivityRecyclerviewBinding
 
     //뷰모델 불러오기
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_period)
+        setContentView(R.layout.activity_recyclerview)
 
         // 뷰바인딩
-        binding = ActivityPeriodBinding.inflate(layoutInflater)
+        binding = ActivityRecyclerviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //php 데이터 불러오기
@@ -40,9 +40,9 @@ class PeriodActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 val periodList = it.body()
                 //리사이클러뷰
-                binding.rvPeriod.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                binding.rvPeriod.setHasFixedSize(true)        // 성능 개선
-                binding.rvPeriod.adapter = PeriodAdapter(periodList)
+                binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                binding.recyclerView.setHasFixedSize(true)        // 성능 개선
+                binding.recyclerView.adapter = PeriodAdapter(periodList)
             }
             // 통신 실패
             else{

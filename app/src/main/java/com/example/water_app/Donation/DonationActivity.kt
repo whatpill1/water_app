@@ -1,11 +1,10 @@
-package com.example.water_app.home
+package com.example.water_app.Donation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityDonationBinding
 import com.example.water_app.databinding.ActivityMyPageBinding
-import com.example.water_app.databinding.ActivitySubmitBinding
 
 class DonationActivity : AppCompatActivity() {
 

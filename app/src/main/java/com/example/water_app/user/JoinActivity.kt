@@ -26,29 +26,18 @@ class JoinActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
+        val id = binding.edtId.text.toString()
+        val pass = binding.edtPass.text.toString()
 
+        val userData = JoinData(
+//            binding.edtId.text.toString(),
+//            binding.edtPass.text.toString()
+            id, pass
+        )
 
-
-
-//        binding.btnJoin.setOnClickListener {
-//            val userData = JoinData(
-//                binding.edtId.text.toString(),
-//                binding.edtPass.text.toString()
-//            )
-//        val id = binding.edtId.text.toString()
-//        val pass = binding.edtPass.text.toString()
-//
-//        val userData = JoinData(
-////            binding.edtId.text.toString(),
-////            binding.edtPass.text.toString()
-//            id, pass
-//        )
-
-
-//        binding.btnJoin.setOnClickListener {
-//            val retrofitWork = RetrofitWork(userData)
-//            retrofitWork.work()
-//            Log.d("asdfsdafsadfsdaf","$userData")
-//        }
+        binding.btnJoin.setOnClickListener {
+            val retrofitWork = RetrofitWork(userData)
+            retrofitWork.work()
+        }
     }
 }

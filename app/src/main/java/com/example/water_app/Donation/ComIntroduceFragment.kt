@@ -1,4 +1,4 @@
-package com.example.water_app.communication
+package com.example.water_app.Donation
 
 import android.os.Bundle
 import android.view.LayoutInflater

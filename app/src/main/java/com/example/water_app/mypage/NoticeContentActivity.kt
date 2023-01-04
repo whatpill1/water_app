@@ -3,9 +3,7 @@ package com.example.water_app.mypage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityNoticeBinding
 import com.example.water_app.databinding.ActivityNoticeContentBinding
-import com.example.water_app.databinding.ActivitySubmitBinding
 
 class NoticeContentActivity : AppCompatActivity() {
 

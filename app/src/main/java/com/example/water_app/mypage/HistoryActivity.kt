@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityHistoryBinding
+import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.HistoryAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -15,15 +15,15 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 
 class HistoryActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHistoryBinding
+    private lateinit var binding: ActivityRecyclerviewBinding
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history)
+        setContentView(R.layout.activity_recyclerview)
 
         // 뷰바인딩
-        binding = ActivityHistoryBinding.inflate(layoutInflater)
+        binding = ActivityRecyclerviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 데이터 통신
@@ -37,9 +37,9 @@ class HistoryActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 val historylist = it.body()
                 //리사이클러뷰
-                binding.rvHistory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                binding.rvHistory.setHasFixedSize(true)  // 성능 개선
-                binding.rvHistory.adapter = HistoryAdapter(this, historylist)
+                binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                binding.recyclerView.setHasFixedSize(true)  // 성능 개선
+                binding.recyclerView.adapter = HistoryAdapter(this, historylist)
             }
             // 통신 실패
             else{

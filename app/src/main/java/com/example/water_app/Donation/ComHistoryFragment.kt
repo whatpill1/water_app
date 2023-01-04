@@ -1,4 +1,4 @@
-package com.example.water_app.communication
+package com.example.water_app.Donation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.water_app.R
 
-class ComStoryFragment : Fragment() {
+class ComHistoryFragment : Fragment() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -17,6 +18,6 @@ class ComStoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_com_story, container, false)
+        return inflater.inflate(R.layout.fragment_com_history, container, false)
     }
 }

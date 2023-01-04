@@ -3,18 +3,17 @@ package com.example.water_app.mypage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityPayBinding
-import com.example.water_app.databinding.ActivityPeriodBinding
+import com.example.water_app.databinding.MypagePayBinding
 
 class PayActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPayBinding
+    private lateinit var binding: MypagePayBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pay)
+        setContentView(R.layout.mypage_pay)
 
-        binding = ActivityPayBinding.inflate(layoutInflater)
+        binding = MypagePayBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.communication.CommunicationActivity
+import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemDonationRecyclerBinding
-import com.example.water_app.home.SubmitActivity
 import com.example.water_app.model.PostData
 
 class MyDonationAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<MyDonationAdapter.ViewHolder>() {

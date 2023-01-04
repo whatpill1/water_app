@@ -21,6 +21,6 @@ interface SimpleApi {
     suspend fun getNoticeList(): Response<List<NoticeData>>
 
 //    @Headers("Content-Type: application/json")
-    @POST("test8.php")
+    @POST("test7.php")
     fun join(@Body userInfo: JoinData): Call<JoinData>
 }

@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
-import com.example.water_app.home.SubmitActivity
 import com.example.water_app.model.NoticeData
-import com.example.water_app.model.PostData
 import com.example.water_app.mypage.NoticeContentActivity
 
 class NoticeAdapter(private val context: Context, private var noticeList: List<NoticeData>?) : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {

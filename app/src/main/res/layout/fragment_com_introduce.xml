@@ -4,44 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".communication.ComIntroduceFragment">
+    tools:context=".Donation.ComIntroduceFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="35dp"
-            android:src="@drawable/backpoint"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/kim_bold"
-            android:text="기부"
-            android:textColor="@color/black"
-            android:textSize="35sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
-            app:layout_constraintStart_toEndOf="@+id/btnBack"
-            app:layout_constraintTop_toTopOf="@+id/btnBack" />
-
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+
             android:layout_marginBottom="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="25dp"
                     android:fontFamily="@font/kim_bold"
                     android:hint="제목 들어갈 위치"

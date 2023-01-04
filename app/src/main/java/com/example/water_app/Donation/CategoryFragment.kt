@@ -1,6 +1,5 @@
-package com.example.water_app.home
+package com.example.water_app.Donation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.water_app.databinding.FragmentCategoryBinding
+import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.CategoryAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -18,7 +17,7 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 class CategoryFragment : Fragment() {
 
     // 뷰바인딩
-    private lateinit var binding: FragmentCategoryBinding
+    private lateinit var binding: ActivityRecyclerviewBinding
 
     //뷰 모델 가져오기
     private lateinit var viewModel : MainViewModel
@@ -34,7 +33,7 @@ class CategoryFragment : Fragment() {
     ): View? {
 
         // 뷰바인딩
-        binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
         //php데이터담은
         //리사이클러뷰 표현 아직 사진 퍼센트 없음
@@ -48,9 +47,9 @@ class CategoryFragment : Fragment() {
             if(it.isSuccessful){
                 val donationList = it.body()
                 //리사이클러뷰
-                binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 2)
-                binding.rvCategory.setHasFixedSize(true)
-                binding.rvCategory.adapter = CategoryAdapter(requireContext(), donationList)
+                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.recyclerView.setHasFixedSize(true)
+                binding.recyclerView.adapter = CategoryAdapter(requireContext(), donationList)
 
                 // OnClickListener
                 val adapter = CategoryAdapter(requireContext(), donationList)
@@ -61,7 +60,7 @@ class CategoryFragment : Fragment() {
                         }
                     }
                 })
-                binding.rvCategory.adapter = adapter
+                binding.recyclerView.adapter = adapter
             }
             // 통신 실패
             else{

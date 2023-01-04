@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.communication.CommunicationActivity
-import com.example.water_app.databinding.FragmentDonationBinding
+import com.example.water_app.Donation.CommunicationActivity
+import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.MyDonationAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -21,7 +20,7 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 class DonationFragment : Fragment() {
 
     // 뷰바인딩
-    private lateinit var binding: FragmentDonationBinding
+    private lateinit var binding: ActivityRecyclerviewBinding
 
     //뷰 모델 가져오기
     private lateinit var viewModel : MainViewModel
@@ -32,7 +31,7 @@ class DonationFragment : Fragment() {
     ): View? {
 
         // 뷰바인딩
-        binding = FragmentDonationBinding.inflate(inflater, container, false)
+        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
         //php데이터담은
         //리사이클러뷰 표현 아직 사진 퍼센트 없음
@@ -47,9 +46,9 @@ class DonationFragment : Fragment() {
                 val donationList = it.body()
 
                 //리사이클러뷰
-                binding.rvDonation.layoutManager = GridLayoutManager(requireContext(), 2)
-                binding.rvDonation.setHasFixedSize(true)
-                binding.rvDonation.adapter = MyDonationAdapter(requireContext(), donationList)
+                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.recyclerView.setHasFixedSize(true)
+                binding.recyclerView.adapter = MyDonationAdapter(requireContext(), donationList)
 
                 // OnClickListener
                 val adapter = MyDonationAdapter(requireContext(), donationList)
@@ -62,7 +61,7 @@ class DonationFragment : Fragment() {
                         }
                     }
                 })
-                binding.rvDonation.adapter = adapter
+                binding.recyclerView.adapter = adapter
             }
             // 통신 실패
             else{
