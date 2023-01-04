@@ -16,11 +16,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.home.SubmitActivity
+import com.example.water_app.model.PostData
 import com.example.water_app.recyclerview.HomeAdapter
 import com.example.water_app.recyclerview.ViewPagerAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
+import kotlinx.android.synthetic.main.activity_submit.view.*
 
 class HomeFragment : Fragment() {
 
@@ -105,8 +107,6 @@ class HomeFragment : Fragment() {
                 adapter.setItemClickListener(object : HomeAdapter.OnItemClickListener{
                     override fun onClick(v: View, position: Int) {
                         activity?.let{
-                            val intent = Intent(context, SubmitActivity::class.java)
-                            startActivity(intent)
                         }
                     }
                 })

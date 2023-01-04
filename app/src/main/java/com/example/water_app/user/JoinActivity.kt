@@ -2,6 +2,7 @@ package com.example.water_app.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityJoinBinding
 import com.example.water_app.model.JoinData
@@ -25,19 +26,29 @@ class JoinActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
-        val id = binding.edtId.text.toString()
-        val pass = binding.edtPass.text.toString()
-
-        val userData = JoinData(
-//            binding.edtId.text.toString(),
-//            binding.edtPass.text.toString()
-            id, pass
-        )
 
 
-        binding.btnJoin.setOnClickListener {
-            val retrofitWork = RetrofitWork(userData)
-            retrofitWork.work()
-        }
+
+
+//        binding.btnJoin.setOnClickListener {
+//            val userData = JoinData(
+//                binding.edtId.text.toString(),
+//                binding.edtPass.text.toString()
+//            )
+//        val id = binding.edtId.text.toString()
+//        val pass = binding.edtPass.text.toString()
+//
+//        val userData = JoinData(
+////            binding.edtId.text.toString(),
+////            binding.edtPass.text.toString()
+//            id, pass
+//        )
+
+
+//        binding.btnJoin.setOnClickListener {
+//            val retrofitWork = RetrofitWork(userData)
+//            retrofitWork.work()
+//            Log.d("asdfsdafsadfsdaf","$userData")
+//        }
     }
 }

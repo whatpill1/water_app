@@ -19,6 +19,9 @@ class DonationActivity : AppCompatActivity() {
         binding = ActivityDonationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //인텐트 putextra getextra 하는 부분
+        val cntr_sn = intent.getStringExtra("cntr_sn")
+
         binding.btnBack.setOnClickListener{
             super.onBackPressed()
         }

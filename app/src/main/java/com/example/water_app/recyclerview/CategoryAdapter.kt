@@ -1,11 +1,14 @@
 package com.example.water_app.recyclerview
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemCategoryRecyclerBinding
+import com.example.water_app.home.SubmitActivity
 import com.example.water_app.model.PostData
 
 
@@ -28,6 +31,12 @@ class CategoryAdapter(private val context: Context, private val donationList: Li
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
+            //인텐트 putextra getextra 하는 부분
+            val intent = Intent(holder.itemView?.context, SubmitActivity::class.java)
+            intent.putExtra("cntr_sn",donationList?.get(position)?.cntr_sn)
+            intent.putExtra("cntr_ttl",donationList?.get(position)?.cntr_ttl)
+            intent.putExtra("cntr_cn",donationList?.get(position)?.cntr_cn)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
 

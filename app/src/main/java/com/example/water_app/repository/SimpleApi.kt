@@ -20,7 +20,7 @@ interface SimpleApi {
     @GET("notice.php")
     suspend fun getNoticeList(): Response<List<NoticeData>>
 
-    @Headers("Content-Type: application/json")
-    @POST("test7.php")
+//    @Headers("Content-Type: application/json")
+    @POST("test8.php")
     fun join(@Body userInfo: JoinData): Call<JoinData>
 }

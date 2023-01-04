@@ -58,8 +58,6 @@ class CategoryFragment : Fragment() {
                 adapter.setItemClickListener(object : CategoryAdapter.OnItemClickListener {
                     override fun onClick(v: View, position: Int) {
                         activity?.let {
-                            val intent = Intent(context, SubmitActivity::class.java)
-                            startActivity(intent)
                         }
                     }
                 })

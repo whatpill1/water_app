@@ -19,6 +19,7 @@ import com.example.water_app.recyclerview.HomeAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
+import kotlinx.android.synthetic.main.item_main_recycler.*
 
 class NoticeActivity : AppCompatActivity() {
 
@@ -52,7 +53,6 @@ class NoticeActivity : AppCompatActivity() {
 
                 adapter.setItemClickListener(object : NoticeAdapter.OnItemClickListener{
                     override fun onClick(v: View, position: Int) {
-
                     }
                 })
 
