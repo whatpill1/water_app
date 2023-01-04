@@ -2,6 +2,7 @@ package com.example.water_app.recyclerview
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
@@ -19,9 +20,26 @@ class NoticeAdapter(private val context: Context, private var noticeList: List<N
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvTitle.text = noticeList?.get(position)?.notice_ttl
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+
+
+        }
     }
 
     override fun getItemCount(): Int {
         return noticeList!!.size
+    }
+
+    // OnClickListener
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+
+    private lateinit var itemClickListener : OnItemClickListener
+
+    fun setItemClickListener(itemClickListener: OnItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 }

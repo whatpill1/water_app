@@ -16,7 +16,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
     val cntrResponse : MutableLiveData<Response<PostData>> = MutableLiveData()
     val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
-    val noticeResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()
+    val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()
 
     fun getUser() {
         viewModelScope.launch {
@@ -39,7 +39,8 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     fun getNoticeList() {
         viewModelScope.launch {
             val response = repository.getNoticeList()
-            noticeResponse.value = response
+            noticeListResponse.value = response
         }
     }
+
 }

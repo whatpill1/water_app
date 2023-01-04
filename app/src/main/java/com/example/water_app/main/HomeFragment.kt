@@ -139,6 +139,7 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
     //뷰페이저
     override fun onResume() {
         super.onResume()
