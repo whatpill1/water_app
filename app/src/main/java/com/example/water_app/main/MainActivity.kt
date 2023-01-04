@@ -22,7 +22,6 @@ import com.example.water_app.home.CategoryFragment
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
-
 class MainActivity : AppCompatActivity() {
 
     // 뷰바인딩

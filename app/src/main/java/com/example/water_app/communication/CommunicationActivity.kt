@@ -7,6 +7,10 @@ import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.FragmentMapBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.combine
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 
 class CommunicationActivity : AppCompatActivity() {
 
@@ -24,22 +28,23 @@ class CommunicationActivity : AppCompatActivity() {
         binding.navCom.run { setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 // 프래그먼트 이동
-                R.id.first -> {
-                    val fragment1 = ComIntroduceFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.doContainer, fragment1).commit()
+                R.id.sixth -> {
+                    val fragment6 = ComIntroduceFragment()
+
+                    supportFragmentManager.beginTransaction().replace(R.id.doContainer, fragment6).commit()
                 }
-                R.id.second -> {
-                    val fragment2 = ComHistoryFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.doContainer, fragment2).commit()
+                R.id.seventh -> {
+                    val fragment7 = ComHistoryFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.doContainer, fragment7).commit()
                 }
-                R.id.third -> {
-                    val fragment3 = ComStoryFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.doContainer, fragment3).commit()
+                R.id.eighth -> {
+                    val fragment8 = ComStoryFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.doContainer, fragment8).commit()
                 }
             }
             true
         }
-            selectedItemId = R.id.first
+            selectedItemId = R.id.sixth
         }
     }
 }
