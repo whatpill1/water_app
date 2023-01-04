@@ -31,13 +31,15 @@ class HomeAdapter(private val context: Context, private val donationList: List<P
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
+
             //인텐트 putextra getextra 하는 부분
             val intent = Intent(holder.itemView?.context,SubmitActivity::class.java)
+
             intent.putExtra("cntr_sn",donationList?.get(position)?.cntr_sn)
             intent.putExtra("cntr_ttl",donationList?.get(position)?.cntr_ttl)
             intent.putExtra("cntr_cn",donationList?.get(position)?.cntr_cn)
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
 
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
 
