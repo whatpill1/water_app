@@ -118,19 +118,19 @@ class HomeFragment : Fragment() {
 
         // 카테고리
         binding.btnChild.setOnClickListener{
-            mainActivity.openFragment()
+            mainActivity.openCategory()
         }
         binding.btnOld.setOnClickListener{
-            mainActivity.openFragment()
+            mainActivity.openCategory()
         }
         binding.btnDisabled.setOnClickListener{
-            mainActivity.openFragment()
+            mainActivity.openCategory()
         }
         binding.btnAnimal.setOnClickListener{
-            mainActivity.openFragment()
+            mainActivity.openCategory()
         }
         binding.btnEtc.setOnClickListener{
-            mainActivity.openFragment()
+            mainActivity.openCategory()
         }
 
         return binding.root

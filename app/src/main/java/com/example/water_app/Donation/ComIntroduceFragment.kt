@@ -1,11 +1,13 @@
 package com.example.water_app.Donation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.water_app.databinding.FragmentComIntroduceBinding
+import com.example.water_app.mypage.MyPageActivity
 
 
 class ComIntroduceFragment : Fragment() {
@@ -32,6 +34,13 @@ class ComIntroduceFragment : Fragment() {
 
         binding.donationTtl.text = cntr_ttl
         binding.donationCn.text = cntr_cn
+
+        binding.btnDonation.setOnClickListener{
+            activity?.let{
+                val intent = Intent(context, DonationActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         return binding.root
     }

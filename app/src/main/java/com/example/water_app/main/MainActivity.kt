@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 카테고리
-    fun openFragment() {
+    fun openCategory() {
         // 프래그먼트 생성
         var fragment = CategoryFragment()
 
