@@ -17,6 +17,9 @@ interface SimpleApi {
     @GET("test.php")
     suspend fun getDonationList(): Response<List<PostData>>
 
+    @GET("notice.php")
+    suspend fun getNoticeList(): Response<List<NoticeData>>
+
     @Headers("Content-Type: application/json")
     @POST("test7.php")
     fun join(@Body userInfo: JoinData): Call<JoinData>

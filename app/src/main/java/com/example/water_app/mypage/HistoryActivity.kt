@@ -15,9 +15,7 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 
 class HistoryActivity : AppCompatActivity() {
 
-    // 뷰바인딩
     private lateinit var binding: ActivityHistoryBinding
-
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

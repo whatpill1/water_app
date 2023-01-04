@@ -1,6 +1,6 @@
 package com.example.water_app.model
 
-class PostData (
+data class PostData (
     val cntr_sn : Int?,
     val mbr_sn : String?,
     val cntr_file_id : Int?,

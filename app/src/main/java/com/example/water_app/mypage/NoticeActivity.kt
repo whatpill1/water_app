@@ -2,16 +2,23 @@ package com.example.water_app.mypage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityNoticeBinding
 import com.example.water_app.recyclerview.NoticeAdapter
 import com.example.water_app.model.NoticeData
+import com.example.water_app.recyclerview.HistoryAdapter
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 
 class NoticeActivity : AppCompatActivity() {
 
-    // 뷰바인딩
     private lateinit var binding: ActivityNoticeBinding
+    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,22 +28,24 @@ class NoticeActivity : AppCompatActivity() {
         binding = ActivityNoticeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val noticeList = arrayListOf(
-            NoticeData("공지사항1"),
-            NoticeData("공지사항2"),
-            NoticeData("공지사항3"),
-            NoticeData("공지사항4"),
-            NoticeData("공지사항5"),
-            NoticeData("공지사항6"),
-            NoticeData("공지사항7"),
-            NoticeData("공지사항8"),
-            NoticeData("공지사항9"),
-            NoticeData("공지사항10"),
-            NoticeData("공지사항11")
-        )
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
 
-        binding.rvNotice.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvNotice.setHasFixedSize(true)        // 성능 개선
-        binding.rvNotice.adapter = NoticeAdapter(noticeList)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getNoticeList()
+        viewModel.noticeResponse.observe(this, Observer {
+            // 통신 성공
+            if(it.isSuccessful){
+                val noticeList = it.body()
+                //리사이클러뷰
+                binding.rvNotice.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                binding.rvNotice.setHasFixedSize(true)  // 성능 개선
+                binding.rvNotice.adapter = NoticeAdapter(this, noticeList)
+            }
+            // 통신 실패
+            else{
+                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

@@ -1,12 +1,14 @@
 package com.example.water_app.recyclerview
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
 import com.example.water_app.model.NoticeData
+import com.example.water_app.model.PostData
 
-class NoticeAdapter(val noticeList: ArrayList<NoticeData>) : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
+class NoticeAdapter(private val context: Context, private var noticeList: List<NoticeData>?) : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemNoticeRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -16,10 +18,10 @@ class NoticeAdapter(val noticeList: ArrayList<NoticeData>) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvTitle.text = noticeList.get(position).notice_ttl
+        holder.binding.tvTitle.text = noticeList?.get(position)?.notice_ttl
     }
 
     override fun getItemCount(): Int {
-        return noticeList.size
+        return noticeList!!.size
     }
 }

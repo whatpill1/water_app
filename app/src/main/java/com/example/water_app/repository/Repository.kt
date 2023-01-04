@@ -1,5 +1,6 @@
 package com.example.water_app.repository
 
+import com.example.water_app.model.NoticeData
 import com.example.water_app.model.PostData
 import com.example.water_app.model.UserData
 import retrofit2.Response
@@ -17,5 +18,9 @@ class Repository {
 
     suspend fun getDonationList() : Response<List<PostData>> {
         return RetrofitInstance.api.getDonationList()
+    }
+
+    suspend fun getNoticeList() : Response<List<NoticeData>> {
+        return RetrofitInstance.api.getNoticeList()
     }
 }
