@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityLoginBinding
 import com.example.water_app.main.MainActivity
+import com.example.water_app.mypage.MyPageActivity
 import kotlinx.android.synthetic.main.activity_join.*
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONException
@@ -27,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         preferenceHelper = PreferenceHelper(this)
 
         // 뷰바인딩
@@ -44,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener{
             loginUser()
+            
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -80,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
             val jsonObject = JSONObject(response)
             if (jsonObject.getString("status") == "true") {
                 saveInfo(response)
-                Toast.makeText(this@LoginActivity, "Login Successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login Successfully!", Toast.LENGTH_SHORT).show()
             }
         } catch (e: JSONException) {
             e.printStackTrace()

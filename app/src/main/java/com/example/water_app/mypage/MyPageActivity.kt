@@ -31,11 +31,13 @@ class MyPageActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
+        val mbr_sn = this.intent.extras?.getString("mbr_sn")
+
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getUser()
         viewModel.myResponse.observe(this, Observer {
             if(it.isSuccessful) {
-                binding.tvName.text = it.body()?.mbr_nm.toString()
+                binding.tvName.text = it.body()?.mbr_sn.toString()
                 binding.tvId.text = it.body()?.mbr_id.toString()
                 binding.tvNickName.text = it.body()?.mbr_ncnm.toString()
                 binding.tvGen.text = it.body()?.mbr_gen.toString()
