@@ -103,12 +103,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    //리사이클러뷰 진행중인 기부
+    // 리사이클러뷰 진행중인 기부
     fun home(){
-        //뷰 모델 가져오기
+        // 뷰 모델 가져오기
         var viewModel : MainViewModel
-        //php데이터담은
-        //리사이클러뷰 표현 아직 사진 퍼센트 없음
+
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
@@ -119,7 +118,7 @@ class HomeFragment : Fragment() {
             if(it.isSuccessful){
                 val homelist = it.body()
 
-                //리사이클러뷰
+                // 리사이클러뷰
                 binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvDonation.setHasFixedSize(true)
                 binding.rvDonation.adapter = OnGoingAdapter(requireContext(), homelist)
@@ -159,13 +158,13 @@ class HomeFragment : Fragment() {
 
             }
         })
-
     }
-    //완료된 기부
+
+    // 완료된 기부
     fun homeEnd(){
         var viewModel : MainViewModel
-        //php데이터담은
-        //리사이클러뷰 표현 아직 사진 퍼센트 없음
+        // php데이터담은
+        // 리사이클러뷰 표현 아직 사진 퍼센트 없음
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
@@ -176,7 +175,7 @@ class HomeFragment : Fragment() {
             if(it.isSuccessful){
                 val closelist = it.body()
 
-                //리사이클러뷰
+                // 리사이클러뷰
                 binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvClose.setHasFixedSize(true)
                 binding.rvClose.adapter = CompletionAdapter(requireContext(), closelist)
@@ -201,7 +200,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    //뷰페이저
+    // 뷰페이저
     override fun onResume() {
         super.onResume()
         sliderImageHandler.postDelayed(sliderImageRunnable, 1000)

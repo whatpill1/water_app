@@ -1,6 +1,7 @@
 package com.example.water_app.main
 
 import android.Manifest
+import android.R.attr.data
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -14,12 +15,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.databinding.FragmentMapBinding
 import com.example.water_app.map.KakaoAPI
 import com.example.water_app.map.ListAdapter
 import com.example.water_app.map.LocationData
 import com.example.water_app.map.ResultSearchKeyword
+import com.example.water_app.model.PostData
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -29,7 +36,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MapFragment : Fragment() {
+
+class MapFragment() : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
     private lateinit var mapView: MapView
