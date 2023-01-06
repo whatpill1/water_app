@@ -24,12 +24,6 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
             myResponse.value = response
         }
     }
-    fun getCntr() {
-        viewModelScope.launch {
-            val response = repository.getCntr()
-            cntrResponse.value = response
-        }
-    }
     fun getDonationList() {
         viewModelScope.launch {
             val response = repository.getDonationList()
