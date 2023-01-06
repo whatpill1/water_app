@@ -11,18 +11,18 @@ import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
 
-class HomeAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class OnGoingAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<OnGoingAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMainRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
     // 아이템 레이아웃 설정
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnGoingAdapter.ViewHolder {
         val binding = ItemMainRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     // 내용 입력
-    override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OnGoingAdapter.ViewHolder, position: Int) {
 //        holder.binding.ivImage.setImageResource(donationList!!.get(position).img)
         holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
         holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()

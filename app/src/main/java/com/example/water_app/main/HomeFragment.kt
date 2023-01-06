@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
-import com.example.water_app.recyclerview.HomeAdapter
+import com.example.water_app.recyclerview.CompletionAdapter
+import com.example.water_app.recyclerview.OnGoingAdapter
 import com.example.water_app.recyclerview.ViewPagerAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -95,19 +96,35 @@ class HomeFragment : Fragment() {
                 //리사이클러뷰
                 binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvDonation.setHasFixedSize(true)
-                binding.rvDonation.adapter = HomeAdapter(requireContext(), homelist)
+                binding.rvDonation.adapter = OnGoingAdapter(requireContext(), homelist)
 
                 // OnClickListener
-                val adapter = HomeAdapter(requireContext(), homelist)
+                val adapter1 = OnGoingAdapter(requireContext(), homelist)
 
-                adapter.setItemClickListener(object : HomeAdapter.OnItemClickListener{
+                adapter1.setItemClickListener(object : OnGoingAdapter.OnItemClickListener{
                     override fun onClick(v: View, position: Int) {
                         activity?.let{
                         }
                     }
                 })
+                binding.rvDonation.adapter = adapter1
 
-                binding.rvDonation.adapter = adapter
+                val closelist = it.body()
+                //리사이클러뷰
+                binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.rvClose.setHasFixedSize(true)
+                binding.rvClose.adapter = CompletionAdapter(requireContext(), homelist)
+
+                // OnClickListener
+                val adapter2 = CompletionAdapter(requireContext(), closelist)
+
+                adapter2.setItemClickListener(object : CompletionAdapter.OnItemClickListener{
+                    override fun onClick(v: View, position: Int) {
+                        activity?.let{
+                        }
+                    }
+                })
+                binding.rvClose.adapter = adapter2
 
             }
             // 통신 실패

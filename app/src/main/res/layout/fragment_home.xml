@@ -7,171 +7,211 @@
     tools:context=".main.HomeFragment"
     android:background="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/ivBanner"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/banner1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="16dp"
-            android:weightSum="5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivBanner">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/ivBanner"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/banner1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnChild"
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/child"
-                android:gravity="center" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:weightSum="5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivBanner">
 
-            <Button
-                android:id="@+id/btnOld"
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/oldman" />
+                <Button
+                    android:id="@+id/btnChild"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/child"
+                    android:gravity="center" />
 
-            <Button
-                android:id="@+id/btnDisabled"
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/disabled" />
+                <Button
+                    android:id="@+id/btnOld"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/oldman" />
 
-            <Button
-                android:id="@+id/btnAnimal"
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/animal" />
+                <Button
+                    android:id="@+id/btnDisabled"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/disabled" />
 
-            <Button
-                android:id="@+id/btnEtc"
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/etc" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btnAnimal"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/animal" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="5dp"
-            android:weightSum="5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                <Button
+                    android:id="@+id/btnEtc"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/etc" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:weightSum="5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kim_regular"
+                    android:gravity="center"
+                    android:text="어린이"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kim_regular"
+                    android:gravity="center"
+                    android:text="노인"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kim_regular"
+                    android:gravity="center"
+                    android:text="장애인"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kim_regular"
+                    android:gravity="center"
+                    android:text="동물"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kim_regular"
+                    android:gravity="center"
+                    android:text="기타"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivHeart2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/red_heart"
+                app:layout_constraintEnd_toStartOf="@+id/tvTitle2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
             <TextView
-                android:layout_width="50dp"
+                android:id="@+id/tvTitle2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/kim_regular"
-                android:text="어린이"
-                android:textColor="@color/black" />
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/kim_bold"
+                android:text="진행중인 기부"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivHeart2"
+                app:layout_constraintStart_toEndOf="@+id/ivHeart2"
+                app:layout_constraintTop_toTopOf="@+id/ivHeart2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDonation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle2"
+                tools:listitem="@layout/item_main_recycler" />
+
+            <ImageView
+                android:id="@+id/ivHeart3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/red_heart"
+                app:layout_constraintStart_toStartOf="@+id/rvDonation"
+                app:layout_constraintTop_toBottomOf="@+id/rvDonation" />
 
             <TextView
-                android:layout_width="50dp"
+                android:id="@+id/tvTitle3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/kim_regular"
-                android:text="노인"
-                android:textColor="@color/black" />
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/kim_bold"
+                android:text="완료된 기부"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivHeart3"
+                app:layout_constraintStart_toEndOf="@+id/ivHeart3"
+                app:layout_constraintTop_toTopOf="@+id/ivHeart3" />
 
-            <TextView
-                android:layout_width="50dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvClose"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/kim_regular"
-                android:text="장애인"
-                android:textColor="@color/black" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle3" />
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/kim_regular"
-                android:text="동물"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/kim_regular"
-                android:text="기타"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ivHeart2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/red_heart"
-            app:layout_constraintEnd_toStartOf="@+id/tvTitle2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-        <TextView
-            android:id="@+id/tvTitle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/kim_bold"
-            android:text="진행중인 기부"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivHeart2"
-            app:layout_constraintStart_toEndOf="@+id/ivHeart2"
-            app:layout_constraintTop_toTopOf="@+id/ivHeart2" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDonation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle2"
-            tools:listitem="@layout/item_main_recycler" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </FrameLayout>
