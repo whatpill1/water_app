@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
-import com.example.water_app.recyclerview.CategoryAdapter
+import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
@@ -49,12 +49,12 @@ class CategoryFragment : Fragment() {
                 //리사이클러뷰
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
-                binding.recyclerView.adapter = CategoryAdapter(requireContext(), donationList)
+                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
 
                 // OnClickListener
-                val adapter = CategoryAdapter(requireContext(), donationList)
+                val adapter = DonationAdapter(requireContext(), donationList)
 
-                adapter.setItemClickListener(object : CategoryAdapter.OnItemClickListener {
+                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {
                     override fun onClick(v: View, position: Int) {
                         activity?.let {
                         }
