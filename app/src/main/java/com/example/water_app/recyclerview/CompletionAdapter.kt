@@ -26,6 +26,15 @@ class CompletionAdapter(private val context: Context, private val donationList: 
 //        holder.binding.ivImage.setImageResource(donationList!!.get(position).img)
         holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
         holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()
+        if (donationList?.get(position)?.ctbny_pc == null) {
+            holder.binding.tvPercent.text = "0%"
+        }else{
+            val a:Int? = donationList?.get(position)?.ctbny_pc
+            val b:Int? = donationList?.get(position)?.cntr_obctr
+            val c:Double? = a!!.toDouble() / b!! * 100
+            val d:Int = c!!.toInt()
+            holder.binding.tvPercent.text = d.toString() + "%"
+        }
 //        holder.binding.tvPercent.text = donationList?.get(position)?.percent
 
         holder.itemView.setOnClickListener {

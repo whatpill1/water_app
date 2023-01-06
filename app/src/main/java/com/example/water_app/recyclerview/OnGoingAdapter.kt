@@ -2,11 +2,13 @@ package com.example.water_app.recyclerview
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
@@ -26,6 +28,17 @@ class OnGoingAdapter(private val context: Context, private val donationList: Lis
 //        holder.binding.ivImage.setImageResource(donationList!!.get(position).img)
         holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
         holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()
+//        val uri : String = donationList?.get(position)?.cntr_file_id.toString()
+//        holder.binding.ivImage.setImageBitmap(uri)
+        if (donationList?.get(position)?.ctbny_pc == null) {
+            holder.binding.tvPercent.text = "0%"
+        }else{
+            val a:Int? = donationList?.get(position)?.ctbny_pc
+            val b:Int? = donationList?.get(position)?.cntr_obctr
+            val c:Double? = a!!.toDouble() / b!! * 100
+            val d:Int? = c!!.toInt()
+            holder.binding.tvPercent.text = d.toString() + "%"
+        }
 //        holder.binding.tvPercent.text = donationList?.get(position)?.percent
 
         holder.itemView.setOnClickListener {

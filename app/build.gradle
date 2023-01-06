@@ -101,7 +101,7 @@ dependencies {
     // 위치
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
-    //nav
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    //이미지 로딩
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 }

@@ -5,7 +5,7 @@ data class PostData (
     val mbr_sn : String?,
     val cntr_file_id : String?,
     val cntr_ttl : String?,
-    val cntr_obctr : String?,
+    val cntr_obctr : Int?,
     val cntr_cn : String?,
     val cntr_adres : String?,
     val cntr_loc_lat : String?,
@@ -15,6 +15,7 @@ data class PostData (
     val cntr_category : Int?,
     val lock_yn : String?,
     val rgtr_id : Int?,
+    val ctbny_pc : Int?,
 //    val rgtr_dt : DateTimeException?,
     val mbfr_id : Int?,
 //    val mbfr_dt : DateTimeException?
