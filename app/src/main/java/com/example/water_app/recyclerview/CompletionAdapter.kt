@@ -2,14 +2,19 @@ package com.example.water_app.recyclerview
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
+import java.net.URL
 
 class CompletionAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<CompletionAdapter.ViewHolder>() {
 
@@ -23,19 +28,37 @@ class CompletionAdapter(private val context: Context, private val donationList: 
 
     // 내용 입력
     override fun onBindViewHolder(holder: CompletionAdapter.ViewHolder, position: Int) {
-//        holder.binding.ivImage.setImageResource(donationList!!.get(position).img)
         holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
         holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()
+
+        // 이미지 url
+        var cntrurl : String = donationList?.get(position)?.cntr_file_id.toString()
+        Glide.with(context).load(cntrurl).into(holder.binding.ivImage)
+
+        // 퍼센트
         if (donationList?.get(position)?.ctbny_pc == null) {
             holder.binding.tvPercent.text = "0%"
+            holder.binding.pbPercent.setProgress(0)
+        }else{
+            val collectPrice:Int? = donationList?.get(position)?.ctbny_pc
+            val totalPrice:Int? = donationList?.get(position)?.cntr_obctr
+            val pricePercent:Double? = collectPrice!!.toDouble() / totalPrice!! * 100
+
+            holder.binding.tvPercent.text = pricePercent?.toInt().toString() + "%"
+            holder.binding.pbPercent.setProgress(pricePercent!!.toInt())
+        }
+
+        if (donationList?.get(position)?.ctbny_pc == null) {
+            holder.binding.tvPercent.text = "0%"
+            holder.binding.pbPercent.setProgress(0)
         }else{
             val a:Int? = donationList?.get(position)?.ctbny_pc
             val b:Int? = donationList?.get(position)?.cntr_obctr
             val c:Double? = a!!.toDouble() / b!! * 100
             val d:Int = c!!.toInt()
             holder.binding.tvPercent.text = d.toString() + "%"
+            holder.binding.pbPercent.setProgress(d!!)
         }
-//        holder.binding.tvPercent.text = donationList?.get(position)?.percent
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)

@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
     // MainActivity 가져오기
     lateinit var mainActivity: MainActivity
 
-    //뷰페이저
+    // 뷰페이저
     private val sliderImageHandler: Handler = Handler()
     private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }
 
@@ -48,10 +48,12 @@ class HomeFragment : Fragment() {
         // 뷰바인딩
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        //뷰페이저
+        // 뷰페이저
         val imageList = arrayListOf<Int>().apply {
             for (i in 0..2) {
                 add(R.drawable.banner1)
+                add(R.drawable.banner2)
+                add(R.drawable.banner3)
             }
         }
 
@@ -79,7 +81,7 @@ class HomeFragment : Fragment() {
         // MainActivity 담음
         mainActivity = context as MainActivity
 
-        //리사이클러뷰
+        // 리사이클러뷰
         home()
         homeEnd()
 
