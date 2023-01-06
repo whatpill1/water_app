@@ -2,6 +2,7 @@ package com.example.water_app.main
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.databinding.FragmentMyPageBinding
@@ -124,9 +126,26 @@ class MyPageFragment : Fragment() {
                 mAlertDialog.dismiss()
             }
         }
-
-
-
         return binding.root
+    }
+    //뒤로가기 메인 고정
+    private lateinit var callback: OnBackPressedCallback
+    lateinit var mainActivity: MainActivity
+    //뒤로가기 고정
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //뒤로가기 고정
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+        mainActivity = context as MainActivity
+    }
+    //뒤로가기 고정
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 }

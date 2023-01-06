@@ -10,9 +10,24 @@ interface RestApi {
     @GET("test2.php")
     suspend fun getUser(): Response<UserData>
 
-    @GET("test.php")
+    @GET("home.php")
     suspend fun getDonationList(): Response<List<PostData>>
 
     @GET("notice.php")
     suspend fun getNoticeList(): Response<List<NoticeData>>
+
+    @GET("homeend.php")
+    suspend fun getHomeend(): Response<List<PostData>>
+
+    @GET("category0.php")
+    suspend fun getCategory0(): Response<List<PostData>>
+
+    @GET("category1.php")
+    suspend fun getCategory1(): Response<List<PostData>>
+
+    @GET("category2.php")
+    suspend fun getCategory2(): Response<List<PostData>>
+
+    @GET("category3.php")
+    suspend fun getCategory3(): Response<List<PostData>>
 }

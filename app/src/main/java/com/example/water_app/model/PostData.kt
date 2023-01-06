@@ -3,7 +3,7 @@ package com.example.water_app.model
 data class PostData (
     val cntr_sn : Int?,
     val mbr_sn : String?,
-    val cntr_file_id : Int?,
+    val cntr_file_id : String?,
     val cntr_ttl : String?,
     val cntr_obctr : String?,
     val cntr_cn : String?,

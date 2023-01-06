@@ -19,4 +19,20 @@ class Repository {
     suspend fun getNoticeList() : Response<List<NoticeData>> {
         return Instance.api.getNoticeList()
     }
+
+    suspend fun getHomeend() : Response<List<PostData>> {
+        return Instance.api.getHomeend()
+    }
+    suspend fun getCategory0() : Response<List<PostData>> {
+        return Instance.api.getCategory0()
+    }
+    suspend fun getCategory1() : Response<List<PostData>> {
+        return Instance.api.getCategory1()
+    }
+    suspend fun getCategory2() : Response<List<PostData>> {
+        return Instance.api.getCategory2()
+    }
+    suspend fun getCategory3() : Response<List<PostData>> {
+        return Instance.api.getCategory3()
+    }
 }

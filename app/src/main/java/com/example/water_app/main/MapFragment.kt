@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.databinding.FragmentMapBinding
@@ -220,5 +221,25 @@ class MapFragment : Fragment() {
             // 검색 결과 없음
             Toast.makeText(requireContext(), "검색 결과가 없습니다", Toast.LENGTH_SHORT).show()
         }
+    }
+    //뒤로가기 메인 고정
+    private lateinit var callback: OnBackPressedCallback
+    lateinit var mainActivity: MainActivity
+    //뒤로가기 고정
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //뒤로가기 고정
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+        mainActivity = context as MainActivity
+    }
+    //뒤로가기 고정
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 }

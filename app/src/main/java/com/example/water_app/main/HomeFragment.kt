@@ -29,9 +29,6 @@ class HomeFragment : Fragment() {
     // MainActivity 가져오기
     lateinit var mainActivity: MainActivity
 
-    //뷰 모델 가져오기
-    private lateinit var viewModel : MainViewModel
-
     //뷰페이저
     private val sliderImageHandler: Handler = Handler()
     private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }
@@ -82,6 +79,34 @@ class HomeFragment : Fragment() {
         // MainActivity 담음
         mainActivity = context as MainActivity
 
+        //리사이클러뷰
+        home()
+        homeEnd()
+
+        // 카테고리
+        binding.btnChild.setOnClickListener{
+            mainActivity.openCategory()
+        }
+        binding.btnOld.setOnClickListener{
+            mainActivity.openCategory()
+        }
+        binding.btnDisabled.setOnClickListener{
+            mainActivity.openCategory()
+        }
+        binding.btnAnimal.setOnClickListener{
+            mainActivity.openCategory()
+        }
+        binding.btnEtc.setOnClickListener{
+            mainActivity.openCategory()
+        }
+
+        return binding.root
+    }
+
+    //리사이클러뷰 진행중인 기부
+    fun home(){
+        //뷰 모델 가져오기
+        var viewModel : MainViewModel
         //php데이터담은
         //리사이클러뷰 표현 아직 사진 퍼센트 없음
         val repository = Repository()
@@ -135,24 +160,45 @@ class HomeFragment : Fragment() {
             }
         })
 
-        // 카테고리
-        binding.btnChild.setOnClickListener{
-            mainActivity.openCategory()
-        }
-        binding.btnOld.setOnClickListener{
-            mainActivity.openCategory()
-        }
-        binding.btnDisabled.setOnClickListener{
-            mainActivity.openCategory()
-        }
-        binding.btnAnimal.setOnClickListener{
-            mainActivity.openCategory()
-        }
-        binding.btnEtc.setOnClickListener{
-            mainActivity.openCategory()
-        }
+    }
+    //완료된 기부
+    fun homeEnd(){
+        var viewModel : MainViewModel
+        //php데이터담은
+        //리사이클러뷰 표현 아직 사진 퍼센트 없음
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
 
-        return binding.root
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getHomeEnd()
+        viewModel.getHomeEndListResponse.observe(viewLifecycleOwner, Observer {
+            // 통신 성공
+            if(it.isSuccessful){
+                val closelist = it.body()
+
+                //리사이클러뷰
+                binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.rvClose.setHasFixedSize(true)
+                binding.rvClose.adapter = CompletionAdapter(requireContext(), closelist)
+
+                // OnClickListener
+                val adapter2 = CompletionAdapter(requireContext(), closelist)
+
+                adapter2.setItemClickListener(object : CompletionAdapter.OnItemClickListener{
+                    override fun onClick(v: View, position: Int) {
+                        activity?.let{
+                        }
+                    }
+                })
+                binding.rvClose.adapter = adapter2
+
+            }
+            // 통신 실패
+            else{
+
+            }
+        })
+
     }
 
     //뷰페이저
