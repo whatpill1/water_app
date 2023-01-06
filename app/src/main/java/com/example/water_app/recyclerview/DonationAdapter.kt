@@ -2,9 +2,6 @@ package com.example.water_app.recyclerview
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,20 +11,19 @@ import com.bumptech.glide.Glide
 import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
-import java.net.URL
 
-class CompletionAdapter(private val context: Context, private val donationList: List<PostData>?) : RecyclerView.Adapter<CompletionAdapter.ViewHolder>() {
+class DonationAdapter(private val context: Context, private var donationList: List<PostData>?) : RecyclerView.Adapter<DonationAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMainRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
     // 아이템 레이아웃 설정
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompletionAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationAdapter.ViewHolder {
         val binding = ItemMainRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     // 내용 입력
-    override fun onBindViewHolder(holder: CompletionAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DonationAdapter.ViewHolder, position: Int) {
         holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
         holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()
 
@@ -47,24 +43,11 @@ class CompletionAdapter(private val context: Context, private val donationList: 
             holder.binding.tvPercent.text = pricePercent?.toInt().toString() + "%"
             holder.binding.pbPercent.setProgress(pricePercent!!.toInt())
         }
-
-        if (donationList?.get(position)?.ctbny_pc == null) {
-            holder.binding.tvPercent.text = "0%"
-            holder.binding.pbPercent.setProgress(0)
-        }else{
-            val a:Int? = donationList?.get(position)?.ctbny_pc
-            val b:Int? = donationList?.get(position)?.cntr_obctr
-            val c:Double? = a!!.toDouble() / b!! * 100
-            val d:Int = c!!.toInt()
-            holder.binding.tvPercent.text = d.toString() + "%"
-            holder.binding.pbPercent.setProgress(d!!)
-        }
-
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
 
             //인텐트 putextra getextra 하는 부분
-            val intent = Intent(holder.itemView?.context, CommunicationActivity::class.java)
+            val intent = Intent(holder.itemView?.context,CommunicationActivity::class.java)
 
             intent.putExtra("cntr_sn",donationList?.get(position)?.cntr_sn)
             intent.putExtra("cntr_ttl",donationList?.get(position)?.cntr_ttl)
@@ -88,5 +71,12 @@ class CompletionAdapter(private val context: Context, private val donationList: 
 
     fun setItemClickListener(itemClickListener: OnItemClickListener) {
         this.itemClickListener = itemClickListener
+    }
+
+    // 데이터 변경시 리스트 다시 할당
+    fun setData(newList: PostData){
+        donationList = listOf(newList)
+        // 새로고침
+        notifyDataSetChanged()
     }
 }

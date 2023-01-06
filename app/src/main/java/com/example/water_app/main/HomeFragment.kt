@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
-import com.example.water_app.recyclerview.CompletionAdapter
-import com.example.water_app.recyclerview.OnGoingAdapter
+import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.recyclerview.ViewPagerAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -108,7 +107,7 @@ class HomeFragment : Fragment() {
     // 리사이클러뷰 진행중인 기부
     fun home(){
         // 뷰 모델 가져오기
-        var viewModel : MainViewModel
+        val viewModel : MainViewModel
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -123,37 +122,18 @@ class HomeFragment : Fragment() {
                 // 리사이클러뷰
                 binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvDonation.setHasFixedSize(true)
-                binding.rvDonation.adapter = OnGoingAdapter(requireContext(), homelist)
+                binding.rvDonation.adapter = DonationAdapter(requireContext(), homelist)
 
                 // OnClickListener
-                val adapter1 = OnGoingAdapter(requireContext(), homelist)
+                val adapter = DonationAdapter(requireContext(), homelist)
 
-                adapter1.setItemClickListener(object : OnGoingAdapter.OnItemClickListener{
+                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{
                     override fun onClick(v: View, position: Int) {
                         activity?.let{
                         }
                     }
                 })
-                binding.rvDonation.adapter = adapter1
-
-                val closelist = it.body()
-
-                //리사이클러뷰
-                binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                binding.rvClose.setHasFixedSize(true)
-                binding.rvClose.adapter = CompletionAdapter(requireContext(), homelist)
-
-                // OnClickListener
-                val adapter2 = CompletionAdapter(requireContext(), closelist)
-
-                adapter2.setItemClickListener(object : CompletionAdapter.OnItemClickListener{
-                    override fun onClick(v: View, position: Int) {
-                        activity?.let{
-                        }
-                    }
-                })
-                binding.rvClose.adapter = adapter2
-
+                binding.rvDonation.adapter = adapter
             }
             // 통신 실패
             else{
@@ -164,7 +144,7 @@ class HomeFragment : Fragment() {
 
     // 완료된 기부
     fun homeEnd(){
-        var viewModel : MainViewModel
+        val viewModel : MainViewModel
         // php데이터담은
         // 리사이클러뷰 표현 아직 사진 퍼센트 없음
         val repository = Repository()
@@ -180,18 +160,18 @@ class HomeFragment : Fragment() {
                 // 리사이클러뷰
                 binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvClose.setHasFixedSize(true)
-                binding.rvClose.adapter = CompletionAdapter(requireContext(), closelist)
+                binding.rvClose.adapter = DonationAdapter(requireContext(), closelist)
 
                 // OnClickListener
-                val adapter2 = CompletionAdapter(requireContext(), closelist)
+                val adapter = DonationAdapter(requireContext(), closelist)
 
-                adapter2.setItemClickListener(object : CompletionAdapter.OnItemClickListener{
+                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{
                     override fun onClick(v: View, position: Int) {
                         activity?.let{
                         }
                     }
                 })
-                binding.rvClose.adapter = adapter2
+                binding.rvClose.adapter = adapter
 
             }
             // 통신 실패
@@ -199,7 +179,6 @@ class HomeFragment : Fragment() {
 
             }
         })
-
     }
 
     // 뷰페이저
