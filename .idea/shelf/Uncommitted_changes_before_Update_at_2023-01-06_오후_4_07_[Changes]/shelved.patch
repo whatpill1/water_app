@@ -1,0 +1,83 @@
+Index: app/src/main/java/com/example/water_app/main/MapFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.Manifest\r\nimport android.content.Context\r\nimport android.content.pm.PackageManager\r\nimport android.location.Location\r\nimport android.location.LocationManager\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Toast\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport com.example.water_app.databinding.FragmentMapBinding\r\nimport com.example.water_app.map.KakaoAPI\r\nimport com.example.water_app.map.ListAdapter\r\nimport com.example.water_app.map.LocationData\r\nimport com.example.water_app.map.ResultSearchKeyword\r\nimport net.daum.mf.map.api.MapPOIItem\r\nimport net.daum.mf.map.api.MapPoint\r\nimport net.daum.mf.map.api.MapView\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.gson.GsonConverterFactory\r\n\r\nclass MapFragment : Fragment() {\r\n\r\n    private lateinit var binding: FragmentMapBinding\r\n    private lateinit var mapView: MapView\r\n\r\n    // 검색 RecyclerView\r\n    private val listItems = arrayListOf<LocationData>() // 리사이클러 뷰 아이템\r\n    private val listAdapter = ListAdapter(listItems) // 리사이클러 뷰 어댑터\r\n    private var pageNumber = 1 // 검색 페이지 번호\r\n    private var keyword = \"\" // 검색 키워드\r\n\r\n    // 카카오 API\r\n    companion object {\r\n        const val BASE_URL = \"https://dapi.kakao.com/\"\r\n        const val API_KEY = \"KakaoAK 887bc0eaa4f3e8018acf2539644a00db\" // REST API 키\r\n    }\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentMapBinding.inflate(inflater, container, false)\r\n\r\n        // 맵 띄우기\r\n        mapView = MapView(requireActivity())\r\n        val mapViewContainer = binding.mapLayout as ViewGroup\r\n        mapViewContainer.addView(mapView)\r\n\r\n        // 중심점\r\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\r\n            if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n                val lm: LocationManager =\r\n                    requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager\r\n\r\n                // 현재 위치 받아옴\r\n                val userNowLocation: Location =\r\n                    lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!\r\n                val uLatitude = userNowLocation.latitude\r\n                val uLongitude = userNowLocation.longitude\r\n\r\n                // 중심점 + 줌 레벨\r\n                mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), 1, true)\r\n\r\n                // 해당 위치 저장\r\n                val MY_LOCATION = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)\r\n\r\n                // 마커 표시\r\n                val marker = MapPOIItem()\r\n                marker.itemName = \"현재 위치\"\r\n                marker.tag = 0\r\n                marker.mapPoint = MY_LOCATION\r\n\r\n                // 기본 마커\r\n                marker.markerType = MapPOIItem.MarkerType.BluePin\r\n\r\n                // 기본 마커 클릭했을 때 나타나는 마커\r\n                marker.selectedMarkerType =\r\n                    MapPOIItem.MarkerType.RedPin\r\n\r\n                mapView.addPOIItem(marker)\r\n            }\r\n        }\r\n\r\n        // 현재 위치로 돌아가기\r\n        binding.btnLocation.setOnClickListener {\r\n            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\r\n                if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n                    val lm: LocationManager =\r\n                        requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager\r\n\r\n                    // 현재 위치 받아옴\r\n                    val userNowLocation: Location =\r\n                        lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!\r\n                    val uLatitude = userNowLocation.latitude\r\n                    val uLongitude = userNowLocation.longitude\r\n\r\n                    // 중심점 + 줌 레벨\r\n                    mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), 1, true)\r\n\r\n                    // 해당 위치 저장\r\n                    val MY_LOCATION = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)\r\n\r\n                    // 마커 표시\r\n                    val marker = MapPOIItem()\r\n                    marker.itemName = \"현재 위치\"\r\n                    marker.tag = 0\r\n                    marker.mapPoint = MY_LOCATION\r\n\r\n                    // 기본 마커\r\n                    marker.markerType = MapPOIItem.MarkerType.BluePin\r\n\r\n                    // 기본 마커 클릭했을 때 나타나는 마커\r\n                    marker.selectedMarkerType =\r\n                        MapPOIItem.MarkerType.RedPin\r\n\r\n                    mapView.addPOIItem(marker)\r\n                }\r\n            }\r\n        }\r\n\r\n        /* 검색 기능 */\r\n        binding.rvList.layoutManager =\r\n            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)\r\n        binding.rvList.adapter = listAdapter\r\n\r\n        // 아이템 클릭 시 해당 위치로 이동\r\n        listAdapter.setItemClickListener(object : ListAdapter.OnItemClickListener {\r\n            override fun onClick(v: View, position: Int) {\r\n                val mapPoint =\r\n                    MapPoint.mapPointWithGeoCoord(listItems[position].y, listItems[position].x)\r\n                mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true)\r\n            }\r\n        })\r\n\r\n        // 검색 버튼\r\n        binding.ivSearch.setOnClickListener {\r\n            keyword = binding.edtSearch.text.toString()\r\n            pageNumber = 1\r\n            searchKeyword(keyword, pageNumber)\r\n        }\r\n\r\n        return binding.root\r\n    }\r\n\r\n    /* 검색 */\r\n    // 키워드 검색\r\n    private fun searchKeyword(keyword: String, page: Int) {\r\n        val retrofit = Retrofit.Builder() // Retrofit 구성\r\n            .baseUrl(BASE_URL)\r\n            .addConverterFactory(GsonConverterFactory.create())\r\n            .build()\r\n        val api = retrofit.create(KakaoAPI::class.java) // 통신 인터페이스를 객체로 생성\r\n        val call = api.getSearchKeyword(API_KEY, keyword, page) // 검색 조건 입력\r\n\r\n        // API 서버에 요청\r\n        call.enqueue(object : Callback<ResultSearchKeyword> {\r\n            // 통신 성공\r\n            override fun onResponse(\r\n                call: Call<ResultSearchKeyword>,\r\n                response: Response<ResultSearchKeyword>\r\n            ) {\r\n                addItemsAndMarkers(response.body())\r\n            }\r\n\r\n            // 통신 실패\r\n            override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {\r\n                Log.w(\"LocalSearch\", \"통신 실패: ${t.message}\")\r\n            }\r\n        })\r\n    }\r\n\r\n    // 검색 결과 처리\r\n    private fun addItemsAndMarkers(searchResult: ResultSearchKeyword?) {\r\n        if (!searchResult?.documents.isNullOrEmpty()) {\r\n            // 검색 결과 있음\r\n            listItems.clear() // 리스트 초기화\r\n            mapView.removeAllPOIItems() // 지도의 마커 모두 제거\r\n            for (document in searchResult!!.documents) {\r\n                // 결과를 리사이클러 뷰에 추가\r\n                val item = LocationData(\r\n                    document.place_name,\r\n                    document.road_address_name,\r\n                    document.address_name,\r\n                    document.x.toDouble(),\r\n                    document.y.toDouble()\r\n                )\r\n                listItems.add(item)\r\n\r\n                // 지도에 마커 추가\r\n                val point = MapPOIItem()\r\n                point.apply {\r\n                    itemName = document.place_name\r\n                    mapPoint = MapPoint.mapPointWithGeoCoord(\r\n                        document.y.toDouble(),\r\n                        document.x.toDouble()\r\n                    )\r\n                    markerType = MapPOIItem.MarkerType.BluePin\r\n                    selectedMarkerType = MapPOIItem.MarkerType.RedPin\r\n                }\r\n                mapView.addPOIItem(point)\r\n            }\r\n            listAdapter.notifyDataSetChanged()\r\n        } else {\r\n            // 검색 결과 없음\r\n            Toast.makeText(requireContext(), \"검색 결과가 없습니다\", Toast.LENGTH_SHORT).show()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/MapFragment.kt b/app/src/main/java/com/example/water_app/main/MapFragment.kt
+--- a/app/src/main/java/com/example/water_app/main/MapFragment.kt	(revision d8d0be345c802ba1b3746fc3a77fde819d4c7bfe)
++++ b/app/src/main/java/com/example/water_app/main/MapFragment.kt	(date 1672988844488)
+@@ -13,12 +13,18 @@
+ import android.view.ViewGroup
+ import android.widget.Toast
+ import androidx.fragment.app.Fragment
++import androidx.lifecycle.Observer
++import androidx.lifecycle.ViewModelProvider
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import com.example.water_app.databinding.FragmentMapBinding
+ import com.example.water_app.map.KakaoAPI
+ import com.example.water_app.map.ListAdapter
+ import com.example.water_app.map.LocationData
+ import com.example.water_app.map.ResultSearchKeyword
++import com.example.water_app.model.PostData
++import com.example.water_app.repository.Repository
++import com.example.water_app.viewmodel.MainViewModel
++import com.example.water_app.viewmodel.MainViewModelFactory
+ import net.daum.mf.map.api.MapPOIItem
+ import net.daum.mf.map.api.MapPoint
+ import net.daum.mf.map.api.MapView
+@@ -28,11 +34,14 @@
+ import retrofit2.Retrofit
+ import retrofit2.converter.gson.GsonConverterFactory
+ 
+-class MapFragment : Fragment() {
++class MapFragment(private val locationList: List<PostData>?) : Fragment() {
+ 
+     private lateinit var binding: FragmentMapBinding
+     private lateinit var mapView: MapView
+ 
++    //뷰 모델 가져오기
++    private lateinit var viewModel : MainViewModel
++
+     // 검색 RecyclerView
+     private val listItems = arrayListOf<LocationData>() // 리사이클러 뷰 아이템
+     private val listAdapter = ListAdapter(listItems) // 리사이클러 뷰 어댑터
+@@ -134,6 +143,21 @@
+             }
+         }
+ 
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++
++        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getDonationList()
++        viewModel.getDonationListResponse.observe(,Observer{
++            if(it.isSuccessful) {
++                while(locationList.size){
++
++            }
++            else{
++                Log.d("Response",it.errorBody().toString())
++            }
++        })
++
+         /* 검색 기능 */
+         binding.rvList.layoutManager =
+             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+Index: app/src/main/java/com/example/water_app/model/JoinData.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/model/JoinData.kt b/app/src/main/java/com/example/water_app/model/JoinData.kt
+new file mode 100644
+--- /dev/null	(date 1672988270577)
++++ b/app/src/main/java/com/example/water_app/model/JoinData.kt	(date 1672988270577)
+@@ -0,0 +1,6 @@
++package com.example.water_app.model
++
++data class JoinData(
++    val mbr_id : String?,
++    val mbr_password : String?
++)
