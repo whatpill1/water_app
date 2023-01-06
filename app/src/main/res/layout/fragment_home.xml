@@ -181,7 +181,7 @@
                 android:id="@+id/ivHeart3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/red_heart"
                 app:layout_constraintStart_toStartOf="@+id/rvDonation"
                 app:layout_constraintTop_toBottomOf="@+id/rvDonation" />

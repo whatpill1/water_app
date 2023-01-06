@@ -93,6 +93,7 @@ class HomeFragment : Fragment() {
             // 통신 성공
             if(it.isSuccessful){
                 val homelist = it.body()
+
                 //리사이클러뷰
                 binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvDonation.setHasFixedSize(true)
@@ -110,6 +111,7 @@ class HomeFragment : Fragment() {
                 binding.rvDonation.adapter = adapter1
 
                 val closelist = it.body()
+
                 //리사이클러뷰
                 binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvClose.setHasFixedSize(true)
