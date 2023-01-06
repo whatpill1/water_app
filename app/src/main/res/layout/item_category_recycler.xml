@@ -7,17 +7,15 @@
     app:cardCornerRadius="1dp"
     android:layout_margin="10dp"
     android:id="@+id/itemView"
-    android:background="@color/lightGrey"
+    android:background="@drawable/post"
     tools:ignore="InvalidId">
 
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="180dp"
         android:src="@drawable/my_heart"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
