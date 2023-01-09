@@ -92,42 +92,18 @@ class HomeFragment : Fragment() {
 
         // 카테고리
         binding.btnChild.setOnClickListener{
-            val categoryFragment = CategoryFragment()
-            val bundle = Bundle()
-            bundle.putInt("categoryNum", 0)
-            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnOld.setOnClickListener{
-            val categoryFragment = CategoryFragment()
-            val bundle = Bundle()
-            bundle.putInt("categoryNum", 1)
-            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnDisabled.setOnClickListener{
-            val categoryFragment = CategoryFragment()
-            val bundle = Bundle()
-            bundle.putInt("categoryNum", 2)
-            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnAnimal.setOnClickListener{
-            val categoryFragment = CategoryFragment()
-            val bundle = Bundle()
-            bundle.putInt("categoryNum", 3)
-            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnEtc.setOnClickListener{
-            activity?.let{
-                val intent = Intent(itemView?.context, MainActivity::class.java)
-
-                intent.putExtra("categoryNum",4)
-            }
-
-
-//            ContextCompat.startActivity(itemView.context, intent, null)
             mainActivity.openCategory()
         }
 

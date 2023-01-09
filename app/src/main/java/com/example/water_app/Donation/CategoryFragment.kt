@@ -39,23 +39,7 @@ class CategoryFragment : Fragment() {
         // 뷰바인딩
         binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
-        //getintent
-
- //       val categoryNum = arguments?.getInt("categoryNum")
-
-        val categoryNum = requireActivity().intent.extras!!.getInt("categoryNum")
-//        val categoryNum = requireArguments().getInt("categoryNum") // 전달한 key 값
-
-        // val categoryNum = bundle.getInt("categoryNum")
-        Log.d("test-------->","$categoryNum")
-
-        when(categoryNum) {
-            0 -> category0()
-            1 -> category1()
-            2 -> category2()
-            3 -> category3()
-            4 -> category4()
-        }
+        category0()
 
         return binding.root
     }
