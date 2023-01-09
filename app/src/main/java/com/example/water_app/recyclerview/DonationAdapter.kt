@@ -2,6 +2,7 @@ package com.example.water_app.recyclerview
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,20 +25,27 @@ class DonationAdapter(private val context: Context, private var donationList: Li
 
     // 내용 입력
     override fun onBindViewHolder(holder: DonationAdapter.ViewHolder, position: Int) {
-        holder.binding.tvTitle.text = donationList?.get(position)?.cntr_ttl
-        holder.binding.tvMoney.text = donationList?.get(position)?.cntr_obctr.toString()
+        val cntr_sn = donationList?.get(position)?.cntr_sn
+        val cntr_ttl = donationList?.get(position)?.cntr_ttl
+        val cntr_cn = donationList?.get(position)?.cntr_cn
+        val cntr_obctr = donationList?.get(position)?.cntr_obctr
+        val cntr_file_id = donationList?.get(position)?.cntr_file_id
+        val ctbny_pc = donationList?.get(position)?.ctbny_pc
+
+        holder.binding.tvTitle.text = cntr_ttl
+        holder.binding.tvMoney.text = cntr_obctr.toString()+"원"
 
         // 이미지 url
-        var cntrurl : String = donationList?.get(position)?.cntr_file_id.toString()
+        var cntrurl : String = cntr_file_id.toString()
         Glide.with(context).load(cntrurl).into(holder.binding.ivImage)
 
         // 퍼센트
-        if (donationList?.get(position)?.ctbny_pc == null) {
+        if (ctbny_pc == null) {
             holder.binding.tvPercent.text = "0%"
             holder.binding.pbPercent.setProgress(0)
         }else{
-            val collectPrice:Int? = donationList?.get(position)?.ctbny_pc
-            val totalPrice:Int? = donationList?.get(position)?.cntr_obctr
+            val collectPrice:Int? = ctbny_pc
+            val totalPrice:Int? = cntr_obctr
             val pricePercent:Double? = collectPrice!!.toDouble() / totalPrice!! * 100
 
             holder.binding.tvPercent.text = pricePercent?.toInt().toString() + "%"
@@ -51,9 +59,12 @@ class DonationAdapter(private val context: Context, private var donationList: Li
             //인텐트 putextra getextra 하는 부분
             val intent = Intent(holder.itemView?.context,CommunicationActivity::class.java)
 
-            intent.putExtra("cntr_sn",donationList?.get(position)?.cntr_sn)
-            intent.putExtra("cntr_ttl",donationList?.get(position)?.cntr_ttl)
-            intent.putExtra("cntr_cn",donationList?.get(position)?.cntr_cn)
+            intent.putExtra("cntr_sn",cntr_sn)
+            intent.putExtra("cntr_ttl",cntr_ttl)
+            intent.putExtra("cntr_cn",cntr_cn)
+            intent.putExtra("ctbny_pc",ctbny_pc)
+            intent.putExtra("cntr_obctr",cntr_obctr)
+            intent.putExtra("cntr_file_id",cntr_file_id)
 
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
