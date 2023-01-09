@@ -1,18 +1,23 @@
 package com.example.water_app.Donation
 
+import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
+import com.example.water_app.main.HomeFragment
+import com.example.water_app.main.MainActivity
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
@@ -52,6 +57,30 @@ class CategoryFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    //뒤로가기 메인 고정
+    private lateinit var callback: OnBackPressedCallback
+    lateinit var mainActivity: MainActivity
+    //뒤로가기 고정
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //뒤로가기 고정
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.flContainer, HomeFragment())
+                    .commit()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+        mainActivity = context as MainActivity
+    }
+    //뒤로가기 고정
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     // 가로 간격

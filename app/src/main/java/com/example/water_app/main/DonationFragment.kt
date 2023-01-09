@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.water_app.Donation.CommunicationActivity
+import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
