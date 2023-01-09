@@ -1,18 +1,21 @@
 package com.example.water_app.main
 
 import android.content.Context
-import android.graphics.Rect
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.water_app.Donation.CategoryFragment
+import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.recyclerview.DonationAdapter
@@ -21,6 +24,7 @@ import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.fragment_com_history.*
+import kotlinx.android.synthetic.main.item_main_recycler.*
 
 class HomeFragment : Fragment() {
 
@@ -88,18 +92,42 @@ class HomeFragment : Fragment() {
 
         // 카테고리
         binding.btnChild.setOnClickListener{
+            val categoryFragment = CategoryFragment()
+            val bundle = Bundle()
+            bundle.putInt("categoryNum", 0)
+            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnOld.setOnClickListener{
+            val categoryFragment = CategoryFragment()
+            val bundle = Bundle()
+            bundle.putInt("categoryNum", 1)
+            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnDisabled.setOnClickListener{
+            val categoryFragment = CategoryFragment()
+            val bundle = Bundle()
+            bundle.putInt("categoryNum", 2)
+            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnAnimal.setOnClickListener{
+            val categoryFragment = CategoryFragment()
+            val bundle = Bundle()
+            bundle.putInt("categoryNum", 3)
+            categoryFragment.arguments = bundle
             mainActivity.openCategory()
         }
         binding.btnEtc.setOnClickListener{
+            activity?.let{
+                val intent = Intent(itemView?.context, MainActivity::class.java)
+
+                intent.putExtra("categoryNum",4)
+            }
+
+
+//            ContextCompat.startActivity(itemView.context, intent, null)
             mainActivity.openCategory()
         }
 

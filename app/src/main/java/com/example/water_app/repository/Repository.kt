@@ -35,4 +35,7 @@ class Repository {
     suspend fun getCategory3() : Response<List<PostData>> {
         return Instance.api.getCategory3()
     }
+    suspend fun getCategory4() : Response<List<PostData>> {
+        return Instance.api.getCategory4()
+    }
 }

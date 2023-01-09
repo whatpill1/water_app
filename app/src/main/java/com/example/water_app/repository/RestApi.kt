@@ -30,4 +30,7 @@ interface RestApi {
 
     @GET("category3.php")
     suspend fun getCategory3(): Response<List<PostData>>
+
+    @GET("category4.php")
+    suspend fun getCategory4(): Response<List<PostData>>
 }

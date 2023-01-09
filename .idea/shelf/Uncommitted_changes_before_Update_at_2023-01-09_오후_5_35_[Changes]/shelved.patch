@@ -1,0 +1,494 @@
+Index: app/src/main/java/com/example/water_app/main/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.Manifest\r\nimport android.content.Context\r\nimport android.content.pm.PackageManager\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.util.Base64\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.app.ActivityCompat\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityMainBinding\r\nimport com.example.water_app.Donation.CategoryFragment\r\nimport java.security.MessageDigest\r\nimport java.security.NoSuchAlgorithmException\r\n\r\nclass MainActivity : AppCompatActivity() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityMainBinding\r\n\r\n    // 위치 권한\r\n    private val REQUEST_PERMISSION_LOCATION = 10\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_main)\r\n\r\n        // 위치 권한 확인\r\n        checkPermissionForLocation(this)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityMainBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        binding.navMain.run { setOnNavigationItemSelectedListener {\r\n            when(it.itemId) {\r\n                // 프래그먼트 이동\r\n                R.id.first -> {\r\n                    val fragment1 = HomeFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment1).commit()\r\n                }\r\n                R.id.second -> {\r\n                    val fragment2 = DonationFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment2).commit()\r\n                }\r\n                R.id.third -> {\r\n                    val fragment3 = MapFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment3).commit()\r\n                }\r\n                R.id.fourth -> {\r\n                    val fragment4 = StoreFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment4).commit()\r\n                }\r\n                R.id.fifth -> {\r\n                    val fragment5 = MyPageFragment()\r\n                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment5).commit()\r\n                }\r\n            }\r\n            true\r\n        }\r\n            selectedItemId = R.id.first\r\n        }\r\n\r\n        // HashKey\r\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {\r\n            val packageInfo =\r\n                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)\r\n            for (signature in packageInfo.signingInfo.apkContentsSigners) {\r\n                try {\r\n                    val md = MessageDigest.getInstance(\"SHA\")\r\n                    md.update(signature.toByteArray())\r\n                    Log.d(\"getKeyHash\", \"key hash: ${Base64.encodeToString(md.digest(), Base64.NO_WRAP)}\")\r\n                } catch (e: NoSuchAlgorithmException) {\r\n                    Log.w(\"getKeyHash\", \"Unable to get MessageDigest. signature=$signature\", e)\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    // 카테고리\r\n    fun openCategory() {\r\n        // 프래그먼트 생성\r\n        var fragment = CategoryFragment()\r\n\r\n//            // 액티비티에서 프래그먼트로 전달할 데이터 추가\r\n//            var bundle = Bundle()\r\n//            bundle.putString(\"key_1\", \"First Fragment\")\r\n//            bundle.putInt(\"key_2\", 20210910)\r\n//            fragment.arguments = bundle\r\n\r\n        // 트랜잭션 생성\r\n        val transaction = supportFragmentManager.beginTransaction()\r\n\r\n        // 트랜잭션을 통한 프래그먼트 삽입\r\n        transaction.add(R.id.flContainer, fragment)\r\n        transaction.commit()\r\n    }\r\n\r\n    // 위치 권한 확인\r\n    private fun checkPermissionForLocation(context: Context): Boolean {\r\n        // Android 6.0 Marshmallow 이상에서는 위치 권한에 추가 런타임 권한이 필요\r\n        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\r\n            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n                true\r\n            } else {\r\n                // 권한이 없으므로 권한 요청 알림 보내기\r\n                ActivityCompat.requestPermissions(\r\n                    this,\r\n                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),\r\n                    REQUEST_PERMISSION_LOCATION\r\n                )\r\n                false\r\n            }\r\n        } else {\r\n            true\r\n        }\r\n    }\r\n\r\n    // 위치 권한 요청 후 결과 처리\r\n    override fun onRequestPermissionsResult(\r\n        requestCode: Int,\r\n        permissions: Array<out String>,\r\n        grantResults: IntArray\r\n    ) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults)\r\n        if (requestCode == REQUEST_PERMISSION_LOCATION) {\r\n            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n                //\r\n            } else {\r\n                Log.d(\"ttt\", \"onRequestPermissionsResult() _ 권한 허용 거부\")\r\n                Toast.makeText(this, \"권한이 없어 해당 기능을 실행할 수 없습니다.\", Toast.LENGTH_SHORT)\r\n                    .show()\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/MainActivity.kt b/app/src/main/java/com/example/water_app/main/MainActivity.kt
+--- a/app/src/main/java/com/example/water_app/main/MainActivity.kt	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/java/com/example/water_app/main/MainActivity.kt	(date 1673251707710)
+@@ -10,6 +10,7 @@
+ import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.app.ActivityCompat
++import androidx.core.os.bundleOf
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityMainBinding
+ import com.example.water_app.Donation.CategoryFragment
+@@ -82,15 +83,10 @@
+ 
+     // 카테고리
+     fun openCategory() {
++
+         // 프래그먼트 생성
+         var fragment = CategoryFragment()
+ 
+-//            // 액티비티에서 프래그먼트로 전달할 데이터 추가
+-//            var bundle = Bundle()
+-//            bundle.putString("key_1", "First Fragment")
+-//            bundle.putInt("key_2", 20210910)
+-//            fragment.arguments = bundle
+-
+         // 트랜잭션 생성
+         val transaction = supportFragmentManager.beginTransaction()
+ 
+Index: app/src/main/java/com/example/water_app/Donation/CategoryFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.Donation\r\n\r\nimport android.graphics.Rect\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport androidx.recyclerview.widget.GridLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.example.water_app.databinding.ActivityRecyclerviewBinding\r\nimport com.example.water_app.main.DonationFragment\r\nimport com.example.water_app.recyclerview.DonationAdapter\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\nimport kotlinx.android.synthetic.main.fragment_com_history.*\r\n\r\nclass CategoryFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityRecyclerviewBinding\r\n\r\n    //뷰 모델 가져오기\r\n    private lateinit var viewModel : MainViewModel\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)\r\n\r\n        //php데이터담은\r\n        //리사이클러뷰 표현 아직 사진 퍼센트 없음\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getDonationList()\r\n        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val donationList = it.body()\r\n                //리사이클러뷰\r\n                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)\r\n                binding.recyclerView.setHasFixedSize(true)\r\n                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)\r\n\r\n                // 아이템 간 간격\r\n                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))\r\n                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))\r\n\r\n                // OnClickListener\r\n                val adapter = DonationAdapter(requireContext(), donationList)\r\n\r\n                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {\r\n                    override fun onClick(v: View, position: Int) {\r\n                        activity?.let {\r\n                        }\r\n                    }\r\n                })\r\n                binding.recyclerView.adapter = adapter\r\n            }\r\n            // 통신 실패\r\n            else{\r\n            }\r\n        })\r\n        return binding.root\r\n    }\r\n\r\n    // 가로 간격\r\n    class RecyclerViewDecoration1(private val divWidth: Int) : RecyclerView.ItemDecoration() {\r\n        override fun getItemOffsets(\r\n            outRect: Rect,\r\n            view: View,\r\n            parent: RecyclerView,\r\n            state: RecyclerView.State\r\n        ) {\r\n            super.getItemOffsets(outRect, view, parent, state)\r\n            outRect.left = divWidth\r\n        }\r\n    }\r\n\r\n    // 세로 간격\r\n    class RecyclerViewDecoration2(private val divHeight: Int) : RecyclerView.ItemDecoration() {\r\n        override fun getItemOffsets(\r\n            outRect: Rect,\r\n            view: View,\r\n            parent: RecyclerView,\r\n            state: RecyclerView.State\r\n        ) {\r\n            super.getItemOffsets(outRect, view, parent, state)\r\n            outRect.bottom = divHeight\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/Donation/CategoryFragment.kt b/app/src/main/java/com/example/water_app/Donation/CategoryFragment.kt
+--- a/app/src/main/java/com/example/water_app/Donation/CategoryFragment.kt	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/java/com/example/water_app/Donation/CategoryFragment.kt	(date 1673252978760)
+@@ -2,16 +2,16 @@
+ 
+ import android.graphics.Rect
+ import android.os.Bundle
+-import androidx.fragment.app.Fragment
++import android.util.Log
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
++import androidx.fragment.app.Fragment
+ import androidx.lifecycle.Observer
+ import androidx.lifecycle.ViewModelProvider
+ import androidx.recyclerview.widget.GridLayoutManager
+ import androidx.recyclerview.widget.RecyclerView
+ import com.example.water_app.databinding.ActivityRecyclerviewBinding
+-import com.example.water_app.main.DonationFragment
+ import com.example.water_app.recyclerview.DonationAdapter
+ import com.example.water_app.repository.Repository
+ import com.example.water_app.viewmodel.MainViewModel
+@@ -39,16 +39,61 @@
+         // 뷰바인딩
+         binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
+ 
+-        //php데이터담은
+-        //리사이클러뷰 표현 아직 사진 퍼센트 없음
++        //getintent
++
++ //       val categoryNum = arguments?.getInt("categoryNum")
++
++        val categoryNum = requireActivity().intent.extras!!.getInt("categoryNum")
++//        val categoryNum = requireArguments().getInt("categoryNum") // 전달한 key 값
++
++        // val categoryNum = bundle.getInt("categoryNum")
++        Log.d("test-------->","$categoryNum")
++
++        when(categoryNum) {
++            0 -> category0()
++            1 -> category1()
++            2 -> category2()
++            3 -> category3()
++            4 -> category4()
++        }
++
++        return binding.root
++    }
++
++    // 가로 간격
++    class RecyclerViewDecoration1(private val divWidth: Int) : RecyclerView.ItemDecoration() {
++        override fun getItemOffsets(
++            outRect: Rect,
++            view: View,
++            parent: RecyclerView,
++            state: RecyclerView.State
++        ) {
++            super.getItemOffsets(outRect, view, parent, state)
++            outRect.left = divWidth
++        }
++    }
++
++    // 세로 간격
++    class RecyclerViewDecoration2(private val divHeight: Int) : RecyclerView.ItemDecoration() {
++        override fun getItemOffsets(
++            outRect: Rect,
++            view: View,
++            parent: RecyclerView,
++            state: RecyclerView.State
++        ) {
++            super.getItemOffsets(outRect, view, parent, state)
++            outRect.bottom = divHeight
++        }
++    }
++    //카테고리 5개
++    fun category0() {
+         val repository = Repository()
+         val viewModelFactory = MainViewModelFactory(repository)
+-
+-        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+-        viewModel.getDonationList()
+-        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
++        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getCategory0()
++        viewModel.getCategory0Response.observe(viewLifecycleOwner, Observer {
+             // 통신 성공
+-            if(it.isSuccessful){
++            if (it.isSuccessful) {
+                 val donationList = it.body()
+                 //리사이클러뷰
+                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+@@ -71,35 +116,144 @@
+                 binding.recyclerView.adapter = adapter
+             }
+             // 통신 실패
+-            else{
++            else {
+             }
+         })
+-        return binding.root
++    }
++    fun category1() {
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getCategory1()
++        viewModel.getCategory1Response.observe(viewLifecycleOwner, Observer {
++            // 통신 성공
++            if (it.isSuccessful) {
++                val donationList = it.body()
++                //리사이클러뷰
++                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
++                binding.recyclerView.setHasFixedSize(true)
++                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
++
++                // 아이템 간 간격
++                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
++                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
++
++                // OnClickListener
++                val adapter = DonationAdapter(requireContext(), donationList)
++
++                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {
++                    override fun onClick(v: View, position: Int) {
++                        activity?.let {
++                        }
++                    }
++                })
++                binding.recyclerView.adapter = adapter
++            }
++            // 통신 실패
++            else {
++            }
++        })
++    }
++    fun category2() {
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getCategory2()
++        viewModel.getCategory2Response.observe(viewLifecycleOwner, Observer {
++            // 통신 성공
++            if (it.isSuccessful) {
++                val donationList = it.body()
++                //리사이클러뷰
++                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
++                binding.recyclerView.setHasFixedSize(true)
++                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
++
++                // 아이템 간 간격
++                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
++                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
++
++                // OnClickListener
++                val adapter = DonationAdapter(requireContext(), donationList)
++
++                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {
++                    override fun onClick(v: View, position: Int) {
++                        activity?.let {
++                        }
++                    }
++                })
++                binding.recyclerView.adapter = adapter
++            }
++            // 통신 실패
++            else {
++            }
++        })
+     }
++    fun category3() {
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getCategory3()
++        viewModel.getCategory3Response.observe(viewLifecycleOwner, Observer {
++            // 통신 성공
++            if (it.isSuccessful) {
++                val donationList = it.body()
++                //리사이클러뷰
++                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
++                binding.recyclerView.setHasFixedSize(true)
++                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
+ 
+-    // 가로 간격
+-    class RecyclerViewDecoration1(private val divWidth: Int) : RecyclerView.ItemDecoration() {
+-        override fun getItemOffsets(
+-            outRect: Rect,
+-            view: View,
+-            parent: RecyclerView,
+-            state: RecyclerView.State
+-        ) {
+-            super.getItemOffsets(outRect, view, parent, state)
+-            outRect.left = divWidth
+-        }
++                // 아이템 간 간격
++                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
++                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
++
++                // OnClickListener
++                val adapter = DonationAdapter(requireContext(), donationList)
++
++                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {
++                    override fun onClick(v: View, position: Int) {
++                        activity?.let {
++                        }
++                    }
++                })
++                binding.recyclerView.adapter = adapter
++            }
++            // 통신 실패
++            else {
++            }
++        })
+     }
++    fun category4() {
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getCategory4()
++        viewModel.getCategory4Response.observe(viewLifecycleOwner, Observer {
++            // 통신 성공
++            if (it.isSuccessful) {
++                val donationList = it.body()
++                //리사이클러뷰
++                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
++                binding.recyclerView.setHasFixedSize(true)
++                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
++
++                // 아이템 간 간격
++                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
++                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
++
++                // OnClickListener
++                val adapter = DonationAdapter(requireContext(), donationList)
+ 
+-    // 세로 간격
+-    class RecyclerViewDecoration2(private val divHeight: Int) : RecyclerView.ItemDecoration() {
+-        override fun getItemOffsets(
+-            outRect: Rect,
+-            view: View,
+-            parent: RecyclerView,
+-            state: RecyclerView.State
+-        ) {
+-            super.getItemOffsets(outRect, view, parent, state)
+-            outRect.bottom = divHeight
+-        }
++                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {
++                    override fun onClick(v: View, position: Int) {
++                        activity?.let {
++                        }
++                    }
++                })
++                binding.recyclerView.adapter = adapter
++            }
++            // 통신 실패
++            else {
++            }
++        })
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/main/HomeFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.content.Context\r\nimport android.graphics.Rect\r\nimport android.os.Bundle\r\nimport android.os.Handler\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport androidx.viewpager2.widget.ViewPager2\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.FragmentHomeBinding\r\nimport com.example.water_app.recyclerview.DonationAdapter\r\nimport com.example.water_app.recyclerview.ViewPagerAdapter\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\nimport kotlinx.android.synthetic.main.fragment_com_history.*\r\n\r\nclass HomeFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: FragmentHomeBinding\r\n\r\n    // MainActivity 가져오기\r\n    lateinit var mainActivity: MainActivity\r\n\r\n    // 뷰페이저\r\n    private val sliderImageHandler: Handler = Handler()\r\n    private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }\r\n\r\n    // context를 mainActivity에 담음\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n\r\n        mainActivity = context as MainActivity\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentHomeBinding.inflate(inflater, container, false)\r\n\r\n        // 뷰페이저\r\n        val imageList = arrayListOf<Int>().apply {\r\n            for (i in 0..2) {\r\n                add(R.drawable.banner1)\r\n                add(R.drawable.banner2)\r\n                add(R.drawable.banner3)\r\n            }\r\n        }\r\n\r\n        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)\r\n        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth)\r\n        val screenWidth = resources.displayMetrics.widthPixels\r\n        val offsetPx = screenWidth - pageMarginPx - pagerWidth\r\n\r\n        binding.ivBanner.apply {\r\n            adapter = ViewPagerAdapter(imageList, binding.ivBanner)\r\n            offscreenPageLimit = 1\r\n            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER\r\n            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {\r\n                override fun onPageSelected(position: Int) {\r\n                    super.onPageSelected(position)\r\n                    sliderImageHandler.removeCallbacks(sliderImageRunnable)\r\n                    sliderImageHandler.postDelayed(sliderImageRunnable, 3000)\r\n                }\r\n            })\r\n            setPageTransformer { page, position ->\r\n                page.translationX = position * -offsetPx\r\n            }\r\n        }\r\n\r\n        // MainActivity 담음\r\n        mainActivity = context as MainActivity\r\n\r\n        // 리사이클러뷰\r\n        home()\r\n        homeEnd()\r\n\r\n        // 카테고리\r\n        binding.btnChild.setOnClickListener{\r\n            mainActivity.openCategory()\r\n        }\r\n        binding.btnOld.setOnClickListener{\r\n            mainActivity.openCategory()\r\n        }\r\n        binding.btnDisabled.setOnClickListener{\r\n            mainActivity.openCategory()\r\n        }\r\n        binding.btnAnimal.setOnClickListener{\r\n            mainActivity.openCategory()\r\n        }\r\n        binding.btnEtc.setOnClickListener{\r\n            mainActivity.openCategory()\r\n        }\r\n\r\n        return binding.root\r\n    }\r\n\r\n    // 리사이클러뷰 진행중인 기부\r\n    fun home(){\r\n        // 뷰 모델 가져오기\r\n        val viewModel : MainViewModel\r\n\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getDonationList()\r\n        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val homelist = it.body()\r\n\r\n                // 리사이클러뷰\r\n                binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)\r\n                binding.rvDonation.setHasFixedSize(true)\r\n                binding.rvDonation.adapter = DonationAdapter(requireContext(), homelist)\r\n\r\n                // OnClickListener\r\n                val adapter = DonationAdapter(requireContext(), homelist)\r\n\r\n                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{\r\n                    override fun onClick(v: View, position: Int) {\r\n                        activity?.let{\r\n                        }\r\n                    }\r\n                })\r\n                binding.rvDonation.adapter = adapter\r\n            }\r\n            // 통신 실패\r\n            else{\r\n\r\n            }\r\n        })\r\n    }\r\n\r\n    // 완료된 기부\r\n    fun homeEnd(){\r\n        val viewModel : MainViewModel\r\n        // php데이터담은\r\n        // 리사이클러뷰 표현 아직 사진 퍼센트 없음\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getHomeEnd()\r\n        viewModel.getHomeEndListResponse.observe(viewLifecycleOwner, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val closelist = it.body()\r\n\r\n                // 리사이클러뷰\r\n                binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)\r\n                binding.rvClose.setHasFixedSize(true)\r\n                binding.rvClose.adapter = DonationAdapter(requireContext(), closelist)\r\n\r\n                // OnClickListener\r\n                val adapter = DonationAdapter(requireContext(), closelist)\r\n\r\n                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{\r\n                    override fun onClick(v: View, position: Int) {\r\n                        activity?.let{\r\n                        }\r\n                    }\r\n                })\r\n                binding.rvClose.adapter = adapter\r\n\r\n            }\r\n            // 통신 실패\r\n            else{\r\n\r\n            }\r\n        })\r\n    }\r\n\r\n    // 뷰페이저\r\n    override fun onResume() {\r\n        super.onResume()\r\n        sliderImageHandler.postDelayed(sliderImageRunnable, 1000)\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        sliderImageHandler.removeCallbacks(sliderImageRunnable)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/HomeFragment.kt b/app/src/main/java/com/example/water_app/main/HomeFragment.kt
+--- a/app/src/main/java/com/example/water_app/main/HomeFragment.kt	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/java/com/example/water_app/main/HomeFragment.kt	(date 1673252948630)
+@@ -1,18 +1,21 @@
+ package com.example.water_app.main
+ 
+ import android.content.Context
+-import android.graphics.Rect
++import android.content.Intent
+ import android.os.Bundle
+ import android.os.Handler
+-import androidx.fragment.app.Fragment
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
++import androidx.core.content.ContextCompat
++import androidx.fragment.app.Fragment
+ import androidx.lifecycle.Observer
+ import androidx.lifecycle.ViewModelProvider
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import androidx.recyclerview.widget.RecyclerView
+ import androidx.viewpager2.widget.ViewPager2
++import com.example.water_app.Donation.CategoryFragment
++import com.example.water_app.Donation.CommunicationActivity
+ import com.example.water_app.R
+ import com.example.water_app.databinding.FragmentHomeBinding
+ import com.example.water_app.recyclerview.DonationAdapter
+@@ -21,6 +24,7 @@
+ import com.example.water_app.viewmodel.MainViewModel
+ import com.example.water_app.viewmodel.MainViewModelFactory
+ import kotlinx.android.synthetic.main.fragment_com_history.*
++import kotlinx.android.synthetic.main.item_main_recycler.*
+ 
+ class HomeFragment : Fragment() {
+ 
+@@ -88,18 +92,42 @@
+ 
+         // 카테고리
+         binding.btnChild.setOnClickListener{
++            val categoryFragment = CategoryFragment()
++            val bundle = Bundle()
++            bundle.putInt("categoryNum", 0)
++            categoryFragment.arguments = bundle
+             mainActivity.openCategory()
+         }
+         binding.btnOld.setOnClickListener{
++            val categoryFragment = CategoryFragment()
++            val bundle = Bundle()
++            bundle.putInt("categoryNum", 1)
++            categoryFragment.arguments = bundle
+             mainActivity.openCategory()
+         }
+         binding.btnDisabled.setOnClickListener{
++            val categoryFragment = CategoryFragment()
++            val bundle = Bundle()
++            bundle.putInt("categoryNum", 2)
++            categoryFragment.arguments = bundle
+             mainActivity.openCategory()
+         }
+         binding.btnAnimal.setOnClickListener{
++            val categoryFragment = CategoryFragment()
++            val bundle = Bundle()
++            bundle.putInt("categoryNum", 3)
++            categoryFragment.arguments = bundle
+             mainActivity.openCategory()
+         }
+         binding.btnEtc.setOnClickListener{
++            activity?.let{
++                val intent = Intent(itemView?.context, MainActivity::class.java)
++
++                intent.putExtra("categoryNum",4)
++            }
++
++
++//            ContextCompat.startActivity(itemView.context, intent, null)
+             mainActivity.openCategory()
+         }
+ 
+Index: app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.viewmodel\r\n\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport androidx.lifecycle.viewModelScope\r\nimport com.example.water_app.model.NoticeData\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport kotlinx.coroutines.launch\r\nimport retrofit2.Response\r\n\r\nclass MainViewModel(private val repository : Repository) : ViewModel() {\r\n    // 데이터 처리\r\n\r\n    val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()\r\n    val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()\r\n    val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCategory0Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCategory1Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCategory2Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCategory3Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n\r\n    fun getUser() {\r\n        viewModelScope.launch {\r\n            val response = repository.getUser()\r\n            myResponse.value = response\r\n        }\r\n    }\r\n    fun getDonationList() {\r\n        viewModelScope.launch {\r\n            val response = repository.getDonationList()\r\n            getDonationListResponse.value = response\r\n        }\r\n    }\r\n    fun getNoticeList() {\r\n        viewModelScope.launch {\r\n            val response = repository.getNoticeList()\r\n            noticeListResponse.value = response\r\n        }\r\n    }\r\n    fun getHomeEnd() {\r\n        viewModelScope.launch {\r\n            val response = repository.getHomeend()\r\n            getHomeEndListResponse.value = response\r\n        }\r\n    }\r\n    fun getCategory0() {\r\n        viewModelScope.launch {\r\n            val response = repository.getCategory0()\r\n            getCategory0Response.value = response\r\n        }\r\n    }\r\n    fun getCategory1() {\r\n        viewModelScope.launch {\r\n            val response = repository.getCategory1()\r\n            getCategory1Response.value = response\r\n        }\r\n    }\r\n    fun getCategory2() {\r\n        viewModelScope.launch {\r\n            val response = repository.getCategory2()\r\n            getCategory2Response.value = response\r\n        }\r\n    }\r\n    fun getCategory3() {\r\n        viewModelScope.launch {\r\n            val response = repository.getCategory3()\r\n            getCategory3Response.value = response\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+--- a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(date 1673249751900)
+@@ -21,6 +21,7 @@
+     val getCategory1Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+     val getCategory2Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+     val getCategory3Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
++    val getCategory4Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+ 
+     fun getUser() {
+         viewModelScope.launch {
+@@ -70,5 +71,11 @@
+             getCategory3Response.value = response
+         }
+     }
++    fun getCategory4() {
++        viewModelScope.launch {
++            val response = repository.getCategory4()
++            getCategory4Response.value = response
++        }
++    }
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_com_history.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Donation.ComHistoryFragment\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvStart\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"시작일\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv1\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"-\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvStart\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tvStart\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvStart\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"마감일\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvStart\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv1\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvStart\" />\r\n\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBar\"\r\n                style=\"?android:attr/progressBarStyle\"\r\n                android:layout_width=\"200dp\"\r\n                android:layout_height=\"200dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tvStart\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tvStart\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvPercent\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:fontFamily=\"@font/kim_bold\"\r\n                android:text=\"100\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"40sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/progressBar\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/progressBar\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/progressBar\"\r\n                app:layout_constraintVertical_bias=\"0.533\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv2\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/kim_bold\"\r\n                android:text=\"%\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"40sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvPercent\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tvPercent\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvPercent\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv4\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"모금 금액\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/progressBar\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/progressBar\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvTotal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:text=\"금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tv4\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv4\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tv4\" />\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv5\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:text=\"지출 금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tv4\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv4\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvExpend\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:text=\"금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tv5\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv5\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tv5\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv3\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:text=\"지출 보고 내역\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tv5\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv5\" />\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv3\" />\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </ScrollView>\r\n\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_com_history.xml b/app/src/main/res/layout/fragment_com_history.xml
+--- a/app/src/main/res/layout/fragment_com_history.xml	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/res/layout/fragment_com_history.xml	(date 1673247703325)
+@@ -58,6 +58,7 @@
+                 android:layout_width="200dp"
+                 android:layout_height="200dp"
+                 android:layout_marginTop="24dp"
++                android:progress="20"
+                 app:layout_constraintStart_toStartOf="@+id/tvStart"
+                 app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+ 
+Index: app/src/main/java/com/example/water_app/repository/RestApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.*\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Response\r\nimport retrofit2.http.*\r\n\r\ninterface RestApi {\r\n    @GET(\"test2.php\")\r\n    suspend fun getUser(): Response<UserData>\r\n\r\n    @GET(\"home.php\")\r\n    suspend fun getDonationList(): Response<List<PostData>>\r\n\r\n    @GET(\"notice.php\")\r\n    suspend fun getNoticeList(): Response<List<NoticeData>>\r\n\r\n    @GET(\"homeend.php\")\r\n    suspend fun getHomeend(): Response<List<PostData>>\r\n\r\n    @GET(\"category0.php\")\r\n    suspend fun getCategory0(): Response<List<PostData>>\r\n\r\n    @GET(\"category1.php\")\r\n    suspend fun getCategory1(): Response<List<PostData>>\r\n\r\n    @GET(\"category2.php\")\r\n    suspend fun getCategory2(): Response<List<PostData>>\r\n\r\n    @GET(\"category3.php\")\r\n    suspend fun getCategory3(): Response<List<PostData>>\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/RestApi.kt b/app/src/main/java/com/example/water_app/repository/RestApi.kt
+--- a/app/src/main/java/com/example/water_app/repository/RestApi.kt	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/java/com/example/water_app/repository/RestApi.kt	(date 1673249751885)
+@@ -30,4 +30,7 @@
+ 
+     @GET("category3.php")
+     suspend fun getCategory3(): Response<List<PostData>>
++
++    @GET("category4.php")
++    suspend fun getCategory4(): Response<List<PostData>>
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/repository/Repository.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.NoticeData\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Response\r\n\r\nclass Repository {\r\n    // ViewModel에서 사용할 데이터 통신\r\n\r\n    suspend fun getUser() : Response<UserData> {\r\n        return Instance.api.getUser()\r\n    }\r\n\r\n    suspend fun getDonationList() : Response<List<PostData>> {\r\n        return Instance.api.getDonationList()\r\n    }\r\n\r\n    suspend fun getNoticeList() : Response<List<NoticeData>> {\r\n        return Instance.api.getNoticeList()\r\n    }\r\n\r\n    suspend fun getHomeend() : Response<List<PostData>> {\r\n        return Instance.api.getHomeend()\r\n    }\r\n    suspend fun getCategory0() : Response<List<PostData>> {\r\n        return Instance.api.getCategory0()\r\n    }\r\n    suspend fun getCategory1() : Response<List<PostData>> {\r\n        return Instance.api.getCategory1()\r\n    }\r\n    suspend fun getCategory2() : Response<List<PostData>> {\r\n        return Instance.api.getCategory2()\r\n    }\r\n    suspend fun getCategory3() : Response<List<PostData>> {\r\n        return Instance.api.getCategory3()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/Repository.kt b/app/src/main/java/com/example/water_app/repository/Repository.kt
+--- a/app/src/main/java/com/example/water_app/repository/Repository.kt	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/java/com/example/water_app/repository/Repository.kt	(date 1673249751924)
+@@ -35,4 +35,7 @@
+     suspend fun getCategory3() : Response<List<PostData>> {
+         return Instance.api.getCategory3()
+     }
++    suspend fun getCategory4() : Response<List<PostData>> {
++        return Instance.api.getCategory4()
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_com_introduce.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Donation.ComIntroduceFragment\">\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <ScrollView\r\n            android:id=\"@+id/scrollView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n\r\n            android:layout_marginBottom=\"80dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            tools:ignore=\"SpeakableTextPresentCheck,SpeakableTextPresentCheck\">\r\n\r\n            <androidx.constraintlayout.widget.ConstraintLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/donationTtl\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"25dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:fontFamily=\"@font/kim_bold\"\r\n                    android:hint=\"제목 들어갈 위치\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:textSize=\"35sp\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/donationImage\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"25dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:adjustViewBounds=\"true\"\r\n                    android:scaleType=\"fitStart\"\r\n                    android:src=\"@drawable/store5\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/donationTtl\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/donationCn\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"25dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:fontFamily=\"@font/kim_regular\"\r\n                    android:hint=\"글 들어가는 부분\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:textSize=\"17sp\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/donationImage\" />\r\n\r\n\r\n            </androidx.constraintlayout.widget.ConstraintLayout>\r\n        </ScrollView>\r\n\r\n        <Button\r\n            android:id=\"@+id/btnDonation\"\r\n            android:layout_width=\"180dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginBottom=\"10dp\"\r\n            android:background=\"@drawable/buttoncolor\"\r\n            android:gravity=\"center\"\r\n            android:text=\"기부하기\"\r\n            android:textColor=\"@color/white\"\r\n            android:textSize=\"25sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toEndOf=\"@+id/donationPercent\"\r\n            app:layout_constraintTop_toTopOf=\"@+id/donationPercent\" />\r\n\r\n        <ProgressBar\r\n            android:id=\"@+id/progressBar\"\r\n            style=\"?android:attr/progressBarStyleHorizontal\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"10dp\"\r\n            android:layout_marginEnd=\"220dp\"\r\n            android:layout_marginBottom=\"10dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            tools:ignore=\"MissingConstraints\"\r\n            android:max=\"100\"\r\n            android:progress=\"50\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/donationPercent\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"50%\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toBottomOf=\"@+id/donationAmount\"\r\n            app:layout_constraintEnd_toEndOf=\"@+id/progressBar\"\r\n            app:layout_constraintTop_toTopOf=\"@+id/donationAmount\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/donationAmount\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"10dp\"\r\n            android:layout_marginBottom=\"10dp\"\r\n            android:text=\"10,000,000원\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintBottom_toTopOf=\"@+id/progressBar\"\r\n            app:layout_constraintStart_toStartOf=\"parent\" />\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_com_introduce.xml b/app/src/main/res/layout/fragment_com_introduce.xml
+--- a/app/src/main/res/layout/fragment_com_introduce.xml	(revision 672e2bd0f4b8cb84a6b38d96f959cfea22fe3526)
++++ b/app/src/main/res/layout/fragment_com_introduce.xml	(date 1673247703336)
+@@ -102,7 +102,7 @@
+             app:layout_constraintStart_toStartOf="parent"
+             tools:ignore="MissingConstraints"
+             android:max="100"
+-            android:progress="50"/>
++            android:progress="0"/>
+ 
+         <TextView
+             android:id="@+id/donationPercent"
