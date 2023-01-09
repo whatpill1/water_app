@@ -39,7 +39,16 @@ class CategoryFragment : Fragment() {
         // 뷰바인딩
         binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
-        category0()
+        val categoryNum = arguments?.getInt("Category")
+        Log.d("000000000000000", "$categoryNum")
+
+        when(categoryNum) {
+            0 -> category0()
+            1 -> category1()
+            2 -> category2()
+            3 -> category3()
+            4 -> category4()
+        }
 
         return binding.root
     }
@@ -69,7 +78,8 @@ class CategoryFragment : Fragment() {
             outRect.bottom = divHeight
         }
     }
-    //카테고리 5개
+
+    // 카테고리
     fun category0() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -79,7 +89,7 @@ class CategoryFragment : Fragment() {
             // 통신 성공
             if (it.isSuccessful) {
                 val donationList = it.body()
-                //리사이클러뷰
+
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
@@ -98,9 +108,6 @@ class CategoryFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
-            }
-            // 통신 실패
-            else {
             }
         })
     }
@@ -113,7 +120,7 @@ class CategoryFragment : Fragment() {
             // 통신 성공
             if (it.isSuccessful) {
                 val donationList = it.body()
-                //리사이클러뷰
+
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
@@ -132,9 +139,6 @@ class CategoryFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
-            }
-            // 통신 실패
-            else {
             }
         })
     }
@@ -147,7 +151,7 @@ class CategoryFragment : Fragment() {
             // 통신 성공
             if (it.isSuccessful) {
                 val donationList = it.body()
-                //리사이클러뷰
+
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
@@ -166,9 +170,6 @@ class CategoryFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
-            }
-            // 통신 실패
-            else {
             }
         })
     }
@@ -181,7 +182,7 @@ class CategoryFragment : Fragment() {
             // 통신 성공
             if (it.isSuccessful) {
                 val donationList = it.body()
-                //리사이클러뷰
+
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
@@ -200,9 +201,6 @@ class CategoryFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
-            }
-            // 통신 실패
-            else {
             }
         })
     }
@@ -215,7 +213,7 @@ class CategoryFragment : Fragment() {
             // 통신 성공
             if (it.isSuccessful) {
                 val donationList = it.body()
-                //리사이클러뷰
+
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
@@ -234,9 +232,6 @@ class CategoryFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
-            }
-            // 통신 실패
-            else {
             }
         })
     }

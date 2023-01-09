@@ -81,20 +81,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 카테고리
-    fun openCategory() {
-
-        // 프래그먼트 생성
-        var fragment = CategoryFragment()
-
-        // 트랜잭션 생성
-        val transaction = supportFragmentManager.beginTransaction()
-
-        // 트랜잭션을 통한 프래그먼트 삽입
-        transaction.add(R.id.flContainer, fragment)
-        transaction.commit()
-    }
-
     // 위치 권한 확인
     private fun checkPermissionForLocation(context: Context): Boolean {
         // Android 6.0 Marshmallow 이상에서는 위치 권한에 추가 런타임 권한이 필요

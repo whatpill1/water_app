@@ -1,13 +1,11 @@
 package com.example.water_app.main
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.water_app.Donation.CategoryFragment
-import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.recyclerview.DonationAdapter
@@ -37,6 +34,8 @@ class HomeFragment : Fragment() {
     // 뷰페이저
     private val sliderImageHandler: Handler = Handler()
     private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }
+
+    private val categoryFragment : Fragment = CategoryFragment()
 
     // context를 mainActivity에 담음
     override fun onAttach(context: Context) {
@@ -90,21 +89,52 @@ class HomeFragment : Fragment() {
         home()
         homeEnd()
 
+        val transaction = fragmentManager?.beginTransaction()
+
         // 카테고리
         binding.btnChild.setOnClickListener{
-            mainActivity.openCategory()
+            val bundle = Bundle()
+            bundle.putInt("Category", 0)
+            categoryFragment.arguments = bundle
+
+            transaction!!.replace(R.id.flContainer,CategoryFragment())
+            transaction!!.addToBackStack(null)
+            transaction!!.commit()
         }
         binding.btnOld.setOnClickListener{
-            mainActivity.openCategory()
+            val bundle = Bundle()
+            bundle.putInt("Category", 1)
+
+            transaction!!.replace(R.id.flContainer,CategoryFragment())
+            transaction!!.addToBackStack(null)
+            transaction!!.commit()
         }
         binding.btnDisabled.setOnClickListener{
-            mainActivity.openCategory()
+            val bundle = Bundle()
+            bundle.putInt("Category", 2)
+            categoryFragment.arguments = bundle
+
+            transaction!!.replace(R.id.flContainer,CategoryFragment())
+            transaction!!.addToBackStack(null)
+            transaction!!.commit()
         }
         binding.btnAnimal.setOnClickListener{
-            mainActivity.openCategory()
+            val bundle = Bundle()
+            bundle.putInt("Category", 3)
+            categoryFragment.arguments = bundle
+
+            transaction!!.replace(R.id.flContainer,CategoryFragment())
+            transaction!!.addToBackStack(null)
+            transaction!!.commit()
         }
         binding.btnEtc.setOnClickListener{
-            mainActivity.openCategory()
+            val bundle = Bundle()
+            bundle.putInt("Category", 4)
+            categoryFragment.arguments = bundle
+
+            transaction!!.replace(R.id.flContainer,CategoryFragment())
+            transaction!!.addToBackStack(null)
+            transaction!!.commit()
         }
 
         return binding.root
