@@ -4,24 +4,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.activity_recyclerview.*
+import kotlinx.android.synthetic.main.fragment_com_history.*
 
 
 class DonationFragment : Fragment() {
@@ -56,6 +55,10 @@ class DonationFragment : Fragment() {
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
+
+                // 아이템 간 간격
+                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
+                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
 
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), donationList)
@@ -94,36 +97,35 @@ class DonationFragment : Fragment() {
         mainActivity = context as MainActivity
     }
 
-    //뒤로가기 고정
+    // 뒤로가기 고정
     override fun onDetach() {
         super.onDetach()
         callback.remove()
     }
 
-    class GridSpaceItemDecoration(private val spanCount: Int, private val space: Int): RecyclerView.ItemDecoration() {
-
+    // 가로 간격
+    class RecyclerViewDecoration1(private val divWidth: Int) : ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
             view: View,
             parent: RecyclerView,
             state: RecyclerView.State
         ) {
-            val position = parent.getChildAdapterPosition(view)
-            val column = position % spanCount + 1      // 1부터 시작
-
-            /** 첫번째 행(row-1)에 있는 아이템인 경우 상단에 [space] 만큼의 여백을 추가한다 */
-            if (position < spanCount){
-                outRect.top = space
-            }
-            /** 마지막 열(column-N)에 있는 아이템인 경우 우측에 [space] 만큼의 여백을 추가한다 */
-            if (column == spanCount){
-                outRect.right = space
-            }
-            /** 모든 아이템의 좌측과 하단에 [space] 만큼의 여백을 추가한다. */
-            outRect.left = space
-            outRect.bottom = space
-
+            super.getItemOffsets(outRect, view, parent, state)
+            outRect.left = divWidth
         }
+    }
 
+    // 세로 간격
+    class RecyclerViewDecoration2(private val divHeight: Int) : ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+            outRect.bottom = divHeight
+        }
     }
 }

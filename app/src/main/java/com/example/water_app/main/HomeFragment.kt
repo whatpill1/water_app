@@ -1,6 +1,7 @@
 package com.example.water_app.main
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.example.water_app.recyclerview.ViewPagerAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
+import kotlinx.android.synthetic.main.fragment_com_history.*
 
 class HomeFragment : Fragment() {
 
