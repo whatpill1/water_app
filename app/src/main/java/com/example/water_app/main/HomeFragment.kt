@@ -104,6 +104,7 @@ class HomeFragment : Fragment() {
         binding.btnOld.setOnClickListener{
             val bundle = Bundle()
             bundle.putInt("Category", 1)
+            categoryFragment.arguments = bundle
 
             transaction!!.replace(R.id.flContainer,CategoryFragment())
             transaction!!.addToBackStack(null)
