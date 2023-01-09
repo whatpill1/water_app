@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.water_app.Donation.ComHistoryFragment
 import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
@@ -31,6 +32,9 @@ class DonationAdapter(private val context: Context, private var donationList: Li
         val cntr_obctr = donationList?.get(position)?.cntr_obctr
         val cntr_file_id = donationList?.get(position)?.cntr_file_id
         val ctbny_pc = donationList?.get(position)?.ctbny_pc
+        val cntr_str_dt = donationList?.get(position)?.cntr_str_dt
+        val cntr_end_dt = donationList?.get(position)?.cntr_end_dt
+
 
         holder.binding.tvTitle.text = cntr_ttl
         holder.binding.tvMoney.text = cntr_obctr.toString()+"원"
@@ -65,6 +69,8 @@ class DonationAdapter(private val context: Context, private var donationList: Li
             intent.putExtra("ctbny_pc",ctbny_pc)
             intent.putExtra("cntr_obctr",cntr_obctr)
             intent.putExtra("cntr_file_id",cntr_file_id)
+            intent.putExtra("cntr_str_dt", cntr_str_dt)
+            intent.putExtra("cntr_end_dt",cntr_end_dt)
 
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
