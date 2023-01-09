@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,17 +40,17 @@ class CategoryFragment : Fragment() {
         // 뷰바인딩
         binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
-        val categoryNum = arguments?.getInt("Category")
-        Log.d("000000000000000", "$categoryNum")
-
-        when(categoryNum) {
-            0 -> category0()
-            1 -> category1()
-            2 -> category2()
-            3 -> category3()
-            4 -> category4()
+        //카테고리별 결과물
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            val result = bundle.getInt("bundleKey")
+            when(result) {
+                0 -> category0()
+                1 -> category1()
+                2 -> category2()
+                3 -> category3()
+                4 -> category4()
+            }
         }
-
         return binding.root
     }
 

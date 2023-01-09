@@ -22,6 +22,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val getCategory2Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val getCategory3Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val getCategory4Response : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+    val loginResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
 
     fun getUser() {
         viewModelScope.launch {
@@ -75,6 +76,12 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
         viewModelScope.launch {
             val response = repository.getCategory4()
             getCategory4Response.value = response
+        }
+    }
+    fun getLogin() {
+        viewModelScope.launch {
+            val response = repository.getLogin()
+            loginResponse.value = response
         }
     }
 

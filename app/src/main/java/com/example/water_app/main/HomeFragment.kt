@@ -6,7 +6,9 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -93,49 +95,39 @@ class HomeFragment : Fragment() {
 
         // 카테고리
         binding.btnChild.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putInt("Category", 0)
-            categoryFragment.arguments = bundle
-
-            transaction!!.replace(R.id.flContainer,CategoryFragment())
-            transaction!!.addToBackStack(null)
-            transaction!!.commit()
+            val result = 0
+            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.flContainer, CategoryFragment())
+                .commit()
         }
         binding.btnOld.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putInt("Category", 1)
-            categoryFragment.arguments = bundle
-
-            transaction!!.replace(R.id.flContainer,CategoryFragment())
-            transaction!!.addToBackStack(null)
-            transaction!!.commit()
+            val result = 1
+            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.flContainer, CategoryFragment())
+                .commit()
         }
         binding.btnDisabled.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putInt("Category", 2)
-            categoryFragment.arguments = bundle
-
-            transaction!!.replace(R.id.flContainer,CategoryFragment())
-            transaction!!.addToBackStack(null)
-            transaction!!.commit()
+            val result = 2
+            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.flContainer, CategoryFragment())
+                .commit()
         }
         binding.btnAnimal.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putInt("Category", 3)
-            categoryFragment.arguments = bundle
-
-            transaction!!.replace(R.id.flContainer,CategoryFragment())
-            transaction!!.addToBackStack(null)
-            transaction!!.commit()
+            val result = 3
+            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.flContainer, CategoryFragment())
+                .commit()
         }
         binding.btnEtc.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putInt("Category", 4)
-            categoryFragment.arguments = bundle
-
-            transaction!!.replace(R.id.flContainer,CategoryFragment())
-            transaction!!.addToBackStack(null)
-            transaction!!.commit()
+            val result = 4
+            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.flContainer, CategoryFragment())
+                .commit()
         }
 
         return binding.root

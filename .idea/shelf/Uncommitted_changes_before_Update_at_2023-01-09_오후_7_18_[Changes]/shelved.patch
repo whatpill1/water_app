@@ -1,0 +1,203 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.Water_app\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".mypage.NoticeContentActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".mypage.NoticeActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".mypage.PayActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".mypage.HistoryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".mypage.PeriodActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".etc.SplashActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".home.SubmitActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Donation.DonationActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Donation.CommunicationActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".mypage.MyPageActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".user.JoinActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".user.LoginActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".main.MainActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.kakao.sdk.AppKey\"\r\n            android:value=\"bd5be5c79f704a2ca43de0e810f10a03\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 769e3a975ff8f0513a31c7c79fd260791214f773)
++++ b/app/src/main/AndroidManifest.xml	(date 1673258879306)
+@@ -61,13 +61,6 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+ 
+-            <meta-data
+-                android:name="android.app.lib_name"
+-                android:value="" />
+-        </activity>
+-        <activity
+-            android:name=".home.SubmitActivity"
+-            android:exported="false">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+Index: app/src/main/java/com/example/water_app/user/LoginActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.user\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityLoginBinding\r\nimport com.example.water_app.main.MainActivity\r\nimport com.example.water_app.mypage.MyPageActivity\r\nimport kotlinx.android.synthetic.main.activity_join.*\r\nimport kotlinx.android.synthetic.main.activity_login.*\r\nimport org.json.JSONException\r\nimport org.json.JSONObject\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.scalars.ScalarsConverterFactory\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n\r\n    private val TAG = \"LoginActivity\"\r\n    private lateinit var binding: ActivityLoginBinding\r\n    private var preferenceHelper: PreferenceHelper? = null\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_login)\r\n\r\n        preferenceHelper = PreferenceHelper(this)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityLoginBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        binding.btnBack.setOnClickListener{\r\n            super.onBackPressed()\r\n        }\r\n\r\n        binding.btnJoin.setOnClickListener{\r\n            val intent = Intent(this, JoinActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n\r\n        binding.btnLogin.setOnClickListener{\r\n            loginUser()\r\n            \r\n            val intent = Intent(this, MainActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n    }\r\n\r\n    private fun loginUser() {\r\n        val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }\r\n        val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }\r\n\r\n        val retrofit = Retrofit.Builder()\r\n            .baseUrl(UserInterface.USER_URL)\r\n            .addConverterFactory(ScalarsConverterFactory.create())\r\n            .build()\r\n\r\n        val api = retrofit.create(UserInterface::class.java)\r\n        val call = api.getUserLogin(mbr_id, mbr_password)\r\n        call!!.enqueue(object : Callback<String?> {\r\n            override fun onResponse(call: Call<String?>, response: Response<String?>) {\r\n                if (response.isSuccessful && response.body() != null) {\r\n                    Log.e(\"onSuccess\", response.body()!!)\r\n                    val jsonResponse = response.body()\r\n                    parseLoginData(jsonResponse)\r\n                }\r\n            }\r\n\r\n            override fun onFailure(call: Call<String?>, t: Throwable) {\r\n                Log.e(TAG, \"에러 = \" + t.message)\r\n            }\r\n        })\r\n    }\r\n\r\n    private fun parseLoginData(response: String?) {\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                saveInfo(response)\r\n                Toast.makeText(this, \"Login Successfully!\", Toast.LENGTH_SHORT).show()\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n\r\n    private fun saveInfo(response: String?) {\r\n        preferenceHelper!!.putIsLogin(true)\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                val dataArray = jsonObject.getJSONArray(\"data\")\r\n                for (i in 0 until dataArray.length()) {\r\n                    val dataobj = dataArray.getJSONObject(i)\r\n                    preferenceHelper!!.putId(dataobj.getString(\"mbr_id\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_pass\"))\r\n                }\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/LoginActivity.kt b/app/src/main/java/com/example/water_app/user/LoginActivity.kt
+--- a/app/src/main/java/com/example/water_app/user/LoginActivity.kt	(revision 769e3a975ff8f0513a31c7c79fd260791214f773)
++++ b/app/src/main/java/com/example/water_app/user/LoginActivity.kt	(date 1673259478936)
+@@ -8,7 +8,6 @@
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityLoginBinding
+ import com.example.water_app.main.MainActivity
+-import com.example.water_app.mypage.MyPageActivity
+ import kotlinx.android.synthetic.main.activity_join.*
+ import kotlinx.android.synthetic.main.activity_login.*
+ import org.json.JSONException
+@@ -35,6 +34,22 @@
+         binding = ActivityLoginBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+ 
++        // SharedPreferences 안에 값이 저장되어 있지 않을 때 -> Login
++        if(MySharedPreferences.getUserId(this).isNullOrBlank()
++            || MySharedPreferences.getUserPass(this).isNullOrBlank()) {
++            Log.d("1111111111","1111111")
++            loginUser()
++        }
++        else {
++            Log.d("22222222","2222222")// SharedPreferences 안에 값이 저장되어 있을 때 -> MainActivity로 이동
++            Toast.makeText(this, "${MySharedPreferences.getUserId(this)}님 자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show()
++                val intent = Intent(this, MainActivity::class.java)
++            startActivity(intent)
++            finish()
++        }
++
++
++
+         binding.btnBack.setOnClickListener{
+             super.onBackPressed()
+         }
+@@ -46,12 +61,15 @@
+ 
+         binding.btnLogin.setOnClickListener{
+             loginUser()
+-            
++
++
++
+             val intent = Intent(this, MainActivity::class.java)
+             startActivity(intent)
+         }
+     }
+ 
++
+     private fun loginUser() {
+         val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }
+         val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }
+@@ -69,6 +87,9 @@
+                     Log.e("onSuccess", response.body()!!)
+                     val jsonResponse = response.body()
+                     parseLoginData(jsonResponse)
++                    MySharedPreferences.setUserId(this, binding.edtEmail!!.text.toString())
++                    MySharedPreferences.setUserPass(this, binding.edtPassword!!.text.toString())
++                    //Toast.makeText(this, "${MySharedPreferences.getUserId(this)}님 로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+                 }
+             }
+ 
+@@ -76,6 +97,7 @@
+                 Log.e(TAG, "에러 = " + t.message)
+             }
+         })
++
+     }
+ 
+     private fun parseLoginData(response: String?) {
+@@ -106,4 +128,5 @@
+             e.printStackTrace()
+         }
+     }
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/etc/SplashActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.etc\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.os.Handler\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.example.water_app.main.MainActivity\r\nimport com.example.water_app.user.LoginActivity\r\n\r\nclass SplashActivity : AppCompatActivity() {\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_splash)\r\n\r\n        val handler = Handler()\r\n        handler.postDelayed({\r\n            val intent = Intent(applicationContext, LoginActivity::class.java)\r\n            startActivity(intent)\r\n            finish()\r\n        }, 1500)\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        finish()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/etc/SplashActivity.kt b/app/src/main/java/com/example/water_app/etc/SplashActivity.kt
+--- a/app/src/main/java/com/example/water_app/etc/SplashActivity.kt	(revision 769e3a975ff8f0513a31c7c79fd260791214f773)
++++ b/app/src/main/java/com/example/water_app/etc/SplashActivity.kt	(date 1673259095513)
+@@ -1,11 +1,12 @@
+ package com.example.water_app.etc
+ 
++import android.content.ContentValues.TAG
+ import android.content.Intent
+ import android.os.Bundle
+ import android.os.Handler
++import android.util.Log
+ import androidx.appcompat.app.AppCompatActivity
+ import com.example.water_app.R
+-import com.example.water_app.main.MainActivity
+ import com.example.water_app.user.LoginActivity
+ 
+ class SplashActivity : AppCompatActivity() {
+Index: app/src/main/java/com/example/water_app/user/MySharedPreferences.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt b/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt
+new file mode 100644
+--- /dev/null	(date 1673259401412)
++++ b/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt	(date 1673259401412)
+@@ -0,0 +1,40 @@
++package com.example.water_app.user
++
++import android.content.Context
++import android.content.SharedPreferences
++
++object MySharedPreferences {
++    private val MY_ACCOUNT : String = "account"
++
++    fun setUserId(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("MY_ID", input)
++        editor.commit()
++    }
++
++    fun getUserId(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("MY_ID", "").toString()
++    }
++
++    fun setUserPass(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("MY_PASS", input)
++        editor.commit()
++    }
++
++    fun getUserPass(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("MY_PASS", "").toString()
++    }
++
++    fun clearUser(context: Context) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.clear()
++        editor.commit()
++    }
++
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_com_history.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Donation.ComHistoryFragment\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvStart\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"시작일\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv1\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"-\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvStart\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tvStart\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvStart\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvEnd\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"마감일\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvStart\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv1\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvStart\" />\r\n\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBar\"\r\n                style=\"@style/Widget.AppCompat.ProgressBar.Horizontal\"\r\n                android:layout_width=\"200dp\"\r\n                android:layout_height=\"200dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:indeterminate=\"false\"\r\n                android:max=\"100\"\r\n                android:progress=\"10\"\r\n                android:progressBackgroundTint=\"@color/lightGrey\"\r\n                android:progressTint=\"@color/darkBlue\"\r\n                android:progressDrawable=\"@drawable/progressbarcircle\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tvStart\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tvStart\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvPercent\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/kim_bold\"\r\n                android:text=\"100\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"40sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/progressBar\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/progressBar\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/progressBar\"\r\n                app:layout_constraintVertical_bias=\"0.533\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv4\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"모금 금액\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/progressBar\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/progressBar\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvTotal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:text=\"금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tv4\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv4\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tv4\" />\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv5\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:text=\"지출 금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tv4\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv4\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvExpend\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:text=\"금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tv5\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv5\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tv5\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv3\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:text=\"지출 보고 내역\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tv5\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv5\" />\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv3\" />\r\n\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </ScrollView>\r\n\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_com_history.xml b/app/src/main/res/layout/fragment_com_history.xml
+--- a/app/src/main/res/layout/fragment_com_history.xml	(revision 769e3a975ff8f0513a31c7c79fd260791214f773)
++++ b/app/src/main/res/layout/fragment_com_history.xml	(date 1673256309285)
+@@ -77,8 +77,8 @@
+                 android:textColor="@color/black"
+                 android:textSize="40sp"
+                 app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+-                app:layout_constraintEnd_toEndOf="parent"
+-                app:layout_constraintStart_toEndOf="@+id/progressBar"
++                app:layout_constraintEnd_toEndOf="@+id/progressBar"
++                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                 app:layout_constraintTop_toTopOf="@+id/progressBar"
+                 app:layout_constraintVertical_bias="0.533" />
+ 
