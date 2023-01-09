@@ -42,6 +42,7 @@
         android:inputType="textEmailAddress"
         android:textColorHint="@color/darkGrey"
         android:textSize="16sp"
+        android:fontFamily="@font/kim_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,50 +52,53 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/edittext_login"
         android:ems="10"
+        android:fontFamily="@font/kim_regular"
         android:hint="  비밀번호"
         android:inputType="textPassword"
-        android:textSize="16sp"
         android:textColorHint="@color/darkGrey"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/buttoncolor"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/buttoncolor_blue"
         android:text="로그인"
+        android:fontFamily="@font/kim_regular"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/edtPassword"
+        app:layout_constraintStart_toStartOf="@+id/edtPassword"
+        app:layout_constraintTop_toBottomOf="@+id/btnFind" />
 
     <TextView
         android:id="@+id/btnJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="50dp"
         android:text="회원가입"
+        android:fontFamily="@font/kim_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toTopOf="@+id/btnFind" />
 
     <TextView
         android:id="@+id/btnFind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/kim_regular"
         android:text="아이디/비밀번호 찾기"
         app:layout_constraintEnd_toStartOf="@+id/btnJoin"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
 
 
