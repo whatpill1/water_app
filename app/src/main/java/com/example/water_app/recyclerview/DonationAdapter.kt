@@ -43,6 +43,8 @@ class DonationAdapter(private val context: Context, private var donationList: Li
             holder.binding.tvPercent.text = pricePercent?.toInt().toString() + "%"
             holder.binding.pbPercent.setProgress(pricePercent!!.toInt())
         }
+
+        // ClickListener
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
 

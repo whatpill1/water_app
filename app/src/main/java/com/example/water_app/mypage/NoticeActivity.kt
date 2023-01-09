@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
@@ -13,6 +14,7 @@ import com.example.water_app.recyclerview.NoticeAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
+import kotlinx.android.synthetic.main.activity_recyclerview.*
 
 class NoticeActivity : AppCompatActivity() {
 
@@ -40,6 +42,12 @@ class NoticeActivity : AppCompatActivity() {
                 binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 binding.recyclerView.setHasFixedSize(true)  // 성능 개선
                 binding.recyclerView.adapter = NoticeAdapter(this, noticeList)
+
+                // 구분선
+                val dividerItemDecoration =
+                    DividerItemDecoration(recyclerView.context, LinearLayoutManager(this).orientation)
+
+                recyclerView.addItemDecoration(dividerItemDecoration)
 
                 // OnClickListener
                 val adapter = NoticeAdapter(this, noticeList)
