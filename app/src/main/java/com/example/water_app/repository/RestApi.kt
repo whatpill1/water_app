@@ -25,4 +25,9 @@ interface RestApi {
     @FormUrlEncoded
     @POST("category.php")
     suspend fun getCategory(@Field("cntr_category") cntr_category: Int?): Response<List<PostData>>
+
+    // 소통
+    @FormUrlEncoded
+    @POST("com.php")
+    suspend fun getCommunication(@Field("cntr_sn") cntr_sn: Int?): Response<List<ReviewData>>
 }

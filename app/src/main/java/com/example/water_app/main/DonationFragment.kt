@@ -71,9 +71,6 @@ class DonationFragment : Fragment() {
                 })
                 binding.recyclerView.adapter = adapter
             }
-            // 통신 실패
-            else{
-            }
         })
         return binding.root
     }
