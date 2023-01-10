@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
+import com.example.water_app.donation.StoryActivity
 import com.example.water_app.model.ReviewData
 
 class StoryAdapter(private val context: Context, private var reviewList: List<ReviewData>?) : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
@@ -28,19 +29,19 @@ class StoryAdapter(private val context: Context, private var reviewList: List<Re
 
         holder.binding.tvTitle.text = mlrd_ttl
 
-//        // ClickListener
-//        holder.itemView.setOnClickListener {
-//            itemClickListener.onClick(it, position)
-//
-//            // 인텐트 putextra
-//            val intent = Intent(holder.itemView?.context, StoryActivity::class.java)
-//
-//            intent.putExtra("mlrd_sn", mlrd_sn)
-//            intent.putExtra("mlrd_ttl", mlrd_ttl)
-//            intent.putExtra("mlrd_cn", mlrd_cn)
-//
-//            ContextCompat.startActivity(holder.itemView.context, intent, null)
-//        }
+        // ClickListener
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+
+            // 인텐트 putextra
+            val intent = Intent(holder.itemView?.context, StoryActivity::class.java)
+
+            intent.putExtra("mlrd_sn", mlrd_sn)
+            intent.putExtra("mlrd_ttl", mlrd_ttl)
+            intent.putExtra("mlrd_cn", mlrd_cn)
+
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     // 리스트 내 아이템 개수
