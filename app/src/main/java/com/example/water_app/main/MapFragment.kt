@@ -87,10 +87,11 @@ class MapFragment() : Fragment() {
                 for (index in 0 until locationList!!.size){
                     val cntr_loc_lat = locationList!!.get(index)!!.cntr_loc_lat!!.toDouble()
                     val cntr_loc_lng = locationList!!.get(index)!!.cntr_loc_lng!!.toDouble()
+                    val cntr_rcvfvr = locationList!!.get(index)!!.cntr_rcvfvr!!.toString()
 
                     var MY_LOCATION = MapPoint.mapPointWithGeoCoord(cntr_loc_lat, cntr_loc_lng)
 
-                    dbMarker.itemName = "현재 위치"
+                    dbMarker.itemName = cntr_rcvfvr
                     dbMarker.tag = 0
                     dbMarker.mapPoint = MY_LOCATION
 

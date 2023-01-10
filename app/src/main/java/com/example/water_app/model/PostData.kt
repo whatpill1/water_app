@@ -7,6 +7,7 @@ data class PostData (
     val cntr_ttl : String?,
     val cntr_obctr : Int?,
     val cntr_cn : String?,
+    val cntr_rcvfvr : String?,
     val cntr_adres : String?,
     val cntr_loc_lat : String?,
     val cntr_loc_lng : String?,
