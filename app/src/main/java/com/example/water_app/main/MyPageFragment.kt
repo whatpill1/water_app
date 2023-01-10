@@ -19,6 +19,7 @@ import com.example.water_app.mypage.HistoryActivity
 import com.example.water_app.mypage.MyPageActivity
 import com.example.water_app.mypage.NoticeActivity
 import com.example.water_app.mypage.PeriodActivity
+import com.example.water_app.user.LoginActivity
 
 class MyPageFragment : Fragment() {
 
@@ -128,7 +129,6 @@ class MyPageFragment : Fragment() {
         }
 
         binding.linlogout.setOnClickListener{
-            MySharedPreferences.clearUser(requireContext())
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
         }
