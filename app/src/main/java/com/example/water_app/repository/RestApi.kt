@@ -19,8 +19,25 @@ interface RestApi {
     @GET("homeend.php")
     suspend fun getHomeend(): Response<List<PostData>>
 
-    @GET("login.php")
-    suspend fun getLogin(): Response<UserData>
+    @FormUrlEncoded
+    @POST("login.php")
+    suspend fun getLogin(
+        @Field("mbr_id") mbr_id: String?,
+        @Field("mbr_password") mbr_password: String?
+    ): Response<UserData>
+
+    @FormUrlEncoded
+    @POST("join.php")
+    suspend fun join(
+        @Field("mbr_id") mbr_nm: String?,
+        @Field("mbr_password") mbr_id: String?,
+        @Field("mbr_password") mbr_password: String?,
+        @Field("mbr_password") mbr_ncnm: String?,
+        @Field("mbr_password") mbr_gen: Char,
+        @Field("mbr_password") mbr_tel: String?,
+        @Field("mbr_password") mbr_brthdy: String?,
+        @Field("mbr_password") mbr_email: String?
+    ): Response<UserData>
 
     @FormUrlEncoded
     @POST("category.php")

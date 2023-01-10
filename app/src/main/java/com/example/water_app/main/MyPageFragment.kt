@@ -19,8 +19,6 @@ import com.example.water_app.mypage.HistoryActivity
 import com.example.water_app.mypage.MyPageActivity
 import com.example.water_app.mypage.NoticeActivity
 import com.example.water_app.mypage.PeriodActivity
-import com.example.water_app.user.LoginActivity
-import com.example.water_app.user.MySharedPreferences
 
 class MyPageFragment : Fragment() {
 

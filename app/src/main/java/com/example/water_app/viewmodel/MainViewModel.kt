@@ -19,6 +19,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()
     val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val loginResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
+    val joinResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
     val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
 
@@ -46,10 +47,24 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
             getHomeEndListResponse.value = response
         }
     }
-    fun getLogin() {
+    fun getLogin(mbr_id: String?, mbr_password: String?) {
         viewModelScope.launch {
-            val response = repository.getLogin()
+            val response = repository.getLogin(mbr_id, mbr_password)
             loginResponse.value = response
+        }
+    }
+    fun join(
+        mbr_nm: String?,
+        mbr_id: String?,
+        mbr_password: String?,
+        mbr_ncnm: String?,
+        mbr_gen: Char,
+        mbr_tel: String?,
+        mbr_brthdy: String?,
+        mbr_email: String?) {
+        viewModelScope.launch {
+            val response = repository.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)
+            joinResponse.value = response
         }
     }
     fun getCategory(cntr_category:Int?) {
