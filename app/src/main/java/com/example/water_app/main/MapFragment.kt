@@ -14,12 +14,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.databinding.FragmentMapBinding
 import com.example.water_app.map.KakaoAPI
 import com.example.water_app.map.ListAdapter
 import com.example.water_app.map.LocationData
 import com.example.water_app.map.ResultSearchKeyword
+import com.example.water_app.model.PostData
+import com.example.water_app.recyclerview.DonationAdapter
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -63,6 +70,39 @@ class MapFragment() : Fragment() {
         mapView = MapView(requireActivity())
         val mapViewContainer = binding.mapLayout as ViewGroup
         mapViewContainer.addView(mapView)
+
+        // DB 위치 표시
+        val viewModel : MainViewModel
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getDonationList()
+        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
+            // 통신 성공
+            if(it.isSuccessful){
+                val locationList : List<PostData>? = it.body()
+                val dbMarker : MapPOIItem = MapPOIItem()
+
+                for (index in 0 until locationList!!.size){
+                    val cntr_loc_lat = locationList!!.get(index)!!.cntr_loc_lat!!.toDouble()
+                    val cntr_loc_lng = locationList!!.get(index)!!.cntr_loc_lng!!.toDouble()
+
+                    var MY_LOCATION = MapPoint.mapPointWithGeoCoord(cntr_loc_lat, cntr_loc_lng)
+
+                    dbMarker.itemName = "현재 위치"
+                    dbMarker.tag = 0
+                    dbMarker.mapPoint = MY_LOCATION
+
+                    // 기본 마커
+                    dbMarker.markerType = MapPOIItem.MarkerType.RedPin
+
+                    mapView.addPOIItem(dbMarker)
+
+                    MY_LOCATION = null
+                }
+            }
+        })
 
         // 중심점
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -160,7 +200,6 @@ class MapFragment() : Fragment() {
         return binding.root
     }
 
-    /* 검색 */
     // 키워드 검색
     private fun searchKeyword(keyword: String, page: Int) {
         val retrofit = Retrofit.Builder() // Retrofit 구성
@@ -223,6 +262,7 @@ class MapFragment() : Fragment() {
             Toast.makeText(requireContext(), "검색 결과가 없습니다", Toast.LENGTH_SHORT).show()
         }
     }
+
     // 뒤로가기 메인 고정
     private lateinit var callback: OnBackPressedCallback
     lateinit var mainActivity: MainActivity
