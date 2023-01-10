@@ -26,7 +26,7 @@ class NoticeAdapter(private val context: Context, private var noticeList: List<N
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
 
-            //인텐트 putextra getextra 하는 부분
+            // 인텐트 putextra
             val intent = Intent(holder.itemView?.context, NoticeContentActivity::class.java)
 
             intent.putExtra("notice_ttl",noticeList?.get(position)?.notice_ttl)

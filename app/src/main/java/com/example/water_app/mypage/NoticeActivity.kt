@@ -3,7 +3,6 @@ package com.example.water_app.mypage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -38,7 +37,7 @@ class NoticeActivity : AppCompatActivity() {
             // 통신 성공
             if(it.isSuccessful){
                 val noticeList = it.body()
-                //리사이클러뷰
+                // 리사이클러뷰
                 binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 binding.recyclerView.setHasFixedSize(true)  // 성능 개선
                 binding.recyclerView.adapter = NoticeAdapter(this, noticeList)
@@ -56,15 +55,8 @@ class NoticeActivity : AppCompatActivity() {
                     override fun onClick(v: View, position: Int) {
                     }
                 })
-
                 binding.recyclerView.adapter = adapter
             }
-            // 통신 실패
-            else{
-                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
-            }
         })
-
-
     }
 }

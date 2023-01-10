@@ -31,7 +31,7 @@ class PeriodActivity : AppCompatActivity() {
         binding = ActivityRecyclerviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //php 데이터 불러오기
+        // php 데이터 불러오기
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
@@ -51,10 +51,6 @@ class PeriodActivity : AppCompatActivity() {
                     DividerItemDecoration(recyclerView.context, LinearLayoutManager(this).orientation)
 
                 recyclerView.addItemDecoration(dividerItemDecoration)
-            }
-            // 통신 실패
-            else{
-                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
             }
         })
     }

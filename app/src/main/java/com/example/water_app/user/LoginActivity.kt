@@ -25,17 +25,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private val TAG = "LoginActivity"
     private lateinit var binding: ActivityLoginBinding
-    private var preferenceHelper: PreferenceHelper? = null
 
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        preferenceHelper = PreferenceHelper(this)
 
         // 뷰바인딩
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -53,8 +49,6 @@ class LoginActivity : AppCompatActivity() {
 //            finish()
 //        }
 
-
-
         binding.btnBack.setOnClickListener{
             super.onBackPressed()
         }
@@ -65,45 +59,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener{
-            loginUser()
-
-
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-    }
-
-
-    private fun loginUser() {
-        val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }
-        val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(UserInterface.USER_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .build()
-
-        val api = retrofit.create(UserInterface::class.java)
-        val call = api.getUserLogin(mbr_id, mbr_password)
-
-
-
-        call!!.enqueue(object : Callback<String?> {
-            override fun onResponse(call: Call<String?>, response: Response<String?>) {
-                if (response.isSuccessful && response.body() != null) {
-                    Log.e("onSuccess", response.body()!!)
-                    val jsonResponse = response.body()
-                    parseLoginData(jsonResponse)
-                    successLogin()
-                }
-            }
-
-            override fun onFailure(call: Call<String?>, t: Throwable) {
-                Log.e(TAG, "에러 = " + t.message)
-            }
-        })
-
     }
 
     private fun successLogin(){
@@ -129,35 +88,6 @@ class LoginActivity : AppCompatActivity() {
 //
 //        MySharedPreferences.setUserId(this, binding.edtEmail!!.text.toString())
 //        MySharedPreferences.setUserPass(this, binding.edtPassword!!.text.toString())
-    }
-
-    private fun parseLoginData(response: String?) {
-        try {
-            val jsonObject = JSONObject(response)
-            if (jsonObject.getString("status") == "true") {
-                saveInfo(response)
-                Toast.makeText(this, "Login Successfully!", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun saveInfo(response: String?) {
-        preferenceHelper!!.putIsLogin(true)
-        try {
-            val jsonObject = JSONObject(response)
-            if (jsonObject.getString("status") == "true") {
-                val dataArray = jsonObject.getJSONArray("data")
-                for (i in 0 until dataArray.length()) {
-                    val dataobj = dataArray.getJSONObject(i)
-                    preferenceHelper!!.putId(dataobj.getString("mbr_id"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_pass"))
-                }
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
     }
 
 }

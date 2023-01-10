@@ -22,8 +22,6 @@ import com.example.water_app.recyclerview.ViewPagerAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.fragment_com_history.*
-import kotlinx.android.synthetic.main.item_main_recycler.*
 
 class HomeFragment : Fragment() {
 
@@ -36,8 +34,6 @@ class HomeFragment : Fragment() {
     // 뷰페이저
     private val sliderImageHandler: Handler = Handler()
     private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }
-
-    private val categoryFragment : Fragment = CategoryFragment()
 
     // context를 mainActivity에 담음
     override fun onAttach(context: Context) {
@@ -91,8 +87,6 @@ class HomeFragment : Fragment() {
         home()
         homeEnd()
 
-        val transaction = fragmentManager?.beginTransaction()
-
         // 카테고리
         binding.btnChild.setOnClickListener{
             val result = 0
@@ -129,7 +123,6 @@ class HomeFragment : Fragment() {
                 .replace(R.id.flContainer, CategoryFragment())
                 .commit()
         }
-
         return binding.root
     }
 
@@ -164,10 +157,6 @@ class HomeFragment : Fragment() {
                 })
                 binding.rvDonation.adapter = adapter
             }
-            // 통신 실패
-            else{
-
-            }
         })
     }
 
@@ -201,10 +190,6 @@ class HomeFragment : Fragment() {
                     }
                 })
                 binding.rvClose.adapter = adapter
-
-            }
-            // 통신 실패
-            else{
 
             }
         })

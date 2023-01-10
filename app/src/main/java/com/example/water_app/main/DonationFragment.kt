@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.water_app.Donation.CommunicationActivity
-import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
@@ -29,7 +28,7 @@ class DonationFragment : Fragment() {
     // 뷰바인딩
     private lateinit var binding: ActivityRecyclerviewBinding
 
-    //뷰 모델 가져오기
+    // 뷰 모델 가져오기
     private lateinit var viewModel : MainViewModel
 
     override fun onCreateView(
@@ -40,8 +39,6 @@ class DonationFragment : Fragment() {
         // 뷰바인딩
         binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
-        //php데이터담은
-        //리사이클러뷰 표현 아직 사진 퍼센트 없음
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
@@ -81,14 +78,13 @@ class DonationFragment : Fragment() {
         return binding.root
     }
 
-    //뒤로가기 메인 고정
+    // 뒤로가기 메인 고정
     private lateinit var callback: OnBackPressedCallback
     lateinit var mainActivity: MainActivity
 
-    //뒤로가기 고정
+    // 뒤로가기 고정
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        //뒤로가기 고정
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
             }

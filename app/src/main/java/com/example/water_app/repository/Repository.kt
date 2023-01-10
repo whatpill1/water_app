@@ -23,22 +23,10 @@ class Repository {
     suspend fun getHomeend() : Response<List<PostData>> {
         return Instance.api.getHomeend()
     }
-    suspend fun getCategory0() : Response<List<PostData>> {
-        return Instance.api.getCategory0()
-    }
-    suspend fun getCategory1() : Response<List<PostData>> {
-        return Instance.api.getCategory1()
-    }
-    suspend fun getCategory2() : Response<List<PostData>> {
-        return Instance.api.getCategory2()
-    }
-    suspend fun getCategory3() : Response<List<PostData>> {
-        return Instance.api.getCategory3()
-    }
-    suspend fun getCategory4() : Response<List<PostData>> {
-        return Instance.api.getCategory4()
-    }
     suspend fun getLogin() : Response<UserData> {
         return Instance.api.getLogin()
+    }
+    suspend fun getCategory(cntr_category:Int?) : Response<List<PostData>> {
+        return Instance.api.getCategory(cntr_category)
     }
 }

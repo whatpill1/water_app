@@ -19,21 +19,10 @@ interface RestApi {
     @GET("homeend.php")
     suspend fun getHomeend(): Response<List<PostData>>
 
-    @GET("category0.php")
-    suspend fun getCategory0(): Response<List<PostData>>
-
-    @GET("category1.php")
-    suspend fun getCategory1(): Response<List<PostData>>
-
-    @GET("category2.php")
-    suspend fun getCategory2(): Response<List<PostData>>
-
-    @GET("category3.php")
-    suspend fun getCategory3(): Response<List<PostData>>
-
-    @GET("category4.php")
-    suspend fun getCategory4(): Response<List<PostData>>
-
     @GET("login.php")
     suspend fun getLogin(): Response<UserData>
+
+    @FormUrlEncoded
+    @POST("category.php")
+    suspend fun getCategory(@Field("cntr_category") cntr_category: Int?): Response<List<PostData>>
 }

@@ -3,8 +3,6 @@ package com.example.water_app.recyclerview
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemHistoryRecyclerBinding
 import com.example.water_app.model.PostData

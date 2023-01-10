@@ -1,15 +1,12 @@
 package com.example.water_app.mypage
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.HistoryAdapter
@@ -41,7 +38,7 @@ class HistoryActivity : AppCompatActivity() {
             // 통신 성공
             if(it.isSuccessful){
                 val historylist = it.body()
-                //리사이클러뷰
+                // 리사이클러뷰
                 binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 binding.recyclerView.setHasFixedSize(true)  // 성능 개선
                 binding.recyclerView.adapter = HistoryAdapter(this, historylist)
@@ -51,11 +48,6 @@ class HistoryActivity : AppCompatActivity() {
                     DividerItemDecoration(recyclerView.context, LinearLayoutManager(this).orientation)
 
                 recyclerView.addItemDecoration(dividerItemDecoration)
-            }
-
-            // 통신 실패
-            else{
-                Toast.makeText(this,it.code(), Toast.LENGTH_SHORT).show()
             }
         })
     }

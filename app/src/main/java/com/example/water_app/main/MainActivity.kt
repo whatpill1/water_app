@@ -10,10 +10,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityMainBinding
-import com.example.water_app.Donation.CategoryFragment
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 

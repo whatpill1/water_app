@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.water_app.databinding.FragmentComIntroduceBinding
-import com.example.water_app.mypage.MyPageActivity
 
 
 class ComIntroduceFragment : Fragment() {
@@ -36,7 +35,6 @@ class ComIntroduceFragment : Fragment() {
         val ctbny_pc = requireActivity().intent.extras!!.getInt("ctbny_pc")
         val cntr_obctr = requireActivity().intent.extras!!.getInt("cntr_obctr")
         val cntr_file_id = requireActivity().intent.extras!!.getString("cntr_file_id")
-        Log.d("test----------->","$cntr_sn,$ctbny_pc,$cntr_obctr,$cntr_file_id")
 
         // 인텐트 putextra getextra 하는 부분
         binding.donationTtl.text = cntr_ttl
@@ -68,7 +66,6 @@ class ComIntroduceFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
         return binding.root
     }
 }

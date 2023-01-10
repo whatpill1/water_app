@@ -18,7 +18,7 @@ class NoticeContentActivity : AppCompatActivity() {
         binding = ActivityNoticeContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //인텐트 putextra getextra 하는 부분
+        // 인텐트 getextra
         val notice_ttl = intent.getStringExtra("notice_ttl")
         val notice_cn = intent.getStringExtra("notice_cn")
 

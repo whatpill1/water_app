@@ -1,7 +1,6 @@
 package com.example.water_app.main
 
 import android.Manifest
-import android.R.attr.data
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -15,19 +14,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.water_app.R
 import com.example.water_app.databinding.FragmentMapBinding
 import com.example.water_app.map.KakaoAPI
 import com.example.water_app.map.ListAdapter
 import com.example.water_app.map.LocationData
 import com.example.water_app.map.ResultSearchKeyword
-import com.example.water_app.model.PostData
-import com.example.water_app.repository.Repository
-import com.example.water_app.viewmodel.MainViewModel
-import com.example.water_app.viewmodel.MainViewModelFactory
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -231,13 +223,13 @@ class MapFragment() : Fragment() {
             Toast.makeText(requireContext(), "검색 결과가 없습니다", Toast.LENGTH_SHORT).show()
         }
     }
-    //뒤로가기 메인 고정
+    // 뒤로가기 메인 고정
     private lateinit var callback: OnBackPressedCallback
     lateinit var mainActivity: MainActivity
-    //뒤로가기 고정
+
+    // 뒤로가기 고정
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        //뒤로가기 고정
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
             }
@@ -246,7 +238,8 @@ class MapFragment() : Fragment() {
 
         mainActivity = context as MainActivity
     }
-    //뒤로가기 고정
+
+    // 뒤로가기 고정
     override fun onDetach() {
         super.onDetach()
         callback.remove()

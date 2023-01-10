@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.water_app.R
 
-//홈화면 배너
+// 홈화면 배너
 class ViewPagerAdapter(
     private val sliderItems: MutableList<Int>,
     private val viewPager2: ViewPager2

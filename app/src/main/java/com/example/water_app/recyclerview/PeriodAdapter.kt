@@ -16,7 +16,6 @@ class PeriodAdapter(val periodList: List<PostData>?) : RecyclerView.Adapter<Peri
     }
 
     override fun onBindViewHolder(holder: PeriodAdapter.ViewHolder, position: Int) {
-//        holder.binding.ivImage.setImageResource(periodList.get(position).cntr_file_id)
         holder.binding.tvTitle.text = periodList?.get(position)?.cntr_ttl
         holder.binding.tvMoney.text = periodList?.get(position)?.cntr_obctr.toString()
         holder.binding.tvStart.text = periodList?.get(position)?.cntr_str_dt

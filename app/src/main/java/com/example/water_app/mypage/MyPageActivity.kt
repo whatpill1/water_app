@@ -2,12 +2,10 @@ package com.example.water_app.mypage
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityMyPageBinding
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel

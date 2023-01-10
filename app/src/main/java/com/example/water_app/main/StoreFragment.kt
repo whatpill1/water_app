@@ -22,13 +22,13 @@ class StoreFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
-    //뒤로가기 메인 고정
+    // 뒤로가기 메인 고정
     private lateinit var callback: OnBackPressedCallback
     lateinit var mainActivity: MainActivity
-    //뒤로가기 고정
+
+    // 뒤로가기 고정
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        //뒤로가기 고정
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
             }
@@ -37,7 +37,8 @@ class StoreFragment : Fragment() {
 
         mainActivity = context as MainActivity
     }
-    //뒤로가기 고정
+
+    // 뒤로가기 고정
     override fun onDetach() {
         super.onDetach()
         callback.remove()

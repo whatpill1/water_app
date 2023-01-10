@@ -11,11 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import com.example.water_app.R
-import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.databinding.FragmentMyPageBinding
 import com.example.water_app.mypage.HistoryActivity
 import com.example.water_app.mypage.MyPageActivity
@@ -97,6 +95,7 @@ class MyPageFragment : Fragment() {
                 Toast.makeText(requireContext(),"서비스 준비중", Toast.LENGTH_LONG).show()
             }
         }
+
         binding.linCall.setOnClickListener{
             val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_call, null)
             val mBuilder = AlertDialog.Builder(requireContext())
@@ -116,6 +115,7 @@ class MyPageFragment : Fragment() {
                 mAlertDialog.dismiss()
             }
         }
+
         binding.linMoney.setOnClickListener{
             val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_money, null)
             val mBuilder = AlertDialog.Builder(requireContext())
@@ -128,6 +128,7 @@ class MyPageFragment : Fragment() {
                 mAlertDialog.dismiss()
             }
         }
+
         binding.linlogout.setOnClickListener{
             MySharedPreferences.clearUser(requireContext())
             val intent = Intent(context, LoginActivity::class.java)
@@ -135,13 +136,13 @@ class MyPageFragment : Fragment() {
         }
         return binding.root
     }
-    //뒤로가기 메인 고정
+    // 뒤로가기 메인 고정
     private lateinit var callback: OnBackPressedCallback
     lateinit var mainActivity: MainActivity
-    //뒤로가기 고정
+
+    // 뒤로가기 고정
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        //뒤로가기 고정
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
             }
@@ -150,7 +151,8 @@ class MyPageFragment : Fragment() {
 
         mainActivity = context as MainActivity
     }
-    //뒤로가기 고정
+
+    // 뒤로가기 고정
     override fun onDetach() {
         super.onDetach()
         callback.remove()

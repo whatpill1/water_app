@@ -2,14 +2,12 @@ package com.example.water_app.recyclerview
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.water_app.Donation.ComHistoryFragment
 import com.example.water_app.Donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
@@ -60,7 +58,7 @@ class DonationAdapter(private val context: Context, private var donationList: Li
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
 
-            //인텐트 putextra getextra 하는 부분
+            // 인텐트 putextra
             val intent = Intent(holder.itemView?.context,CommunicationActivity::class.java)
 
             intent.putExtra("cntr_sn",cntr_sn)
