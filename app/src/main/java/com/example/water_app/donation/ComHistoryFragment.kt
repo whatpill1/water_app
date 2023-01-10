@@ -1,4 +1,4 @@
-package com.example.water_app.Donation
+package com.example.water_app.donation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

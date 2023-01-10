@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.water_app.Donation.CategoryFragment
+import com.example.water_app.donation.CategoryFragment
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentHomeBinding
 import com.example.water_app.recyclerview.DonationAdapter

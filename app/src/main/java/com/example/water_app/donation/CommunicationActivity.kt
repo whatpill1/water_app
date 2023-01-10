@@ -1,4 +1,4 @@
-package com.example.water_app.Donation
+package com.example.water_app.donation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

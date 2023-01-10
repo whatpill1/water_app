@@ -1,6 +1,5 @@
-package com.example.water_app.Donation
+package com.example.water_app.donation
 
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -11,19 +10,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
-import com.example.water_app.main.DonationFragment
-import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.recyclerview.StoryAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.activity_recyclerview.*
-import kotlinx.android.synthetic.main.fragment_com_history.*
 import kotlinx.android.synthetic.main.fragment_com_history.recyclerView
 
 class ComStoryFragment : Fragment() {
@@ -74,14 +67,12 @@ class ComStoryFragment : Fragment() {
                 // OnClickListener
                 val adapter = StoryAdapter(requireContext(), reviewList)
 
-//                adapter.setItemClickListener(object : StoryAdapter.OnItemClickListener{
-//                    override fun onClick(v: View, position: Int) {
-//                        activity?.let{
-//                            val intent = Intent(context, CommunicationActivity::class.java)
-//                            startActivity(intent)
-//                        }
-//                    }
-//                })
+                adapter.setItemClickListener(object : StoryAdapter.OnItemClickListener{
+                    override fun onClick(v: View, position: Int) {
+                        activity?.let{
+                        }
+                    }
+                })
                 binding.recyclerView.adapter = adapter
             }
         })

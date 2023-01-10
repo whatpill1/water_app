@@ -7,11 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.water_app.Donation.CommunicationActivity
-import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.databinding.ItemNoticeRecyclerBinding
-import com.example.water_app.model.PostData
 import com.example.water_app.model.ReviewData
 
 class StoryAdapter(private val context: Context, private var reviewList: List<ReviewData>?) : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
@@ -32,24 +28,19 @@ class StoryAdapter(private val context: Context, private var reviewList: List<Re
 
         holder.binding.tvTitle.text = mlrd_ttl
 
-        // ClickListener
-        holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
-
-//            // 인텐트 putextra
-//            val intent = Intent(holder.itemView?.context, CommunicationActivity::class.java)
+//        // ClickListener
+//        holder.itemView.setOnClickListener {
+//            itemClickListener.onClick(it, position)
 //
-//            intent.putExtra("cntr_sn",cntr_sn)
-//            intent.putExtra("cntr_ttl",cntr_ttl)
-//            intent.putExtra("cntr_cn",cntr_cn)
-//            intent.putExtra("ctbny_pc",ctbny_pc)
-//            intent.putExtra("cntr_obctr",cntr_obctr)
-//            intent.putExtra("cntr_file_id",cntr_file_id)
-//            intent.putExtra("cntr_str_dt", cntr_str_dt)
-//            intent.putExtra("cntr_end_dt",cntr_end_dt)
+//            // 인텐트 putextra
+//            val intent = Intent(holder.itemView?.context, StoryActivity::class.java)
+//
+//            intent.putExtra("mlrd_sn", mlrd_sn)
+//            intent.putExtra("mlrd_ttl", mlrd_ttl)
+//            intent.putExtra("mlrd_cn", mlrd_cn)
 //
 //            ContextCompat.startActivity(holder.itemView.context, intent, null)
-        }
+//        }
     }
 
     // 리스트 내 아이템 개수

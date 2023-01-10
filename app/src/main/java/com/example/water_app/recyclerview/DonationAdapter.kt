@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.water_app.Donation.CommunicationActivity
+import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
 
