@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="180dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/edittext_login"
         android:ems="10"
@@ -68,8 +68,8 @@
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="100dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/buttoncolor_blue"
         android:fontFamily="@font/kim_regular"
         android:text="로그인"
@@ -99,6 +99,17 @@
         android:text="아이디/비밀번호 찾기"
         app:layout_constraintEnd_toStartOf="@+id/btnJoin"
         app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+
+    <TextView
+        android:id="@+id/btnGuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/kim_regular"
+        android:text="비회원으로 입장하기"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 
 
