@@ -46,13 +46,14 @@ class LoginActivity : AppCompatActivity() {
 //            loginUser()
             val intent = Intent(this, MainActivity::class.java)
 
-            intent.putExtra("cntr_sn", 17)
+            intent.putExtra("mbr_sn", 17)
 
             startActivity(intent)
         }
 
         binding.btnGuest.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+
             startActivity(intent)
         }
     }

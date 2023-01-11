@@ -168,10 +168,6 @@ class MapFragment() : Fragment() {
                     // 기본 마커
                     marker.markerType = MapPOIItem.MarkerType.BluePin
 
-                    // 기본 마커 클릭했을 때 나타나는 마커
-                    marker.selectedMarkerType =
-                        MapPOIItem.MarkerType.RedPin
-
                     mapView.addPOIItem(marker)
                 }
             }

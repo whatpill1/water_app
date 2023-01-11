@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val cntr_sn = intent.getStringExtra("cntr_sn")
+        val mbr_sn = intent.getIntExtra("mbr_sn", -1)
+        Log.d("cntrrrrrrrrrrrrrrrrrrr", "$mbr_sn")
 
         binding.navMain.run { setOnNavigationItemSelectedListener {
             when(it.itemId) {
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     val fragment1 = DonationFragment()
                     val fragment2 = ToastLoginFragment()
 
-                    if (cntr_sn == null){
+                    if (mbr_sn == -1){
                         supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment2).commit()
                     }else{
                         supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment1).commit()
