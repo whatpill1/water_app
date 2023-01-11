@@ -29,14 +29,14 @@ interface RestApi {
     @FormUrlEncoded
     @POST("join.php")
     suspend fun join(
-        @Field("mbr_id") mbr_nm: String?,
-        @Field("mbr_password") mbr_id: String?,
+        @Field("mbr_nm") mbr_nm: String?,
+        @Field("mbr_id") mbr_id: String?,
         @Field("mbr_password") mbr_password: String?,
-        @Field("mbr_password") mbr_ncnm: String?,
-        @Field("mbr_password") mbr_gen: Char,
-        @Field("mbr_password") mbr_tel: String?,
-        @Field("mbr_password") mbr_brthdy: String?,
-        @Field("mbr_password") mbr_email: String?
+        @Field("mbr_ncnm") mbr_ncnm: String?,
+        @Field("mbr_gen") mbr_gen: Char,
+        @Field("mbr_tel") mbr_tel: String?,
+        @Field("mbr_brthdy") mbr_brthdy: String?,
+        @Field("mbr_email") mbr_email: String?
     ): Response<UserData>
 
     @FormUrlEncoded

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityCommunicationBinding
+import com.example.water_app.user.MySharedPreferences
 
 class CommunicationActivity : AppCompatActivity() {
 

@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentComIntroduceBinding
+import com.example.water_app.user.MySharedPreferences
 
 
 class ComIntroduceFragment : Fragment() {
@@ -31,7 +33,7 @@ class ComIntroduceFragment : Fragment() {
         binding = FragmentComIntroduceBinding.inflate(inflater, container, false)
 
         // get
-        val mbr_sn = requireActivity().intent.extras!!.getInt("mbr_sn")
+        val mbr_sn = MySharedPreferences.getUserSn(requireContext()).toInt()
         val cntr_sn = requireActivity().intent.extras!!.getInt("cntr_sn")
         val cntr_ttl = requireActivity().intent.extras!!.getString("cntr_ttl")
         val cntr_cn = requireActivity().intent.extras!!.getString("cntr_cn")
@@ -66,12 +68,15 @@ class ComIntroduceFragment : Fragment() {
         // 인텐트 putextra getextra 하는 부분
         binding.btnDonation.setOnClickListener{
             activity?.let{
-                if(mbr_sn == null){
+                if(mbr_sn == -1){
                     val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
                     val mBuilder = AlertDialog.Builder(requireContext())
                         .setView(mDialogView)
-
                     val  mAlertDialog = mBuilder.show()
+                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
+                    noButton.setOnClickListener {
+                        mAlertDialog.dismiss()
+                    }
                 }else{
                     val intent = Intent(context, DonationActivity::class.java)
                     intent.putExtra("cntr_sn",cntr_sn)

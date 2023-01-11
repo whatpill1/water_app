@@ -45,15 +45,15 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener{
 //            loginUser()
             val intent = Intent(this, MainActivity::class.java)
-
-            intent.putExtra("mbr_sn", 17)
+            MySharedPreferences.setUserSn(this,"17")
+            //intent.putExtra("mbr_sn", 17)
 
             startActivity(intent)
         }
 
         binding.btnGuest.setOnClickListener{
+            MySharedPreferences.setUserSn(this,"-1")
             val intent = Intent(this, MainActivity::class.java)
-
             startActivity(intent)
         }
     }
@@ -112,4 +112,19 @@ class LoginActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+
+    // 통신 성공
+//            if(it.isSuccessful){
+////                if (it.body()?.mbr_sn != null) {
+////                    Log.d("------->","${it.body()}")
+////                    MySharedPreferences.setUserId(this, it.body()?.mbr_id.toString())
+////                    MySharedPreferences.setUserPass(this, it.body()?.mbr_password.toString())
+////                    MySharedPreferences.setUserSn(this, it.body()?.mbr_sn.toString())
+////                    val intent = Intent(this, MainActivity::class.java)
+////                    startActivity(intent)
+//                }else{
+//                    Toast.makeText(this@LoginActivity, "아이디 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
+//                }
+
 }

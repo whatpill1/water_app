@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityMainBinding
 import com.example.water_app.etc.ToastLoginFragment
+import com.example.water_app.user.MySharedPreferences
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mbr_sn = intent.getIntExtra("mbr_sn", -1)
+        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
         Log.d("cntrrrrrrrrrrrrrrrrrrr", "$mbr_sn")
 
         binding.navMain.run { setOnNavigationItemSelectedListener {

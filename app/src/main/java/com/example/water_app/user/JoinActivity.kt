@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityJoinBinding
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -19,6 +23,7 @@ class JoinActivity : AppCompatActivity() {
     val TAG = "JoinActivity"
     private lateinit var binding: ActivityJoinBinding
     private var preferenceHelper: PreferenceHelper? = null
+    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +36,26 @@ class JoinActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
+
+
         binding.btnJoin!!.setOnClickListener {
-            registerMe()
+
+                val mbr_nm = binding.edtName.text.toString()
+                val mbr_id = binding.edtId.text.toString()
+                val mbr_password = binding.edtPass.text.toString()
+                val mbr_ncnm = binding.edtNick.text.toString()
+                val mbr_gen = '남'//binding.radioGroup.text.toString()
+                val mbr_tel = binding.edtTel.text.toString()
+                val mbr_brthdy = binding.edtBirth.text.toString()
+                val mbr_email = binding.edtEmail.text.toString()
+                val repository = Repository()
+                val viewModelFactory = MainViewModelFactory(repository)
+                viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+                viewModel.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)
+//
+
+
+            //registerMe()
         }
 
     }
