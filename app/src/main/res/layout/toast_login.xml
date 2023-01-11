@@ -30,14 +30,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btnBackCall" />
 
     <Button
-        android:id="@+id/btnCall"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnLogin"
+        android:layout_width="150dp"
         android:layout_height="35dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/buttoncolor"
         android:fontFamily="@font/kim_regular"
-        android:text="로그인"
+        android:text="로그인 바로가기"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView6"

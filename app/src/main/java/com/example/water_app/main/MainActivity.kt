@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityMainBinding
+import com.example.water_app.etc.ToastLoginFragment
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -34,28 +35,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val cntr_sn = intent.getStringExtra("cntr_sn")
+
         binding.navMain.run { setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 // 프래그먼트 이동
                 R.id.first -> {
-                    val fragment1 = HomeFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment1).commit()
+                    val fragment = HomeFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit()
                 }
                 R.id.second -> {
-                    val fragment2 = DonationFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment2).commit()
+                    val fragment1 = DonationFragment()
+                    val fragment2 = ToastLoginFragment()
+
+                    if (cntr_sn == null){
+                        supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment2).commit()
+                    }else{
+                        supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment1).commit()
+                    }
                 }
                 R.id.third -> {
-                    val fragment3 = MapFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment3).commit()
+                    val fragment = MapFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit()
                 }
                 R.id.fourth -> {
-                    val fragment4 = StoreFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment4).commit()
+                    val fragment = StoreFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit()
                 }
                 R.id.fifth -> {
-                    val fragment5 = MyPageFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment5).commit()
+                    val fragment = MyPageFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit()
                 }
             }
             true

@@ -46,7 +46,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="30dp"
-        android:background="@color/darkBlue"
+        android:background="@drawable/click_btn"
         android:fontFamily="@font/kim_regular"
         android:text="전화 연결"
         android:textColor="@color/white"

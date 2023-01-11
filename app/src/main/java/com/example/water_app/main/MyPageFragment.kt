@@ -39,8 +39,6 @@ class MyPageFragment : Fragment() {
         // 뷰바인딩
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_my_page, null)
-
         binding.linMyPage.setOnClickListener{
             activity?.let{
                 val intent = Intent(context, MyPageActivity::class.java)

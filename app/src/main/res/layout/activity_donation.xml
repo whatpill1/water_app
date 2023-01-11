@@ -106,7 +106,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/buttoncolor"
+                android:background="@drawable/click_btn"
                 android:text="기부하기"
                 android:textColor="@color/white"
                 android:textSize="20sp"

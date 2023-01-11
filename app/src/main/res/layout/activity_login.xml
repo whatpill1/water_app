@@ -70,7 +70,7 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/buttoncolor_blue"
+        android:background="@drawable/click_btn"
         android:fontFamily="@font/kim_regular"
         android:text="로그인"
         android:textColor="@color/white"
