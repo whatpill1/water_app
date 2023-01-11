@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentComIntroduceBinding
+import com.example.water_app.user.LoginActivity
 import com.example.water_app.user.MySharedPreferences
 
 
@@ -76,6 +77,11 @@ class ComIntroduceFragment : Fragment() {
                     val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
                     noButton.setOnClickListener {
                         mAlertDialog.dismiss()
+                    }
+                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
+                    btnLogin.setOnClickListener{
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
                     }
                 }else{
                     val intent = Intent(context, DonationActivity::class.java)

@@ -55,6 +55,11 @@ class MyPageFragment : Fragment() {
                     noButton.setOnClickListener {
                         mAlertDialog.dismiss()
                     }
+                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
+                    btnLogin.setOnClickListener{
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
                 }else {
                     val intent = Intent(context, MyPageActivity::class.java)
                     startActivity(intent)
@@ -74,6 +79,11 @@ class MyPageFragment : Fragment() {
                     noButton.setOnClickListener {
                         mAlertDialog.dismiss()
                     }
+                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
+                    btnLogin.setOnClickListener{
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
                 }else {
                     val intent = Intent(context, HistoryActivity::class.java)
                     startActivity(intent)
@@ -92,6 +102,11 @@ class MyPageFragment : Fragment() {
                     val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
                     noButton.setOnClickListener {
                         mAlertDialog.dismiss()
+                    }
+                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
+                    btnLogin.setOnClickListener{
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
                     }
                 } else {
                     val intent = Intent(context, PeriodActivity::class.java)
@@ -119,6 +134,11 @@ class MyPageFragment : Fragment() {
                     val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
                     noButton.setOnClickListener {
                         mAlertDialog.dismiss()
+                    }
+                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
+                    btnLogin.setOnClickListener{
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
                     }
                 }else{
                         val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_pay, null)
@@ -199,7 +219,6 @@ class MyPageFragment : Fragment() {
             binding.tvChange.setText("로그인")
             binding.linlogout.setOnClickListener{
                 val intent = Intent(context, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
         }else{
