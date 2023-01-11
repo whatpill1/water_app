@@ -1,0 +1,201 @@
+Index: app/src/main/java/com/example/water_app/repository/RestApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.*\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Response\r\nimport retrofit2.http.*\r\n\r\ninterface RestApi {\r\n    @GET(\"test2.php\")\r\n    suspend fun getUser(): Response<UserData>\r\n\r\n    @GET(\"home.php\")\r\n    suspend fun getDonationList(): Response<List<PostData>>\r\n\r\n    @GET(\"notice.php\")\r\n    suspend fun getNoticeList(): Response<List<NoticeData>>\r\n\r\n    @GET(\"homeend.php\")\r\n    suspend fun getHomeend(): Response<List<PostData>>\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"login.php\")\r\n    suspend fun getLogin(\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?\r\n    ): Response<UserData>\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"join.php\")\r\n    suspend fun join(\r\n        @Field(\"mbr_id\") mbr_nm: String?,\r\n        @Field(\"mbr_password\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?,\r\n        @Field(\"mbr_password\") mbr_ncnm: String?,\r\n        @Field(\"mbr_password\") mbr_gen: Char,\r\n        @Field(\"mbr_password\") mbr_tel: String?,\r\n        @Field(\"mbr_password\") mbr_brthdy: String?,\r\n        @Field(\"mbr_password\") mbr_email: String?\r\n    ): Response<UserData>\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"category.php\")\r\n    suspend fun getCategory(@Field(\"cntr_category\") cntr_category: Int?): Response<List<PostData>>\r\n\r\n    // 소통\r\n    @FormUrlEncoded\r\n    @POST(\"com.php\")\r\n    suspend fun getCommunication(@Field(\"cntr_sn\") cntr_sn: Int?): Response<List<ReviewData>>\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/RestApi.kt b/app/src/main/java/com/example/water_app/repository/RestApi.kt
+--- a/app/src/main/java/com/example/water_app/repository/RestApi.kt	
++++ b/app/src/main/java/com/example/water_app/repository/RestApi.kt	
+@@ -29,14 +29,14 @@
+     @FormUrlEncoded
+     @POST("join.php")
+     suspend fun join(
+-        @Field("mbr_id") mbr_nm: String?,
+-        @Field("mbr_password") mbr_id: String?,
++        @Field("mbr_nm") mbr_nm: String?,
++        @Field("mbr_id") mbr_id: String?,
+         @Field("mbr_password") mbr_password: String?,
+-        @Field("mbr_password") mbr_ncnm: String?,
+-        @Field("mbr_password") mbr_gen: Char,
+-        @Field("mbr_password") mbr_tel: String?,
+-        @Field("mbr_password") mbr_brthdy: String?,
+-        @Field("mbr_password") mbr_email: String?
++        @Field("mbr_ncnm") mbr_ncnm: String?,
++        @Field("mbr_gen") mbr_gen: Char,
++        @Field("mbr_tel") mbr_tel: String?,
++        @Field("mbr_brthdy") mbr_brthdy: String?,
++        @Field("mbr_email") mbr_email: String?
+     ): Response<UserData>
+ 
+     @FormUrlEncoded
+Index: app/src/main/java/com/example/water_app/user/JoinActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.user\r\n\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityJoinBinding\r\nimport org.json.JSONException\r\nimport org.json.JSONObject\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.scalars.ScalarsConverterFactory\r\n\r\nclass JoinActivity : AppCompatActivity() {\r\n\r\n    val TAG = \"JoinActivity\"\r\n    private lateinit var binding: ActivityJoinBinding\r\n    private var preferenceHelper: PreferenceHelper? = null\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_join)\r\n\r\n        binding = ActivityJoinBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        binding.btnBack.setOnClickListener {\r\n            super.onBackPressed()\r\n        }\r\n\r\n        binding.btnJoin!!.setOnClickListener {\r\n            registerMe()\r\n        }\r\n\r\n    }\r\n\r\n    private fun registerMe() {\r\n        val mbr_id = binding!!.edtId.text.toString()\r\n        val mbr_password = binding!!.edtPass.text.toString()\r\n        val mbr_nm = binding!!.edtName.text.toString()\r\n        val mbr_ncnm = binding!!.edtNick.text.toString()\r\n        val mbr_gen = 'Y'\r\n        val mbr_tel = binding!!.edtTel.text.toString()\r\n        val mbr_birth = binding!!.edtBirth.text.toString()\r\n        val mbr_email = binding!!.edtEmail.text.toString()\r\n\r\n        val retrofit = Retrofit.Builder()\r\n            .baseUrl(UserInterface.USER_URL)\r\n            .addConverterFactory(ScalarsConverterFactory.create())\r\n            .build()\r\n        val api = retrofit.create(UserInterface::class.java)\r\n        val call = api.getUserRegist(\r\n            mbr_id, mbr_password, mbr_nm, mbr_ncnm, mbr_gen, mbr_tel, mbr_birth, mbr_email)\r\n        call!!.enqueue(object : Callback<String?> {\r\n            override fun onResponse(call: Call<String?>, response: Response<String?>) {\r\n                if (response.isSuccessful && response.body() != null) {\r\n                    Log.e(\"onSuccess\", response.body()!!)\r\n                    val jsonResponse = response.body()\r\n                    try {\r\n                        parseRegData(jsonResponse)\r\n                    } catch (e: JSONException) {\r\n                        e.printStackTrace()\r\n                    }\r\n                }\r\n            }\r\n\r\n            override fun onFailure(call: Call<String?>, t: Throwable) {\r\n                Log.e(TAG, \"에러 = \" + t.message)\r\n            }\r\n        })\r\n    }\r\n\r\n    @Throws(JSONException::class)\r\n    private fun parseRegData(response: String?) {\r\n        val jsonObject = JSONObject(response)\r\n        if (jsonObject.optString(\"status\") == \"true\") {\r\n            saveInfo(response)\r\n            Toast.makeText(this@JoinActivity, \"회원가입 성공\", Toast.LENGTH_SHORT).show()\r\n        } else {\r\n            Toast.makeText(this@JoinActivity, jsonObject.getString(\"message\"), Toast.LENGTH_SHORT)\r\n                .show()\r\n        }\r\n    }\r\n\r\n    private fun saveInfo(response: String?) {\r\n        preferenceHelper!!.putIsLogin(true)\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                val dataArray = jsonObject.getJSONArray(\"data\")\r\n                for (i in 0 until dataArray.length()) {\r\n                    val dataobj = dataArray.getJSONObject(i)\r\n                    preferenceHelper!!.putId(dataobj.getString(\"mbr_id\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_pass\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_nm\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_ncnm\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_tel\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_brthdy\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_email\"))\r\n                }\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/JoinActivity.kt b/app/src/main/java/com/example/water_app/user/JoinActivity.kt
+--- a/app/src/main/java/com/example/water_app/user/JoinActivity.kt	
++++ b/app/src/main/java/com/example/water_app/user/JoinActivity.kt	
+@@ -4,8 +4,12 @@
+ import android.os.Bundle
+ import android.util.Log
+ import android.widget.Toast
++import androidx.lifecycle.ViewModelProvider
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityJoinBinding
++import com.example.water_app.repository.Repository
++import com.example.water_app.viewmodel.MainViewModel
++import com.example.water_app.viewmodel.MainViewModelFactory
+ import org.json.JSONException
+ import org.json.JSONObject
+ import retrofit2.Call
+@@ -19,6 +23,7 @@
+     val TAG = "JoinActivity"
+     private lateinit var binding: ActivityJoinBinding
+     private var preferenceHelper: PreferenceHelper? = null
++    private lateinit var viewModel : MainViewModel
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -31,8 +36,26 @@
+             super.onBackPressed()
+         }
+ 
++
++
+         binding.btnJoin!!.setOnClickListener {
+-            registerMe()
++
++                val mbr_nm = binding.edtName.text.toString()
++                val mbr_id = binding.edtId.text.toString()
++                val mbr_password = binding.edtPass.text.toString()
++                val mbr_ncnm = binding.edtNick.text.toString()
++                val mbr_gen = '남'//binding.radioGroup.text.toString()
++                val mbr_tel = binding.edtTel.text.toString()
++                val mbr_brthdy = binding.edtBirth.text.toString()
++                val mbr_email = binding.edtEmail.text.toString()
++                val repository = Repository()
++                val viewModelFactory = MainViewModelFactory(repository)
++                viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
++                viewModel.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)
++//
++
++
++            //registerMe()
+         }
+ 
+     }
+Index: app/src/main/java/com/example/water_app/user/LoginActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.user\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityLoginBinding\r\nimport com.example.water_app.main.MainActivity\r\nimport kotlinx.android.synthetic.main.activity_join.*\r\nimport kotlinx.android.synthetic.main.activity_login.*\r\nimport org.json.JSONException\r\nimport org.json.JSONObject\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.scalars.ScalarsConverterFactory\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n\r\n    private val TAG = \"LoginActivity\"\r\n    private lateinit var binding: ActivityLoginBinding\r\n    private var preferenceHelper: PreferenceHelper? = null\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_login)\r\n        preferenceHelper = PreferenceHelper(this)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityLoginBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        binding.btnBack.setOnClickListener{\r\n            super.onBackPressed()\r\n        }\r\n\r\n        binding.btnJoin.setOnClickListener{\r\n            val intent = Intent(this, JoinActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n\r\n        binding.btnLogin.setOnClickListener{\r\n//            loginUser()\r\n            val intent = Intent(this, MainActivity::class.java)\r\n\r\n            intent.putExtra(\"cntr_sn\", 17)\r\n\r\n            startActivity(intent)\r\n        }\r\n\r\n        binding.btnGuest.setOnClickListener{\r\n            val intent = Intent(this, MainActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n    }\r\n\r\n    private fun loginUser() {\r\n        val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }\r\n        val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }\r\n\r\n        val retrofit = Retrofit.Builder()\r\n            .baseUrl(UserInterface.USER_URL)\r\n            .addConverterFactory(ScalarsConverterFactory.create())\r\n            .build()\r\n\r\n        val api = retrofit.create(UserInterface::class.java)\r\n        val call = api.getUserLogin(mbr_id, mbr_password)\r\n        call!!.enqueue(object : Callback<String?> {\r\n            override fun onResponse(call: Call<String?>, response: Response<String?>) {\r\n                if (response.isSuccessful && response.body() != null) {\r\n                    Log.e(\"onSuccess\", response.body()!!)\r\n                    val jsonResponse = response.body()\r\n                    parseLoginData(jsonResponse)\r\n                }\r\n            }\r\n\r\n            override fun onFailure(call: Call<String?>, t: Throwable) {\r\n                Log.e(TAG, \"에러 = \" + t.message)\r\n            }\r\n        })\r\n    }\r\n\r\n    private fun parseLoginData(response: String?) {\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                saveInfo(response)\r\n                Toast.makeText(this@LoginActivity, \"Login Successfully!\", Toast.LENGTH_SHORT).show()\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n\r\n    private fun saveInfo(response: String?) {\r\n        preferenceHelper!!.putIsLogin(true)\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                val dataArray = jsonObject.getJSONArray(\"data\")\r\n                for (i in 0 until dataArray.length()) {\r\n                    val dataobj = dataArray.getJSONObject(i)\r\n                    preferenceHelper!!.putId(dataobj.getString(\"mbr_id\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_pass\"))\r\n                }\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/LoginActivity.kt b/app/src/main/java/com/example/water_app/user/LoginActivity.kt
+--- a/app/src/main/java/com/example/water_app/user/LoginActivity.kt	
++++ b/app/src/main/java/com/example/water_app/user/LoginActivity.kt	
+@@ -45,13 +45,14 @@
+         binding.btnLogin.setOnClickListener{
+ //            loginUser()
+             val intent = Intent(this, MainActivity::class.java)
+-
++            MySharedPreferences.setUserSn(this,"17")
+             intent.putExtra("cntr_sn", 17)
+ 
+             startActivity(intent)
+         }
+ 
+         binding.btnGuest.setOnClickListener{
++            MySharedPreferences.setUserSn(this,"5")
+             val intent = Intent(this, MainActivity::class.java)
+             startActivity(intent)
+         }
+@@ -111,4 +112,19 @@
+             e.printStackTrace()
+         }
+     }
++
++
++    // 통신 성공
++//            if(it.isSuccessful){
++////                if (it.body()?.mbr_sn != null) {
++////                    Log.d("------->","${it.body()}")
++////                    MySharedPreferences.setUserId(this, it.body()?.mbr_id.toString())
++////                    MySharedPreferences.setUserPass(this, it.body()?.mbr_password.toString())
++////                    MySharedPreferences.setUserSn(this, it.body()?.mbr_sn.toString())
++////                    val intent = Intent(this, MainActivity::class.java)
++////                    startActivity(intent)
++//                }else{
++//                    Toast.makeText(this@LoginActivity, "아이디 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
++//                }
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/user/MySharedPreferences.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt b/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt	
+@@ -0,0 +1,52 @@
++package com.example.water_app.user
++
++import android.content.Context
++import android.content.SharedPreferences
++
++object MySharedPreferences {
++    private val MY_ACCOUNT : String = "account"
++
++    fun setUserId(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("mbr_id", input)
++        editor.commit()
++    }
++
++    fun getUserId(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("mbr_id", "").toString()
++    }
++
++    fun setUserPass(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("mbr_password", input)
++        editor.commit()
++    }
++
++    fun getUserPass(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("mbr_password", "").toString()
++    }
++
++    fun setUserSn(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("mbr_sn", input)
++        editor.commit()
++    }
++
++    fun getUserSn(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("mbr_sn", "").toString()
++    }
++
++    fun clearUser(context: Context) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.clear()
++        editor.commit()
++    }
++
++}
+\ No newline at end of file

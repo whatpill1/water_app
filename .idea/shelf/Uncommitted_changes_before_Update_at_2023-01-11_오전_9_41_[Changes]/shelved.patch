@@ -1,0 +1,44 @@
+Index: app/src/main/java/com/example/water_app/main/MyPageFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.annotation.SuppressLint\r\nimport android.app.AlertDialog\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.net.Uri\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport android.widget.Toast\r\nimport androidx.activity.OnBackPressedCallback\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.FragmentMyPageBinding\r\nimport com.example.water_app.mypage.HistoryActivity\r\nimport com.example.water_app.mypage.MyPageActivity\r\nimport com.example.water_app.mypage.NoticeActivity\r\nimport com.example.water_app.mypage.PeriodActivity\r\n\r\nclass MyPageFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: FragmentMyPageBinding\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n    }\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentMyPageBinding.inflate(inflater, container, false)\r\n\r\n        val view = inflater.inflate(R.layout.fragment_my_page, null)\r\n\r\n        binding.linMyPage.setOnClickListener{\r\n            activity?.let{\r\n                val intent = Intent(context, MyPageActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }\r\n\r\n        binding.linHistory.setOnClickListener{\r\n            activity?.let{\r\n                val intent = Intent(context, HistoryActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }\r\n\r\n        binding.linPeriod.setOnClickListener{\r\n            activity?.let{\r\n                val intent = Intent(context, PeriodActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }\r\n\r\n        binding.linNotice.setOnClickListener{\r\n            activity?.let{\r\n                val intent = Intent(context, NoticeActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }\r\n\r\n        // Dialog\r\n        binding.linPay.setOnClickListener{\r\n            val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_pay, null)\r\n            val mBuilder = AlertDialog.Builder(requireContext())\r\n                .setView(mDialogView)\r\n\r\n            val  mAlertDialog = mBuilder.show()\r\n\r\n            val okButton = mDialogView.findViewById<Button>(R.id.btnCall)\r\n            okButton.setOnClickListener {\r\n\r\n                Toast.makeText(requireContext(),\"서비스 준비중\", Toast.LENGTH_LONG).show()\r\n            }\r\n\r\n            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n            noButton.setOnClickListener {\r\n                mAlertDialog.dismiss()\r\n            }\r\n\r\n            val outButton = mDialogView.findViewById<Button>(R.id.btnOut)\r\n            outButton.setOnClickListener {\r\n\r\n                Toast.makeText(requireContext(),\"서비스 준비중\", Toast.LENGTH_LONG).show()\r\n            }\r\n        }\r\n\r\n        binding.linCall.setOnClickListener{\r\n            val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_call, null)\r\n            val mBuilder = AlertDialog.Builder(requireContext())\r\n                .setView(mDialogView)\r\n\r\n            val  mAlertDialog = mBuilder.show()\r\n\r\n            val okButton = mDialogView.findViewById<Button>(R.id.btnCall)\r\n            okButton.setOnClickListener {\r\n\r\n                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(\"tel:0531111111\"))\r\n                startActivity(intent)\r\n            }\r\n\r\n            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n            noButton.setOnClickListener {\r\n                mAlertDialog.dismiss()\r\n            }\r\n        }\r\n\r\n        binding.linMoney.setOnClickListener{\r\n            val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_money, null)\r\n            val mBuilder = AlertDialog.Builder(requireContext())\r\n                .setView(mDialogView)\r\n\r\n            val  mAlertDialog = mBuilder.show()\r\n\r\n            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n            noButton.setOnClickListener {\r\n                mAlertDialog.dismiss()\r\n            }\r\n        }\r\n\r\n        binding.linlogout.setOnClickListener{\r\n            MySharedPreferences.clearUser(requireContext())\r\n            val intent = Intent(context, LoginActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n        return binding.root\r\n    }\r\n    // 뒤로가기 메인 고정\r\n    private lateinit var callback: OnBackPressedCallback\r\n    lateinit var mainActivity: MainActivity\r\n\r\n    // 뒤로가기 고정\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        callback = object : OnBackPressedCallback(true) {\r\n            override fun handleOnBackPressed() {\r\n            }\r\n        }\r\n        requireActivity().onBackPressedDispatcher.addCallback(this, callback)\r\n\r\n        mainActivity = context as MainActivity\r\n    }\r\n\r\n    // 뒤로가기 고정\r\n    override fun onDetach() {\r\n        super.onDetach()\r\n        callback.remove()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/MyPageFragment.kt b/app/src/main/java/com/example/water_app/main/MyPageFragment.kt
+--- a/app/src/main/java/com/example/water_app/main/MyPageFragment.kt	(revision 140a52754767481d051bc4c241dd0e7e2d16996b)
++++ b/app/src/main/java/com/example/water_app/main/MyPageFragment.kt	(date 1673337491485)
+@@ -19,6 +19,7 @@
+ import com.example.water_app.mypage.MyPageActivity
+ import com.example.water_app.mypage.NoticeActivity
+ import com.example.water_app.mypage.PeriodActivity
++import com.example.water_app.user.LoginActivity
+ 
+ class MyPageFragment : Fragment() {
+ 
+@@ -128,7 +129,6 @@
+         }
+ 
+         binding.linlogout.setOnClickListener{
+-            MySharedPreferences.clearUser(requireContext())
+             val intent = Intent(context, LoginActivity::class.java)
+             startActivity(intent)
+         }
+Index: app/src/main/java/com/example/water_app/etc/SplashActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.etc\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.os.Handler\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\n\r\nclass SplashActivity : AppCompatActivity() {\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_splash)\r\n\r\n        val handler = Handler()\r\n        handler.postDelayed({\r\n            val intent = Intent(applicationContext, LoginActivity::class.java)\r\n            startActivity(intent)\r\n            finish()\r\n        }, 1500)\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        finish()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/etc/SplashActivity.kt b/app/src/main/java/com/example/water_app/etc/SplashActivity.kt
+--- a/app/src/main/java/com/example/water_app/etc/SplashActivity.kt	(revision 140a52754767481d051bc4c241dd0e7e2d16996b)
++++ b/app/src/main/java/com/example/water_app/etc/SplashActivity.kt	(date 1673337491490)
+@@ -5,6 +5,7 @@
+ import android.os.Handler
+ import androidx.appcompat.app.AppCompatActivity
+ import com.example.water_app.R
++import com.example.water_app.user.LoginActivity
+ 
+ class SplashActivity : AppCompatActivity() {
+ 

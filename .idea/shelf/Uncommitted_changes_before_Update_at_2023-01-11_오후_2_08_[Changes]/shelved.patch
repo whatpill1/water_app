@@ -1,0 +1,94 @@
+Index: app/src/main/java/com/example/water_app/user/LoginActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.user\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityLoginBinding\r\nimport com.example.water_app.main.MainActivity\r\nimport kotlinx.android.synthetic.main.activity_join.*\r\nimport kotlinx.android.synthetic.main.activity_login.*\r\nimport org.json.JSONException\r\nimport org.json.JSONObject\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.scalars.ScalarsConverterFactory\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n\r\n    private val TAG = \"LoginActivity\"\r\n    private lateinit var binding: ActivityLoginBinding\r\n    private var preferenceHelper: PreferenceHelper? = null\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_login)\r\n        preferenceHelper = PreferenceHelper(this)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityLoginBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        binding.btnBack.setOnClickListener{\r\n            super.onBackPressed()\r\n        }\r\n\r\n        binding.btnJoin.setOnClickListener{\r\n            val intent = Intent(this, JoinActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n\r\n        binding.btnLogin.setOnClickListener{\r\n            loginUser()\r\n            val intent = Intent(this, MainActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n    }\r\n\r\n    private fun loginUser() {\r\n        val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }\r\n        val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }\r\n\r\n        val retrofit = Retrofit.Builder()\r\n            .baseUrl(UserInterface.USER_URL)\r\n            .addConverterFactory(ScalarsConverterFactory.create())\r\n            .build()\r\n\r\n        val api = retrofit.create(UserInterface::class.java)\r\n        val call = api.getUserLogin(mbr_id, mbr_password)\r\n        call!!.enqueue(object : Callback<String?> {\r\n            override fun onResponse(call: Call<String?>, response: Response<String?>) {\r\n                if (response.isSuccessful && response.body() != null) {\r\n                    Log.e(\"onSuccess\", response.body()!!)\r\n                    val jsonResponse = response.body()\r\n                    parseLoginData(jsonResponse)\r\n                }\r\n            }\r\n\r\n            override fun onFailure(call: Call<String?>, t: Throwable) {\r\n                Log.e(TAG, \"에러 = \" + t.message)\r\n            }\r\n        })\r\n    }\r\n\r\n    private fun parseLoginData(response: String?) {\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                saveInfo(response)\r\n                Toast.makeText(this@LoginActivity, \"Login Successfully!\", Toast.LENGTH_SHORT).show()\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n\r\n    private fun saveInfo(response: String?) {\r\n        preferenceHelper!!.putIsLogin(true)\r\n        try {\r\n            val jsonObject = JSONObject(response)\r\n            if (jsonObject.getString(\"status\") == \"true\") {\r\n                val dataArray = jsonObject.getJSONArray(\"data\")\r\n                for (i in 0 until dataArray.length()) {\r\n                    val dataobj = dataArray.getJSONObject(i)\r\n                    preferenceHelper!!.putId(dataobj.getString(\"mbr_id\"))\r\n                    preferenceHelper!!.putPass(dataobj.getString(\"mbr_pass\"))\r\n                }\r\n            }\r\n        } catch (e: JSONException) {\r\n            e.printStackTrace()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/LoginActivity.kt b/app/src/main/java/com/example/water_app/user/LoginActivity.kt
+--- a/app/src/main/java/com/example/water_app/user/LoginActivity.kt	(revision bfeda04fada7223cf0f934989bd56b384df660c6)
++++ b/app/src/main/java/com/example/water_app/user/LoginActivity.kt	(date 1673413416342)
+@@ -103,4 +103,19 @@
+             e.printStackTrace()
+         }
+     }
++
++
++    // 통신 성공
++//            if(it.isSuccessful){
++////                if (it.body()?.mbr_sn != null) {
++////                    Log.d("------->","${it.body()}")
++////                    MySharedPreferences.setUserId(this, it.body()?.mbr_id.toString())
++////                    MySharedPreferences.setUserPass(this, it.body()?.mbr_password.toString())
++////                    MySharedPreferences.setUserSn(this, it.body()?.mbr_sn.toString())
++////                    val intent = Intent(this, MainActivity::class.java)
++////                    startActivity(intent)
++//                }else{
++//                    Toast.makeText(this@LoginActivity, "아이디 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
++//                }
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/user/MySharedPreferences.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt b/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt
+new file mode 100644
+--- /dev/null	(date 1673413416342)
++++ b/app/src/main/java/com/example/water_app/user/MySharedPreferences.kt	(date 1673413416342)
+@@ -0,0 +1,52 @@
++package com.example.water_app.user
++
++import android.content.Context
++import android.content.SharedPreferences
++
++object MySharedPreferences {
++    private val MY_ACCOUNT : String = "account"
++
++    fun setUserId(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("mbr_id", input)
++        editor.commit()
++    }
++
++    fun getUserId(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("mbr_id", "").toString()
++    }
++
++    fun setUserPass(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("mbr_password", input)
++        editor.commit()
++    }
++
++    fun getUserPass(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("mbr_password", "").toString()
++    }
++
++    fun setUserSn(context: Context, input: String) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.putString("mbr_sn", input)
++        editor.commit()
++    }
++
++    fun getUserSn(context: Context): String {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        return prefs.getString("mbr_sn", "").toString()
++    }
++
++    fun clearUser(context: Context) {
++        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
++        val editor : SharedPreferences.Editor = prefs.edit()
++        editor.clear()
++        editor.commit()
++    }
++
++}
+\ No newline at end of file
