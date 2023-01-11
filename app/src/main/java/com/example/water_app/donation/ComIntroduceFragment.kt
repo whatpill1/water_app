@@ -1,12 +1,15 @@
 package com.example.water_app.donation
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.water_app.R
 import com.example.water_app.databinding.FragmentComIntroduceBinding
 
 
@@ -28,12 +31,15 @@ class ComIntroduceFragment : Fragment() {
         binding = FragmentComIntroduceBinding.inflate(inflater, container, false)
 
         // get
+        val mbr_sn = requireActivity().intent.extras!!.getInt("mbr_sn")
         val cntr_sn = requireActivity().intent.extras!!.getInt("cntr_sn")
         val cntr_ttl = requireActivity().intent.extras!!.getString("cntr_ttl")
         val cntr_cn = requireActivity().intent.extras!!.getString("cntr_cn")
         val ctbny_pc = requireActivity().intent.extras!!.getInt("ctbny_pc")
         val cntr_obctr = requireActivity().intent.extras!!.getInt("cntr_obctr")
         val cntr_file_id = requireActivity().intent.extras!!.getString("cntr_file_id")
+
+        Log.d("cntrrrrrrrrrrrrrrrrrrr", "$mbr_sn")
 
         // 인텐트 putextra getextra 하는 부분
         binding.donationTtl.text = cntr_ttl
@@ -57,12 +63,20 @@ class ComIntroduceFragment : Fragment() {
             binding.progressBar.setProgress(pricePercent!!.toInt())
         }
 
-        //인텐트 putextra getextra 하는 부분
+        // 인텐트 putextra getextra 하는 부분
         binding.btnDonation.setOnClickListener{
             activity?.let{
-                val intent = Intent(context, DonationActivity::class.java)
-                intent.putExtra("cntr_sn",cntr_sn)
-                startActivity(intent)
+                if(mbr_sn == null){
+                    val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
+                    val mBuilder = AlertDialog.Builder(requireContext())
+                        .setView(mDialogView)
+
+                    val  mAlertDialog = mBuilder.show()
+                }else{
+                    val intent = Intent(context, DonationActivity::class.java)
+                    intent.putExtra("cntr_sn",cntr_sn)
+                    startActivity(intent)
+                }
             }
         }
         return binding.root
