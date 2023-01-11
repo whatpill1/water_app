@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/edittext_login"
         android:ems="10"
@@ -100,16 +100,6 @@
         app:layout_constraintEnd_toStartOf="@+id/btnJoin"
         app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
-    <TextView
-        android:id="@+id/btnGuest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:fontFamily="@font/kim_regular"
-        android:text="비회원으로 입장하기"
-        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
-        app:layout_constraintStart_toStartOf="@+id/btnLogin"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 
 

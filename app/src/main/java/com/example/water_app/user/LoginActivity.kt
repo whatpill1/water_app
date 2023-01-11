@@ -46,14 +46,7 @@ class LoginActivity : AppCompatActivity() {
 //            loginUser()
             val intent = Intent(this, MainActivity::class.java)
             MySharedPreferences.setUserSn(this,"17")
-            //intent.putExtra("mbr_sn", 17)
 
-            startActivity(intent)
-        }
-
-        binding.btnGuest.setOnClickListener{
-            MySharedPreferences.setUserSn(this,"-1")
-            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

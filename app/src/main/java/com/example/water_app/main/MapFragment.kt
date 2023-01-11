@@ -215,10 +215,9 @@ class MapFragment() : Fragment() {
             ) {
                 addItemsAndMarkers(response.body())
             }
-
             // 통신 실패
             override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {
-                Log.w("LocalSearch", "통신 실패: ${t.message}")
+                // 없으면 오류 뜸
             }
         })
     }
