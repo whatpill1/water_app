@@ -18,14 +18,17 @@ class SplashActivity : AppCompatActivity() {
 
         val handler = Handler()
         handler.postDelayed({
-            val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
-            Log.d("----------->","$mbr_sn")
-            if (mbr_sn == -1){
+            val mbr_sn = MySharedPreferences.getUserSn(this)
+            if (mbr_sn == " "){
+                MySharedPreferences.setUserSn(this,"-1")
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else if (mbr_sn.toInt() == -1){
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }else{
-                MySharedPreferences.setUserSn(this,"-1")
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
                 finish()

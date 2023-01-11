@@ -34,12 +34,13 @@ object MySharedPreferences {
         val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
         val editor : SharedPreferences.Editor = prefs.edit()
         editor.putString("mbr_sn", input)
-        editor.commit()
+        //editor.commit()
+        editor.apply()
     }
 
     fun getUserSn(context: Context): String {
         val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
-        return prefs.getString("mbr_sn", "").toString()
+        return prefs.getString("mbr_sn", " ").toString()
     }
 
     fun clearUser(context: Context) {

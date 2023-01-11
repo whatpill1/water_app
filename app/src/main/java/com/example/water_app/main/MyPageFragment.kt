@@ -43,8 +43,6 @@ class MyPageFragment : Fragment() {
 
         val mbr_sn = MySharedPreferences.getUserSn(requireContext()).toInt()
 
-        Log.d("----마이페이지------->","$mbr_sn")
-
         binding.linMyPage.setOnClickListener{
             activity?.let{
                 if(mbr_sn == -1) {
