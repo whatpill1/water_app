@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -96,7 +97,10 @@ class MapFragment() : Fragment() {
                     dbMarker.mapPoint = MY_LOCATION
 
                     // 기본 마커
-                    dbMarker.markerType = MapPOIItem.MarkerType.RedPin
+                    dbMarker.markerType = MapPOIItem.MarkerType.YellowPin
+
+                    // 기본 마커 클릭했을 때 나타나는 마커
+                    dbMarker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
 
                     mapView.addPOIItem(dbMarker)
 
@@ -133,8 +137,7 @@ class MapFragment() : Fragment() {
                 marker.markerType = MapPOIItem.MarkerType.BluePin
 
                 // 기본 마커 클릭했을 때 나타나는 마커
-                marker.selectedMarkerType =
-                    MapPOIItem.MarkerType.RedPin
+                marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
 
                 mapView.addPOIItem(marker)
             }
@@ -168,6 +171,9 @@ class MapFragment() : Fragment() {
                     // 기본 마커
                     marker.markerType = MapPOIItem.MarkerType.BluePin
 
+                    // 기본 마커 클릭했을 때 나타나는 마커
+                    marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+
                     mapView.addPOIItem(marker)
                 }
             }
@@ -184,6 +190,8 @@ class MapFragment() : Fragment() {
                 val mapPoint =
                     MapPoint.mapPointWithGeoCoord(listItems[position].y, listItems[position].x)
                 mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true)
+
+                binding.rvList.setVisibility(View.GONE)
             }
         })
 
@@ -192,6 +200,8 @@ class MapFragment() : Fragment() {
             keyword = binding.edtSearch.text.toString()
             pageNumber = 1
             searchKeyword(keyword, pageNumber)
+
+            binding.rvList.setVisibility(View.VISIBLE)
         }
 
         return binding.root
