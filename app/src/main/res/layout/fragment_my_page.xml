@@ -210,10 +210,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp">
                     <ImageView
+                        android:id="@+id/ivChange"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/my_logout" />
                     <TextView
+                        android:id="@+id/tvChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="로그아웃"

@@ -6,13 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import com.example.water_app.R
 import com.example.water_app.databinding.FragmentMyPageBinding
 import com.example.water_app.mypage.HistoryActivity
@@ -41,6 +42,9 @@ class MyPageFragment : Fragment() {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
         val mbr_sn = MySharedPreferences.getUserSn(requireContext()).toInt()
+
+        Log.d("----마이페이지------->","$mbr_sn")
+
         binding.linMyPage.setOnClickListener{
             activity?.let{
                 if(mbr_sn == -1) {
@@ -192,10 +196,24 @@ class MyPageFragment : Fragment() {
             }
         }
 
-        binding.linlogout.setOnClickListener{
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
+        if (mbr_sn == -1){
+            binding.ivChange.setImageResource(R.drawable.my_login)
+            binding.tvChange.setText("로그인")
+            binding.linlogout.setOnClickListener{
+                val intent = Intent(context, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }else{
+            binding.linlogout.setOnClickListener{
+                MySharedPreferences.setUserSn(requireContext(),"-1")
+                val intent = Intent(context, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+
         }
+
         return binding.root
     }
     // 뒤로가기 메인 고정

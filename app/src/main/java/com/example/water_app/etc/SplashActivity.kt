@@ -3,10 +3,12 @@ package com.example.water_app.etc
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.main.MainActivity
 import com.example.water_app.user.LoginActivity
+import com.example.water_app.user.MySharedPreferences
 
 class SplashActivity : AppCompatActivity() {
 
@@ -16,9 +18,20 @@ class SplashActivity : AppCompatActivity() {
 
         val handler = Handler()
         handler.postDelayed({
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
+            Log.d("----------->","$mbr_sn")
+            if (mbr_sn == -1){
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                MySharedPreferences.setUserSn(this,"-1")
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+
         }, 1500)
     }
 

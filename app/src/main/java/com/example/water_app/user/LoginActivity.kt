@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 //            loginUser()
             val intent = Intent(this, MainActivity::class.java)
             MySharedPreferences.setUserSn(this,"17")
-
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
     }

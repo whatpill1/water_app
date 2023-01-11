@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
-        Log.d("cntrrrrrrrrrrrrrrrrrrr", "$mbr_sn")
+        Log.d("----메인 엑티비티------->","$mbr_sn")
 
         binding.navMain.run { setOnNavigationItemSelectedListener {
             when(it.itemId) {
