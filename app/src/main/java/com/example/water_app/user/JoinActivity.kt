@@ -39,26 +39,11 @@ class JoinActivity : AppCompatActivity() {
 
 
         binding.btnJoin!!.setOnClickListener {
-
-                val mbr_nm = binding.edtName.text.toString()
-                val mbr_id = binding.edtId.text.toString()
-                val mbr_password = binding.edtPass.text.toString()
-                val mbr_ncnm = binding.edtNick.text.toString()
-                val mbr_gen = '남'//binding.radioGroup.text.toString()
-                val mbr_tel = binding.edtTel.text.toString()
-                val mbr_brthdy = binding.edtBirth.text.toString()
-                val mbr_email = binding.edtEmail.text.toString()
-                val repository = Repository()
-                val viewModelFactory = MainViewModelFactory(repository)
-                viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-                viewModel.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)
-//
-
-
-            //registerMe()
+            registerMe()
         }
 
     }
+
 
     private fun registerMe() {
         val mbr_id = binding!!.edtId.text.toString()
@@ -80,13 +65,7 @@ class JoinActivity : AppCompatActivity() {
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {
-                    Log.e("onSuccess", response.body()!!)
-                    val jsonResponse = response.body()
-                    try {
-                        parseRegData(jsonResponse)
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
+                    val list = response.body()!!
                 }
             }
 
@@ -94,39 +73,5 @@ class JoinActivity : AppCompatActivity() {
                 Log.e(TAG, "에러 = " + t.message)
             }
         })
-    }
-
-    @Throws(JSONException::class)
-    private fun parseRegData(response: String?) {
-        val jsonObject = JSONObject(response)
-        if (jsonObject.optString("status") == "true") {
-            saveInfo(response)
-            Toast.makeText(this@JoinActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this@JoinActivity, jsonObject.getString("message"), Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
-    private fun saveInfo(response: String?) {
-        preferenceHelper!!.putIsLogin(true)
-        try {
-            val jsonObject = JSONObject(response)
-            if (jsonObject.getString("status") == "true") {
-                val dataArray = jsonObject.getJSONArray("data")
-                for (i in 0 until dataArray.length()) {
-                    val dataobj = dataArray.getJSONObject(i)
-                    preferenceHelper!!.putId(dataobj.getString("mbr_id"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_pass"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_nm"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_ncnm"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_tel"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_brthdy"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_email"))
-                }
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
     }
 }

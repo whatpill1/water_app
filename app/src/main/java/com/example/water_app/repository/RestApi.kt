@@ -3,6 +3,7 @@ package com.example.water_app.repository
 import com.example.water_app.model.*
 import com.example.water_app.model.PostData
 import com.example.water_app.model.UserData
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -21,14 +22,14 @@ interface RestApi {
 
     @FormUrlEncoded
     @POST("login.php")
-    suspend fun getLogin(
+    fun getLogin(
         @Field("mbr_id") mbr_id: String?,
         @Field("mbr_password") mbr_password: String?
-    ): Response<UserData>
+    ): Response<UserData?>?
 
     @FormUrlEncoded
     @POST("join.php")
-    suspend fun join(
+    fun join(
         @Field("mbr_nm") mbr_nm: String?,
         @Field("mbr_id") mbr_id: String?,
         @Field("mbr_password") mbr_password: String?,
@@ -37,7 +38,7 @@ interface RestApi {
         @Field("mbr_tel") mbr_tel: String?,
         @Field("mbr_brthdy") mbr_brthdy: String?,
         @Field("mbr_email") mbr_email: String?
-    ): Response<UserData>
+    ): Call<UserData?>
 
     @FormUrlEncoded
     @POST("category.php")

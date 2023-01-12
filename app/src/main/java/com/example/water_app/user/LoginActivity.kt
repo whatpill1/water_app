@@ -3,13 +3,23 @@ package com.example.water_app.user
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityLoginBinding
+import com.example.water_app.donation.CategoryFragment
 import com.example.water_app.main.MainActivity
+import com.example.water_app.recyclerview.DonationAdapter
+import com.example.water_app.repository.Repository
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_join.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_com_history.*
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -43,11 +53,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener{
-//            loginUser()
-            val intent = Intent(this, MainActivity::class.java)
-            MySharedPreferences.setUserSn(this,"17")
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            loginUser()
+//            val intent = Intent(this, MainActivity::class.java)
+//            MySharedPreferences.setUserSn(this,"17")
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            startActivity(intent)
         }
     }
 
@@ -65,9 +75,8 @@ class LoginActivity : AppCompatActivity() {
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {
-                    Log.e("onSuccess", response.body()!!)
                     val jsonResponse = response.body()
-                    parseLoginData(jsonResponse)
+                    Log.d("onSuccess", "$jsonResponse")
                 }
             }
 
@@ -76,48 +85,5 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun parseLoginData(response: String?) {
-        try {
-            val jsonObject = JSONObject(response)
-            if (jsonObject.getString("status") == "true") {
-                saveInfo(response)
-                Toast.makeText(this@LoginActivity, "Login Successfully!", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun saveInfo(response: String?) {
-        preferenceHelper!!.putIsLogin(true)
-        try {
-            val jsonObject = JSONObject(response)
-            if (jsonObject.getString("status") == "true") {
-                val dataArray = jsonObject.getJSONArray("data")
-                for (i in 0 until dataArray.length()) {
-                    val dataobj = dataArray.getJSONObject(i)
-                    preferenceHelper!!.putId(dataobj.getString("mbr_id"))
-                    preferenceHelper!!.putPass(dataobj.getString("mbr_pass"))
-                }
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-    }
-
-
-    // 통신 성공
-//            if(it.isSuccessful){
-////                if (it.body()?.mbr_sn != null) {
-////                    Log.d("------->","${it.body()}")
-////                    MySharedPreferences.setUserId(this, it.body()?.mbr_id.toString())
-////                    MySharedPreferences.setUserPass(this, it.body()?.mbr_password.toString())
-////                    MySharedPreferences.setUserSn(this, it.body()?.mbr_sn.toString())
-////                    val intent = Intent(this, MainActivity::class.java)
-////                    startActivity(intent)
-//                }else{
-//                    Toast.makeText(this@LoginActivity, "아이디 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
-//                }
 
 }

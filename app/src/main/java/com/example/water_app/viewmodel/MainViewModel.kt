@@ -9,6 +9,7 @@ import com.example.water_app.model.PostData
 import com.example.water_app.model.ReviewData
 import com.example.water_app.model.UserData
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Response
 
 class MainViewModel(private val repository : Repository) : ViewModel() {
@@ -18,8 +19,8 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()
     val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
-    val loginResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
-    val joinResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
+    val loginResponse : MutableLiveData<Response<UserData?>?> = MutableLiveData()
+    val joinResponse : MutableLiveData<Call<UserData?>> = MutableLiveData()
     val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
 

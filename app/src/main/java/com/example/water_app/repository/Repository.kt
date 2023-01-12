@@ -4,6 +4,7 @@ import com.example.water_app.model.NoticeData
 import com.example.water_app.model.PostData
 import com.example.water_app.model.ReviewData
 import com.example.water_app.model.UserData
+import retrofit2.Call
 import retrofit2.Response
 
 class Repository {
@@ -25,7 +26,7 @@ class Repository {
         return Instance.api.getHomeend()
     }
 
-    suspend fun getLogin(mbr_id: String?, mbr_password: String?) : Response<UserData> {
+    suspend fun getLogin(mbr_id: String?, mbr_password: String?) : Response<UserData?>? {
         return Instance.api.getLogin(mbr_id, mbr_password)
     }
 
@@ -37,7 +38,7 @@ class Repository {
         mbr_gen: Char,
         mbr_tel: String?,
         mbr_brthdy: String?,
-        mbr_email: String?) : Response<UserData> {
+        mbr_email: String?) : Call<UserData?> {
         return Instance.api.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)
     }
 
