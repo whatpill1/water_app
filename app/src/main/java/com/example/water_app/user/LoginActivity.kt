@@ -32,12 +32,10 @@ class LoginActivity : AppCompatActivity() {
 
     private val TAG = "LoginActivity"
     private lateinit var binding: ActivityLoginBinding
-    private var preferenceHelper: PreferenceHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        preferenceHelper = PreferenceHelper(this)
 
         // 뷰바인딩
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -54,10 +52,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener{
             loginUser()
-//            val intent = Intent(this, MainActivity::class.java)
-//            MySharedPreferences.setUserSn(this,"17")
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(intent)
+            val intent = Intent(this, MainActivity::class.java)
+            MySharedPreferences.setUserSn(this,"17")
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 
