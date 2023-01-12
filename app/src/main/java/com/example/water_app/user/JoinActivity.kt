@@ -22,7 +22,6 @@ class JoinActivity : AppCompatActivity() {
 
     val TAG = "JoinActivity"
     private lateinit var binding: ActivityJoinBinding
-    private var preferenceHelper: PreferenceHelper? = null
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
