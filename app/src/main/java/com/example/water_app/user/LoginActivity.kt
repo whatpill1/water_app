@@ -3,25 +3,13 @@ package com.example.water_app.user
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityLoginBinding
-import com.example.water_app.donation.CategoryFragment
 import com.example.water_app.main.MainActivity
-import com.example.water_app.recyclerview.DonationAdapter
-import com.example.water_app.repository.Repository
+import com.example.water_app.model.UserData
 import com.example.water_app.viewmodel.MainViewModel
-import com.example.water_app.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.activity_join.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_com_history.*
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,12 +40,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener{
             loginUser()
-            val intent = Intent(this, MainActivity::class.java)
-            MySharedPreferences.setUserSn(this,"17")
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+
         }
     }
+
 
     private fun loginUser() {
         val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }
@@ -73,8 +59,16 @@ class LoginActivity : AppCompatActivity() {
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {
-                    val jsonResponse = response.body()
-                    Log.d("onSuccess", "$jsonResponse")
+                    val mbr_sn = response.body()!!
+                    if (mbr_sn.toInt() < 1)
+                    {
+                        Toast.makeText(this@LoginActivity,"아이디 혹은 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
+                    }else {
+
+                        MySharedPreferences.setUserSn(this@LoginActivity,mbr_sn)
+                        startLogin()
+
+                    }
                 }
             }
 
@@ -83,5 +77,9 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
-
+    private fun startLogin(){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
 }

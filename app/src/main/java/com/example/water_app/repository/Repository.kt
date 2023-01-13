@@ -26,8 +26,8 @@ class Repository {
         return Instance.api.getHomeend()
     }
 
-    suspend fun getLogin(mbr_id: String?, mbr_password: String?) : Response<UserData?>? {
-        return Instance.api.getLogin(mbr_id, mbr_password)
+    suspend fun getLogin(userData: UserData) : Response<UserData?>? {
+        return Instance.api.getLogin(userData)
     }
 
     suspend fun join(

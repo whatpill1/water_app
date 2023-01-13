@@ -48,9 +48,9 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
             getHomeEndListResponse.value = response
         }
     }
-    fun getLogin(mbr_id: String?, mbr_password: String?) {
+    fun getLogin(userData: UserData) {
         viewModelScope.launch {
-            val response = repository.getLogin(mbr_id, mbr_password)
+            val response = repository.getLogin(userData)
             loginResponse.value = response
         }
     }

@@ -3,15 +3,9 @@ package com.example.water_app.user
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityJoinBinding
-import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
-import com.example.water_app.viewmodel.MainViewModelFactory
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,7 +37,6 @@ class JoinActivity : AppCompatActivity() {
 
     }
 
-
     private fun registerMe() {
         val mbr_id = binding!!.edtId.text.toString()
         val mbr_password = binding!!.edtPass.text.toString()
@@ -64,7 +57,7 @@ class JoinActivity : AppCompatActivity() {
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {
-                    val list = response.body()!!
+
                 }
             }
 

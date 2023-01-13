@@ -22,9 +22,8 @@ interface RestApi {
 
     @FormUrlEncoded
     @POST("login.php")
-    fun getLogin(
-        @Field("mbr_id") mbr_id: String?,
-        @Field("mbr_password") mbr_password: String?
+    suspend fun getLogin(
+        @Body userData: UserData
     ): Response<UserData?>?
 
     @FormUrlEncoded
