@@ -1,10 +1,13 @@
 package com.example.water_app.user
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityJoinBinding
+import com.example.water_app.main.MainActivity
 import com.example.water_app.viewmodel.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,8 +31,6 @@ class JoinActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             super.onBackPressed()
         }
-
-
 
         binding.btnJoin!!.setOnClickListener {
             registerMe()
@@ -57,7 +58,13 @@ class JoinActivity : AppCompatActivity() {
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {
-
+                    val joinConfirm = response.body()!!
+                    if (joinConfirm.toString() == "{\"mbr_sn\":0}"){
+                        Toast.makeText(this@JoinActivity,"모든 칸을 채워주세요", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this@JoinActivity,"회원가입 성공", Toast.LENGTH_SHORT).show()
+                        startLoginPage()
+                    }
                 }
             }
 
@@ -65,5 +72,10 @@ class JoinActivity : AppCompatActivity() {
                 Log.e(TAG, "에러 = " + t.message)
             }
         })
+    }
+    private fun startLoginPage(){
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

@@ -63,11 +63,13 @@ class LoginActivity : AppCompatActivity() {
                     if (mbr_sn.toInt() < 1)
                     {
                         Toast.makeText(this@LoginActivity,"아이디 혹은 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
-                    }else {
+                    }else if(mbr_sn.toInt() > 1){
 
                         MySharedPreferences.setUserSn(this@LoginActivity,mbr_sn)
                         startLogin()
 
+                    }else{
+                        Toast.makeText(this@LoginActivity,"error", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
