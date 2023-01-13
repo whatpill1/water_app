@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemCommentRecyclerBinding
 import com.example.water_app.model.CommentData
+import com.example.water_app.model.PostData
 
 class CommentAdapter(private val context: Context, private var commentList: List<CommentData>?): RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
@@ -31,5 +32,12 @@ class CommentAdapter(private val context: Context, private var commentList: List
     // 리스트 내 아이템 개수
     override fun getItemCount(): Int {
         return commentList!!.size
+    }
+
+    // 데이터 변경시 리스트 다시 할당
+    fun setData(newList: CommentData){
+        commentList = listOf(newList)
+        // 새로고침
+        notifyDataSetChanged()
     }
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityStoryBinding
+import com.example.water_app.model.PostData
 import com.example.water_app.recyclerview.CommentAdapter
 import com.example.water_app.recyclerview.StoryAdapter
 import com.example.water_app.repository.Instance
@@ -81,20 +82,12 @@ class StoryActivity : AppCompatActivity() {
         val call = Instance.api.getComment(mbr_sn, mlrd_sn, comt_cn)
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val joinConfirm = response.body()!!
-                    if (joinConfirm.toString() == "") {
-                        Toast.makeText(this@StoryActivity, "댓글을 작성해 주세요", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this@StoryActivity, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                //
             }
 
             override fun onFailure(call: Call<String?>, t: Throwable) {
-                // 네
+                //
             }
         })
-
     }
 }
