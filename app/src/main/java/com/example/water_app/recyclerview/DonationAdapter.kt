@@ -33,9 +33,6 @@ class DonationAdapter(private val context: Context, private var donationList: Li
         val cntr_str_dt = donationList?.get(position)?.cntr_str_dt
         val cntr_end_dt = donationList?.get(position)?.cntr_end_dt
 
-
-
-
         holder.binding.tvTitle.text = cntr_ttl
         holder.binding.tvMoney.text = cntr_obctr.toString()+"원"
 

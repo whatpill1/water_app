@@ -47,4 +47,11 @@ interface RestApi {
     @FormUrlEncoded
     @POST("com.php")
     suspend fun getCommunication(@Field("cntr_sn") cntr_sn: Int?): Response<List<ReviewData>>
+
+    // 모금 내역
+    @FormUrlEncoded
+    @POST("collecter.php")
+    suspend fun getCollecter(@Field("cntr_sn") cntr_sn: Int?): Response<List<CollectData>>
+
+
 }

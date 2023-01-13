@@ -3,11 +3,8 @@ package com.example.water_app.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.water_app.model.NoticeData
+import com.example.water_app.model.*
 import com.example.water_app.repository.Repository
-import com.example.water_app.model.PostData
-import com.example.water_app.model.ReviewData
-import com.example.water_app.model.UserData
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
@@ -23,6 +20,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val joinResponse : MutableLiveData<Call<UserData?>> = MutableLiveData()
     val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
+    val getCollecterResponse : MutableLiveData<Response<List<CollectData>>> = MutableLiveData()
 
     fun getUser() {
         viewModelScope.launch {
@@ -80,6 +78,14 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
         viewModelScope.launch {
             val response = repository.getCommunication(cntr_sn)
             getCommunicationResponse.value = response
+        }
+    }
+
+    // 모금 내역
+    fun getCollecter(cntr_sn:Int?) {
+        viewModelScope.launch {
+            val response = repository.getCollecter(cntr_sn)
+            getCollecterResponse.value = response
         }
     }
 }
