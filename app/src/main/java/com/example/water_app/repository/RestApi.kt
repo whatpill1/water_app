@@ -74,4 +74,14 @@ interface RestApi {
         @Field("mlrd_sn") mlrd_sn: Int?,
         @Field("comt_cn") comt_cn: String?
     ): Call<String?>?
+
+    // 기부하기
+    @FormUrlEncoded
+    @POST("donation.php")
+    fun postDonation(
+        @Field("cntr_sn") cntr_sn: Int?,
+        @Field("mbr_sn") mbr_sn: Int?,
+        @Field("btn_nm") btn_nm: String?,
+        @Field("btr_pc") btr_pc: Int
+    ): Call<String?>?
 }

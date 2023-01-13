@@ -1,0 +1,113 @@
+Index: app/src/main/java/com/example/water_app/repository/RestApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.*\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\nimport retrofit2.http.*\r\n\r\ninterface RestApi {\r\n    // 마이페이지\r\n    @GET(\"test2.php\")\r\n    suspend fun getUser(): Response<UserData>\r\n\r\n    // 진행중인 기부\r\n    @GET(\"home.php\")\r\n    suspend fun getDonationList(): Response<List<PostData>>\r\n\r\n    // 공지사항\r\n    @GET(\"notice.php\")\r\n    suspend fun getNoticeList(): Response<List<NoticeData>>\r\n\r\n    // 완료된 기부\r\n    @GET(\"homeend.php\")\r\n    suspend fun getHomeend(): Response<List<PostData>>\r\n\r\n    // 카테고리별 목록\r\n    @FormUrlEncoded\r\n    @POST(\"category.php\")\r\n    suspend fun getCategory(@Field(\"cntr_category\") cntr_category: Int?): Response<List<PostData>>\r\n\r\n    // 소통\r\n    @FormUrlEncoded\r\n    @POST(\"com.php\")\r\n    suspend fun getCommunication(@Field(\"cntr_sn\") cntr_sn: Int?): Response<List<ReviewData>>\r\n\r\n    // 모금 내역\r\n    @FormUrlEncoded\r\n    @POST(\"collecter.php\")\r\n    suspend fun getCollecter(@Field(\"cntr_sn\") cntr_sn: Int?): Response<List<CollectData>>\r\n\r\n    // 회원가입\r\n    @FormUrlEncoded\r\n    @POST(\"join.php\")\r\n    fun getUserRegist(\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?,\r\n        @Field(\"mbr_nm\") mbr_nm: String?,\r\n        @Field(\"mbr_ncnm\") mbr_ncnm: String?,\r\n        @Field(\"mbr_gen\") mbr_gen: Char,\r\n        @Field(\"mbr_tel\") mbr_tel: String?,\r\n        @Field(\"mbr_brthdy\") mbr_brthdy: String?,\r\n        @Field(\"mbr_email\") mbr_email: String?\r\n    ): Call<String?>?\r\n\r\n    // 로그인\r\n    @FormUrlEncoded\r\n    @POST(\"login.php\")\r\n    fun getUserLogin(\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?\r\n    ): Call<String?>?\r\n\r\n    // 댓글 작성\r\n    @FormUrlEncoded\r\n    @POST(\"comt.php\")\r\n    fun getComment(\r\n        @Field(\"mbr_sn\") mbr_sn: Int?,\r\n        @Field(\"mlrd_sn\") mlrd_sn: Int?,\r\n        @Field(\"comt_cn\") comt_cn: String?\r\n    ): Call<String?>?\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/RestApi.kt b/app/src/main/java/com/example/water_app/repository/RestApi.kt
+--- a/app/src/main/java/com/example/water_app/repository/RestApi.kt	(revision 2f72674a604a69979b6fc7c75dc15a6c77ace62b)
++++ b/app/src/main/java/com/example/water_app/repository/RestApi.kt	(date 1673596567771)
+@@ -69,4 +69,14 @@
+         @Field("mlrd_sn") mlrd_sn: Int?,
+         @Field("comt_cn") comt_cn: String?
+     ): Call<String?>?
++
++    // 기부하기
++    @FormUrlEncoded
++    @POST("donation.php")
++    fun postDonation(
++        @Field("cntr_sn") cntr_sn: Int?,
++        @Field("mbr_sn") mbr_sn: Int?,
++        @Field("btr_pc") btr_pc: Int,
++        @Field("btn_nm") btn_nm: String?
++    ): Call<String?>?
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_donation.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@color/white\"\r\n    tools:context=\".donation.DonationActivity\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\">\r\n            <ImageView\r\n                android:id=\"@+id/btnBack\"\r\n                android:layout_width=\"25dp\"\r\n                android:layout_height=\"25dp\"\r\n                android:layout_marginStart=\"25dp\"\r\n                android:layout_marginTop=\"35dp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                android:src=\"@drawable/backpoint\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView3\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"25dp\"\r\n                android:fontFamily=\"@font/kim_bold\"\r\n                android:text=\"기부하기\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"25sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/btnBack\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/btnBack\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/btnBack\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView2\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:text=\"기부자 이름\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/checkBox\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/edtName\"\r\n                android:background=\"@drawable/edittext_login\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"50dp\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_marginEnd=\"50dp\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"textPersonName\"\r\n                android:hint=\"  이름\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/textView2\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView4\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:layout_marginTop=\"30dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"기부 금액\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/edtName\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/edtMoney\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"50dp\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_marginEnd=\"70dp\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"number\"\r\n                android:hint=\"0\"\r\n                android:gravity=\"right\"\r\n                android:textSize=\"25sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/textView4\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView5\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"원\"\r\n                android:textSize=\"25sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/edtMoney\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/edtMoney\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/edtMoney\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/btnDonation\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:layout_marginTop=\"50dp\"\r\n                android:layout_marginEnd=\"50dp\"\r\n                android:layout_marginBottom=\"30dp\"\r\n                android:background=\"@drawable/click_btn\"\r\n                android:text=\"기부하기\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/edtMoney\" />\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/checkBox\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginEnd=\"49dp\"\r\n                android:minHeight=\"48dp\"\r\n                android:text=\"동의합니다.\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/scrollView2\" />\r\n\r\n            <ScrollView\r\n                android:id=\"@+id/scrollView2\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"150dp\"\r\n                android:layout_marginStart=\"50dp\"\r\n                android:layout_marginTop=\"50dp\"\r\n                android:layout_marginEnd=\"50dp\"\r\n                android:background=\"@drawable/text_donation\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/textView3\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:orientation=\"vertical\">\r\n\r\n                    <TextView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:text=\"@string/terms\"\r\n                        android:textColor=\"@color/black\" />\r\n                </LinearLayout>\r\n            </ScrollView>\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </ScrollView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_donation.xml b/app/src/main/res/layout/activity_donation.xml
+--- a/app/src/main/res/layout/activity_donation.xml	(revision 2f72674a604a69979b6fc7c75dc15a6c77ace62b)
++++ b/app/src/main/res/layout/activity_donation.xml	(date 1673596005429)
+@@ -106,7 +106,8 @@
+                 android:layout_marginTop="50dp"
+                 android:layout_marginEnd="50dp"
+                 android:layout_marginBottom="30dp"
+-                android:background="@drawable/click_btn"
++                android:background="@color/grey"
++                android:enabled="false"
+                 android:text="기부하기"
+                 android:textColor="@color/white"
+                 android:textSize="20sp"
+Index: app/src/main/java/com/example/water_app/donation/DonationActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.donation\r\n\r\nimport android.os.Bundle\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityDonationBinding\r\n\r\nclass DonationActivity : AppCompatActivity() {\r\n\r\n    private lateinit var binding: ActivityDonationBinding\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_donation)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityDonationBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        // 인텐트 getextra\r\n        val cntr_sn = intent.getStringExtra(\"cntr_sn\")\r\n\r\n        binding.btnBack.setOnClickListener{\r\n            super.onBackPressed()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/donation/DonationActivity.kt b/app/src/main/java/com/example/water_app/donation/DonationActivity.kt
+--- a/app/src/main/java/com/example/water_app/donation/DonationActivity.kt	(revision 2f72674a604a69979b6fc7c75dc15a6c77ace62b)
++++ b/app/src/main/java/com/example/water_app/donation/DonationActivity.kt	(date 1673596567765)
+@@ -1,9 +1,15 @@
+ package com.example.water_app.donation
+ 
+ import android.os.Bundle
++import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityDonationBinding
++import com.example.water_app.repository.Instance
++import com.example.water_app.user.MySharedPreferences
++import retrofit2.Call
++import retrofit2.Callback
++import retrofit2.Response
+ 
+ class DonationActivity : AppCompatActivity() {
+ 
+@@ -18,10 +24,38 @@
+         setContentView(binding.root)
+ 
+         // 인텐트 getextra
+-        val cntr_sn = intent.getStringExtra("cntr_sn")
++        val cntr_sn = intent.extras!!.getInt("cntr_sn")
++        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
++        val btr_pc = binding.edtMoney?.text.toString()
++        val btn_nm = binding.edtName?.text.toString()
+ 
+         binding.btnBack.setOnClickListener{
+             super.onBackPressed()
+         }
++        binding.checkBox.setOnClickListener{
++            if(binding.checkBox.isChecked){
++                binding.btnDonation.isEnabled = true
++                binding.btnDonation.setBackgroundResource(R.color.Blue)
++                binding.btnDonation.setOnClickListener{
++                    val call = Instance.api.postDonation(cntr_sn, mbr_sn, btr_pc.toInt(), btn_nm)
++                    call!!.enqueue(object : Callback<String?> {
++                        override fun onResponse(call: Call<String?>, response: Response<String?>) {
++                            if (response.isSuccessful && response.body() != null) {
++                                Toast.makeText(this@DonationActivity,"기부 감사합니다.", Toast.LENGTH_SHORT).show()
++                            }
++                        }
++
++                        override fun onFailure(call: Call<String?>, t: Throwable) {
++                            Toast.makeText(this@DonationActivity,"오류.", Toast.LENGTH_SHORT).show()
++                        }
++                    })
++                }
++
++            }else{
++                binding.btnDonation.isEnabled = false
++                binding.btnDonation.setBackgroundResource(R.color.grey)
++            }
++        }
++
+     }
+ }
+\ No newline at end of file
