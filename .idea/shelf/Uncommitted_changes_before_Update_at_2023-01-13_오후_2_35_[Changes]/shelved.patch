@@ -1,0 +1,413 @@
+Index: app/src/main/res/layout/fragment_com_history.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".donation.ComHistoryFragment\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvStart\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"시작일\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv1\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"-\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvStart\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tvStart\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvStart\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvEnd\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"마감일\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tvStart\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv1\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tvStart\" />\r\n\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBar\"\r\n                style=\"@style/Widget.AppCompat.ProgressBar.Horizontal\"\r\n                android:layout_width=\"200dp\"\r\n                android:layout_height=\"200dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:indeterminate=\"false\"\r\n                android:max=\"100\"\r\n                android:progress=\"10\"\r\n                android:progressBackgroundTint=\"@color/lightGrey\"\r\n                android:progressTint=\"@color/darkBlue\"\r\n                android:progressDrawable=\"@drawable/progressbarcircle\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tvStart\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tvStart\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvPercent\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/kim_bold\"\r\n                android:text=\"100\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"40sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/progressBar\"\r\n                app:layout_constraintEnd_toEndOf=\"@+id/progressBar\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/progressBar\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/progressBar\"\r\n                app:layout_constraintVertical_bias=\"0.533\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv4\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:text=\"모금 금액\"\r\n                android:textColor=\"@color/black\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/progressBar\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/progressBar\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvTotal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:text=\"금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tv4\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv4\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tv4\" />\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv5\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:text=\"지출 금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tv4\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv4\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvExpend\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:text=\"금액\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/tv5\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/tv5\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/tv5\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv3\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:text=\"지출 보고 내역\"\r\n                android:textSize=\"20sp\"\r\n                android:fontFamily=\"@font/kim_regular\"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/tv5\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv5\" />\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/tv3\" />\r\n\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </ScrollView>\r\n\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_com_history.xml b/app/src/main/res/layout/fragment_com_history.xml
+--- a/app/src/main/res/layout/fragment_com_history.xml	(revision ec4313621c0eb8ada57b256d9706ea41c1088dea)
++++ b/app/src/main/res/layout/fragment_com_history.xml	(date 1673587971481)
+@@ -18,8 +18,8 @@
+                 android:id="@+id/tvStart"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:layout_marginStart="16dp"
+-                android:layout_marginTop="24dp"
++                android:layout_marginStart="24dp"
++                android:layout_marginTop="32dp"
+                 android:fontFamily="@font/kim_regular"
+                 android:text="시작일"
+                 android:textColor="@color/black"
+@@ -58,13 +58,14 @@
+                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                 android:layout_width="200dp"
+                 android:layout_height="200dp"
+-                android:layout_marginTop="24dp"
++                android:layout_marginTop="32dp"
+                 android:indeterminate="false"
+                 android:max="100"
+                 android:progress="10"
+                 android:progressBackgroundTint="@color/lightGrey"
+-                android:progressTint="@color/darkBlue"
+                 android:progressDrawable="@drawable/progressbarcircle"
++                android:progressTint="@color/darkBlue"
++                app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="@+id/tvStart"
+                 app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+ 
+@@ -86,12 +87,12 @@
+                 android:id="@+id/tv4"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:layout_marginTop="24dp"
++                android:layout_marginTop="32dp"
+                 android:fontFamily="@font/kim_regular"
+                 android:text="모금 금액"
+                 android:textColor="@color/black"
+                 android:textSize="20sp"
+-                app:layout_constraintStart_toStartOf="@+id/progressBar"
++                app:layout_constraintStart_toStartOf="@+id/tvStart"
+                 app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+ 
+             <TextView
+@@ -138,7 +139,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+-                android:text="지출 보고 내역"
++                android:text="모금 내역"
+                 android:textSize="20sp"
+                 android:fontFamily="@font/kim_regular"
+                 android:textColor="@color/black"
+@@ -148,10 +149,11 @@
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/recyclerView"
+                 android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginStart="16dp"
++                android:layout_height="250dp"
++                android:layout_marginStart="24dp"
+                 android:layout_marginTop="8dp"
+-                android:layout_marginEnd="16dp"
++                android:layout_marginEnd="24dp"
++                app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/tv3" />
+Index: app/src/main/java/com/example/water_app/donation/ComHistoryFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.donation\r\n\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport com.example.water_app.databinding.FragmentComHistoryBinding\r\n\r\nclass ComHistoryFragment : Fragment() {\r\n\r\n    private lateinit var binding: FragmentComHistoryBinding\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentComHistoryBinding.inflate(inflater, container, false)\r\n\r\n        // get\r\n        val cntr_str_dt = requireActivity().intent.extras!!.getString(\"cntr_str_dt\")\r\n        val cntr_end_dt = requireActivity().intent.extras!!.getString(\"cntr_end_dt\")\r\n        val ctbny_pc = requireActivity().intent.extras!!.getInt(\"ctbny_pc\")\r\n        val cntr_obctr = requireActivity().intent.extras!!.getInt(\"cntr_obctr\")\r\n\r\n        binding.tvStart.text = cntr_str_dt\r\n        binding.tvEnd.text = cntr_end_dt\r\n\r\n        // 퍼센트\r\n        if (ctbny_pc == 0) {\r\n            binding.tvPercent.text = \"0%\"\r\n            binding.progressBar.setProgress(0)\r\n        }else{\r\n            val collectPrice:Int? = ctbny_pc!!.toInt()\r\n            val totalPrice:Int? = cntr_obctr!!.toInt()\r\n            val pricePercent:Double? = collectPrice!!.toDouble() / totalPrice!! * 100\r\n\r\n            binding.tvPercent.text = pricePercent?.toInt().toString() + \"%\"\r\n            binding.progressBar.setProgress(pricePercent!!.toInt())\r\n        }\r\n\r\n        binding.tvTotal.text = cntr_obctr!!.toString()\r\n\r\n        return binding.root\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/donation/ComHistoryFragment.kt b/app/src/main/java/com/example/water_app/donation/ComHistoryFragment.kt
+--- a/app/src/main/java/com/example/water_app/donation/ComHistoryFragment.kt	(revision ec4313621c0eb8ada57b256d9706ea41c1088dea)
++++ b/app/src/main/java/com/example/water_app/donation/ComHistoryFragment.kt	(date 1673587112330)
+@@ -1,15 +1,26 @@
+ package com.example.water_app.donation
+ 
+ import android.os.Bundle
++import android.util.Log
+ import androidx.fragment.app.Fragment
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
++import androidx.lifecycle.Observer
++import androidx.lifecycle.ViewModelProvider
++import androidx.recyclerview.widget.DividerItemDecoration
++import androidx.recyclerview.widget.LinearLayoutManager
+ import com.example.water_app.databinding.FragmentComHistoryBinding
++import com.example.water_app.recyclerview.CollecterAdapter
++import com.example.water_app.repository.Repository
++import com.example.water_app.viewmodel.MainViewModel
++import com.example.water_app.viewmodel.MainViewModelFactory
++import kotlinx.android.synthetic.main.activity_recyclerview.*
+ 
+ class ComHistoryFragment : Fragment() {
+ 
+     private lateinit var binding: FragmentComHistoryBinding
++    private lateinit var viewModel : MainViewModel
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -28,6 +39,9 @@
+         val cntr_end_dt = requireActivity().intent.extras!!.getString("cntr_end_dt")
+         val ctbny_pc = requireActivity().intent.extras!!.getInt("ctbny_pc")
+         val cntr_obctr = requireActivity().intent.extras!!.getInt("cntr_obctr")
++        val cntr_sn = requireActivity().intent.extras!!.getInt("cntr_sn")
++
++        Log.d("---", "$cntr_sn")
+ 
+         binding.tvStart.text = cntr_str_dt
+         binding.tvEnd.text = cntr_end_dt
+@@ -47,6 +61,32 @@
+ 
+         binding.tvTotal.text = cntr_obctr!!.toString()
+ 
++        // 리사이클러뷰 통신
++        val repository = Repository()
++        val viewModelFactory = MainViewModelFactory(repository)
++
++        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
++        viewModel.getCollecter(cntr_sn)
++        viewModel.getCollecterResponse.observe(viewLifecycleOwner, Observer {
++            // 통신 성공
++            if(it.isSuccessful){
++                val collectList = it.body()
++
++                Log.d("---", "$collectList")
++
++                // 리사이클러뷰
++                binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
++                binding.recyclerView.setHasFixedSize(true)  // 성능 개선
++                binding.recyclerView.adapter = CollecterAdapter(requireContext(), collectList)
++
++                // 구분선
++                val dividerItemDecoration =
++                    DividerItemDecoration(recyclerView.context, LinearLayoutManager(requireContext()).orientation)
++
++                recyclerView.addItemDecoration(dividerItemDecoration)
++            }
++        })
++
+         return binding.root
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/repository/RestApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.*\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\nimport retrofit2.http.*\r\n\r\ninterface RestApi {\r\n    @GET(\"test2.php\")\r\n    suspend fun getUser(): Response<UserData>\r\n\r\n    @GET(\"home.php\")\r\n    suspend fun getDonationList(): Response<List<PostData>>\r\n\r\n    @GET(\"notice.php\")\r\n    suspend fun getNoticeList(): Response<List<NoticeData>>\r\n\r\n    @GET(\"homeend.php\")\r\n    suspend fun getHomeend(): Response<List<PostData>>\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"login.php\")\r\n    fun getLogin(\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?\r\n    ): Response<UserData?>?\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"join.php\")\r\n    fun join(\r\n        @Field(\"mbr_nm\") mbr_nm: String?,\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?,\r\n        @Field(\"mbr_ncnm\") mbr_ncnm: String?,\r\n        @Field(\"mbr_gen\") mbr_gen: Char,\r\n        @Field(\"mbr_tel\") mbr_tel: String?,\r\n        @Field(\"mbr_brthdy\") mbr_brthdy: String?,\r\n        @Field(\"mbr_email\") mbr_email: String?\r\n    ): Call<UserData?>\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"category.php\")\r\n    suspend fun getCategory(@Field(\"cntr_category\") cntr_category: Int?): Response<List<PostData>>\r\n\r\n    // 소통\r\n    @FormUrlEncoded\r\n    @POST(\"com.php\")\r\n    suspend fun getCommunication(@Field(\"cntr_sn\") cntr_sn: Int?): Response<List<ReviewData>>\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/RestApi.kt b/app/src/main/java/com/example/water_app/repository/RestApi.kt
+--- a/app/src/main/java/com/example/water_app/repository/RestApi.kt	(revision ec4313621c0eb8ada57b256d9706ea41c1088dea)
++++ b/app/src/main/java/com/example/water_app/repository/RestApi.kt	(date 1673586072366)
+@@ -48,4 +48,11 @@
+     @FormUrlEncoded
+     @POST("com.php")
+     suspend fun getCommunication(@Field("cntr_sn") cntr_sn: Int?): Response<List<ReviewData>>
++
++    // 모금 내역
++    @FormUrlEncoded
++    @POST("collecter.php")
++    suspend fun getCollecter(@Field("cntr_sn") cntr_sn: Int?): Response<List<CollectData>>
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/repository/Repository.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.NoticeData\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.ReviewData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\n\r\nclass Repository {\r\n    // ViewModel에서 사용할 데이터 통신\r\n\r\n    suspend fun getUser() : Response<UserData> {\r\n        return Instance.api.getUser()\r\n    }\r\n\r\n    suspend fun getDonationList() : Response<List<PostData>> {\r\n        return Instance.api.getDonationList()\r\n    }\r\n\r\n    suspend fun getNoticeList() : Response<List<NoticeData>> {\r\n        return Instance.api.getNoticeList()\r\n    }\r\n\r\n    suspend fun getHomeend() : Response<List<PostData>> {\r\n        return Instance.api.getHomeend()\r\n    }\r\n\r\n    suspend fun getLogin(mbr_id: String?, mbr_password: String?) : Response<UserData?>? {\r\n        return Instance.api.getLogin(mbr_id, mbr_password)\r\n    }\r\n\r\n    suspend fun join(\r\n        mbr_nm: String?,\r\n        mbr_id: String?,\r\n        mbr_password: String?,\r\n        mbr_ncnm: String?,\r\n        mbr_gen: Char,\r\n        mbr_tel: String?,\r\n        mbr_brthdy: String?,\r\n        mbr_email: String?) : Call<UserData?> {\r\n        return Instance.api.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)\r\n    }\r\n\r\n    suspend fun getCategory(cntr_category:Int?) : Response<List<PostData>> {\r\n        return Instance.api.getCategory(cntr_category)\r\n    }\r\n\r\n    // 소통\r\n    suspend fun getCommunication(cntr_sn:Int?) : Response<List<ReviewData>> {\r\n        return Instance.api.getCommunication(cntr_sn)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/Repository.kt b/app/src/main/java/com/example/water_app/repository/Repository.kt
+--- a/app/src/main/java/com/example/water_app/repository/Repository.kt	(revision ec4313621c0eb8ada57b256d9706ea41c1088dea)
++++ b/app/src/main/java/com/example/water_app/repository/Repository.kt	(date 1673585069743)
+@@ -1,9 +1,6 @@
+ package com.example.water_app.repository
+ 
+-import com.example.water_app.model.NoticeData
+-import com.example.water_app.model.PostData
+-import com.example.water_app.model.ReviewData
+-import com.example.water_app.model.UserData
++import com.example.water_app.model.*
+ import retrofit2.Call
+ import retrofit2.Response
+ 
+@@ -50,4 +47,9 @@
+     suspend fun getCommunication(cntr_sn:Int?) : Response<List<ReviewData>> {
+         return Instance.api.getCommunication(cntr_sn)
+     }
++
++    // 모금내역
++    suspend fun getCollecter(cntr_sn:Int?) : Response<List<CollectData>> {
++        return Instance.api.getCollecter(cntr_sn)
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/recyclerview/DonationAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.recyclerview\r\n\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.bumptech.glide.Glide\r\nimport com.example.water_app.donation.CommunicationActivity\r\nimport com.example.water_app.databinding.ItemMainRecyclerBinding\r\nimport com.example.water_app.model.PostData\r\n\r\nclass DonationAdapter(private val context: Context, private var donationList: List<PostData>?) : RecyclerView.Adapter<DonationAdapter.ViewHolder>() {\r\n\r\n    class ViewHolder(val binding: ItemMainRecyclerBinding) : RecyclerView.ViewHolder(binding.root)\r\n\r\n    // 아이템 레이아웃 설정\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationAdapter.ViewHolder {\r\n        val binding = ItemMainRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)\r\n        return ViewHolder(binding)\r\n    }\r\n\r\n    // 내용 입력\r\n    override fun onBindViewHolder(holder: DonationAdapter.ViewHolder, position: Int) {\r\n        val cntr_sn = donationList?.get(position)?.cntr_sn\r\n        val cntr_ttl = donationList?.get(position)?.cntr_ttl\r\n        val cntr_cn = donationList?.get(position)?.cntr_cn\r\n        val cntr_obctr = donationList?.get(position)?.cntr_obctr\r\n        val cntr_file_id = donationList?.get(position)?.cntr_file_id\r\n        val ctbny_pc = donationList?.get(position)?.ctbny_pc\r\n        val cntr_str_dt = donationList?.get(position)?.cntr_str_dt\r\n        val cntr_end_dt = donationList?.get(position)?.cntr_end_dt\r\n\r\n\r\n\r\n\r\n        holder.binding.tvTitle.text = cntr_ttl\r\n        holder.binding.tvMoney.text = cntr_obctr.toString()+\"원\"\r\n\r\n        // 이미지 url\r\n        var cntrurl : String = cntr_file_id.toString()\r\n        Glide.with(context).load(cntrurl).into(holder.binding.ivImage)\r\n\r\n        // 퍼센트\r\n        if (ctbny_pc == null) {\r\n            holder.binding.tvPercent.text = \"0%\"\r\n            holder.binding.pbPercent.setProgress(0)\r\n        }else{\r\n            val collectPrice:Int? = ctbny_pc\r\n            val totalPrice:Int? = cntr_obctr\r\n            val pricePercent:Double? = collectPrice!!.toDouble() / totalPrice!! * 100\r\n\r\n            holder.binding.tvPercent.text = pricePercent?.toInt().toString() + \"%\"\r\n            holder.binding.pbPercent.setProgress(pricePercent!!.toInt())\r\n        }\r\n\r\n        // ClickListener\r\n        holder.itemView.setOnClickListener {\r\n            itemClickListener.onClick(it, position)\r\n\r\n            // 인텐트 putextra\r\n            val intent = Intent(holder.itemView?.context,CommunicationActivity::class.java)\r\n\r\n            intent.putExtra(\"cntr_sn\",cntr_sn)\r\n            intent.putExtra(\"cntr_ttl\",cntr_ttl)\r\n            intent.putExtra(\"cntr_cn\",cntr_cn)\r\n            intent.putExtra(\"ctbny_pc\",ctbny_pc)\r\n            intent.putExtra(\"cntr_obctr\",cntr_obctr)\r\n            intent.putExtra(\"cntr_file_id\",cntr_file_id)\r\n            intent.putExtra(\"cntr_str_dt\", cntr_str_dt)\r\n            intent.putExtra(\"cntr_end_dt\",cntr_end_dt)\r\n\r\n            ContextCompat.startActivity(holder.itemView.context, intent, null)\r\n        }\r\n    }\r\n\r\n    // 리스트 내 아이템 개수\r\n    override fun getItemCount(): Int {\r\n        return donationList!!.size\r\n    }\r\n\r\n    // OnClickListener\r\n    interface OnItemClickListener {\r\n        fun onClick(v: View, position: Int)\r\n    }\r\n\r\n    private lateinit var itemClickListener : OnItemClickListener\r\n\r\n    fun setItemClickListener(itemClickListener: OnItemClickListener) {\r\n        this.itemClickListener = itemClickListener\r\n    }\r\n\r\n    // 데이터 변경시 리스트 다시 할당\r\n    fun setData(newList: PostData){\r\n        donationList = listOf(newList)\r\n        // 새로고침\r\n        notifyDataSetChanged()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/recyclerview/DonationAdapter.kt b/app/src/main/java/com/example/water_app/recyclerview/DonationAdapter.kt
+--- a/app/src/main/java/com/example/water_app/recyclerview/DonationAdapter.kt	(revision ec4313621c0eb8ada57b256d9706ea41c1088dea)
++++ b/app/src/main/java/com/example/water_app/recyclerview/DonationAdapter.kt	(date 1673586298702)
+@@ -33,9 +33,6 @@
+         val cntr_str_dt = donationList?.get(position)?.cntr_str_dt
+         val cntr_end_dt = donationList?.get(position)?.cntr_end_dt
+ 
+-
+-
+-
+         holder.binding.tvTitle.text = cntr_ttl
+         holder.binding.tvMoney.text = cntr_obctr.toString()+"원"
+ 
+Index: app/src/main/java/com/example/water_app/recyclerview/CollecterAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/recyclerview/CollecterAdapter.kt b/app/src/main/java/com/example/water_app/recyclerview/CollecterAdapter.kt
+new file mode 100644
+--- /dev/null	(date 1673587611263)
++++ b/app/src/main/java/com/example/water_app/recyclerview/CollecterAdapter.kt	(date 1673587611263)
+@@ -0,0 +1,32 @@
++package com.example.water_app.recyclerview
++
++import android.content.Context
++import android.view.LayoutInflater
++import android.view.ViewGroup
++import androidx.recyclerview.widget.RecyclerView
++import com.example.water_app.databinding.ItemCollectRecyclerBinding
++import com.example.water_app.model.CollectData
++
++class CollecterAdapter(private val context: Context, private var collectList: List<CollectData>?) : RecyclerView.Adapter<CollecterAdapter.ViewHolder>() {
++
++    class ViewHolder(val binding: ItemCollectRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
++
++    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
++        val binding = ItemCollectRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
++        return ViewHolder(binding)
++    }
++
++    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
++        val btn_pc = collectList?.get(position)?.btr_pc
++        val rgtr_dt = collectList?.get(position)?.rgtr_dt
++        val mbr_nm = collectList?.get(position)?.mbr_ncnm
++
++        holder.binding.tvNick.text = mbr_nm.toString()
++        holder.binding.tvMoney.text = btn_pc.toString()+"원"
++        holder.binding.tvDate.text = rgtr_dt.toString()
++    }
++
++    override fun getItemCount(): Int {
++        return collectList!!.size
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/item_collect_recycler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_collect_recycler.xml b/app/src/main/res/layout/item_collect_recycler.xml
+new file mode 100644
+--- /dev/null	(date 1673587999910)
++++ b/app/src/main/res/layout/item_collect_recycler.xml	(date 1673587999910)
+@@ -0,0 +1,61 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content">
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent">
++
++        <TextView
++            android:id="@+id/tvNick"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="32dp"
++            android:layout_marginTop="16dp"
++            android:layout_marginBottom="16dp"
++            android:fontFamily="@font/kim_regular"
++            android:text="닉네임"
++            android:textColor="@color/black"
++            android:textSize="14sp"
++            android:textStyle="bold"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
++
++        <TextView
++            android:id="@+id/tvMoney"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="24dp"
++            android:fontFamily="@font/kim_regular"
++            android:text="기부 금액"
++            android:textColor="@color/darkBlue"
++            android:textSize="14sp"
++            android:textStyle="bold"
++            app:layout_constraintBottom_toBottomOf="@+id/tvNick"
++            app:layout_constraintStart_toEndOf="@+id/tvNick"
++            app:layout_constraintTop_toTopOf="@+id/tvNick" />
++
++        <TextView
++            android:id="@+id/tvDate"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="24dp"
++            android:fontFamily="@font/kim_regular"
++            android:text="날짜"
++            android:textColor="@color/black"
++            android:textSize="14sp"
++            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
++            app:layout_constraintStart_toEndOf="@+id/tvMoney"
++            app:layout_constraintTop_toTopOf="@+id/tvMoney" />
++
++
++    </androidx.constraintlayout.widget.ConstraintLayout>
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/model/CollectData.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/model/CollectData.kt b/app/src/main/java/com/example/water_app/model/CollectData.kt
+new file mode 100644
+--- /dev/null	(date 1673587611257)
++++ b/app/src/main/java/com/example/water_app/model/CollectData.kt	(date 1673587611257)
+@@ -0,0 +1,10 @@
++package com.example.water_app.model
++
++import java.sql.Date
++
++data class CollectData(
++    val btr_pc: Int?,
++    val cntr_sn: Int?,
++    val rgtr_dt: String?,
++    val mbr_ncnm: String?
++)
+Index: app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.viewmodel\r\n\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport androidx.lifecycle.viewModelScope\r\nimport com.example.water_app.model.NoticeData\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.ReviewData\r\nimport com.example.water_app.model.UserData\r\nimport kotlinx.coroutines.launch\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\n\r\nclass MainViewModel(private val repository : Repository) : ViewModel() {\r\n    // 데이터 처리\r\n\r\n    val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()\r\n    val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()\r\n    val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val loginResponse : MutableLiveData<Response<UserData?>?> = MutableLiveData()\r\n    val joinResponse : MutableLiveData<Call<UserData?>> = MutableLiveData()\r\n    val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()\r\n\r\n    fun getUser() {\r\n        viewModelScope.launch {\r\n            val response = repository.getUser()\r\n            myResponse.value = response\r\n        }\r\n    }\r\n    fun getDonationList() {\r\n        viewModelScope.launch {\r\n            val response = repository.getDonationList()\r\n            getDonationListResponse.value = response\r\n        }\r\n    }\r\n    fun getNoticeList() {\r\n        viewModelScope.launch {\r\n            val response = repository.getNoticeList()\r\n            noticeListResponse.value = response\r\n        }\r\n    }\r\n    fun getHomeEnd() {\r\n        viewModelScope.launch {\r\n            val response = repository.getHomeend()\r\n            getHomeEndListResponse.value = response\r\n        }\r\n    }\r\n    fun getLogin(mbr_id: String?, mbr_password: String?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getLogin(mbr_id, mbr_password)\r\n            loginResponse.value = response\r\n        }\r\n    }\r\n    fun join(\r\n        mbr_nm: String?,\r\n        mbr_id: String?,\r\n        mbr_password: String?,\r\n        mbr_ncnm: String?,\r\n        mbr_gen: Char,\r\n        mbr_tel: String?,\r\n        mbr_brthdy: String?,\r\n        mbr_email: String?) {\r\n        viewModelScope.launch {\r\n            val response = repository.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)\r\n            joinResponse.value = response\r\n        }\r\n    }\r\n    fun getCategory(cntr_category:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getCategory(cntr_category)\r\n            getCategoryResponse.value = response\r\n        }\r\n    }\r\n\r\n    // 소통\r\n    fun getCommunication(cntr_sn:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getCommunication(cntr_sn)\r\n            getCommunicationResponse.value = response\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+--- a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(revision ec4313621c0eb8ada57b256d9706ea41c1088dea)
++++ b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(date 1673586072339)
+@@ -3,11 +3,8 @@
+ import androidx.lifecycle.MutableLiveData
+ import androidx.lifecycle.ViewModel
+ import androidx.lifecycle.viewModelScope
+-import com.example.water_app.model.NoticeData
++import com.example.water_app.model.*
+ import com.example.water_app.repository.Repository
+-import com.example.water_app.model.PostData
+-import com.example.water_app.model.ReviewData
+-import com.example.water_app.model.UserData
+ import kotlinx.coroutines.launch
+ import retrofit2.Call
+ import retrofit2.Response
+@@ -23,6 +20,7 @@
+     val joinResponse : MutableLiveData<Call<UserData?>> = MutableLiveData()
+     val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
++    val getCollecterResponse : MutableLiveData<Response<List<CollectData>>> = MutableLiveData()
+ 
+     fun getUser() {
+         viewModelScope.launch {
+@@ -82,4 +80,12 @@
+             getCommunicationResponse.value = response
+         }
+     }
++
++    // 모금 내역
++    fun getCollecter(cntr_sn:Int?) {
++        viewModelScope.launch {
++            val response = repository.getCollecter(cntr_sn)
++            getCollecterResponse.value = response
++        }
++    }
+ }
+\ No newline at end of file
