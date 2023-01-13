@@ -18,6 +18,7 @@ import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_recyclerview.*
+import java.text.DecimalFormat
 
 class ComHistoryFragment : Fragment() {
 
@@ -61,7 +62,8 @@ class ComHistoryFragment : Fragment() {
             binding.progressBar.setProgress(pricePercent!!.toInt())
         }
 
-        binding.tvTotal.text = cntr_obctr!!.toString()
+        val decimalFormat = DecimalFormat("#,###")
+        binding.tvTotal.text = decimalFormat.format(cntr_obctr)+"원"
 
         // 리사이클러뷰 통신
         val repository = Repository()

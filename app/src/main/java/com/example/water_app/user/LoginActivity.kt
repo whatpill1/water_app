@@ -51,13 +51,7 @@ class LoginActivity : AppCompatActivity() {
         val mbr_id = binding.edtEmail!!.text.toString().trim { it <= ' ' }
         val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Instance.BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .build()
-
-        val api = retrofit.create(RestApi::class.java)
-        val call = api.getUserLogin(mbr_id, mbr_password)
+        val call = Instance.api.getUserLogin(mbr_id, mbr_password)
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {

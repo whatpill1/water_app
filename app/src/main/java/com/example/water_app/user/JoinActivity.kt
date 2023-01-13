@@ -48,13 +48,7 @@ class JoinActivity : AppCompatActivity() {
         val mbr_birth = binding!!.edtBirth.text.toString()
         val mbr_email = binding!!.edtEmail.text.toString()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Instance.BASE_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .build()
-        val api = retrofit.create(RestApi::class.java)
-        val call = api.getUserRegist(
-            mbr_id, mbr_password, mbr_nm, mbr_ncnm, mbr_gen, mbr_tel, mbr_birth, mbr_email)
+        val call = Instance.api.getUserRegist(mbr_id, mbr_password, mbr_nm, mbr_ncnm, mbr_gen, mbr_tel, mbr_birth, mbr_email)
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 if (response.isSuccessful && response.body() != null) {

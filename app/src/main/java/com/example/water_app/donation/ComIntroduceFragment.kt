@@ -14,6 +14,7 @@ import com.example.water_app.R
 import com.example.water_app.databinding.FragmentComIntroduceBinding
 import com.example.water_app.user.LoginActivity
 import com.example.water_app.user.MySharedPreferences
+import java.text.DecimalFormat
 
 
 class ComIntroduceFragment : Fragment() {
@@ -47,7 +48,8 @@ class ComIntroduceFragment : Fragment() {
         // 인텐트 putextra getextra 하는 부분
         binding.donationTtl.text = cntr_ttl
         binding.donationCn.text = cntr_cn
-        binding.donationAmount.text = cntr_obctr.toString() +"원"
+        val decimalFormat = DecimalFormat("#,###")
+        binding.donationAmount.text = decimalFormat.format(cntr_obctr)+"원"
 
         // 이미지 url
         var cntrurl : String = cntr_file_id.toString()

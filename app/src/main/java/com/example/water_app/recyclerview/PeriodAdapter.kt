@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemPeriodRecyclerBinding
 import com.example.water_app.model.PostData
+import java.text.DecimalFormat
 
 class PeriodAdapter(val periodList: List<PostData>?) : RecyclerView.Adapter<PeriodAdapter.ViewHolder>() {
 
@@ -17,7 +18,9 @@ class PeriodAdapter(val periodList: List<PostData>?) : RecyclerView.Adapter<Peri
 
     override fun onBindViewHolder(holder: PeriodAdapter.ViewHolder, position: Int) {
         holder.binding.tvTitle.text = periodList?.get(position)?.cntr_ttl
-        holder.binding.tvMoney.text = periodList?.get(position)?.cntr_obctr.toString()
+        val decimalFormat = DecimalFormat("#,###")
+        holder.binding.tvMoney.text = decimalFormat.format( periodList?.get(position)?.cntr_obctr)+"원"
+        //holder.binding.tvMoney.text = periodList?.get(position)?.cntr_obctr.toString()
         holder.binding.tvStart.text = periodList?.get(position)?.cntr_str_dt
         holder.binding.tvEnd.text = periodList?.get(position)?.cntr_end_dt
     }

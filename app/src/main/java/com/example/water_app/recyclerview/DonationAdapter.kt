@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.databinding.ItemMainRecyclerBinding
 import com.example.water_app.model.PostData
+import java.text.DecimalFormat
 
 class DonationAdapter(private val context: Context, private var donationList: List<PostData>?) : RecyclerView.Adapter<DonationAdapter.ViewHolder>() {
 
@@ -34,7 +35,8 @@ class DonationAdapter(private val context: Context, private var donationList: Li
         val cntr_end_dt = donationList?.get(position)?.cntr_end_dt
 
         holder.binding.tvTitle.text = cntr_ttl
-        holder.binding.tvMoney.text = cntr_obctr.toString()+"원"
+        val decimalFormat = DecimalFormat("#,###")
+        holder.binding.tvMoney.text = decimalFormat.format(cntr_obctr)+"원"
 
         // 이미지 url
         var cntrurl : String = cntr_file_id.toString()

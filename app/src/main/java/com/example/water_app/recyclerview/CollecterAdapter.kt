@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.databinding.ItemCollectRecyclerBinding
 import com.example.water_app.model.CollectData
+import java.text.DecimalFormat
 
 class CollecterAdapter(private val context: Context, private var collectList: List<CollectData>?) : RecyclerView.Adapter<CollecterAdapter.ViewHolder>() {
 
@@ -20,9 +21,9 @@ class CollecterAdapter(private val context: Context, private var collectList: Li
         val btn_pc = collectList?.get(position)?.btr_pc
         val rgtr_dt = collectList?.get(position)?.rgtr_dt
         val mbr_nm = collectList?.get(position)?.mbr_ncnm
-
         holder.binding.tvNick.text = mbr_nm.toString()
-        holder.binding.tvMoney.text = btn_pc.toString()+"원"
+        val decimalFormat = DecimalFormat("#,###")
+        holder.binding.tvMoney.text = decimalFormat.format(btn_pc)+"원"
         holder.binding.tvDate.text = rgtr_dt.toString()
     }
 
