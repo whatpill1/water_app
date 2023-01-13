@@ -23,22 +23,6 @@ class Repository {
         return Instance.api.getHomeend()
     }
 
-    suspend fun getLogin(userData: UserData) : Response<UserData?>? {
-        return Instance.api.getLogin(userData)
-    }
-
-    suspend fun join(
-        mbr_nm: String?,
-        mbr_id: String?,
-        mbr_password: String?,
-        mbr_ncnm: String?,
-        mbr_gen: Char,
-        mbr_tel: String?,
-        mbr_brthdy: String?,
-        mbr_email: String?) : Call<UserData?> {
-        return Instance.api.join(mbr_nm, mbr_id, mbr_password, mbr_ncnm, mbr_gen, mbr_tel, mbr_brthdy, mbr_email)
-    }
-
     suspend fun getCategory(cntr_category:Int?) : Response<List<PostData>> {
         return Instance.api.getCategory(cntr_category)
     }

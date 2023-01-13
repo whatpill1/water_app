@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityJoinBinding
 import com.example.water_app.main.MainActivity
+import com.example.water_app.repository.Instance
+import com.example.water_app.repository.RestApi
 import com.example.water_app.viewmodel.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +21,6 @@ class JoinActivity : AppCompatActivity() {
 
     val TAG = "JoinActivity"
     private lateinit var binding: ActivityJoinBinding
-    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,6 @@ class JoinActivity : AppCompatActivity() {
         binding.btnJoin!!.setOnClickListener {
             registerMe()
         }
-
     }
 
     private fun registerMe() {
@@ -49,10 +49,10 @@ class JoinActivity : AppCompatActivity() {
         val mbr_email = binding!!.edtEmail.text.toString()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(UserInterface.USER_URL)
+            .baseUrl(Instance.BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
-        val api = retrofit.create(UserInterface::class.java)
+        val api = retrofit.create(RestApi::class.java)
         val call = api.getUserRegist(
             mbr_id, mbr_password, mbr_nm, mbr_ncnm, mbr_gen, mbr_tel, mbr_birth, mbr_email)
         call!!.enqueue(object : Callback<String?> {

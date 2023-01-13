@@ -9,6 +9,8 @@ import com.example.water_app.R
 import com.example.water_app.databinding.ActivityLoginBinding
 import com.example.water_app.main.MainActivity
 import com.example.water_app.model.UserData
+import com.example.water_app.repository.Instance
+import com.example.water_app.repository.RestApi
 import com.example.water_app.viewmodel.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -50,11 +52,11 @@ class LoginActivity : AppCompatActivity() {
         val mbr_password = binding.edtPassword!!.text.toString().trim { it <= ' ' }
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(UserInterface.USER_URL)
+            .baseUrl(Instance.BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
 
-        val api = retrofit.create(UserInterface::class.java)
+        val api = retrofit.create(RestApi::class.java)
         val call = api.getUserLogin(mbr_id, mbr_password)
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
@@ -79,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun startLogin(){
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

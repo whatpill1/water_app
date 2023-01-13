@@ -79,17 +79,4 @@ class ComStoryFragment : Fragment() {
 
         return binding.root
     }
-
-    // 세로 간격
-    class RecyclerViewDecoration2(private val divHeight: Int) : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
-            outRect.bottom = divHeight
-        }
-    }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityStoryBinding
+import com.example.water_app.user.MySharedPreferences
 
 class StoryActivity : AppCompatActivity() {
 
@@ -20,9 +21,14 @@ class StoryActivity : AppCompatActivity() {
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mlrd_sn = this.intent.extras!!.getInt("mlrd_sn")
+        // 글 내용
         val mlrd_ttl = this.intent.extras!!.getString("mlrd_ttl")
         val mlrd_cn = this.intent.extras!!.getString("mlrd_cn")
+
+//        // 댓글
+//        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
+//        val mlrd_sn = this.intent.extras!!.getInt("mlrd_sn")
+//        val comt_cn = binding!!.edtComment.text.toString()
 
         binding.tvTitle.text = mlrd_ttl
         binding.tvContent.text = mlrd_cn
