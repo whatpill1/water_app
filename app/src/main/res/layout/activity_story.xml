@@ -74,8 +74,8 @@
                 app:layout_constraintStart_toStartOf="@+id/tvContent"
                 app:layout_constraintTop_toBottomOf="@+id/view1" />
 
-            <TextView
-                android:id="@+id/tvComment"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -102,9 +102,22 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/darkGrey"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/tvComment"
-                app:layout_constraintStart_toStartOf="@+id/tvComment"
-                app:layout_constraintTop_toBottomOf="@+id/tvComment" />
+                app:layout_constraintEnd_toEndOf="@+id/rvComment"
+                app:layout_constraintStart_toStartOf="@+id/rvComment"
+                app:layout_constraintTop_toBottomOf="@+id/rvComment" />
+
+            <Button
+                android:id="@+id/btnComment"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/click_btn"
+                android:fontFamily="@font/kim_regular"
+                android:text="댓글 작성"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/edtComment"
+                app:layout_constraintTop_toBottomOf="@+id/edtComment" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
