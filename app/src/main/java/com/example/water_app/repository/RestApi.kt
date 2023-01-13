@@ -61,6 +61,11 @@ interface RestApi {
         @Field("mbr_password") mbr_password: String?
     ): Call<String?>?
 
+    // 댓글
+    @FormUrlEncoded
+    @POST("getcomt.php")
+    suspend fun getComment(@Field("mlrd_sn") mlrd_sn: Int?): Response<List<CommentData>>
+
     // 댓글 작성
     @FormUrlEncoded
     @POST("comt.php")

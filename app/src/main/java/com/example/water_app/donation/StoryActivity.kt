@@ -3,12 +3,25 @@ package com.example.water_app.donation
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityStoryBinding
+import com.example.water_app.recyclerview.CommentAdapter
+import com.example.water_app.recyclerview.StoryAdapter
 import com.example.water_app.repository.Instance
+import com.example.water_app.repository.Repository
 import com.example.water_app.user.MySharedPreferences
+import com.example.water_app.viewmodel.MainViewModel
+import com.example.water_app.viewmodel.MainViewModelFactory
+import kotlinx.android.synthetic.main.fragment_com_history.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +30,9 @@ class StoryActivity : AppCompatActivity() {
 
     // 뷰바인딩
     private lateinit var binding: ActivityStoryBinding
+
+    // 뷰 모델
+    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +48,26 @@ class StoryActivity : AppCompatActivity() {
         binding.tvTitle.text = mlrd_ttl
         binding.tvContent.text = mlrd_cn
 
+        // 댓글
+        val mlrd_sn = this.intent.extras!!.getInt("mlrd_sn")
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getComment(mlrd_sn)
+        viewModel.getCommentResponse.observe(this, Observer {
+            // 통신 성공
+            if(it.isSuccessful){
+                val commentList = it.body()
+
+                //리사이클러뷰
+                binding.rvComment.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                binding.rvComment.setHasFixedSize(true)
+                binding.rvComment.adapter = CommentAdapter(this, commentList)
+            }
+        })
+
+        // 댓글 작성
         binding.btnComment!!.setOnClickListener {
             getComment()
         }

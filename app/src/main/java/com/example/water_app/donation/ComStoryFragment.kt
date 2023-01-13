@@ -40,7 +40,6 @@ class ComStoryFragment : Fragment() {
         binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
 
         val cntr_sn = requireActivity().intent.extras!!.getInt("cntr_sn")
-        Log.d("---------", "$cntr_sn")
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)

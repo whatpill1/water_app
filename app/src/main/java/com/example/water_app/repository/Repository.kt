@@ -36,4 +36,9 @@ class Repository {
     suspend fun getCollecter(cntr_sn:Int?) : Response<List<CollectData>> {
         return Instance.api.getCollecter(cntr_sn)
     }
+
+    // 댓글
+    suspend fun getComment(mlrd_sn:Int?) : Response<List<CommentData>> {
+        return Instance.api.getComment(mlrd_sn)
+    }
 }
