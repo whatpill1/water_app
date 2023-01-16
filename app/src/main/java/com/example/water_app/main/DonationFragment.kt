@@ -47,7 +47,7 @@ class DonationFragment : Fragment() {
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getMy(mbr_sn)
-        viewModel.getMyResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
             // 통신 성공
             if(it.isSuccessful){
                 val donationList = it.body()

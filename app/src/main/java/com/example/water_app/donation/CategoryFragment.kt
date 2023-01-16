@@ -51,7 +51,7 @@ class CategoryFragment : Fragment() {
             val viewModelFactory = MainViewModelFactory(repository)
             viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
             viewModel.getCategory(categoryNum)
-            viewModel.getCategoryResponse.observe(viewLifecycleOwner, Observer {
+            viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
                 // 통신 성공
                 if (it.isSuccessful) {
                     val donationList = it.body()

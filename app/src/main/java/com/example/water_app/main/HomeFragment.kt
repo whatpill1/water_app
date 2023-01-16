@@ -175,7 +175,7 @@ class HomeFragment : Fragment() {
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getHomeEnd()
-        viewModel.getHomeEndListResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
             // 통신 성공
             if(it.isSuccessful){
                 val closelist = it.body()

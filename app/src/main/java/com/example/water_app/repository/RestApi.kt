@@ -89,4 +89,17 @@ interface RestApi {
     @FormUrlEncoded
     @POST("mydonation.php")
     suspend fun getMy(@Field("mbr_sn") mbr_sn: Int?): Response<List<PostData>>
+
+    // 회원 정보 수정
+    @POST("updatemypage.php")
+    fun updateUser(@Field("mbr_sn") mbr_sn: Int?,
+                           @Field("mbr_ncnm") mbr_ncnm: String?,
+                           @Field("mbr_password") mbr_password: String?,
+                           @Field("mbr_tel") mbr_tel: String?,
+                           @Field("mbr_email") mbr_email: String?
+    ): Call<String?>?
+
+    // 회원 탈퇴
+    @POST("updatemypage.php")
+    fun deleteUser(@Field("mbr_sn") mbr_sn: Int?): Call<String?>?
 }
