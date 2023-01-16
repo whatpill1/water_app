@@ -101,6 +101,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".user.UpdateMyPageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".user.LoginActivity"
             android:exported="false">
             <meta-data

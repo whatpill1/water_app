@@ -9,14 +9,18 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Update
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityMyPageBinding
+import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.main.MainActivity
 import com.example.water_app.repository.Instance
 import com.example.water_app.repository.Repository
 import com.example.water_app.user.MySharedPreferences
+import com.example.water_app.user.UpdateMyPageActivity
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
 import retrofit2.Call
@@ -45,17 +49,43 @@ class MyPageActivity : AppCompatActivity() {
 
         val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
 
+
+
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getUser(mbr_sn)
         viewModel.myResponse.observe(this, Observer {
             if(it.isSuccessful) {
-                binding.tvName.text = it.body()?.mbr_sn.toString()
-                binding.tvId.text = it.body()?.mbr_id.toString()
-                binding.tvNickName.text = it.body()?.mbr_ncnm.toString()
-                binding.tvGen.text = it.body()?.mbr_gen.toString()
-                binding.tvPhone.text = it.body()?.mbr_tel.toString()
-                binding.tvBirth.text = it.body()?.mbr_brthdy.toString()
-                binding.tvEmail.text = it.body()?.mbr_email.toString()
+
+                val mbr_nm = it.body()?.mbr_nm.toString()
+                val mbr_id = it.body()?.mbr_id.toString()
+                val mbr_ncnm = it.body()?.mbr_ncnm.toString()
+                val mbr_gen = it.body()?.mbr_gen.toString()
+                val mbr_tel = it.body()?.mbr_tel.toString()
+                val mbr_brthdy = it.body()?.mbr_brthdy.toString()
+                val mbr_email = it.body()?.mbr_email.toString()
+
+
+                binding.tvName.text = mbr_nm.toString()
+                binding.tvId.text = mbr_id.toString()
+                binding.tvNickName.text = mbr_ncnm.toString()
+                binding.tvGen.text = mbr_gen.toString()
+                binding.tvPhone.text = mbr_tel.toString()
+                binding.tvBirth.text = mbr_brthdy.toString()
+                binding.tvEmail.text = mbr_email.toString()
+
+                binding.btnChange.setOnClickListener{
+                    val intent = Intent(this, UpdateMyPageActivity::class.java)
+                    intent.putExtra("mbr_id",mbr_id)
+                    intent.putExtra("mbr_nm",mbr_nm)
+                    intent.putExtra("mbr_ncnm",mbr_ncnm)
+                    intent.putExtra("mbr_gen",mbr_gen)
+                    intent.putExtra("mbr_tel",mbr_tel)
+                    intent.putExtra("mbr_brthdy",mbr_brthdy)
+                    intent.putExtra("mbr_email",mbr_email)
+                    startActivity(intent)
+
+                }
+
             }
             else{
                 Log.d("Response",it.errorBody().toString())
@@ -65,44 +95,5 @@ class MyPageActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener{
             super.onBackPressed()
         }
-
-        binding.btnDelete.setOnClickListener{
-            val mDialogView =
-                LayoutInflater.from(this).inflate(R.layout.mypage_delete, null)
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-
-            val mAlertDialog = mBuilder.show()
-
-            val noButton = mDialogView.findViewById<Button>(R.id.btnNo)
-            noButton.setOnClickListener {
-                mAlertDialog.dismiss()
-            }
-            val yesButton = mDialogView.findViewById<Button>(R.id.btnYes)
-            yesButton.setOnClickListener {
-                deleteUser()
-            }
-        }
-    }
-    fun deleteUser(){
-        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
-        val call = Instance.api.deleteUser(mbr_sn)
-        call!!.enqueue(object : Callback<String?> {
-            override fun onResponse(call: Call<String?>, response: Response<String?>) {
-                if (response.isSuccessful && response.body() != null) {
-                    Toast.makeText(this@MyPageActivity,"회원 탈퇴 완료.", Toast.LENGTH_SHORT).show()
-                    reStart()
-                }
-            }
-
-            override fun onFailure(call: Call<String?>, t: Throwable) {
-            }
-        })
-    }
-
-    private fun reStart(){
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
     }
 }

@@ -45,11 +45,20 @@ class DonationActivity : AppCompatActivity() {
                     val call = Instance.api.postDonation(cntr_sn, mbr_sn, btn_nm, btr_pc)
                     call!!.enqueue(object : Callback<String?> {
                         override fun onResponse(call: Call<String?>, response: Response<String?>) {
+                            val result = response.body()!!
+                            if (result.toInt() == 0){
+                                Toast.makeText(this@DonationActivity,"error", Toast.LENGTH_SHORT).show()
+                            }else if(result.toInt() == 1){
+                                Toast.makeText(this@DonationActivity,"error", Toast.LENGTH_SHORT).show()
+                            }else if(result.toInt() == 2){
+                                Toast.makeText(this@DonationActivity,"기부가 감사합니다.", Toast.LENGTH_SHORT).show()
+                                startMain()
+                            }else{
+                                Toast.makeText(this@DonationActivity,"error", Toast.LENGTH_SHORT).show()
+                            }
                         }
                         override fun onFailure(call: Call<String?>, t: Throwable) {
-                            Toast.makeText(this@DonationActivity,"기부가 완료되었습니다..", Toast.LENGTH_SHORT).show()
-
-                            startMain()
+                            Toast.makeText(this@DonationActivity,"error", Toast.LENGTH_SHORT).show()
                         }
                     })
                 }
