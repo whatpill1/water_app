@@ -9,8 +9,8 @@ import retrofit2.http.*
 
 interface RestApi {
     // 마이페이지
-    @GET("test2.php")
-    suspend fun getUser(): Response<UserData>
+    @POST("mypage.php")
+    suspend fun getUser(@Field("mbr_sn") mbr_sn: Int?): Response<UserData>
 
     // 진행중인 기부
     @GET("home.php")
@@ -88,5 +88,5 @@ interface RestApi {
     // 나의 후원 목록
     @FormUrlEncoded
     @POST("mydonation.php")
-    suspend fun getMy(@Field("mbr_sn") cntr_category: Int?): Response<List<PostData>>
+    suspend fun getMy(@Field("mbr_sn") mbr_sn: Int?): Response<List<PostData>>
 }

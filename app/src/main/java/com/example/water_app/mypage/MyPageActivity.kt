@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityMyPageBinding
 import com.example.water_app.repository.Repository
+import com.example.water_app.user.MySharedPreferences
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
 
@@ -28,11 +29,10 @@ class MyPageActivity : AppCompatActivity() {
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-
-        val mbr_sn = this.intent.extras?.getString("mbr_sn")
+        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getUser()
+        viewModel.getUser(mbr_sn)
         viewModel.myResponse.observe(this, Observer {
             if(it.isSuccessful) {
                 binding.tvName.text = it.body()?.mbr_sn.toString()
