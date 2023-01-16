@@ -1,0 +1,289 @@
+Index: app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.viewmodel\r\n\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport androidx.lifecycle.viewModelScope\r\nimport com.example.water_app.model.*\r\nimport com.example.water_app.repository.Repository\r\nimport kotlinx.coroutines.launch\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\n\r\nclass MainViewModel(private val repository : Repository) : ViewModel() {\r\n    // 데이터 처리\r\n\r\n    val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()\r\n    val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()\r\n    val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n    val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()\r\n    val getCollecterResponse : MutableLiveData<Response<List<CollectData>>> = MutableLiveData()\r\n    val getCommentResponse : MutableLiveData<Response<List<CommentData>>> = MutableLiveData()\r\n    val getMyResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()\r\n\r\n    fun getUser(mbr_sn: Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getUser(mbr_sn)\r\n            myResponse.value = response\r\n        }\r\n    }\r\n    fun getDonationList() {\r\n        viewModelScope.launch {\r\n            val response = repository.getDonationList()\r\n            getDonationListResponse.value = response\r\n        }\r\n    }\r\n    fun getNoticeList() {\r\n        viewModelScope.launch {\r\n            val response = repository.getNoticeList()\r\n            noticeListResponse.value = response\r\n        }\r\n    }\r\n    fun getHomeEnd() {\r\n        viewModelScope.launch {\r\n            val response = repository.getHomeend()\r\n            getHomeEndListResponse.value = response\r\n        }\r\n    }\r\n\r\n    fun getCategory(cntr_category:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getCategory(cntr_category)\r\n            getCategoryResponse.value = response\r\n        }\r\n    }\r\n\r\n    // 소통\r\n    fun getCommunication(cntr_sn:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getCommunication(cntr_sn)\r\n            getCommunicationResponse.value = response\r\n        }\r\n    }\r\n\r\n    // 모금 내역\r\n    fun getCollecter(cntr_sn:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getCollecter(cntr_sn)\r\n            getCollecterResponse.value = response\r\n        }\r\n    }\r\n\r\n    // 댓글\r\n    fun getComment(mlrd_sn:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getComment(mlrd_sn)\r\n            getCommentResponse.value = response\r\n        }\r\n    }\r\n\r\n    fun getMy(mbr_sn:Int?) {\r\n        viewModelScope.launch {\r\n            val response = repository.getMy(mbr_sn)\r\n            getMyResponse.value = response\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt
+--- a/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/viewmodel/MainViewModel.kt	(date 1673835858920)
+@@ -15,12 +15,12 @@
+     val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
+     val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+     val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()
+-    val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+-    val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
++    //val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
++    //val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
+     val getCollecterResponse : MutableLiveData<Response<List<CollectData>>> = MutableLiveData()
+     val getCommentResponse : MutableLiveData<Response<List<CommentData>>> = MutableLiveData()
+-    val getMyResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
++    //val getMyResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+ 
+     fun getUser(mbr_sn: Int?) {
+         viewModelScope.launch {
+@@ -43,14 +43,14 @@
+     fun getHomeEnd() {
+         viewModelScope.launch {
+             val response = repository.getHomeend()
+-            getHomeEndListResponse.value = response
++            getDonationListResponse.value = response
+         }
+     }
+ 
+     fun getCategory(cntr_category:Int?) {
+         viewModelScope.launch {
+             val response = repository.getCategory(cntr_category)
+-            getCategoryResponse.value = response
++            getDonationListResponse.value = response
+         }
+     }
+ 
+@@ -81,7 +81,7 @@
+     fun getMy(mbr_sn:Int?) {
+         viewModelScope.launch {
+             val response = repository.getMy(mbr_sn)
+-            getMyResponse.value = response
++            getDonationListResponse.value = response
+         }
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/repository/RestApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.*\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.model.UserData\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\nimport retrofit2.http.*\r\n\r\ninterface RestApi {\r\n    // 마이페이지\r\n    @POST(\"mypage.php\")\r\n    suspend fun getUser(@Field(\"mbr_sn\") mbr_sn: Int?): Response<UserData>\r\n\r\n    // 진행중인 기부\r\n    @GET(\"home.php\")\r\n    suspend fun getDonationList(): Response<List<PostData>>\r\n\r\n    // 공지사항\r\n    @GET(\"notice.php\")\r\n    suspend fun getNoticeList(): Response<List<NoticeData>>\r\n\r\n    // 완료된 기부\r\n    @GET(\"homeend.php\")\r\n    suspend fun getHomeend(): Response<List<PostData>>\r\n\r\n    // 카테고리별 목록\r\n    @FormUrlEncoded\r\n    @POST(\"category.php\")\r\n    suspend fun getCategory(@Field(\"cntr_category\") cntr_category: Int?): Response<List<PostData>>\r\n\r\n    // 소통\r\n    @FormUrlEncoded\r\n    @POST(\"com.php\")\r\n    suspend fun getCommunication(@Field(\"cntr_sn\") cntr_sn: Int?): Response<List<ReviewData>>\r\n\r\n    // 모금 내역\r\n    @FormUrlEncoded\r\n    @POST(\"collecter.php\")\r\n    suspend fun getCollecter(@Field(\"cntr_sn\") cntr_sn: Int?): Response<List<CollectData>>\r\n\r\n    // 회원가입\r\n    @FormUrlEncoded\r\n    @POST(\"join.php\")\r\n    fun getUserRegist(\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?,\r\n        @Field(\"mbr_nm\") mbr_nm: String?,\r\n        @Field(\"mbr_ncnm\") mbr_ncnm: String?,\r\n        @Field(\"mbr_gen\") mbr_gen: Char,\r\n        @Field(\"mbr_tel\") mbr_tel: String?,\r\n        @Field(\"mbr_brthdy\") mbr_brthdy: String?,\r\n        @Field(\"mbr_email\") mbr_email: String?\r\n    ): Call<String?>?\r\n\r\n    // 로그인\r\n    @FormUrlEncoded\r\n    @POST(\"login.php\")\r\n    fun getUserLogin(\r\n        @Field(\"mbr_id\") mbr_id: String?,\r\n        @Field(\"mbr_password\") mbr_password: String?\r\n    ): Call<String?>?\r\n\r\n    // 댓글\r\n    @FormUrlEncoded\r\n    @POST(\"getcomt.php\")\r\n    suspend fun getComment(@Field(\"mlrd_sn\") mlrd_sn: Int?): Response<List<CommentData>>\r\n\r\n    // 댓글 작성\r\n    @FormUrlEncoded\r\n    @POST(\"comt.php\")\r\n    fun getComment(\r\n        @Field(\"mbr_sn\") mbr_sn: Int?,\r\n        @Field(\"mlrd_sn\") mlrd_sn: Int?,\r\n        @Field(\"comt_cn\") comt_cn: String?\r\n    ): Call<String?>?\r\n\r\n    // 기부하기\r\n    @FormUrlEncoded\r\n    @POST(\"donation.php\")\r\n    fun postDonation(\r\n        @Field(\"cntr_sn\") cntr_sn: Int?,\r\n        @Field(\"mbr_sn\") mbr_sn: Int?,\r\n        @Field(\"btn_nm\") btn_nm: String?,\r\n        @Field(\"btr_pc\") btr_pc: Int\r\n    ): Call<String?>?\r\n\r\n    // 나의 후원 목록\r\n    @FormUrlEncoded\r\n    @POST(\"mydonation.php\")\r\n    suspend fun getMy(@Field(\"mbr_sn\") mbr_sn: Int?): Response<List<PostData>>\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/RestApi.kt b/app/src/main/java/com/example/water_app/repository/RestApi.kt
+--- a/app/src/main/java/com/example/water_app/repository/RestApi.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/repository/RestApi.kt	(date 1673835858915)
+@@ -89,4 +89,17 @@
+     @FormUrlEncoded
+     @POST("mydonation.php")
+     suspend fun getMy(@Field("mbr_sn") mbr_sn: Int?): Response<List<PostData>>
++
++    // 회원 정보 수정
++    @POST("updatemypage.php")
++    fun updateUser(@Field("mbr_sn") mbr_sn: Int?,
++                           @Field("mbr_ncnm") mbr_ncnm: String?,
++                           @Field("mbr_password") mbr_password: String?,
++                           @Field("mbr_tel") mbr_tel: String?,
++                           @Field("mbr_email") mbr_email: String?
++    ): Call<String?>?
++
++    // 회원 탈퇴
++    @POST("updatemypage.php")
++    fun deleteUser(@Field("mbr_sn") mbr_sn: Int?): Call<String?>?
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/repository/Repository.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.repository\r\n\r\nimport com.example.water_app.model.*\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\n\r\nclass Repository {\r\n    // ViewModel에서 사용할 데이터 통신\r\n\r\n    suspend fun getUser(mbr_sn: Int?) : Response<UserData> {\r\n        return Instance.api.getUser(mbr_sn)\r\n    }\r\n\r\n    suspend fun getDonationList() : Response<List<PostData>> {\r\n        return Instance.api.getDonationList()\r\n    }\r\n\r\n    suspend fun getNoticeList() : Response<List<NoticeData>> {\r\n        return Instance.api.getNoticeList()\r\n    }\r\n\r\n    suspend fun getHomeend() : Response<List<PostData>> {\r\n        return Instance.api.getHomeend()\r\n    }\r\n\r\n    suspend fun getCategory(cntr_category:Int?) : Response<List<PostData>> {\r\n        return Instance.api.getCategory(cntr_category)\r\n    }\r\n\r\n    // 소통\r\n    suspend fun getCommunication(cntr_sn:Int?) : Response<List<ReviewData>> {\r\n        return Instance.api.getCommunication(cntr_sn)\r\n    }\r\n\r\n    // 모금내역\r\n    suspend fun getCollecter(cntr_sn:Int?) : Response<List<CollectData>> {\r\n        return Instance.api.getCollecter(cntr_sn)\r\n    }\r\n\r\n    // 댓글\r\n    suspend fun getComment(mlrd_sn:Int?) : Response<List<CommentData>> {\r\n        return Instance.api.getComment(mlrd_sn)\r\n    }\r\n\r\n    // 나의 후원 목록\r\n    suspend fun getMy(mbr_sn:Int?) : Response<List<PostData>> {\r\n        return Instance.api.getMy(mbr_sn)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/repository/Repository.kt b/app/src/main/java/com/example/water_app/repository/Repository.kt
+--- a/app/src/main/java/com/example/water_app/repository/Repository.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/repository/Repository.kt	(date 1673835858903)
+@@ -3,6 +3,7 @@
+ import com.example.water_app.model.*
+ import retrofit2.Call
+ import retrofit2.Response
++import retrofit2.http.Field
+ 
+ class Repository {
+     // ViewModel에서 사용할 데이터 통신
+Index: app/src/main/java/com/example/water_app/mypage/MyPageActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.mypage\r\n\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityMyPageBinding\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.user.MySharedPreferences\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\n\r\nclass MyPageActivity : AppCompatActivity() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityMyPageBinding\r\n\r\n    private lateinit var viewModel : MainViewModel\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_my_page)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityMyPageBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getUser(mbr_sn)\r\n        viewModel.myResponse.observe(this, Observer {\r\n            if(it.isSuccessful) {\r\n                binding.tvName.text = it.body()?.mbr_sn.toString()\r\n                binding.tvId.text = it.body()?.mbr_id.toString()\r\n                binding.tvNickName.text = it.body()?.mbr_ncnm.toString()\r\n                binding.tvGen.text = it.body()?.mbr_gen.toString()\r\n                binding.tvPhone.text = it.body()?.mbr_tel.toString()\r\n                binding.tvBirth.text = it.body()?.mbr_brthdy.toString()\r\n                binding.tvEmail.text = it.body()?.mbr_email.toString()\r\n            }\r\n            else{\r\n                Log.d(\"Response\",it.errorBody().toString())\r\n            }\r\n        })\r\n\r\n        binding.btnBack.setOnClickListener{\r\n            super.onBackPressed()\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/mypage/MyPageActivity.kt b/app/src/main/java/com/example/water_app/mypage/MyPageActivity.kt
+--- a/app/src/main/java/com/example/water_app/mypage/MyPageActivity.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/mypage/MyPageActivity.kt	(date 1673835858940)
+@@ -1,16 +1,24 @@
+ package com.example.water_app.mypage
+ 
++import android.app.AlertDialog
+ import android.os.Bundle
+ import android.util.Log
++import android.view.LayoutInflater
++import android.widget.Button
++import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.lifecycle.Observer
+ import androidx.lifecycle.ViewModelProvider
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityMyPageBinding
++import com.example.water_app.repository.Instance
+ import com.example.water_app.repository.Repository
+ import com.example.water_app.user.MySharedPreferences
+ import com.example.water_app.viewmodel.MainViewModel
+ import com.example.water_app.viewmodel.MainViewModelFactory
++import retrofit2.Call
++import retrofit2.Callback
++import retrofit2.Response
+ 
+ class MyPageActivity : AppCompatActivity() {
+ 
+@@ -18,6 +26,7 @@
+     private lateinit var binding: ActivityMyPageBinding
+ 
+     private lateinit var viewModel : MainViewModel
++    val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -29,7 +38,7 @@
+ 
+         val repository = Repository()
+         val viewModelFactory = MainViewModelFactory(repository)
+-        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
++
+ 
+         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+         viewModel.getUser(mbr_sn)
+@@ -51,5 +60,33 @@
+         binding.btnBack.setOnClickListener{
+             super.onBackPressed()
+         }
++
++        binding.btnDelete.setOnClickListener{
++            val mDialogView =
++                LayoutInflater.from(this).inflate(R.layout.mypage_money, null)
++            val mBuilder = AlertDialog.Builder(this)
++                .setView(mDialogView)
++
++            val mAlertDialog = mBuilder.show()
++
++            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
++            noButton.setOnClickListener {
++                mAlertDialog.dismiss()
++            }
++            deleteUser()
++        }
++    }
++    fun deleteUser(){
++        val call = Instance.api.deleteUser(mbr_sn)
++        call!!.enqueue(object : Callback<String?> {
++            override fun onResponse(call: Call<String?>, response: Response<String?>) {
++                if (response.isSuccessful && response.body() != null) {
++                    Toast.makeText(this@MyPageActivity,"회원 탈퇴 완료.", Toast.LENGTH_SHORT).show()
++                }
++            }
++
++            override fun onFailure(call: Call<String?>, t: Throwable) {
++            }
++        })
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/main/DonationFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.graphics.Rect\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.activity.OnBackPressedCallback\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport androidx.recyclerview.widget.GridLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport androidx.recyclerview.widget.RecyclerView.ItemDecoration\r\nimport com.example.water_app.donation.CommunicationActivity\r\nimport com.example.water_app.databinding.ActivityRecyclerviewBinding\r\nimport com.example.water_app.recyclerview.DonationAdapter\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.user.MySharedPreferences\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\nimport kotlinx.android.synthetic.main.fragment_com_history.*\r\n\r\n\r\nclass DonationFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityRecyclerviewBinding\r\n\r\n    // 뷰 모델 가져오기\r\n    private lateinit var viewModel : MainViewModel\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)\r\n\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        val mbr_sn = MySharedPreferences.getUserSn(requireContext()).toInt()\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getMy(mbr_sn)\r\n        viewModel.getMyResponse.observe(viewLifecycleOwner, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val donationList = it.body()\r\n\r\n                //리사이클러뷰\r\n                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)\r\n                binding.recyclerView.setHasFixedSize(true)\r\n                binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)\r\n\r\n                // 아이템 간 간격\r\n                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))\r\n                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))\r\n\r\n                // OnClickListener\r\n                val adapter = DonationAdapter(requireContext(), donationList)\r\n\r\n                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{\r\n                    override fun onClick(v: View, position: Int) {\r\n                        activity?.let{\r\n                            val intent = Intent(context, CommunicationActivity::class.java)\r\n                            startActivity(intent)\r\n                        }\r\n                    }\r\n                })\r\n                binding.recyclerView.adapter = adapter\r\n            }\r\n        })\r\n        return binding.root\r\n    }\r\n\r\n    // 뒤로가기 메인 고정\r\n    private lateinit var callback: OnBackPressedCallback\r\n    lateinit var mainActivity: MainActivity\r\n\r\n    // 뒤로가기 고정\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        callback = object : OnBackPressedCallback(true) {\r\n            override fun handleOnBackPressed() {\r\n            }\r\n        }\r\n        requireActivity().onBackPressedDispatcher.addCallback(this, callback)\r\n\r\n        mainActivity = context as MainActivity\r\n    }\r\n\r\n    // 뒤로가기 고정\r\n    override fun onDetach() {\r\n        super.onDetach()\r\n        callback.remove()\r\n    }\r\n\r\n    // 가로 간격\r\n    class RecyclerViewDecoration1(private val divWidth: Int) : ItemDecoration() {\r\n        override fun getItemOffsets(\r\n            outRect: Rect,\r\n            view: View,\r\n            parent: RecyclerView,\r\n            state: RecyclerView.State\r\n        ) {\r\n            super.getItemOffsets(outRect, view, parent, state)\r\n            outRect.left = divWidth\r\n        }\r\n    }\r\n\r\n    // 세로 간격\r\n    class RecyclerViewDecoration2(private val divHeight: Int) : ItemDecoration() {\r\n        override fun getItemOffsets(\r\n            outRect: Rect,\r\n            view: View,\r\n            parent: RecyclerView,\r\n            state: RecyclerView.State\r\n        ) {\r\n            super.getItemOffsets(outRect, view, parent, state)\r\n            outRect.bottom = divHeight\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/DonationFragment.kt b/app/src/main/java/com/example/water_app/main/DonationFragment.kt
+--- a/app/src/main/java/com/example/water_app/main/DonationFragment.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/main/DonationFragment.kt	(date 1673835858898)
+@@ -47,7 +47,7 @@
+ 
+         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+         viewModel.getMy(mbr_sn)
+-        viewModel.getMyResponse.observe(viewLifecycleOwner, Observer {
++        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
+             // 통신 성공
+             if(it.isSuccessful){
+                 val donationList = it.body()
+Index: app/src/main/java/com/example/water_app/donation/CategoryFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.donation\r\n\r\nimport android.content.Context\r\nimport android.graphics.Rect\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.activity.OnBackPressedCallback\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.fragment.app.setFragmentResultListener\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport androidx.recyclerview.widget.GridLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityRecyclerviewBinding\r\nimport com.example.water_app.main.HomeFragment\r\nimport com.example.water_app.main.MainActivity\r\nimport com.example.water_app.recyclerview.DonationAdapter\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\nimport kotlinx.android.synthetic.main.fragment_com_history.*\r\n\r\nclass CategoryFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityRecyclerviewBinding\r\n\r\n    // 뷰 모델 가져오기\r\n    private lateinit var viewModel : MainViewModel\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)\r\n\r\n        // 카테고리별 결과물\r\n        setFragmentResultListener(\"requestKey\") { requestKey, bundle ->\r\n            val categoryNum = bundle.getInt(\"bundleKey\")\r\n            val repository = Repository()\r\n            val viewModelFactory = MainViewModelFactory(repository)\r\n            viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)\r\n            viewModel.getCategory(categoryNum)\r\n            viewModel.getCategoryResponse.observe(viewLifecycleOwner, Observer {\r\n                // 통신 성공\r\n                if (it.isSuccessful) {\r\n                    val donationList = it.body()\r\n\r\n                    binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)\r\n                    binding.recyclerView.setHasFixedSize(true)\r\n                    binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)\r\n\r\n                    // 아이템 간 간격\r\n                    recyclerView.addItemDecoration(RecyclerViewDecoration1(50))\r\n                    recyclerView.addItemDecoration(RecyclerViewDecoration2(50))\r\n\r\n                    // OnClickListener\r\n                    val adapter = DonationAdapter(requireContext(), donationList)\r\n\r\n                    adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener {\r\n                        override fun onClick(v: View, position: Int) {\r\n                            activity?.let {\r\n                            }\r\n                        }\r\n                    })\r\n                    binding.recyclerView.adapter = adapter\r\n                }\r\n            })\r\n        }\r\n        return binding.root\r\n    }\r\n\r\n    // 뒤로가기 메인 고정\r\n    private lateinit var callback: OnBackPressedCallback\r\n    lateinit var mainActivity: MainActivity\r\n\r\n    // 뒤로가기 고정\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        callback = object : OnBackPressedCallback(true) {\r\n            override fun handleOnBackPressed() {\r\n                parentFragmentManager.beginTransaction()\r\n                    .replace(R.id.flContainer, HomeFragment())\r\n                    .commit()\r\n            }\r\n        }\r\n        requireActivity().onBackPressedDispatcher.addCallback(this, callback)\r\n\r\n        mainActivity = context as MainActivity\r\n    }\r\n\r\n    // 뒤로가기 고정\r\n    override fun onDetach() {\r\n        super.onDetach()\r\n        callback.remove()\r\n    }\r\n\r\n    // 가로 간격\r\n    class RecyclerViewDecoration1(private val divWidth: Int) : RecyclerView.ItemDecoration() {\r\n        override fun getItemOffsets(\r\n            outRect: Rect,\r\n            view: View,\r\n            parent: RecyclerView,\r\n            state: RecyclerView.State\r\n        ) {\r\n            super.getItemOffsets(outRect, view, parent, state)\r\n            outRect.left = divWidth\r\n        }\r\n    }\r\n\r\n    // 세로 간격\r\n    class RecyclerViewDecoration2(private val divHeight: Int) : RecyclerView.ItemDecoration() {\r\n        override fun getItemOffsets(\r\n            outRect: Rect,\r\n            view: View,\r\n            parent: RecyclerView,\r\n            state: RecyclerView.State\r\n        ) {\r\n            super.getItemOffsets(outRect, view, parent, state)\r\n            outRect.bottom = divHeight\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/donation/CategoryFragment.kt b/app/src/main/java/com/example/water_app/donation/CategoryFragment.kt
+--- a/app/src/main/java/com/example/water_app/donation/CategoryFragment.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/donation/CategoryFragment.kt	(date 1673835858932)
+@@ -51,7 +51,7 @@
+             val viewModelFactory = MainViewModelFactory(repository)
+             viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+             viewModel.getCategory(categoryNum)
+-            viewModel.getCategoryResponse.observe(viewLifecycleOwner, Observer {
++            viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
+                 // 통신 성공
+                 if (it.isSuccessful) {
+                     val donationList = it.body()
+Index: app/src/main/res/layout/mypage_delete.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/mypage_delete.xml b/app/src/main/res/layout/mypage_delete.xml
+new file mode 100644
+--- /dev/null	(date 1673835858909)
++++ b/app/src/main/res/layout/mypage_delete.xml	(date 1673835858909)
+@@ -0,0 +1,34 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content">
++
++    <Button
++        android:id="@+id/btnBackCall"
++        android:layout_width="15dp"
++        android:layout_height="15dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="16dp"
++        android:background="@drawable/close"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/textView6"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="60dp"
++        android:layout_marginBottom="60dp"
++        android:fontFamily="@font/kim_bold"
++        android:text="정말 탈퇴하시겠습니까?"
++        android:textColor="@color/black"
++        android:textSize="20sp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/main/HomeFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.content.Context\r\nimport android.os.Bundle\r\nimport android.os.Handler\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.core.os.bundleOf\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.fragment.app.setFragmentResult\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport androidx.viewpager2.widget.ViewPager2\r\nimport com.example.water_app.donation.CategoryFragment\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.FragmentHomeBinding\r\nimport com.example.water_app.recyclerview.DonationAdapter\r\nimport com.example.water_app.recyclerview.ViewPagerAdapter\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\n\r\nclass HomeFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: FragmentHomeBinding\r\n\r\n    // MainActivity 가져오기\r\n    lateinit var mainActivity: MainActivity\r\n\r\n    // 뷰페이저\r\n    private val sliderImageHandler: Handler = Handler()\r\n    private val sliderImageRunnable = Runnable { binding.ivBanner.currentItem = binding.ivBanner.currentItem + 1 }\r\n\r\n    // context를 mainActivity에 담음\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n\r\n        mainActivity = context as MainActivity\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentHomeBinding.inflate(inflater, container, false)\r\n\r\n        // 뷰페이저\r\n        val imageList = arrayListOf<Int>().apply {\r\n            for (i in 0..2) {\r\n                add(R.drawable.banner1)\r\n                add(R.drawable.banner2)\r\n                add(R.drawable.banner3)\r\n            }\r\n        }\r\n\r\n        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)\r\n        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth)\r\n        val screenWidth = resources.displayMetrics.widthPixels\r\n        val offsetPx = screenWidth - pageMarginPx - pagerWidth\r\n\r\n        binding.ivBanner.apply {\r\n            adapter = ViewPagerAdapter(imageList, binding.ivBanner)\r\n            offscreenPageLimit = 1\r\n            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER\r\n            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {\r\n                override fun onPageSelected(position: Int) {\r\n                    super.onPageSelected(position)\r\n                    sliderImageHandler.removeCallbacks(sliderImageRunnable)\r\n                    sliderImageHandler.postDelayed(sliderImageRunnable, 3000)\r\n                }\r\n            })\r\n            setPageTransformer { page, position ->\r\n                page.translationX = position * -offsetPx\r\n            }\r\n        }\r\n\r\n        // MainActivity 담음\r\n        mainActivity = context as MainActivity\r\n\r\n        // 리사이클러뷰\r\n        home()\r\n        homeEnd()\r\n\r\n        // 카테고리\r\n        binding.btnChild.setOnClickListener{\r\n            val result = 0\r\n            setFragmentResult(\"requestKey\", bundleOf(\"bundleKey\" to result))\r\n            parentFragmentManager.beginTransaction()\r\n                .replace(R.id.flContainer, CategoryFragment())\r\n                .commit()\r\n        }\r\n        binding.btnOld.setOnClickListener{\r\n            val result = 1\r\n            setFragmentResult(\"requestKey\", bundleOf(\"bundleKey\" to result))\r\n            parentFragmentManager.beginTransaction()\r\n                .replace(R.id.flContainer, CategoryFragment())\r\n                .commit()\r\n        }\r\n        binding.btnDisabled.setOnClickListener{\r\n            val result = 2\r\n            setFragmentResult(\"requestKey\", bundleOf(\"bundleKey\" to result))\r\n            parentFragmentManager.beginTransaction()\r\n                .replace(R.id.flContainer, CategoryFragment())\r\n                .commit()\r\n        }\r\n        binding.btnAnimal.setOnClickListener{\r\n            val result = 3\r\n            setFragmentResult(\"requestKey\", bundleOf(\"bundleKey\" to result))\r\n            parentFragmentManager.beginTransaction()\r\n                .replace(R.id.flContainer, CategoryFragment())\r\n                .commit()\r\n        }\r\n        binding.btnEtc.setOnClickListener{\r\n            val result = 4\r\n            setFragmentResult(\"requestKey\", bundleOf(\"bundleKey\" to result))\r\n            parentFragmentManager.beginTransaction()\r\n                .replace(R.id.flContainer, CategoryFragment())\r\n                .commit()\r\n        }\r\n        return binding.root\r\n    }\r\n\r\n    // 리사이클러뷰 진행중인 기부\r\n    fun home(){\r\n        // 뷰 모델 가져오기\r\n        val viewModel : MainViewModel\r\n\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getDonationList()\r\n        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val homelist = it.body()\r\n\r\n                // 리사이클러뷰\r\n                binding.rvDonation.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)\r\n                binding.rvDonation.setHasFixedSize(true)\r\n                binding.rvDonation.adapter = DonationAdapter(requireContext(), homelist)\r\n\r\n                // OnClickListener\r\n                val adapter = DonationAdapter(requireContext(), homelist)\r\n\r\n                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{\r\n                    override fun onClick(v: View, position: Int) {\r\n                        activity?.let{\r\n                        }\r\n                    }\r\n                })\r\n                binding.rvDonation.adapter = adapter\r\n            }\r\n        })\r\n    }\r\n\r\n    // 완료된 기부\r\n    fun homeEnd(){\r\n        val viewModel : MainViewModel\r\n        // php데이터담은\r\n        // 리사이클러뷰 표현 아직 사진 퍼센트 없음\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getHomeEnd()\r\n        viewModel.getHomeEndListResponse.observe(viewLifecycleOwner, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val closelist = it.body()\r\n\r\n                // 리사이클러뷰\r\n                binding.rvClose.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)\r\n                binding.rvClose.setHasFixedSize(true)\r\n                binding.rvClose.adapter = DonationAdapter(requireContext(), closelist)\r\n\r\n                // OnClickListener\r\n                val adapter = DonationAdapter(requireContext(), closelist)\r\n\r\n                adapter.setItemClickListener(object : DonationAdapter.OnItemClickListener{\r\n                    override fun onClick(v: View, position: Int) {\r\n                        activity?.let{\r\n                        }\r\n                    }\r\n                })\r\n                binding.rvClose.adapter = adapter\r\n\r\n            }\r\n        })\r\n    }\r\n\r\n    // 뷰페이저\r\n    override fun onResume() {\r\n        super.onResume()\r\n        sliderImageHandler.postDelayed(sliderImageRunnable, 1000)\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        sliderImageHandler.removeCallbacks(sliderImageRunnable)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/HomeFragment.kt b/app/src/main/java/com/example/water_app/main/HomeFragment.kt
+--- a/app/src/main/java/com/example/water_app/main/HomeFragment.kt	(revision aba34a0cd33ff16595fa69ea38698c478c02e08e)
++++ b/app/src/main/java/com/example/water_app/main/HomeFragment.kt	(date 1673835858885)
+@@ -170,7 +170,7 @@
+ 
+         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+         viewModel.getHomeEnd()
+-        viewModel.getHomeEndListResponse.observe(viewLifecycleOwner, Observer {
++        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
+             // 통신 성공
+             if(it.isSuccessful){
+                 val closelist = it.body()

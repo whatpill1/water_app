@@ -9,6 +9,7 @@ import retrofit2.http.*
 
 interface RestApi {
     // 마이페이지
+    @FormUrlEncoded
     @POST("mypage.php")
     suspend fun getUser(@Field("mbr_sn") mbr_sn: Int?): Response<UserData>
 

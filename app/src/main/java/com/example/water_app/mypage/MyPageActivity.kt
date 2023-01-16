@@ -29,7 +29,7 @@ class MyPageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyPageBinding
 
     private lateinit var viewModel : MainViewModel
-    val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +43,7 @@ class MyPageActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
+        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
 
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getUser(mbr_sn)
@@ -84,6 +85,7 @@ class MyPageActivity : AppCompatActivity() {
         }
     }
     fun deleteUser(){
+        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
         val call = Instance.api.deleteUser(mbr_sn)
         call!!.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
