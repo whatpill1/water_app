@@ -20,6 +20,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
     val getCollecterResponse : MutableLiveData<Response<List<CollectData>>> = MutableLiveData()
     val getCommentResponse : MutableLiveData<Response<List<CommentData>>> = MutableLiveData()
+    val getMyResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
 
     fun getUser() {
         viewModelScope.launch {
@@ -74,6 +75,13 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
         viewModelScope.launch {
             val response = repository.getComment(mlrd_sn)
             getCommentResponse.value = response
+        }
+    }
+
+    fun getMy(mbr_sn:Int?) {
+        viewModelScope.launch {
+            val response = repository.getMy(mbr_sn)
+            getMyResponse.value = response
         }
     }
 }

@@ -18,6 +18,7 @@ import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
+import com.example.water_app.user.MySharedPreferences
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.fragment_com_history.*
@@ -42,9 +43,11 @@ class DonationFragment : Fragment() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
 
+        val mbr_sn = MySharedPreferences.getUserSn(requireContext()).toInt()
+
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getDonationList()
-        viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.getMy(mbr_sn)
+        viewModel.getMyResponse.observe(viewLifecycleOwner, Observer {
             // 통신 성공
             if(it.isSuccessful){
                 val donationList = it.body()

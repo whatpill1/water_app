@@ -84,4 +84,9 @@ interface RestApi {
         @Field("btn_nm") btn_nm: String?,
         @Field("btr_pc") btr_pc: Int
     ): Call<String?>?
+
+    // 나의 후원 목록
+    @FormUrlEncoded
+    @POST("mydonation.php")
+    suspend fun getMy(@Field("mbr_sn") cntr_category: Int?): Response<List<PostData>>
 }

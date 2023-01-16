@@ -41,4 +41,9 @@ class Repository {
     suspend fun getComment(mlrd_sn:Int?) : Response<List<CommentData>> {
         return Instance.api.getComment(mlrd_sn)
     }
+
+    // 나의 후원 목록
+    suspend fun getMy(mbr_sn:Int?) : Response<List<PostData>> {
+        return Instance.api.getMy(mbr_sn)
+    }
 }
