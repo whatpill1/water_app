@@ -7,8 +7,8 @@ import retrofit2.Response
 class Repository {
     // ViewModel에서 사용할 데이터 통신
 
-    suspend fun getUser() : Response<UserData> {
-        return Instance.api.getUser()
+    suspend fun getUser(mbr_sn: Int?) : Response<UserData> {
+        return Instance.api.getUser(mbr_sn)
     }
 
     suspend fun getDonationList() : Response<List<PostData>> {
