@@ -57,9 +57,9 @@ class DonationFragment : Fragment() {
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
 
-                // 아이템 간 간격
-                recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
-                recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
+//                // 아이템 간 간격
+//                binding.recyclerView.addItemDecoration(RecyclerViewDecoration1(40, 10))
+//                binding.recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
 
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), donationList)
@@ -101,7 +101,7 @@ class DonationFragment : Fragment() {
     }
 
     // 가로 간격
-    class RecyclerViewDecoration1(private val divWidth: Int) : ItemDecoration() {
+    class RecyclerViewDecoration1(private val divLeft: Int, private val divRight: Int) : ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
             view: View,
@@ -109,7 +109,8 @@ class DonationFragment : Fragment() {
             state: RecyclerView.State
         ) {
             super.getItemOffsets(outRect, view, parent, state)
-            outRect.left = divWidth
+            outRect.left = divLeft
+            outRect.right = divRight
         }
     }
 

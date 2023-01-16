@@ -149,7 +149,7 @@ class HomeFragment : Fragment() {
                 binding.rvDonation.setHasFixedSize(true)
                 binding.rvDonation.adapter = DonationAdapter(requireContext(), homelist)
 
-                rvDonation.addItemDecoration(RecyclerViewDecoration(25))
+                binding.rvDonation.addItemDecoration(RecyclerViewDecoration(10))
 
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), homelist)
@@ -185,7 +185,7 @@ class HomeFragment : Fragment() {
                 binding.rvClose.setHasFixedSize(true)
                 binding.rvClose.adapter = DonationAdapter(requireContext(), closelist)
 
-                rvClose.addItemDecoration(RecyclerViewDecoration(25))
+                binding.rvClose.addItemDecoration(RecyclerViewDecoration(10))
 
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), closelist)

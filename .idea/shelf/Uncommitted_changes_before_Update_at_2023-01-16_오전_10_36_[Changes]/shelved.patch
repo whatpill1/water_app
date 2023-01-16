@@ -1,0 +1,331 @@
+Index: app/src/main/java/com/example/water_app/donation/DonationActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.donation\r\n\r\nimport android.os.Bundle\r\nimport android.text.Editable\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityDonationBinding\r\nimport com.example.water_app.repository.Instance\r\nimport com.example.water_app.user.MySharedPreferences\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\n\r\nclass DonationActivity : AppCompatActivity() {\r\n\r\n    private lateinit var binding: ActivityDonationBinding\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_donation)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityDonationBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        // 인텐트 getextra\r\n        val cntr_sn = intent.extras!!.getInt(\"cntr_sn\")\r\n        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()\r\n\r\n\r\n\r\n        binding.btnBack.setOnClickListener{\r\n            super.onBackPressed()\r\n        }\r\n        binding.checkBox.setOnClickListener{\r\n            if(binding.checkBox.isChecked){\r\n                binding.btnDonation.isEnabled = true\r\n                binding.btnDonation.setBackgroundResource(R.color.Blue)\r\n\r\n                binding.btnDonation.setOnClickListener{\r\n                    val btr_pc = binding.edtMoney.text.toString().toInt()\r\n                    val btn_nm = binding.edtName.text.toString()\r\n                    val call = Instance.api.postDonation(cntr_sn, mbr_sn, btn_nm, btr_pc)\r\n                    call!!.enqueue(object : Callback<String?> {\r\n                        override fun onResponse(call: Call<String?>, response: Response<String?>) {\r\n                        }\r\n                        override fun onFailure(call: Call<String?>, t: Throwable) {\r\n                            Toast.makeText(this@DonationActivity,\"기부 감사합니다.\", Toast.LENGTH_SHORT).show()\r\n                            onBackPressed()\r\n                        }\r\n                    })\r\n                }\r\n\r\n\r\n            }else{\r\n                binding.btnDonation.isEnabled = false\r\n                binding.btnDonation.setBackgroundResource(R.color.grey)\r\n            }\r\n        }\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/donation/DonationActivity.kt b/app/src/main/java/com/example/water_app/donation/DonationActivity.kt
+--- a/app/src/main/java/com/example/water_app/donation/DonationActivity.kt	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
++++ b/app/src/main/java/com/example/water_app/donation/DonationActivity.kt	(date 1673832478105)
+@@ -1,5 +1,6 @@
+ package com.example.water_app.donation
+ 
++import android.content.Intent
+ import android.os.Bundle
+ import android.text.Editable
+ import android.util.Log
+@@ -7,6 +8,7 @@
+ import androidx.appcompat.app.AppCompatActivity
+ import com.example.water_app.R
+ import com.example.water_app.databinding.ActivityDonationBinding
++import com.example.water_app.main.MainActivity
+ import com.example.water_app.repository.Instance
+ import com.example.water_app.user.MySharedPreferences
+ import retrofit2.Call
+@@ -29,8 +31,6 @@
+         val cntr_sn = intent.extras!!.getInt("cntr_sn")
+         val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
+ 
+-
+-
+         binding.btnBack.setOnClickListener{
+             super.onBackPressed()
+         }
+@@ -47,18 +47,22 @@
+                         override fun onResponse(call: Call<String?>, response: Response<String?>) {
+                         }
+                         override fun onFailure(call: Call<String?>, t: Throwable) {
+-                            Toast.makeText(this@DonationActivity,"기부 감사합니다.", Toast.LENGTH_SHORT).show()
+-                            onBackPressed()
++                            Toast.makeText(this@DonationActivity,"기부가 완료되었습니다..", Toast.LENGTH_SHORT).show()
++
++                            startMain()
+                         }
+                     })
+                 }
+-
+-
+             }else{
+                 binding.btnDonation.isEnabled = false
+                 binding.btnDonation.setBackgroundResource(R.color.grey)
+             }
+         }
++    }
+ 
++    private fun startMain(){
++        val intent = Intent(this, MainActivity::class.java)
++        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
++        startActivity(intent)
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/water_app/main/MyPageFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.main\r\n\r\nimport android.annotation.SuppressLint\r\nimport android.app.AlertDialog\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.net.Uri\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport android.widget.Toast\r\nimport androidx.activity.OnBackPressedCallback\r\nimport androidx.fragment.app.Fragment\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.FragmentMyPageBinding\r\nimport com.example.water_app.mypage.HistoryActivity\r\nimport com.example.water_app.mypage.MyPageActivity\r\nimport com.example.water_app.mypage.NoticeActivity\r\nimport com.example.water_app.mypage.PeriodActivity\r\nimport com.example.water_app.user.LoginActivity\r\nimport com.example.water_app.user.MySharedPreferences\r\n\r\nclass MyPageFragment : Fragment() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: FragmentMyPageBinding\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n    }\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentMyPageBinding.inflate(inflater, container, false)\r\n\r\n        val mbr_sn = MySharedPreferences.getUserSn(requireContext()).toInt()\r\n\r\n        binding.linMyPage.setOnClickListener{\r\n            activity?.let{\r\n                if(mbr_sn == -1) {\r\n                    val mDialogView =\r\n                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)\r\n                    val mBuilder = AlertDialog.Builder(requireContext())\r\n                        .setView(mDialogView)\r\n                    val mAlertDialog = mBuilder.show()\r\n                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                    noButton.setOnClickListener {\r\n                        mAlertDialog.dismiss()\r\n                    }\r\n                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)\r\n                    btnLogin.setOnClickListener{\r\n                        val intent = Intent(context, LoginActivity::class.java)\r\n                        startActivity(intent)\r\n                    }\r\n                }else {\r\n                    val intent = Intent(context, MyPageActivity::class.java)\r\n                    startActivity(intent)\r\n                }\r\n            }\r\n        }\r\n\r\n        binding.linHistory.setOnClickListener{\r\n            activity?.let{\r\n                if(mbr_sn == -1) {\r\n                    val mDialogView =\r\n                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)\r\n                    val mBuilder = AlertDialog.Builder(requireContext())\r\n                        .setView(mDialogView)\r\n                    val mAlertDialog = mBuilder.show()\r\n                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                    noButton.setOnClickListener {\r\n                        mAlertDialog.dismiss()\r\n                    }\r\n                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)\r\n                    btnLogin.setOnClickListener{\r\n                        val intent = Intent(context, LoginActivity::class.java)\r\n                        startActivity(intent)\r\n                    }\r\n                }else {\r\n                    val intent = Intent(context, HistoryActivity::class.java)\r\n                    startActivity(intent)\r\n                }\r\n            }\r\n        }\r\n\r\n        binding.linPeriod.setOnClickListener{\r\n            activity?.let {\r\n                if (mbr_sn == -1) {\r\n                    val mDialogView =\r\n                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)\r\n                    val mBuilder = AlertDialog.Builder(requireContext())\r\n                        .setView(mDialogView)\r\n                    val mAlertDialog = mBuilder.show()\r\n                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                    noButton.setOnClickListener {\r\n                        mAlertDialog.dismiss()\r\n                    }\r\n                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)\r\n                    btnLogin.setOnClickListener{\r\n                        val intent = Intent(context, LoginActivity::class.java)\r\n                        startActivity(intent)\r\n                    }\r\n                } else {\r\n                    val intent = Intent(context, PeriodActivity::class.java)\r\n                    startActivity(intent)\r\n                }\r\n            }\r\n        }\r\n\r\n        binding.linNotice.setOnClickListener{\r\n            activity?.let{\r\n                val intent = Intent(context, NoticeActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }\r\n\r\n        // Dialog\r\n        binding.linPay.setOnClickListener{\r\n            activity?.let{\r\n                if(mbr_sn == -1) {\r\n                    val mDialogView =\r\n                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)\r\n                    val mBuilder = AlertDialog.Builder(requireContext())\r\n                        .setView(mDialogView)\r\n                    val mAlertDialog = mBuilder.show()\r\n                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                    noButton.setOnClickListener {\r\n                        mAlertDialog.dismiss()\r\n                    }\r\n                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)\r\n                    btnLogin.setOnClickListener{\r\n                        val intent = Intent(context, LoginActivity::class.java)\r\n                        startActivity(intent)\r\n                    }\r\n                }else{\r\n                        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_pay, null)\r\n                        val mBuilder = AlertDialog.Builder(requireContext())\r\n                            .setView(mDialogView)\r\n\r\n                        val  mAlertDialog = mBuilder.show()\r\n\r\n                        val okButton = mDialogView.findViewById<Button>(R.id.btnCall)\r\n                        okButton.setOnClickListener {\r\n\r\n                            Toast.makeText(requireContext(),\"서비스 준비중\", Toast.LENGTH_LONG).show()\r\n                        }\r\n\r\n                        val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                        noButton.setOnClickListener {\r\n                            mAlertDialog.dismiss()\r\n                        }\r\n\r\n                        val outButton = mDialogView.findViewById<Button>(R.id.btnOut)\r\n                        outButton.setOnClickListener {\r\n\r\n                            Toast.makeText(requireContext(),\"서비스 준비중\", Toast.LENGTH_LONG).show()\r\n                        }\r\n                }\r\n            }\r\n\r\n        }\r\n\r\n        binding.linCall.setOnClickListener{\r\n            val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.mypage_call, null)\r\n            val mBuilder = AlertDialog.Builder(requireContext())\r\n                .setView(mDialogView)\r\n\r\n            val  mAlertDialog = mBuilder.show()\r\n\r\n            val okButton = mDialogView.findViewById<Button>(R.id.btnCall)\r\n            okButton.setOnClickListener {\r\n\r\n                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(\"tel:0531111111\"))\r\n                startActivity(intent)\r\n            }\r\n\r\n            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n            noButton.setOnClickListener {\r\n                mAlertDialog.dismiss()\r\n            }\r\n        }\r\n\r\n        binding.linMoney.setOnClickListener{\r\n            if(mbr_sn == -1) {\r\n                val mDialogView =\r\n                    LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)\r\n                val mBuilder = AlertDialog.Builder(requireContext())\r\n                    .setView(mDialogView)\r\n                val mAlertDialog = mBuilder.show()\r\n                val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                noButton.setOnClickListener {\r\n                    mAlertDialog.dismiss()\r\n                }\r\n            }else {\r\n                val mDialogView =\r\n                    LayoutInflater.from(requireContext()).inflate(R.layout.mypage_money, null)\r\n                val mBuilder = AlertDialog.Builder(requireContext())\r\n                    .setView(mDialogView)\r\n\r\n                val mAlertDialog = mBuilder.show()\r\n\r\n                val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)\r\n                noButton.setOnClickListener {\r\n                    mAlertDialog.dismiss()\r\n                }\r\n            }\r\n        }\r\n\r\n        if (mbr_sn == -1){\r\n            binding.ivChange.setImageResource(R.drawable.my_login)\r\n            binding.tvChange.setText(\"로그인\")\r\n            binding.linlogout.setOnClickListener{\r\n                val intent = Intent(context, LoginActivity::class.java)\r\n                startActivity(intent)\r\n            }\r\n        }else{\r\n            binding.linlogout.setOnClickListener{\r\n                MySharedPreferences.setUserSn(requireContext(),\"-1\")\r\n                val intent = Intent(context, MainActivity::class.java)\r\n                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK\r\n                startActivity(intent)\r\n            }\r\n\r\n        }\r\n\r\n        return binding.root\r\n    }\r\n    // 뒤로가기 메인 고정\r\n    private lateinit var callback: OnBackPressedCallback\r\n    lateinit var mainActivity: MainActivity\r\n\r\n    // 뒤로가기 고정\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        callback = object : OnBackPressedCallback(true) {\r\n            override fun handleOnBackPressed() {\r\n            }\r\n        }\r\n        requireActivity().onBackPressedDispatcher.addCallback(this, callback)\r\n\r\n        mainActivity = context as MainActivity\r\n    }\r\n\r\n    // 뒤로가기 고정\r\n    override fun onDetach() {\r\n        super.onDetach()\r\n        callback.remove()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/main/MyPageFragment.kt b/app/src/main/java/com/example/water_app/main/MyPageFragment.kt
+--- a/app/src/main/java/com/example/water_app/main/MyPageFragment.kt	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
++++ b/app/src/main/java/com/example/water_app/main/MyPageFragment.kt	(date 1673832862888)
+@@ -67,30 +67,6 @@
+             }
+         }
+ 
+-        binding.linHistory.setOnClickListener{
+-            activity?.let{
+-                if(mbr_sn == -1) {
+-                    val mDialogView =
+-                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
+-                    val mBuilder = AlertDialog.Builder(requireContext())
+-                        .setView(mDialogView)
+-                    val mAlertDialog = mBuilder.show()
+-                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
+-                    noButton.setOnClickListener {
+-                        mAlertDialog.dismiss()
+-                    }
+-                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
+-                    btnLogin.setOnClickListener{
+-                        val intent = Intent(context, LoginActivity::class.java)
+-                        startActivity(intent)
+-                    }
+-                }else {
+-                    val intent = Intent(context, HistoryActivity::class.java)
+-                    startActivity(intent)
+-                }
+-            }
+-        }
+-
+         binding.linPeriod.setOnClickListener{
+             activity?.let {
+                 if (mbr_sn == -1) {
+@@ -165,7 +141,6 @@
+                         }
+                 }
+             }
+-
+         }
+ 
+         binding.linCall.setOnClickListener{
+@@ -233,6 +208,7 @@
+ 
+         return binding.root
+     }
++
+     // 뒤로가기 메인 고정
+     private lateinit var callback: OnBackPressedCallback
+     lateinit var mainActivity: MainActivity
+Index: app/src/main/java/com/example/water_app/donation/StoryActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.water_app.donation\r\n\r\nimport android.app.Activity\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.View\r\nimport android.widget.Toast\r\nimport androidx.core.content.ContentProviderCompat.requireContext\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport androidx.recyclerview.widget.DividerItemDecoration\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport com.example.water_app.R\r\nimport com.example.water_app.databinding.ActivityCommunicationBinding\r\nimport com.example.water_app.databinding.ActivityStoryBinding\r\nimport com.example.water_app.model.PostData\r\nimport com.example.water_app.recyclerview.CommentAdapter\r\nimport com.example.water_app.recyclerview.StoryAdapter\r\nimport com.example.water_app.repository.Instance\r\nimport com.example.water_app.repository.Repository\r\nimport com.example.water_app.user.MySharedPreferences\r\nimport com.example.water_app.viewmodel.MainViewModel\r\nimport com.example.water_app.viewmodel.MainViewModelFactory\r\nimport kotlinx.android.synthetic.main.fragment_com_history.*\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\n\r\nclass StoryActivity : AppCompatActivity() {\r\n\r\n    // 뷰바인딩\r\n    private lateinit var binding: ActivityStoryBinding\r\n\r\n    // 뷰 모델\r\n    private lateinit var viewModel : MainViewModel\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_story)\r\n\r\n        // 뷰바인딩\r\n        binding = ActivityStoryBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        val mlrd_ttl = this.intent.extras!!.getString(\"mlrd_ttl\")\r\n        val mlrd_cn = this.intent.extras!!.getString(\"mlrd_cn\")\r\n\r\n        binding.tvTitle.text = mlrd_ttl\r\n        binding.tvContent.text = mlrd_cn\r\n\r\n        // 댓글\r\n        val mlrd_sn = this.intent.extras!!.getInt(\"mlrd_sn\")\r\n        val repository = Repository()\r\n        val viewModelFactory = MainViewModelFactory(repository)\r\n\r\n        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)\r\n        viewModel.getComment(mlrd_sn)\r\n        viewModel.getCommentResponse.observe(this, Observer {\r\n            // 통신 성공\r\n            if(it.isSuccessful){\r\n                val commentList = it.body()\r\n\r\n                //리사이클러뷰\r\n                binding.rvComment.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)\r\n                binding.rvComment.setHasFixedSize(true)\r\n                binding.rvComment.adapter = CommentAdapter(this, commentList)\r\n            }\r\n        })\r\n\r\n        // 댓글 작성\r\n        binding.btnComment!!.setOnClickListener {\r\n            getComment()\r\n        }\r\n    }\r\n\r\n    private fun getComment() {\r\n        val mbr_sn = MySharedPreferences.getUserSn(this).toInt()\r\n        val mlrd_sn = this.intent.extras!!.getInt(\"mlrd_sn\")\r\n        val comt_cn = binding!!.edtComment.text.toString()\r\n\r\n        val call = Instance.api.getComment(mbr_sn, mlrd_sn, comt_cn)\r\n        call!!.enqueue(object : Callback<String?> {\r\n            override fun onResponse(call: Call<String?>, response: Response<String?>) {\r\n                //\r\n            }\r\n\r\n            override fun onFailure(call: Call<String?>, t: Throwable) {\r\n                //\r\n            }\r\n        })\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/water_app/donation/StoryActivity.kt b/app/src/main/java/com/example/water_app/donation/StoryActivity.kt
+--- a/app/src/main/java/com/example/water_app/donation/StoryActivity.kt	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
++++ b/app/src/main/java/com/example/water_app/donation/StoryActivity.kt	(date 1673832225855)
+@@ -1,32 +1,23 @@
+ package com.example.water_app.donation
+ 
+-import android.app.Activity
+-import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
+-import android.util.Log
+-import android.view.View
+-import android.widget.Toast
+-import androidx.core.content.ContentProviderCompat.requireContext
++import androidx.appcompat.app.AppCompatActivity
+ import androidx.lifecycle.Observer
+ import androidx.lifecycle.ViewModelProvider
+-import androidx.recyclerview.widget.DividerItemDecoration
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import com.example.water_app.R
+-import com.example.water_app.databinding.ActivityCommunicationBinding
+ import com.example.water_app.databinding.ActivityStoryBinding
+-import com.example.water_app.model.PostData
+ import com.example.water_app.recyclerview.CommentAdapter
+-import com.example.water_app.recyclerview.StoryAdapter
+ import com.example.water_app.repository.Instance
+ import com.example.water_app.repository.Repository
+ import com.example.water_app.user.MySharedPreferences
+ import com.example.water_app.viewmodel.MainViewModel
+ import com.example.water_app.viewmodel.MainViewModelFactory
+-import kotlinx.android.synthetic.main.fragment_com_history.*
+ import retrofit2.Call
+ import retrofit2.Callback
+ import retrofit2.Response
+ 
++
+ class StoryActivity : AppCompatActivity() {
+ 
+     // 뷰바인딩
+@@ -71,6 +62,13 @@
+         // 댓글 작성
+         binding.btnComment!!.setOnClickListener {
+             getComment()
++
++            // 새로고침
++            finish() // 인텐트 종료
++            overridePendingTransition(0, 0) // 인텐트 효과 없애기
++            val intent = intent
++            startActivity(intent)
++            overridePendingTransition(0, 0) // 인텐트 효과 없애기
+         }
+     }
+ 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06__4_07__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06__4_07__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06__4_07__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06__4_07__Changes_.xml	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
++++ /dev/null	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023-01-06_오후_4_07_[Changes]" date="1672988847594" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06_오후_4_07_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023-01-06 오후 4:07 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06_오후_4_07_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06_오후_4_07_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06_오후_4_07_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-01-06_오후_4_07_[Changes]/shelved.patch	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
++++ /dev/null	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
+@@ -1,83 +0,0 @@
+-Index: app/src/main/java/com/example/water_app/main/MapFragment.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.water_app.main\r\n\r\nimport android.Manifest\r\nimport android.content.Context\r\nimport android.content.pm.PackageManager\r\nimport android.location.Location\r\nimport android.location.LocationManager\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Toast\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport com.example.water_app.databinding.FragmentMapBinding\r\nimport com.example.water_app.map.KakaoAPI\r\nimport com.example.water_app.map.ListAdapter\r\nimport com.example.water_app.map.LocationData\r\nimport com.example.water_app.map.ResultSearchKeyword\r\nimport net.daum.mf.map.api.MapPOIItem\r\nimport net.daum.mf.map.api.MapPoint\r\nimport net.daum.mf.map.api.MapView\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.gson.GsonConverterFactory\r\n\r\nclass MapFragment : Fragment() {\r\n\r\n    private lateinit var binding: FragmentMapBinding\r\n    private lateinit var mapView: MapView\r\n\r\n    // 검색 RecyclerView\r\n    private val listItems = arrayListOf<LocationData>() // 리사이클러 뷰 아이템\r\n    private val listAdapter = ListAdapter(listItems) // 리사이클러 뷰 어댑터\r\n    private var pageNumber = 1 // 검색 페이지 번호\r\n    private var keyword = \"\" // 검색 키워드\r\n\r\n    // 카카오 API\r\n    companion object {\r\n        const val BASE_URL = \"https://dapi.kakao.com/\"\r\n        const val API_KEY = \"KakaoAK 887bc0eaa4f3e8018acf2539644a00db\" // REST API 키\r\n    }\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n\r\n        // 뷰바인딩\r\n        binding = FragmentMapBinding.inflate(inflater, container, false)\r\n\r\n        // 맵 띄우기\r\n        mapView = MapView(requireActivity())\r\n        val mapViewContainer = binding.mapLayout as ViewGroup\r\n        mapViewContainer.addView(mapView)\r\n\r\n        // 중심점\r\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\r\n            if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n                val lm: LocationManager =\r\n                    requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager\r\n\r\n                // 현재 위치 받아옴\r\n                val userNowLocation: Location =\r\n                    lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!\r\n                val uLatitude = userNowLocation.latitude\r\n                val uLongitude = userNowLocation.longitude\r\n\r\n                // 중심점 + 줌 레벨\r\n                mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), 1, true)\r\n\r\n                // 해당 위치 저장\r\n                val MY_LOCATION = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)\r\n\r\n                // 마커 표시\r\n                val marker = MapPOIItem()\r\n                marker.itemName = \"현재 위치\"\r\n                marker.tag = 0\r\n                marker.mapPoint = MY_LOCATION\r\n\r\n                // 기본 마커\r\n                marker.markerType = MapPOIItem.MarkerType.BluePin\r\n\r\n                // 기본 마커 클릭했을 때 나타나는 마커\r\n                marker.selectedMarkerType =\r\n                    MapPOIItem.MarkerType.RedPin\r\n\r\n                mapView.addPOIItem(marker)\r\n            }\r\n        }\r\n\r\n        // 현재 위치로 돌아가기\r\n        binding.btnLocation.setOnClickListener {\r\n            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {\r\n                if (requireContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n                    val lm: LocationManager =\r\n                        requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager\r\n\r\n                    // 현재 위치 받아옴\r\n                    val userNowLocation: Location =\r\n                        lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!!\r\n                    val uLatitude = userNowLocation.latitude\r\n                    val uLongitude = userNowLocation.longitude\r\n\r\n                    // 중심점 + 줌 레벨\r\n                    mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude), 1, true)\r\n\r\n                    // 해당 위치 저장\r\n                    val MY_LOCATION = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)\r\n\r\n                    // 마커 표시\r\n                    val marker = MapPOIItem()\r\n                    marker.itemName = \"현재 위치\"\r\n                    marker.tag = 0\r\n                    marker.mapPoint = MY_LOCATION\r\n\r\n                    // 기본 마커\r\n                    marker.markerType = MapPOIItem.MarkerType.BluePin\r\n\r\n                    // 기본 마커 클릭했을 때 나타나는 마커\r\n                    marker.selectedMarkerType =\r\n                        MapPOIItem.MarkerType.RedPin\r\n\r\n                    mapView.addPOIItem(marker)\r\n                }\r\n            }\r\n        }\r\n\r\n        /* 검색 기능 */\r\n        binding.rvList.layoutManager =\r\n            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)\r\n        binding.rvList.adapter = listAdapter\r\n\r\n        // 아이템 클릭 시 해당 위치로 이동\r\n        listAdapter.setItemClickListener(object : ListAdapter.OnItemClickListener {\r\n            override fun onClick(v: View, position: Int) {\r\n                val mapPoint =\r\n                    MapPoint.mapPointWithGeoCoord(listItems[position].y, listItems[position].x)\r\n                mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true)\r\n            }\r\n        })\r\n\r\n        // 검색 버튼\r\n        binding.ivSearch.setOnClickListener {\r\n            keyword = binding.edtSearch.text.toString()\r\n            pageNumber = 1\r\n            searchKeyword(keyword, pageNumber)\r\n        }\r\n\r\n        return binding.root\r\n    }\r\n\r\n    /* 검색 */\r\n    // 키워드 검색\r\n    private fun searchKeyword(keyword: String, page: Int) {\r\n        val retrofit = Retrofit.Builder() // Retrofit 구성\r\n            .baseUrl(BASE_URL)\r\n            .addConverterFactory(GsonConverterFactory.create())\r\n            .build()\r\n        val api = retrofit.create(KakaoAPI::class.java) // 통신 인터페이스를 객체로 생성\r\n        val call = api.getSearchKeyword(API_KEY, keyword, page) // 검색 조건 입력\r\n\r\n        // API 서버에 요청\r\n        call.enqueue(object : Callback<ResultSearchKeyword> {\r\n            // 통신 성공\r\n            override fun onResponse(\r\n                call: Call<ResultSearchKeyword>,\r\n                response: Response<ResultSearchKeyword>\r\n            ) {\r\n                addItemsAndMarkers(response.body())\r\n            }\r\n\r\n            // 통신 실패\r\n            override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {\r\n                Log.w(\"LocalSearch\", \"통신 실패: ${t.message}\")\r\n            }\r\n        })\r\n    }\r\n\r\n    // 검색 결과 처리\r\n    private fun addItemsAndMarkers(searchResult: ResultSearchKeyword?) {\r\n        if (!searchResult?.documents.isNullOrEmpty()) {\r\n            // 검색 결과 있음\r\n            listItems.clear() // 리스트 초기화\r\n            mapView.removeAllPOIItems() // 지도의 마커 모두 제거\r\n            for (document in searchResult!!.documents) {\r\n                // 결과를 리사이클러 뷰에 추가\r\n                val item = LocationData(\r\n                    document.place_name,\r\n                    document.road_address_name,\r\n                    document.address_name,\r\n                    document.x.toDouble(),\r\n                    document.y.toDouble()\r\n                )\r\n                listItems.add(item)\r\n\r\n                // 지도에 마커 추가\r\n                val point = MapPOIItem()\r\n                point.apply {\r\n                    itemName = document.place_name\r\n                    mapPoint = MapPoint.mapPointWithGeoCoord(\r\n                        document.y.toDouble(),\r\n                        document.x.toDouble()\r\n                    )\r\n                    markerType = MapPOIItem.MarkerType.BluePin\r\n                    selectedMarkerType = MapPOIItem.MarkerType.RedPin\r\n                }\r\n                mapView.addPOIItem(point)\r\n            }\r\n            listAdapter.notifyDataSetChanged()\r\n        } else {\r\n            // 검색 결과 없음\r\n            Toast.makeText(requireContext(), \"검색 결과가 없습니다\", Toast.LENGTH_SHORT).show()\r\n        }\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/main/MapFragment.kt b/app/src/main/java/com/example/water_app/main/MapFragment.kt
+---- a/app/src/main/java/com/example/water_app/main/MapFragment.kt	(revision d8d0be345c802ba1b3746fc3a77fde819d4c7bfe)
+-+++ b/app/src/main/java/com/example/water_app/main/MapFragment.kt	(date 1672988844488)
+-@@ -13,12 +13,18 @@
+- import android.view.ViewGroup
+- import android.widget.Toast
+- import androidx.fragment.app.Fragment
+-+import androidx.lifecycle.Observer
+-+import androidx.lifecycle.ViewModelProvider
+- import androidx.recyclerview.widget.LinearLayoutManager
+- import com.example.water_app.databinding.FragmentMapBinding
+- import com.example.water_app.map.KakaoAPI
+- import com.example.water_app.map.ListAdapter
+- import com.example.water_app.map.LocationData
+- import com.example.water_app.map.ResultSearchKeyword
+-+import com.example.water_app.model.PostData
+-+import com.example.water_app.repository.Repository
+-+import com.example.water_app.viewmodel.MainViewModel
+-+import com.example.water_app.viewmodel.MainViewModelFactory
+- import net.daum.mf.map.api.MapPOIItem
+- import net.daum.mf.map.api.MapPoint
+- import net.daum.mf.map.api.MapView
+-@@ -28,11 +34,14 @@
+- import retrofit2.Retrofit
+- import retrofit2.converter.gson.GsonConverterFactory
+- 
+--class MapFragment : Fragment() {
+-+class MapFragment(private val locationList: List<PostData>?) : Fragment() {
+- 
+-     private lateinit var binding: FragmentMapBinding
+-     private lateinit var mapView: MapView
+- 
+-+    //뷰 모델 가져오기
+-+    private lateinit var viewModel : MainViewModel
+-+
+-     // 검색 RecyclerView
+-     private val listItems = arrayListOf<LocationData>() // 리사이클러 뷰 아이템
+-     private val listAdapter = ListAdapter(listItems) // 리사이클러 뷰 어댑터
+-@@ -134,6 +143,21 @@
+-             }
+-         }
+- 
+-+        val repository = Repository()
+-+        val viewModelFactory = MainViewModelFactory(repository)
+-+
+-+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+-+        viewModel.getDonationList()
+-+        viewModel.getDonationListResponse.observe(,Observer{
+-+            if(it.isSuccessful) {
+-+                while(locationList.size){
+-+
+-+            }
+-+            else{
+-+                Log.d("Response",it.errorBody().toString())
+-+            }
+-+        })
+-+
+-         /* 검색 기능 */
+-         binding.rvList.layoutManager =
+-             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+-Index: app/src/main/java/com/example/water_app/model/JoinData.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/example/water_app/model/JoinData.kt b/app/src/main/java/com/example/water_app/model/JoinData.kt
+-new file mode 100644
+---- /dev/null	(date 1672988270577)
+-+++ b/app/src/main/java/com/example/water_app/model/JoinData.kt	(date 1672988270577)
+-@@ -0,0 +1,6 @@
+-+package com.example.water_app.model
+-+
+-+data class JoinData(
+-+    val mbr_id : String?,
+-+    val mbr_password : String?
+-+)
+Index: app/src/main/res/layout/fragment_my_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".mypage.MyPageFragment\"\r\n    android:background=\"@color/white\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\">\r\n                <LinearLayout\r\n                    android:id=\"@+id/linMyPage\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_user\" />\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"마이페이지\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linPay\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_point\" />\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"워터 Pay\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linHistory\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_document\" />\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"후원이력\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linPeriod\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"40dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_heart\"\r\n                        android:layout_marginLeft=\"5dp\"\r\n                        android:layout_marginRight=\"20dp\"/>\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"정기후원\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"1dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linMoney\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_money\" />\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"연말정산\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linCall\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_operator\" />\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"고객센터\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linNotice\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_notification\" />\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"공지사항\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n\r\n                <View\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"1dp\"\r\n                    android:background=\"@color/grey\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"/>\r\n\r\n                <LinearLayout\r\n                    android:id=\"@+id/linlogout\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"15dp\">\r\n                    <ImageView\r\n                        android:id=\"@+id/ivChange\"\r\n                        android:layout_width=\"50dp\"\r\n                        android:layout_height=\"50dp\"\r\n                        android:src=\"@drawable/my_logout\" />\r\n                    <TextView\r\n                        android:id=\"@+id/tvChange\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"로그아웃\"\r\n                        android:textColor=\"@color/darkGrey\"\r\n                        android:textSize=\"16sp\"\r\n                        android:fontFamily=\"@font/kim_regular\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginLeft=\"15dp\"/>\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n    </ScrollView>\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_my_page.xml b/app/src/main/res/layout/fragment_my_page.xml
+--- a/app/src/main/res/layout/fragment_my_page.xml	(revision d4b34107757af8a7d6316c17fbb5d0f82b8ad094)
++++ b/app/src/main/res/layout/fragment_my_page.xml	(date 1673832862894)
+@@ -67,26 +67,6 @@
+                     android:layout_marginStart="15dp"
+                     android:layout_marginEnd="15dp"/>
+ 
+-                <LinearLayout
+-                    android:id="@+id/linHistory"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_margin="15dp">
+-                    <ImageView
+-                        android:layout_width="50dp"
+-                        android:layout_height="50dp"
+-                        android:src="@drawable/my_document" />
+-                    <TextView
+-                        android:layout_width="wrap_content"
+-                        android:layout_height="wrap_content"
+-                        android:text="후원이력"
+-                        android:textColor="@color/darkGrey"
+-                        android:textSize="16sp"
+-                        android:fontFamily="@font/kim_regular"
+-                        android:layout_gravity="center"
+-                        android:layout_marginLeft="15dp"/>
+-                </LinearLayout>
+-
+                 <View
+                     android:layout_width="match_parent"
+                     android:layout_height="1dp"
+@@ -225,6 +205,13 @@
+                         android:layout_gravity="center"
+                         android:layout_marginLeft="15dp"/>
+                 </LinearLayout>
++
++                <ImageView
++                    android:layout_width="100dp"
++                    android:layout_height="50dp"
++                    android:src="@drawable/logo2"
++                    android:layout_gravity="center"
++                    android:layout_marginTop="20dp" />
+             </LinearLayout>
+     </ScrollView>
+ 
