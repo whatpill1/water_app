@@ -1,6 +1,7 @@
 package com.example.water_app.main
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -22,6 +23,8 @@ import com.example.water_app.recyclerview.ViewPagerAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
+import kotlinx.android.synthetic.main.fragment_com_history.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -146,6 +149,8 @@ class HomeFragment : Fragment() {
                 binding.rvDonation.setHasFixedSize(true)
                 binding.rvDonation.adapter = DonationAdapter(requireContext(), homelist)
 
+                rvDonation.addItemDecoration(RecyclerViewDecoration(25))
+
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), homelist)
 
@@ -180,6 +185,8 @@ class HomeFragment : Fragment() {
                 binding.rvClose.setHasFixedSize(true)
                 binding.rvClose.adapter = DonationAdapter(requireContext(), closelist)
 
+                rvClose.addItemDecoration(RecyclerViewDecoration(25))
+
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), closelist)
 
@@ -204,5 +211,18 @@ class HomeFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         sliderImageHandler.removeCallbacks(sliderImageRunnable)
+    }
+
+    // 가로 간격
+    class RecyclerViewDecoration(private val divWidth: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+            outRect.right = divWidth
+        }
     }
 }

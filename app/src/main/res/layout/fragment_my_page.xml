@@ -67,26 +67,6 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"/>
 
-                <LinearLayout
-                    android:id="@+id/linHistory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/my_document" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="후원이력"
-                        android:textColor="@color/darkGrey"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/kim_regular"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="15dp"/>
-                </LinearLayout>
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -225,6 +205,13 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"/>
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo2"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp" />
             </LinearLayout>
     </ScrollView>
 

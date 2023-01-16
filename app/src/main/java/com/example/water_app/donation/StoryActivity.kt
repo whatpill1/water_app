@@ -1,31 +1,22 @@
 package com.example.water_app.donation
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.water_app.R
-import com.example.water_app.databinding.ActivityCommunicationBinding
 import com.example.water_app.databinding.ActivityStoryBinding
-import com.example.water_app.model.PostData
 import com.example.water_app.recyclerview.CommentAdapter
-import com.example.water_app.recyclerview.StoryAdapter
 import com.example.water_app.repository.Instance
 import com.example.water_app.repository.Repository
 import com.example.water_app.user.MySharedPreferences
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.fragment_com_history.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class StoryActivity : AppCompatActivity() {
 
@@ -71,6 +62,13 @@ class StoryActivity : AppCompatActivity() {
         // 댓글 작성
         binding.btnComment!!.setOnClickListener {
             getComment()
+
+            // 새로고침
+            finish() // 인텐트 종료
+            overridePendingTransition(0, 0) // 인텐트 효과 없애기
+            val intent = intent
+            startActivity(intent)
+            overridePendingTransition(0, 0) // 인텐트 효과 없애기
         }
     }
 

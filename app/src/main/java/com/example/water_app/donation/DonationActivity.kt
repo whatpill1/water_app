@@ -1,5 +1,6 @@
 package com.example.water_app.donation
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityDonationBinding
+import com.example.water_app.main.MainActivity
 import com.example.water_app.repository.Instance
 import com.example.water_app.user.MySharedPreferences
 import retrofit2.Call
@@ -29,8 +31,6 @@ class DonationActivity : AppCompatActivity() {
         val cntr_sn = intent.extras!!.getInt("cntr_sn")
         val mbr_sn = MySharedPreferences.getUserSn(this).toInt()
 
-
-
         binding.btnBack.setOnClickListener{
             super.onBackPressed()
         }
@@ -47,18 +47,22 @@ class DonationActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<String?>, response: Response<String?>) {
                         }
                         override fun onFailure(call: Call<String?>, t: Throwable) {
-                            Toast.makeText(this@DonationActivity,"기부 감사합니다.", Toast.LENGTH_SHORT).show()
-                            onBackPressed()
+                            Toast.makeText(this@DonationActivity,"기부가 완료되었습니다..", Toast.LENGTH_SHORT).show()
+
+                            startMain()
                         }
                     })
                 }
-
-
             }else{
                 binding.btnDonation.isEnabled = false
                 binding.btnDonation.setBackgroundResource(R.color.grey)
             }
         }
+    }
 
+    private fun startMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

@@ -67,52 +67,8 @@ class MyPageFragment : Fragment() {
             }
         }
 
-        binding.linHistory.setOnClickListener{
-            activity?.let{
-                if(mbr_sn == -1) {
-                    val mDialogView =
-                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
-                    val mBuilder = AlertDialog.Builder(requireContext())
-                        .setView(mDialogView)
-                    val mAlertDialog = mBuilder.show()
-                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
-                    noButton.setOnClickListener {
-                        mAlertDialog.dismiss()
-                    }
-                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
-                    btnLogin.setOnClickListener{
-                        val intent = Intent(context, LoginActivity::class.java)
-                        startActivity(intent)
-                    }
-                }else {
-                    val intent = Intent(context, HistoryActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-        }
-
         binding.linPeriod.setOnClickListener{
-            activity?.let {
-                if (mbr_sn == -1) {
-                    val mDialogView =
-                        LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
-                    val mBuilder = AlertDialog.Builder(requireContext())
-                        .setView(mDialogView)
-                    val mAlertDialog = mBuilder.show()
-                    val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
-                    noButton.setOnClickListener {
-                        mAlertDialog.dismiss()
-                    }
-                    val btnLogin = mDialogView.findViewById<Button>(R.id.btnLogin)
-                    btnLogin.setOnClickListener{
-                        val intent = Intent(context, LoginActivity::class.java)
-                        startActivity(intent)
-                    }
-                } else {
-                    val intent = Intent(context, PeriodActivity::class.java)
-                    startActivity(intent)
-                }
-            }
+            toastService(mbr_sn)
         }
 
         binding.linNotice.setOnClickListener{
@@ -165,7 +121,6 @@ class MyPageFragment : Fragment() {
                         }
                 }
             }
-
         }
 
         binding.linCall.setOnClickListener{
@@ -189,29 +144,7 @@ class MyPageFragment : Fragment() {
         }
 
         binding.linMoney.setOnClickListener{
-            if(mbr_sn == -1) {
-                val mDialogView =
-                    LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
-                val mBuilder = AlertDialog.Builder(requireContext())
-                    .setView(mDialogView)
-                val mAlertDialog = mBuilder.show()
-                val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
-                noButton.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
-            }else {
-                val mDialogView =
-                    LayoutInflater.from(requireContext()).inflate(R.layout.mypage_money, null)
-                val mBuilder = AlertDialog.Builder(requireContext())
-                    .setView(mDialogView)
-
-                val mAlertDialog = mBuilder.show()
-
-                val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
-                noButton.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
-            }
+            toastService(mbr_sn)
         }
 
         if (mbr_sn == -1){
@@ -233,6 +166,7 @@ class MyPageFragment : Fragment() {
 
         return binding.root
     }
+
     // 뒤로가기 메인 고정
     private lateinit var callback: OnBackPressedCallback
     lateinit var mainActivity: MainActivity
@@ -253,5 +187,32 @@ class MyPageFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         callback.remove()
+    }
+
+    // 서비스 준비중
+    fun toastService(mbr_sn: Int) {
+        if (mbr_sn == -1) {
+            val mDialogView =
+                LayoutInflater.from(requireContext()).inflate(R.layout.toast_login, null)
+            val mBuilder = AlertDialog.Builder(requireContext())
+                .setView(mDialogView)
+            val mAlertDialog = mBuilder.show()
+            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
+            noButton.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+        } else {
+            val mDialogView =
+                LayoutInflater.from(requireContext()).inflate(R.layout.mypage_money, null)
+            val mBuilder = AlertDialog.Builder(requireContext())
+                .setView(mDialogView)
+
+            val mAlertDialog = mBuilder.show()
+
+            val noButton = mDialogView.findViewById<Button>(R.id.btnBackCall)
+            noButton.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+        }
     }
 }

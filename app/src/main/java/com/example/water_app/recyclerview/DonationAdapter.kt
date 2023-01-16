@@ -41,6 +41,7 @@ class DonationAdapter(private val context: Context, private var donationList: Li
         // 이미지 url
         var cntrurl : String = cntr_file_id.toString()
         Glide.with(context).load(cntrurl).into(holder.binding.ivImage)
+        holder.binding.ivImage.clipToOutline = true
 
         // 퍼센트
         if (ctbny_pc == null) {
