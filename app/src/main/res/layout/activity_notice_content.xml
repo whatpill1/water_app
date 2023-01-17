@@ -16,14 +16,16 @@
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="35dp"
+                android:layout_marginEnd="25dp"
                 android:fontFamily="@font/kim_bold"
                 android:text="제목"
                 android:textColor="@color/black"
                 android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

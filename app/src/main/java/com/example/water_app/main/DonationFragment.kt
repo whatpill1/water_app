@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
+import com.example.water_app.databinding.ActivityRecyclerviewGridBinding
 import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
@@ -27,7 +28,7 @@ import com.example.water_app.viewmodel.MainViewModelFactory
 class DonationFragment : Fragment() {
 
     // 뷰바인딩
-    private lateinit var binding: ActivityRecyclerviewBinding
+    private lateinit var binding: ActivityRecyclerviewGridBinding
 
     // 뷰 모델 가져오기
     private lateinit var viewModel : MainViewModel
@@ -38,7 +39,7 @@ class DonationFragment : Fragment() {
     ): View? {
 
         // 뷰바인딩
-        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
+        binding = ActivityRecyclerviewGridBinding.inflate(inflater, container, false)
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
