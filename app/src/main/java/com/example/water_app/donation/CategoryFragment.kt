@@ -61,8 +61,7 @@ class CategoryFragment : Fragment() {
                     binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
 
                     // 아이템 간 간격
-                    recyclerView.addItemDecoration(RecyclerViewDecoration1(50))
-                    recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
+                    recyclerView.addItemDecoration(RecyclerViewDecoration(20,20,0,40))
 
                     // OnClickListener
                     val adapter = DonationAdapter(requireContext(), donationList)
@@ -105,8 +104,8 @@ class CategoryFragment : Fragment() {
         callback.remove()
     }
 
-    // 가로 간격
-    class RecyclerViewDecoration1(private val divWidth: Int) : RecyclerView.ItemDecoration() {
+    // 리싸이클러뷰 간격
+    class RecyclerViewDecoration(private val divLeft: Int, private val divRight: Int, private val divHeight: Int, private val divTop: Int) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
             view: View,
@@ -114,20 +113,10 @@ class CategoryFragment : Fragment() {
             state: RecyclerView.State
         ) {
             super.getItemOffsets(outRect, view, parent, state)
-            outRect.left = divWidth
-        }
-    }
-
-    // 세로 간격
-    class RecyclerViewDecoration2(private val divHeight: Int) : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
+            outRect.left = divLeft
+            outRect.right = divRight
             outRect.bottom = divHeight
+            outRect.top = divTop
         }
     }
 }

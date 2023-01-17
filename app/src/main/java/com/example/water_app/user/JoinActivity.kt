@@ -1,23 +1,18 @@
 package com.example.water_app.user
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityJoinBinding
-import com.example.water_app.main.MainActivity
 import com.example.water_app.repository.Instance
 import com.example.water_app.repository.Password
-import com.example.water_app.repository.RestApi
-import com.example.water_app.viewmodel.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.security.spec.MGF1ParameterSpec.SHA256
+
 
 class JoinActivity : AppCompatActivity() {
 
@@ -42,11 +37,18 @@ class JoinActivity : AppCompatActivity() {
 
     private fun registerMe() {
         val mbr_id = binding!!.edtId.text.toString()
-        val pass = binding!!.edtPass.text.toString()
-        val mbr_password : String = Password.SHA256.encryptPassword(pass)
+        val mbr_password = binding!!.edtPass.text.toString()
+        //val mbr_password : String = Password.SHA256.encryptPassword(pass)
         val mbr_nm = binding!!.edtName.text.toString()
         val mbr_ncnm = binding!!.edtNick.text.toString()
-        val mbr_gen = 'Y'
+        var mbr_gen : Char  = ' '
+
+        if(binding.menCheck.isChecked){
+            mbr_gen  = '남'
+        }else if(binding.menCheck.isChecked){
+            mbr_gen  = '여'
+        }
+
         val mbr_tel = binding!!.edtTel.text.toString()
         val mbr_birth = binding!!.edtBirth.text.toString()
         val mbr_email = binding!!.edtEmail.text.toString()

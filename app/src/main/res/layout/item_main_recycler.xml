@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="1dp"
     android:id="@+id/itemView"
+    android:layout_gravity="center"
     android:background="@drawable/post"
     tools:ignore="InvalidId">
 

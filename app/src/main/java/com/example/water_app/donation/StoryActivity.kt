@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityStoryBinding
 import com.example.water_app.recyclerview.CommentAdapter
@@ -33,12 +34,14 @@ class StoryActivity : AppCompatActivity() {
         // 뷰바인딩
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val mlrd_ttl = this.intent.extras!!.getString("mlrd_ttl")
         val mlrd_cn = this.intent.extras!!.getString("mlrd_cn")
+        val mlrd_file_id = this.intent.extras!!.getString("mlrd_file_id")
 
         binding.tvTitle.text = mlrd_ttl
         binding.tvContent.text = mlrd_cn
+        var cntrurl : String = mlrd_file_id.toString()
+        Glide.with(this).load(cntrurl).into(binding.ivImage)
 
         // 댓글
         val mlrd_sn = this.intent.extras!!.getInt("mlrd_sn")

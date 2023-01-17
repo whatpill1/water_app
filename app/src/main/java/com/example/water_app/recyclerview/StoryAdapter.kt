@@ -24,6 +24,7 @@ class StoryAdapter(private val context: Context, private var reviewList: List<Re
     // 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val mlrd_sn = reviewList?.get(position)?.mlrd_sn
+        val mlrd_file_id = reviewList?.get(position)?.mlrd_file_id
         val mlrd_ttl = reviewList?.get(position)?.mlrd_ttl
         val mlrd_cn = reviewList?.get(position)?.mlrd_cn
 
@@ -37,6 +38,7 @@ class StoryAdapter(private val context: Context, private var reviewList: List<Re
             val intent = Intent(holder.itemView?.context, StoryActivity::class.java)
 
             intent.putExtra("mlrd_sn", mlrd_sn)
+            intent.putExtra("mlrd_file_id", mlrd_file_id)
             intent.putExtra("mlrd_ttl", mlrd_ttl)
             intent.putExtra("mlrd_cn", mlrd_cn)
 

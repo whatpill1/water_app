@@ -15,12 +15,10 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     val myResponse : MutableLiveData<Response<UserData>> = MutableLiveData()
     val getDonationListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val noticeListResponse : MutableLiveData<Response<List<NoticeData>>> = MutableLiveData()
-    //val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
-    //val getCategoryResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
+    val getHomeEndListResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
     val getCommunicationResponse : MutableLiveData<Response<List<ReviewData>>> = MutableLiveData()
     val getCollecterResponse : MutableLiveData<Response<List<CollectData>>> = MutableLiveData()
     val getCommentResponse : MutableLiveData<Response<List<CommentData>>> = MutableLiveData()
-    //val getMyResponse : MutableLiveData<Response<List<PostData>>> = MutableLiveData()
 
     fun getUser(mbr_sn: Int?) {
         viewModelScope.launch {
@@ -43,7 +41,7 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
     fun getHomeEnd() {
         viewModelScope.launch {
             val response = repository.getHomeend()
-            getDonationListResponse.value = response
+            getHomeEndListResponse.value = response
         }
     }
 

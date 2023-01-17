@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,14 +15,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
+import com.example.water_app.donation.CommunicationActivity
 import com.example.water_app.recyclerview.DonationAdapter
 import com.example.water_app.repository.Repository
 import com.example.water_app.user.MySharedPreferences
 import com.example.water_app.viewmodel.MainViewModel
 import com.example.water_app.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.fragment_com_history.*
 
 
 class DonationFragment : Fragment() {
@@ -57,9 +57,8 @@ class DonationFragment : Fragment() {
                 binding.recyclerView.setHasFixedSize(true)
                 binding.recyclerView.adapter = DonationAdapter(requireContext(), donationList)
 
-//                // 아이템 간 간격
-//                binding.recyclerView.addItemDecoration(RecyclerViewDecoration1(40, 10))
-//                binding.recyclerView.addItemDecoration(RecyclerViewDecoration2(50))
+                // 아이템 간 간격
+                binding.recyclerView.addItemDecoration(RecyclerViewDecoration(20, 20,0,40))
 
                 // OnClickListener
                 val adapter = DonationAdapter(requireContext(), donationList)
@@ -100,8 +99,8 @@ class DonationFragment : Fragment() {
         callback.remove()
     }
 
-    // 가로 간격
-    class RecyclerViewDecoration1(private val divLeft: Int, private val divRight: Int) : ItemDecoration() {
+    // 리싸이클러뷰 간격
+    class RecyclerViewDecoration(private val divLeft: Int, private val divRight: Int, private val divHeight: Int, private val divTop: Int) : ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
             view: View,
@@ -111,19 +110,8 @@ class DonationFragment : Fragment() {
             super.getItemOffsets(outRect, view, parent, state)
             outRect.left = divLeft
             outRect.right = divRight
-        }
-    }
-
-    // 세로 간격
-    class RecyclerViewDecoration2(private val divHeight: Int) : ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
             outRect.bottom = divHeight
+            outRect.top = divTop
         }
     }
 }
