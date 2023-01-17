@@ -5,5 +5,6 @@ data class NoticeData (
     val mbr_sn: Int?,
     val notice_ttl : String?,
     val notice_cn: String?,
-    val use_yn: String?
+    val use_yn: String?,
+    val rgtr_dt: String?
 )

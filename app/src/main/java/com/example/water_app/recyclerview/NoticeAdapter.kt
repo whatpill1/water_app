@@ -22,6 +22,7 @@ class NoticeAdapter(private val context: Context, private var noticeList: List<N
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvTitle.text = noticeList?.get(position)?.notice_ttl
+        holder.binding.tvDate.text = noticeList?.get(position)?.rgtr_dt
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
