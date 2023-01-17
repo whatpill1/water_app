@@ -43,11 +43,11 @@ class ComIntroduceFragment : Fragment() {
         val cntr_obctr = requireActivity().intent.extras!!.getInt("cntr_obctr")
         val cntr_file_id = requireActivity().intent.extras!!.getString("cntr_file_id")
 
-        Log.d("cntrrrrrrrrrrrrrrrrrrr", "$mbr_sn")
+        val cntr_cn_replace = cntr_cn?.replace("<h2 style=\"font-style:italic\">","")
 
         // 인텐트 putextra getextra 하는 부분
         binding.donationTtl.text = cntr_ttl
-        binding.donationCn.text = cntr_cn
+        binding.donationCn.text = cntr_cn_replace
         val decimalFormat = DecimalFormat("#,###")
         binding.donationAmount.text = decimalFormat.format(cntr_obctr)+"원"
 

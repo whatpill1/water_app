@@ -51,7 +51,7 @@ class DonationActivity : AppCompatActivity() {
                             }else if(result.toInt() == 1){
                                 Toast.makeText(this@DonationActivity,"error", Toast.LENGTH_SHORT).show()
                             }else if(result.toInt() == 2){
-                                Toast.makeText(this@DonationActivity,"기부가 감사합니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@DonationActivity,"기부가 완료되었습니다.", Toast.LENGTH_SHORT).show()
                                 startMain()
                             }else{
                                 Toast.makeText(this@DonationActivity,"error", Toast.LENGTH_SHORT).show()

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.water_app.R
 import com.example.water_app.databinding.ActivityRecyclerviewBinding
+import com.example.water_app.databinding.ActivityRecyclerviewGridBinding
 import com.example.water_app.main.HomeFragment
 import com.example.water_app.main.MainActivity
 import com.example.water_app.recyclerview.DonationAdapter
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_com_history.*
 class CategoryFragment : Fragment() {
 
     // 뷰바인딩
-    private lateinit var binding: ActivityRecyclerviewBinding
+    private lateinit var binding: ActivityRecyclerviewGridBinding
 
     // 뷰 모델 가져오기
     private lateinit var viewModel : MainViewModel
@@ -42,7 +43,7 @@ class CategoryFragment : Fragment() {
     ): View? {
 
         // 뷰바인딩
-        binding = ActivityRecyclerviewBinding.inflate(inflater, container, false)
+        binding = ActivityRecyclerviewGridBinding.inflate(inflater, container, false)
 
         // 카테고리별 결과물
         setFragmentResultListener("requestKey") { requestKey, bundle ->

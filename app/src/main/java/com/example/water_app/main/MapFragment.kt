@@ -192,6 +192,36 @@ class MapFragment() : Fragment() {
                 mapView.setMapCenterPointAndZoomLevel(mapPoint, 1, true)
 
                 binding.rvList.setVisibility(View.GONE)
+
+                viewModel.getDonationListResponse.observe(viewLifecycleOwner, Observer {
+                    // 통신 성공
+                    if(it.isSuccessful){
+                        val locationList : List<PostData>? = it.body()
+                        val dbMarker : MapPOIItem = MapPOIItem()
+
+                        for (index in 0 until locationList!!.size){
+                            val cntr_loc_lat = locationList!!.get(index)!!.cntr_loc_lat!!.toDouble()
+                            val cntr_loc_lng = locationList!!.get(index)!!.cntr_loc_lng!!.toDouble()
+                            val cntr_rcvfvr = locationList!!.get(index)!!.cntr_rcvfvr!!.toString()
+
+                            var MY_LOCATION = MapPoint.mapPointWithGeoCoord(cntr_loc_lat, cntr_loc_lng)
+
+                            dbMarker.itemName = cntr_rcvfvr
+                            dbMarker.tag = 0
+                            dbMarker.mapPoint = MY_LOCATION
+
+                            // 기본 마커
+                            dbMarker.markerType = MapPOIItem.MarkerType.YellowPin
+
+                            // 기본 마커 클릭했을 때 나타나는 마커
+                            dbMarker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+
+                            mapView.addPOIItem(dbMarker)
+
+                            MY_LOCATION = null
+                        }
+                    }
+                })
             }
         })
 
