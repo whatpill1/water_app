@@ -50,7 +50,6 @@ class ComStoryFragment : Fragment() {
             // 통신 성공
             if(it.isSuccessful){
                 val reviewList = it.body()
-                Log.d("---------", "$reviewList")
 
                 //리사이클러뷰
                 binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

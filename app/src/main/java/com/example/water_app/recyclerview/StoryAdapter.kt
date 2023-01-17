@@ -27,8 +27,10 @@ class StoryAdapter(private val context: Context, private var reviewList: List<Re
         val mlrd_file_id = reviewList?.get(position)?.mlrd_file_id
         val mlrd_ttl = reviewList?.get(position)?.mlrd_ttl
         val mlrd_cn = reviewList?.get(position)?.mlrd_cn
+        val rgtr_dt = reviewList?.get(position)?.rgtr_dt
 
         holder.binding.tvTitle.text = mlrd_ttl
+        holder.binding.tvDate.text = rgtr_dt
 
         // ClickListener
         holder.itemView.setOnClickListener {

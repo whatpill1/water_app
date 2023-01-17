@@ -6,5 +6,6 @@ data class ReviewData(
     val mlrd_ttl : String?,
     val mlrd_cn : String?,
     val use_yn : String?,
-    val mlrd_file_id: String?
+    val mlrd_file_id: String?,
+    val rgtr_dt : String?
 )
